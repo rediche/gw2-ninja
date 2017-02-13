@@ -1,10 +1,14 @@
 {
   "entrypoint": "index.html",
-  "shell": "src/my-app.html",
+  "shell": "src/gw2-ninja.html",
   "fragments": [
-    "src/my-view1.html",
-    "src/my-view2.html",
-    "src/my-view3.html",
+    "src/my-calc.html",
+    "src/my-chatcodes.html",
+    "src/my-collections.html",
+    "src/my-directory.html",
+    "src/my-index.html",
+    "src/my-tickets.html",
+    "src/my-timer.html",
     "src/my-view404.html"
   ],
   "sourceGlobs": [
@@ -14,6 +18,8 @@
   ],
   "includeDependencies": [
     "manifest.json",
-    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js",
+    "bower_components/gw2-coin-input/images/*",
+    "bower_components/gw2-coin-output/images/*"
   ]
 }
