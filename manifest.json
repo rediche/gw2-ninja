@@ -1,0 +1,20 @@
+{
+  "name": "GW2 Ninja",
+  "short_name": "GW2 Ninja",
+  "start_url": "/?homescreen=1",
+  "display": "standalone",
+  "theme_color": "#F44336",
+  "background_color": "#F44336",
+  "icons": [
+    {
+      "src": "images/manifest/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/manifest/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
