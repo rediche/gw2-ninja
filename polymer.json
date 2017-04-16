@@ -11,12 +11,12 @@
     "src/my-timer.html",
     "src/my-view404.html"
   ],
-  "sourceGlobs": [
+  "sources": [
     "src/**/*",
     "images/**/*",
     "bower.json"
   ],
-  "includeDependencies": [
+  "extraDependencies": [
     "manifest.json",
     "bower_components/webcomponentsjs/webcomponents-lite.min.js",
     "bower_components/gw2-coin-input/images/*",
