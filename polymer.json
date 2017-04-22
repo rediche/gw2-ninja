@@ -21,5 +21,8 @@
     "bower_components/webcomponentsjs/webcomponents-lite.min.js",
     "bower_components/gw2-coin-input/images/*",
     "bower_components/gw2-coin-output/images/*"
-  ]
+  ],
+  "lint": {
+    "rules": ["polymer-2"]
+  }
 }
