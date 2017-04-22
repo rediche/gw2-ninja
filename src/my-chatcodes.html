@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-chatcodes">
@@ -27,8 +28,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
-    Polymer({
-      is: 'my-chatcodes',
-    });
+    class MyChatcodes extends Polymer.Element {
+      static get is() { return 'my-chatcodes'; }
+    }
+
+    window.customElements.define(MyChatcodes.is, MyChatcodes);
   </script>
 </dom-module>
