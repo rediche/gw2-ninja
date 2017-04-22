@@ -55,9 +55,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta name="msapplication-tap-highlight" content="no">
 
     <script>
+      const baseUrl = document.querySelector('base').href;
+      
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-          navigator.serviceWorker.register('/service-worker.js');
+          navigator.serviceWorker.register(baseUrl + 'service-worker.js');
         });
       }
     </script>
