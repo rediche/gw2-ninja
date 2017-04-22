@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
@@ -32,10 +33,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
 
+      app-drawer-layout:not([narrow]) [drawer-toggle] {
+        display: none;
+      }
+
       app-header {
         color: #fff;
         background-color: var(--app-primary-color);
       }
+
       app-header paper-icon-button {
         --paper-icon-button-ink-color: white;
       }
@@ -67,7 +73,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <app-drawer-layout fullbleed>
       <!-- Drawer content -->
-      <app-drawer id="drawer">
+      <app-drawer id="drawer" slow="drawer">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a name="directory"   href="/directory">Directory</a>
@@ -82,7 +88,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <!-- Main content -->
       <app-header-layout has-scrolling-region>
 
-        <app-header fixed effects="waterfall">
+        <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
             <div main-title>GW2 Ninja</div>
@@ -154,7 +160,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _pageChanged(page) {
         // Load page import on demand. Show 404 page if fails
-        var resolvedUrl = this.resolveUrl('my-' + page + '.html');
+        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
         Polymer.importHref(
           resolvedPageUrl,
           null,
