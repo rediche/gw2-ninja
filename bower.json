@@ -17,7 +17,8 @@
     "paper-icon-button": "PolymerElements/paper-icon-button#2.0-preview",
     "polymer": "Polymer/polymer#^2.0.0-rc.1",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.4",
-    "gw2-tpcalc": "^1.0.0"
+    "gw2-tpcalc": "^1.0.0",
+    "paper-item": "PolymerElements/paper-item#2.0-preview"
   },
   "resolutions": {
     "polymer": "^2.0.0-rc.1"
