@@ -20,16 +20,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta name="author" content="Rediche">
     <meta name="copyright" content="GW2 Ninja, Copyright (c) 2017">
 
-    <!--
-      If deploying to a non-root path, replace href="/" width the full path to the project root.
-      For example: href="/polymer-starter-kit/relative-path-example/"
-    -->
-    <base href="/">
-
-    <link rel="icon" href="images/favicon.ico">
+    <link rel="icon" href="/images/favicon.ico">
 
     <!-- See https://goo.gl/OOhYW5 -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/manifest.json">
 
     <!-- See https://goo.gl/qRE0vM -->
     <meta name="theme-color" content="#F44336">
@@ -44,23 +38,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta name="apple-mobile-web-app-title" content="GW2 Ninja">
 
     <!-- Homescreen icons -->
-    <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96x96.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/images/manifest/icon-48x48.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/manifest/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="/images/manifest/icon-96x96.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/manifest/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/images/manifest/icon-192x192.png">
 
     <!-- Tile icon for Windows 8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
+    <meta name="msapplication-TileImage" content="/images/manifest/icon-144x144.png">
     <meta name="msapplication-TileColor" content="#F44336">
     <meta name="msapplication-tap-highlight" content="no">
 
-    <script>
-      const baseUrl = document.querySelector('base').href;
-
+    <!-- Load and register pre-caching Service Worker -->
+    <script> 
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-          navigator.serviceWorker.register(baseUrl + 'service-worker.js');
+          navigator.serviceWorker.register('/service-worker.js');
         });
       }
     </script>
@@ -93,9 +86,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </head>
   <body>
     <gw2-ninja></gw2-ninja>
-    <noscript>
-      Please enable JavaScript to view this website.
-    </noscript>
     <!-- Built with love using Polymer Starter Kit -->
   </body>
 </html>
