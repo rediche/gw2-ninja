@@ -25,12 +25,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id="gw2-ninja">
   <template>
-    <style>
+    <style include="shared-styles">
       :host {
+        display: block;
+
         --app-primary-color: #009688;
         --app-secondary-color: black;
 
-        display: block;
+        --app-text-color: #333333;
+        --app-text-color-inverted: #ffffff;
       }
 
       app-drawer-layout:not([narrow]) [drawer-toggle] {
@@ -52,13 +55,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .drawer-list a {
         display: block;
+        color: var(--app-text-color);
         text-decoration: none;
-        color: var(--app-secondary-color);
         line-height: 40px;
       }
 
       .drawer-list a.iron-selected paper-item {
-        color: black;
         font-weight: bold;
       }
     </style>
