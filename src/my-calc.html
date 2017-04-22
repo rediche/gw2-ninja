@@ -37,8 +37,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
-    Polymer({
-      is: 'my-calc',
-    });
+
+    class MyCalc extends Polymer.Element {
+      static get is() { return 'my-calc' }
+    }
+
+    window.customElements.define(MyCalc.is, MyCalc);
   </script>
 </dom-module>
