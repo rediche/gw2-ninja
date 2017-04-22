@@ -1,7 +1,7 @@
 {
   "name": "GW2 Ninja",
   "short_name": "GW2 Ninja",
-  "start_url": "/?homescreen=1",
+  "start_url": "./?homescreen=1",
   "display": "standalone",
   "theme_color": "#F44336",
   "background_color": "#F44336",
