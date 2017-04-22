@@ -14,10 +14,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="shared-styles">
   <template>
     <style>
+      body {
+        color: var(--app-text-color);
+      }
+
       .card {
         margin: 24px;
         padding: 16px;
-        color: #757575;
         border-radius: 5px;
         background-color: #fff;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
@@ -45,10 +48,50 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         line-height: 64px;
       }
 
-      h1 {
-        margin: 16px 0;
-        color: #212121;
-        font-size: 22px;
+      .text-center {
+        text-align: center;
+      }
+
+      h1, 
+      .display-4 {
+        font-size: 112px;
+        font-weight: 300;
+        color: var(--app-text-color);
+      }
+
+      h2,
+      .display-3 {
+        font-size: 56px;
+        font-weight: 400;
+        color: var(--app-text-color);
+      }
+
+      h3,
+      .display-2 {
+        font-size: 45px;
+        font-weight: 400;
+        color: var(--app-text-color);
+      }
+
+      h4,
+      .display-1 {
+        font-size: 34px;
+        font-weight: 400;
+        color: var(--app-text-color);
+      }
+
+      h5,
+      .headline {
+        font-size: 24px;
+        font-weight: 400;
+        color: var(--app-text-color);
+      }
+
+      h6,
+      .title {
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--app-text-color);
       }
     </style>
   </template>
