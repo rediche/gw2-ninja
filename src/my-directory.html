@@ -9,6 +9,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-directory">
@@ -16,20 +19,132 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles">
       :host {
         display: block;
+      }
 
-        padding: 10px;
+      paper-tabs {
+        background-color: var(--app-primary-color);
+      }
+
+      paper-tab {
+        color: white;
+      }
+
+      h6 {
+        margin: 0;
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+
+      .search {
+        margin: 1.25rem;
+      }
+
+      .search-field {
+        padding: 1rem 1rem;
+        font-size: 1rem;
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        border: 0;
+        border-radius: .125rem;
+        box-shadow: 0 1px 4px rgba(0,0,0,.12);
       }
     </style>
 
-    <div class="card">
-      <h1 class="headline">Directory</h1>
-      <p>Here's some text</p>
+    <paper-tabs selected="{{selected}}" attr-for-selected="name">
+      <paper-tab name="websites">Websites</paper-tab>
+      <paper-tab name="twitch">Twitch</paper-tab>
+      <paper-tab name="youtube">YouTube</paper-tab>
+    </paper-tabs>
+
+    <div class="search">
+      <input class="search-field" type="text" value="{{searchValue::input}}" placeholder="Search for link">
     </div>
+
+    <iron-pages selected="{{selected}}" attr-for-selected="name" fallback-selection="websites">
+      <div name="websites">
+        <template is="dom-repeat" items="{{websites}}">
+            <div class="card">
+              <h6>[[ item.name ]]</h6>
+              <p>[[ item.description ]]</p>
+            </div>
+          </template>
+      </div>
+      <div name="twitch">
+        <template is="dom-repeat" items="{{twitch}}">
+            <div class="card">
+              <h6>[[ item.name ]]</h6>
+              <p>[[ item.description ]]</p>
+            </div>
+          </template>
+      </div>
+      <div name="youtube">
+        <template is="dom-repeat" items="{{youtube}}">
+            <div class="card">
+              <h6>[[ item.name ]]</h6>
+              <p>[[ item.description ]]</p>
+            </div>
+          </template>
+      </div>
+
+    </iron-pages>
+    
   </template>
 
   <script>
     class MyDirectory extends Polymer.Element {
       static get is() { return 'my-directory'; }
+
+      static get properties() {
+        return {
+          selected: {
+            type: Number,
+            value: 0
+          },
+          entries: {
+            type: Array,
+            observer: '_entriesObserver'
+          },
+          websites: {
+            type: Array
+          },
+          twitch: {
+            type: Array
+          },
+          youtube: {
+            type: Array
+          }
+        };
+      }
+
+      ready() {
+        super.ready();
+        Polymer.RenderStatus.afterNextRender(this, function() {
+          this._loadDirectoryData();
+        });
+      }
+
+      _loadDirectoryData() {
+        fetch('./src/data/directory.json')
+          .then((resp) => resp.json())
+          .then((data) => {
+            this.set('entries', data);
+          });
+      }
+
+      _entriesObserver(entries) {
+        this.set('websites', this._filterEntries(entries, 'websites'));
+        this.set('twitch', this._filterEntries(entries, 'twitch'));
+        this.set('youtube', this._filterEntries(entries, 'youtube'));
+      }
+
+      _filterEntries(entries, directory) {
+        return entries.filter((entry) => {
+          return entry.directory == directory;
+        });
+      }
     }
 
     window.customElements.define(MyDirectory.is, MyDirectory);

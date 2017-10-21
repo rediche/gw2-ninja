@@ -1,0 +1,17 @@
+[{
+  "name": "Black Lion Ticket Value",
+  "description": "This page shows the value of a Black Lion Claim Ticket.",
+  "directory": "websites"
+},{
+  "name": "Collection Prices",
+  "description": "Calculates the price (in gold) to complete various Collections in Guild Wars 2.",
+  "directory": "websites"
+},{
+  "name": "Rediche",
+  "description": "WvW Streamer",
+  "directory": "twitch"
+},{
+  "name": "WoodenPotatoes",
+  "description": "Big GW2 YouTuber",
+  "directory": "youtube"
+}]
