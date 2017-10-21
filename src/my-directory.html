@@ -14,6 +14,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="shared-styles.html">
 
+<link rel="import" href="./directory/directory-entry.html">
+
 <dom-module id="my-directory">
   <template>
     <style include="shared-styles">
@@ -27,14 +29,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       paper-tab {
         color: white;
-      }
-
-      h6 {
-        margin: 0;
-      }
-
-      p:last-child {
-        margin-bottom: 0;
       }
 
       .search {
@@ -60,33 +54,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </paper-tabs>
 
     <div class="search">
-      <input class="search-field" type="text" value="{{searchValue::input}}" placeholder="Search for link">
+      <input class="search-field" type="text" value="{{searchValue::input}}" placeholder$="Search for [[searchForText]]">
     </div>
 
     <iron-pages selected="{{selected}}" attr-for-selected="name" fallback-selection="websites">
       <div name="websites">
         <template is="dom-repeat" items="{{websites}}">
-            <div class="card">
-              <h6>[[ item.name ]]</h6>
-              <p>[[ item.description ]]</p>
-            </div>
-          </template>
+          <directory-entry name="[[item.name]]" description="[[item.description]]"></directory-entry>
+        </template>
       </div>
       <div name="twitch">
         <template is="dom-repeat" items="{{twitch}}">
-            <div class="card">
-              <h6>[[ item.name ]]</h6>
-              <p>[[ item.description ]]</p>
-            </div>
-          </template>
+          <directory-entry name="[[item.name]]" description="[[item.description]]"></directory-entry>
+        </template>
       </div>
       <div name="youtube">
         <template is="dom-repeat" items="{{youtube}}">
-            <div class="card">
-              <h6>[[ item.name ]]</h6>
-              <p>[[ item.description ]]</p>
-            </div>
-          </template>
+          <directory-entry name="[[item.name]]" description="[[item.description]]"></directory-entry>
+        </template>
       </div>
 
     </iron-pages>
@@ -101,11 +86,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return {
           selected: {
             type: Number,
-            value: 0
+            value: 'websites',
+            observer: '_selectedObserver'
+          },
+          searchValue: {
+            type: String
+          },
+          searchForText: {
+            type: String,
+            computed: '_computeSearchForText(selected)'
           },
           entries: {
+            type: Array
+          },
+          entriesFiltered: {
             type: Array,
-            observer: '_entriesObserver'
+            computed: '_entriesFilteredObserver(entries, searchValue)',
           },
           websites: {
             type: Array
@@ -134,16 +130,44 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           });
       }
 
-      _entriesObserver(entries) {
-        this.set('websites', this._filterEntries(entries, 'websites'));
-        this.set('twitch', this._filterEntries(entries, 'twitch'));
-        this.set('youtube', this._filterEntries(entries, 'youtube'));
+      _selectedObserver(selected) {
+        this.set('searchValue', '');
+      }
+
+      _entriesFilteredObserver(entries, searchValue) {
+        let entriesFiltered = entries;
+
+        if (searchValue !== '') {
+          entriesFiltered = entries.filter((entry) => {
+            return entry.name.toLowerCase().includes(searchValue.toLowerCase()) || entry.description.toLowerCase().includes(searchValue.toLowerCase());
+          });
+        }
+
+        this.set('websites', this._filterEntries(entriesFiltered, 'websites'));
+        this.set('twitch', this._filterEntries(entriesFiltered, 'twitch'));
+        this.set('youtube', this._filterEntries(entriesFiltered, 'youtube'));
       }
 
       _filterEntries(entries, directory) {
+        if (!entries) return;
         return entries.filter((entry) => {
           return entry.directory == directory;
         });
+      }
+
+      _computeSearchForText(selected) {
+        switch (selected) {
+          case 'youtube':
+            return 'YouTube Channels';
+            break;
+          case 'twitch':
+            return 'Twitch Channels';
+            break;
+          case 'websites':
+          default:
+            return 'Websites';
+            break;
+        }
       }
     }
 

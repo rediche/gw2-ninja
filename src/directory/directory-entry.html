@@ -11,22 +11,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../shared-styles.html">
 
-<dom-module id="my-directory">
+<dom-module id="directory-entry">
   <template>
     <style include="shared-styles">
       :host {
         display: block;
+      }
 
-        padding: 10px;
+      h6 {
+        margin: 0;
+      }
+
+      p:last-child {
+        margin-bottom: 0;
       }
     </style>
 
-    [[ name ]] - [[ description ]]
+    <div class="card">
+      <h6>[[ name ]]</h6>
+      <p>[[ description ]]</p>
+    </div>
   </template>
 
   <script>
-    class MyDirectory extends Polymer.Element {
-      static get is() { return 'my-directory'; }
+    class DirectoryEntry extends Polymer.Element {
+      static get is() { return 'directory-entry'; }
 
       static get properties() {
         return {
@@ -38,22 +47,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         };
       }
-
-      ready() {
-        super.ready();
-        this._loadDirectoryData();
-      }
-
-      _loadDirectoryData() {
-        fetch('./src/data/directory.json')
-          .then((resp) => resp.json())
-          .then((data) => {
-            console.log(data);
-            this.set('entries', data);
-          });
-      }
     }
 
-    window.customElements.define(MyDirectory.is, MyDirectory);
+    window.customElements.define(DirectoryEntry.is, DirectoryEntry);
   </script>
 </dom-module>
