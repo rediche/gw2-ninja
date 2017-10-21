@@ -17,6 +17,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: block;
       }
+      
+      a {
+        display: block;
+        text-decoration: none;
+        color: var(--app-text-color);
+      }
 
       h6 {
         margin: 0;
@@ -27,10 +33,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
-    <div class="card">
-      <h6>[[ name ]]</h6>
-      <p>[[ description ]]</p>
-    </div>
+    <a href="[[ url ]]" target="_blank" rel="nofollow">
+      <div class="card">
+        <h6>[[ name ]]</h6>
+        <p>[[ description ]]</p>
+      </div>
+    </a>
   </template>
 
   <script>
@@ -40,6 +48,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       static get properties() {
         return {
           name: {
+            type: String
+          },
+          url: {
             type: String
           },
           description: {

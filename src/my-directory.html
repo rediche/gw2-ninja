@@ -60,17 +60,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <iron-pages selected="{{selected}}" attr-for-selected="name" fallback-selection="websites">
       <div name="websites">
         <template is="dom-repeat" items="{{websites}}">
-          <directory-entry name="[[item.name]]" description="[[item.description]]"></directory-entry>
+          <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]"></directory-entry>
         </template>
       </div>
       <div name="twitch">
         <template is="dom-repeat" items="{{twitch}}">
-          <directory-entry name="[[item.name]]" description="[[item.description]]"></directory-entry>
+          <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]"></directory-entry>
         </template>
       </div>
       <div name="youtube">
         <template is="dom-repeat" items="{{youtube}}">
-          <directory-entry name="[[item.name]]" description="[[item.description]]"></directory-entry>
+          <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]"></directory-entry>
         </template>
       </div>
 

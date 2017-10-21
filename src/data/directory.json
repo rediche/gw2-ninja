@@ -1,17 +1,26 @@
 [{
   "name": "Black Lion Ticket Value",
   "description": "This page shows the value of a Black Lion Claim Ticket.",
+  "url": "http://gw2.ninja/tickets",
   "directory": "websites"
 },{
   "name": "Collection Prices",
   "description": "Calculates the price (in gold) to complete various Collections in Guild Wars 2.",
+  "url": "http://gw2.ninja/collections",
+  "directory": "websites"
+},{
+  "name": "GW2 BLTC",
+  "description": "Evon Gnashblade feels violated by this perfect copy of his Trading Post. Nothing more to say.",
+  "url": "http://gw2bltc.com/",
   "directory": "websites"
 },{
   "name": "Rediche",
   "description": "WvW Streamer",
+  "url": "https://twitch.tv/rediche",
   "directory": "twitch"
 },{
   "name": "WoodenPotatoes",
   "description": "Big GW2 YouTuber",
+  "url": "http://gw2.ninja/tickets",
   "directory": "youtube"
 }]
