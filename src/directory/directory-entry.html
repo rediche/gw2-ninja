@@ -16,12 +16,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles">
       :host {
         display: block;
+        box-sizing: border-box;
       }
       
       a {
         display: block;
         text-decoration: none;
         color: var(--app-text-color);
+        height: 100%;
+        box-sizing: border-box;
       }
 
       h6 {
@@ -30,6 +33,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       p:last-child {
         margin-bottom: 0;
+      }
+
+      .card {
+        margin: 0;
+        height: 100%;
+        box-sizing: border-box;
       }
     </style>
 

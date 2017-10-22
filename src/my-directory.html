@@ -45,6 +45,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         border-radius: .125rem;
         box-shadow: 0 1px 4px rgba(0,0,0,.12);
       }
+
+      .directory-list {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        flex-wrap: wrap;
+        margin: 1.25rem;
+      }
+
+      directory-entry {
+        flex-basis: 100%;
+        margin-bottom: 1.25rem;
+      }
+
+      @media screen and (min-width: 768px) {
+        directory-entry {
+          flex-basis: calc(100% / 2 - .75rem);
+        }
+      }
     </style>
 
     <paper-tabs selected="{{selected}}" attr-for-selected="name">
@@ -58,17 +77,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </div>
 
     <iron-pages selected="{{selected}}" attr-for-selected="name" fallback-selection="websites">
-      <div name="websites">
+      <div name="websites" class="directory-list">
         <template is="dom-repeat" items="{{websites}}">
           <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]"></directory-entry>
         </template>
       </div>
-      <div name="twitch">
+      <div name="twitch" class="directory-list">
         <template is="dom-repeat" items="{{twitch}}">
           <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]"></directory-entry>
         </template>
       </div>
-      <div name="youtube">
+      <div name="youtube" class="directory-list">
         <template is="dom-repeat" items="{{youtube}}">
           <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]"></directory-entry>
         </template>
