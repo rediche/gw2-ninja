@@ -36,14 +36,92 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <paper-tab name="black-lion">Black Lion</paper-tab>
     </paper-tabs>
 
-    <div class="card">
-      <h1 class="headline">Collections</h1>
-    </div>
+    <iron-pages selected="{{selected}}" attr-for-selected="name" fallback-selection="basic">
+      <div name="basic" class="card">
+        Basic
+        <template is="dom-repeat" items="{{basic}}" as="category">
+          [[category.name]]<br>
+
+          <template is="dom-repeat" items="{{category.items}}">
+              <p>[[item.name]]</p>
+            </template>
+        </template>
+      </div>
+      <div name="rare" class="card">
+        Rare
+        <template is="dom-repeat" items="{{rare}}">
+            [[item.name]]
+          </template>
+      </div>
+      <div name="black-lion" class="card">
+        Black Lion
+        <template is="dom-repeat" items="{{blacklion}}">
+            [[item.name]]
+          </template>
+      </div>
+    </iron-pages>
   </template>
 
   <script>
     class MyCollections extends Polymer.Element {
       static get is() { return 'my-collections'; }
+
+      static get properties() {
+        return {
+          collections: {
+            type: Array
+          },
+          basic: {
+            type: Array
+          },
+          rare: {
+            type: Array
+          },
+          blacklion: {
+            type: Array
+          }
+        };
+      }
+
+      ready() {
+        super.ready();
+        this._loadCollectionData();
+      }
+
+      async _loadCollectionData() {
+        const collectionMeta = await fetch('./src/data/collections.json');
+        const collectionJson = await collectionMeta.json()
+
+        const basic = this._filterEntries(collectionJson, 'basic');
+        const basicWithPrices = await Promise.all(basic.map(async collection => {
+          return Object.assign({}, collection, { items: await this._loadItemData(collection.ids) });
+        }, this));
+        this.set('basic', basicWithPrices);
+        
+        const rare = this._filterEntries(collectionJson, 'rare');
+        this.set('rare', rare);
+
+        const blacklion = this._filterEntries(collectionJson, 'blacklion');
+        this.set('blacklion', blacklion);
+      }
+
+      async _loadItemData(ids) {
+        const itemsData = await fetch('https://api.guildwars2.com/v2/items?ids=' + ids);
+        const pricesData = await fetch('https://api.guildwars2.com/v2/commerce/prices?ids=' + ids);
+        const itemsJson = await itemsData.json();
+        const pricesJson = await pricesData.json();
+
+        return itemsJson.map(item => {
+          return Object.assign({}, item, pricesJson.find(price => price.id === item.id));
+        });
+      }
+
+      _filterEntries(collections, category) {
+        if (!collections) return;
+        return collections.filter((collection) => {
+          return collection.category == category;
+        });
+      }
     }
 
     window.customElements.define(MyCollections.is, MyCollections);
