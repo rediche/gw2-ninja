@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-collections">
@@ -16,10 +17,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles">
       :host {
         display: block;
+        box-sizing: border-box;
+      }
 
-        padding: 10px;
+      paper-tabs {
+        background-color: var(--app-primary-color);
+        --paper-tabs-selection-bar-color: #ffffff;
+      }
+
+      paper-tab {
+        color: white;
       }
     </style>
+
+    <paper-tabs selected="{{selected}}" attr-for-selected="name">
+      <paper-tab name="basic">Basic</paper-tab>
+      <paper-tab name="rare">Rare</paper-tab>
+      <paper-tab name="black-lion">Black Lion</paper-tab>
+    </paper-tabs>
 
     <div class="card">
       <h1 class="headline">Collections</h1>
