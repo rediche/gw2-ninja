@@ -20,7 +20,8 @@
     "gw2-tpcalc": "^1.0.0",
     "paper-item": "PolymerElements/paper-item#^2.0",
     "paper-tabs": "PolymerElements/paper-tabs#^2.0.0",
-    "paper-styles": "PolymerElements/paper-styles#^2.0.0"
+    "paper-styles": "PolymerElements/paper-styles#^2.0.0",
+    "iron-icons": "PolymerElements/iron-icons#^2.0.1"
   },
   "resolutions": {
     "polymer": "^2.0.0"
