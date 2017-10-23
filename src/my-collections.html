@@ -36,9 +36,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .category-name {
         font-weight: 500;
-        margin: 0;
-        border-bottom: 1px solid lightgrey;
-        padding: 1rem;
       }
 
       .category-item {
@@ -55,7 +52,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       gw2-coin-output {
         margin-left: 1rem;
-        width: 20%;
+        width: 25%;
         text-align: right;
       }
     </style>
@@ -70,9 +67,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <div name="basic">
         <template is="dom-repeat" items="{{basic}}" as="category">
           <div class="card">
-            <p class="category-name">[[category.name]]</p>
-            <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'sells')]]"></gw2-coin-output>
-            <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'buys')]]"></gw2-coin-output>
+            <div class="category-item">
+              <p class="category-name category-item-name">[[category.name]]</p>
+              <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'sells')]]"></gw2-coin-output>
+              <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'buys')]]"></gw2-coin-output>
+            </div>
             
             <template is="dom-repeat" items="{{category.items}}">
               <div class="category-item">
