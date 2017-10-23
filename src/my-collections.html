@@ -10,6 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/gw2-coin-output/gw2-coin-output.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-collections">
@@ -28,6 +29,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       paper-tab {
         color: white;
       }
+
+      .card {
+        padding: 0;
+      }
+
+      .category-name {
+        font-weight: 500;
+        margin: 0;
+        border-bottom: 1px solid lightgrey;
+        padding: 1rem;
+      }
+
+      .category-item {
+        padding: 0 1rem;
+        border-bottom: 1px solid lightgrey;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .category-item-name {
+        margin-right: auto;
+      }
+
+      gw2-coin-output {
+        margin-left: 1rem;
+        width: 20%;
+        text-align: right;
+      }
     </style>
 
     <paper-tabs selected="{{selected}}" attr-for-selected="name">
@@ -37,27 +67,40 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </paper-tabs>
 
     <iron-pages selected="{{selected}}" attr-for-selected="name" fallback-selection="basic">
-      <div name="basic" class="card">
-        Basic
+      <div name="basic">
         <template is="dom-repeat" items="{{basic}}" as="category">
-          [[category.name]]<br>
-
-          <template is="dom-repeat" items="{{category.items}}">
-              <p>[[item.name]]</p>
+          <div class="card">
+            <p class="category-name">[[category.name]]</p>
+            <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'sells')]]"></gw2-coin-output>
+            <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'buys')]]"></gw2-coin-output>
+            
+            <template is="dom-repeat" items="{{category.items}}">
+              <div class="category-item">
+                <p class="category-item-name">[[item.name]]</p>
+                <gw2-coin-output coin-string="[[item.buys.unit_price]]"></gw2-coin-output>
+                <gw2-coin-output coin-string="[[item.sells.unit_price]]"></gw2-coin-output>
+              </div>
             </template>
+          </div>
         </template>
       </div>
-      <div name="rare" class="card">
-        Rare
-        <template is="dom-repeat" items="{{rare}}">
-            [[item.name]]
-          </template>
+      <div name="rare">
+        <div class="card">
+            [[category.name]]<br>
+            
+            <template is="dom-repeat" items="{{category.items}}">
+              <p>[[item.name]]</p>
+            </template>
+          </div>
       </div>
-      <div name="black-lion" class="card">
-        Black Lion
-        <template is="dom-repeat" items="{{blacklion}}">
-            [[item.name]]
-          </template>
+      <div name="black-lion">
+        <div class="card">
+            [[category.name]]<br>
+            
+            <template is="dom-repeat" items="{{category.items}}">
+              <p>[[item.name]]</p>
+            </template>
+          </div>
       </div>
     </iron-pages>
   </template>
@@ -97,6 +140,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           return Object.assign({}, collection, { items: await this._loadItemData(collection.ids) });
         }, this));
         this.set('basic', basicWithPrices);
+        console.log(this.basic);
         
         const rare = this._filterEntries(collectionJson, 'rare');
         this.set('rare', rare);
@@ -121,6 +165,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return collections.filter((collection) => {
           return collection.category == category;
         });
+      }
+
+      _calcTotalPrices(items, buysOrSells) {
+        let totalPrices = 0;
+
+        switch (buysOrSells) {
+          case 'sells':
+            items.forEach((item) => { totalPrices += item.sells.unit_price });
+            break;
+          case 'buys':
+          default:
+            items.forEach((item) => { totalPrices += item.buys.unit_price });
+            break;
+        }
+        
+
+        return totalPrices;
       }
     }
 
