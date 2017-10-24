@@ -1,0 +1,132 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../../bower_components/gw2-coin-output/gw2-coin-output.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="collection-list">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block
+      }
+
+      .card {
+        padding: 0;
+      }
+
+      .category-name {
+        font-weight: 500;
+      }
+
+      .category,
+      .category-item {
+        padding: 0 1rem;
+        border-bottom: 1px solid rgba(0,0,0,.12);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .category-name,
+      .category-item-name {
+        margin-right: auto;
+      }
+
+      gw2-coin-output {
+        margin-left: 1rem;
+        width: 25%;
+        text-align: right;
+      }
+    </style>
+
+    <div class="card">
+      <div class="category-item">
+        <p class="category-name category-item-name">[[categoryName]]</p>
+        <gw2-coin-output coin-string="[[_calcTotalPrices(categoryItems, 'buys')]]"></gw2-coin-output>
+        <gw2-coin-output coin-string="[[_calcTotalPrices(categoryItems, 'sells')]]"></gw2-coin-output>
+      </div>
+      
+      <template is="dom-repeat" items="{{categoryItems}}">
+        <div class="category-item">
+          <p class="category-item-name">[[item.name]]</p>
+          <gw2-coin-output coin-string="[[item.buys.unit_price]]"></gw2-coin-output>
+          <gw2-coin-output coin-string="[[item.sells.unit_price]]"></gw2-coin-output>
+        </div>
+      </template>
+    </div>    
+
+  </template>
+
+  <script>
+    /**
+     * `collection-list` Description
+     *
+     * @summary ShortDescription.
+     * @customElement
+     * @polymer
+     * @extends {Polymer.Element}
+     */
+    class CollectionList extends Polymer.Element {
+      /**
+       * String providing the tag name to register the element under.
+       */
+      static get is() {
+        return 'collection-list';
+      }
+
+      /**
+       * Object describing property-related metadata used by Polymer features
+       */
+      static get properties() {
+        return {
+          categoryName: {
+            type: String
+          },
+          categoryItems: {
+            type: Array
+          },
+
+        };
+      }
+
+      _calcTotalPrices(items, buysOrSells) {
+        let totalPrices = 0;
+
+        switch (buysOrSells) {
+          case 'sells':
+            items.forEach((item) => { totalPrices += item.sells.unit_price });
+            break;
+          case 'buys':
+          default:
+            items.forEach((item) => { totalPrices += item.buys.unit_price });
+            break;
+        }
+        
+        return totalPrices;
+      }
+
+      /**
+       * Instance of the element is created/upgraded. Use: initializing state,
+       * set up event listeners, create shadow dom.
+       * @constructor
+       */
+      /* constructor() {
+        super();
+      } */
+
+      /**
+       * Use for one-time configuration of your component after local DOM is initialized. 
+       */
+      /* ready() {
+        super.ready();
+
+        Polymer.RenderStatus.afterNextRender(this, function() {
+          
+        });
+      } */
+
+    }
+
+    window.customElements.define(CollectionList.is, CollectionList);
+  </script>
+</dom-module>

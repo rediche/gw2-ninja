@@ -13,6 +13,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../bower_components/gw2-coin-output/gw2-coin-output.html">
 <link rel="import" href="shared-styles.html">
+<link rel="import" href="./collections/collection-list.html">
 
 <dom-module id="my-collections">
   <template>
@@ -69,59 +70,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <iron-pages selected="{{selected}}" attr-for-selected="name" fallback-selection="basic">
       <div name="basic">
         <template is="dom-repeat" items="{{basic}}" as="category">
-          <div class="card">
-            <div class="category-item">
-              <p class="category-name category-item-name">[[category.name]]</p>
-              <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'buys')]]"></gw2-coin-output>
-              <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'sells')]]"></gw2-coin-output>
-            </div>
-            
-            <template is="dom-repeat" items="{{category.items}}">
-              <div class="category-item">
-                <p class="category-item-name">[[item.name]]</p>
-                <gw2-coin-output coin-string="[[item.buys.unit_price]]"></gw2-coin-output>
-                <gw2-coin-output coin-string="[[item.sells.unit_price]]"></gw2-coin-output>
-              </div>
-            </template>
-          </div>
+          <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
         </template>
       </div>
       <div name="rare">
         <template is="dom-repeat" items="{{rare}}" as="category">
-          <div class="card">
-            <div class="category">
-              <p class="category-name">[[category.name]]</p>
-              <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'buys')]]"></gw2-coin-output>
-              <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'sells')]]"></gw2-coin-output>
-            </div>
-            
-            <template is="dom-repeat" items="{{category.items}}">
-              <div class="category-item">
-                <p class="category-item-name">[[item.name]]</p>
-                <gw2-coin-output coin-string="[[item.buys.unit_price]]"></gw2-coin-output>
-                <gw2-coin-output coin-string="[[item.sells.unit_price]]"></gw2-coin-output>
-              </div>
-            </template>
-          </div>
+          <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
         </template>
       </div>
       <div name="black-lion">
         <template is="dom-repeat" items="{{blacklion}}" as="category">
-          <div class="card">
-            <div class="category">
-              <p class="category-name">[[category.name]]</p>
-              <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'buys')]]"></gw2-coin-output>
-              <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'sells')]]"></gw2-coin-output>
-            </div>
-            
-            <template is="dom-repeat" items="{{category.items}}">
-              <div class="category">
-                <p class="category">[[item.name]]</p>
-                <gw2-coin-output coin-string="[[item.buys.unit_price]]"></gw2-coin-output>
-                <gw2-coin-output coin-string="[[item.sells.unit_price]]"></gw2-coin-output>
-              </div>
-            </template>
-          </div>
+          <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
         </template>
     </iron-pages>
   </template>
@@ -193,7 +152,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         });
       }
 
-      _calcTotalPrices(items, buysOrSells) {
+      /* _calcTotalPrices(items, buysOrSells) {
         let totalPrices = 0;
 
         switch (buysOrSells) {
@@ -208,7 +167,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         
 
         return totalPrices;
-      }
+      } */
     }
 
     window.customElements.define(MyCollections.is, MyCollections);
