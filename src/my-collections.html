@@ -38,6 +38,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         font-weight: 500;
       }
 
+      .category,
       .category-item {
         padding: 0 1rem;
         border-bottom: 1px solid lightgrey;
@@ -46,6 +47,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         justify-content: flex-end;
       }
 
+      .category-name,
       .category-item-name {
         margin-right: auto;
       }
@@ -69,8 +71,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <div class="card">
             <div class="category-item">
               <p class="category-name category-item-name">[[category.name]]</p>
-              <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'sells')]]"></gw2-coin-output>
               <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'buys')]]"></gw2-coin-output>
+              <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'sells')]]"></gw2-coin-output>
             </div>
             
             <template is="dom-repeat" items="{{category.items}}">
@@ -86,10 +88,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <div name="rare">
         <template is="dom-repeat" items="{{rare}}" as="category">
           <div class="card">
-            <div class="category-item">
-              <p class="category-name category-item-name">[[category.name]]</p>
-              <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'sells')]]"></gw2-coin-output>
+            <div class="category">
+              <p class="category-name">[[category.name]]</p>
               <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'buys')]]"></gw2-coin-output>
+              <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'sells')]]"></gw2-coin-output>
             </div>
             
             <template is="dom-repeat" items="{{category.items}}">
@@ -105,15 +107,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <div name="black-lion">
         <template is="dom-repeat" items="{{blacklion}}" as="category">
           <div class="card">
-            <div class="category-item">
-              <p class="category-name category-item-name">[[category.name]]</p>
-              <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'sells')]]"></gw2-coin-output>
+            <div class="category">
+              <p class="category-name">[[category.name]]</p>
               <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'buys')]]"></gw2-coin-output>
+              <gw2-coin-output coin-string="[[_calcTotalPrices(category.items, 'sells')]]"></gw2-coin-output>
             </div>
             
             <template is="dom-repeat" items="{{category.items}}">
-              <div class="category-item">
-                <p class="category-item-name">[[item.name]]</p>
+              <div class="category">
+                <p class="category">[[item.name]]</p>
                 <gw2-coin-output coin-string="[[item.buys.unit_price]]"></gw2-coin-output>
                 <gw2-coin-output coin-string="[[item.sells.unit_price]]"></gw2-coin-output>
               </div>
