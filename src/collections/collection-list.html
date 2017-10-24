@@ -21,10 +21,11 @@
 
       .category,
       .category-item {
-        padding: 0 1rem;
+        padding: 1rem;
         border-bottom: 1px solid rgba(0,0,0,.12);
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
         justify-content: flex-end;
       }
 
@@ -47,13 +48,29 @@
 
       .category-name,
       .category-item-name {
-        margin-right: auto;
+        margin: 0 0 .5rem;
+        width: 100%;
       }
 
       gw2-coin-output {
-        margin-left: 1rem;
-        width: 25%;
         text-align: right;
+        width: 50%;
+      }
+
+      @media screen and (min-width: 900px) {
+        .category,
+        .category-item {
+          flex-wrap: nowrap;
+        }
+
+        .category-name,
+        .category-item-name {
+          width: 50%;
+        }
+
+        gw2-coin-output {
+          width: 25%;
+        }
       }
     </style>
 
