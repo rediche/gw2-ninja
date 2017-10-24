@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../../bower_components/gw2-coin-output/gw2-coin-output.html">
 <link rel="import" href="../shared-styles.html">
 
@@ -27,6 +28,23 @@
         justify-content: flex-end;
       }
 
+      .category {
+        cursor: pointer;
+        border-bottom: none;
+      }
+
+      .category-item {
+        display: none;
+      }
+
+      :host([expanded]) .category-item {
+        display: flex;
+      }
+
+      :host([expanded]) .category {
+        border-bottom: 1px solid rgba(0,0,0,.12);
+      }
+
       .category-name,
       .category-item-name {
         margin-right: auto;
@@ -40,7 +58,7 @@
     </style>
 
     <div class="card">
-      <div class="category">
+      <div class="category" on-tap="toggleExpanded">
         <p class="category-name">[[categoryName]]</p>
         <gw2-coin-output coin-string="[[_calcTotalPrices(categoryItems, 'buys')]]"></gw2-coin-output>
         <gw2-coin-output coin-string="[[_calcTotalPrices(categoryItems, 'sells')]]"></gw2-coin-output>
@@ -66,7 +84,7 @@
      * @polymer
      * @extends {Polymer.Element}
      */
-    class CollectionList extends Polymer.Element {
+    class CollectionList extends Polymer.GestureEventListeners(Polymer.Element) {
       /**
        * String providing the tag name to register the element under.
        */
@@ -85,7 +103,11 @@
           categoryItems: {
             type: Array
           },
-
+          expanded: {
+            type: Boolean,
+            value: false,
+            reflectToAttribute: true
+          }
         };
       }
 
@@ -103,6 +125,11 @@
         }
         
         return totalPrices;
+      }
+
+      toggleExpanded(e) {
+        console.log("text");
+        this.set('expanded', !this.expanded);
       }
 
       /**
