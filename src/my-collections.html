@@ -83,27 +83,34 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this._loadCollectionData();
       }
 
+      async _filterAndSort(json, categoryName) {
+        const category = this._filterEntries(json, categoryName);
+        const categoryWithPrices = await Promise.all(category.map(async collection => {
+          return Object.assign({}, collection, { items: await this._loadItemData(collection.ids) });
+        }, this));
+        const categorySortedAlphabetically = categoryWithPrices.slice().sort((a, b) => {
+          const aName = a.name.toLowerCase();
+          const bName = b.name.toLowerCase();
+          if (aName < bName) return -1;
+          if (aName > bName) return 1;
+          return 0;
+        });
+
+        return categorySortedAlphabetically;
+      }
+
       async _loadCollectionData() {
         const collectionMeta = await fetch('./src/data/collections.json');
         const collectionJson = await collectionMeta.json()
 
-        const basic = this._filterEntries(collectionJson, 'basic');
-        const basicWithPrices = await Promise.all(basic.map(async collection => {
-          return Object.assign({}, collection, { items: await this._loadItemData(collection.ids) });
-        }, this));
-        this.set('basic', basicWithPrices);
+        const basic = await this._filterAndSort(collectionJson, 'basic');
+        this.set('basic', basic);
         
-        const rare = this._filterEntries(collectionJson, 'rare');
-        const rareWithPrices = await Promise.all(rare.map(async collection => {
-          return Object.assign({}, collection, { items: await this._loadItemData(collection.ids) });
-        }, this));
-        this.set('rare', rareWithPrices);
+        const rare = await this._filterAndSort(collectionJson, 'rare');
+        this.set('rare', rare);
 
-        const blacklion = this._filterEntries(collectionJson, 'blacklion');
-        const blacklionWithPrices = await Promise.all(blacklion.map(async collection => {
-          return Object.assign({}, collection, { items: await this._loadItemData(collection.ids) });
-        }, this));
-        this.set('blacklion', blacklionWithPrices);
+        const blacklion = await this._filterAndSort(collectionJson, 'blacklion');
+        this.set('blacklion', blacklion);
       }
 
       async _loadItemData(ids) {
