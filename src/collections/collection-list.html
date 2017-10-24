@@ -8,7 +8,7 @@
   <template>
     <style include="shared-styles">
       :host {
-        display: block
+        display: block;
       }
 
       .card {
@@ -39,11 +39,12 @@
       }
 
       :host([expanded]) .category-item {
+        background-color: rgba(0,0,0,.025);
         display: flex;
       }
 
       :host([expanded]) .category {
-        border-bottom: 1px solid rgba(0,0,0,.12);
+        box-shadow: 0 2px 4px rgba(0,0,0,.12);
       }
 
       .category-name,
@@ -146,7 +147,6 @@
       }
 
       toggleExpanded(e) {
-        console.log("text");
         this.set('expanded', !this.expanded);
       }
 
