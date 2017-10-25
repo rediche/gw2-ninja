@@ -25,13 +25,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: #ffffff;
         background-color: var(--app-primary-color);
       }
+
+      .title {
+        margin: 0;
+        font-weight: 300;
+      }
+
+      .card {
+        max-width: 30rem;
+      }
+
+      gw2-coin-output {
+        display: block;
+      }
     </style>
 
     <p class="description">Ever wondered what it would cost to buy a Black Lion Claim Ticket with gold? This tool does the math for you, so you don't have to.</p>
 
     <div class="card">
-      <gw2-coin-output coin-string="[[averageSell]]"></gw2-coin-output>
-      <gw2-coin-output coin-string="[[averageBuy]]"></gw2-coin-output>
+      <p class="title">Average Listing Price</p>
+      <gw2-coin-output class="display-3" coin-string="[[averageSell]]"></gw2-coin-output>
+    </div>
+    <div class="card">
+      <p class="title">Average Order Price</p>
+      <gw2-coin-output class="display-3" coin-string="[[averageBuy]]"></gw2-coin-output>
     </div>
   </template>
 
