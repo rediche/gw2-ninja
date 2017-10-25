@@ -11,6 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="./collections/collection-list.html">
 
@@ -37,6 +38,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       paper-tab {
         color: white;
       }
+
+      paper-spinner {
+        margin: 1.25rem auto;
+        display: none;
+      }
+
+      paper-spinner[active] {
+        display: block;
+      }
     </style>
 
     <p class="description">With the collections tool, you can see the prices of items in various collections, which can be bought straight off the trading post. It also calculates a total price of how much the collection is worth.</p>
@@ -49,16 +59,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <iron-pages selected="{{selected}}" attr-for-selected="name" fallback-selection="basic">
       <div name="basic">
+        <paper-spinner alt="Loading basic collections..." active="[[basicLoading]]"></paper-spinner>
         <template is="dom-repeat" items="{{basic}}" as="category">
           <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
         </template>
       </div>
       <div name="rare">
+        <paper-spinner alt="Loading basic collections..." active$="[[rareLoading]]"></paper-spinner>
         <template is="dom-repeat" items="{{rare}}" as="category">
           <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
         </template>
       </div>
       <div name="black-lion">
+        <paper-spinner alt="Loading basic collections..." active$="[[blacklionLoading]]"></paper-spinner>
         <template is="dom-repeat" items="{{blacklion}}" as="category">
           <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
         </template>
@@ -82,6 +95,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           },
           blacklion: {
             type: Array
+          },
+          basicLoading: {
+            type: Boolean,
+            value: true
+          },
+          rareLoading: {
+            type: Boolean,
+            value: true
+          },
+          blacklionLoading: {
+            type: Boolean,
+            value: true
           }
         };
       }
@@ -113,12 +138,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         const basic = await this._filterAndSort(collectionJson, 'basic');
         this.set('basic', basic);
+        this.set('basicLoading', false);
         
         const rare = await this._filterAndSort(collectionJson, 'rare');
         this.set('rare', rare);
+        this.set('rareLoading', false);
 
         const blacklion = await this._filterAndSort(collectionJson, 'blacklion');
         this.set('blacklion', blacklion);
+        this.set('blacklionLoading', false);
       }
 
       async _loadItemData(ids) {
