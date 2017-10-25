@@ -16,19 +16,107 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles">
       :host {
         display: block;
+      }
 
-        padding: 10px;
+      .description {
+        padding: 0 1rem 1rem;
+        margin: 0;
+        color: #ffffff;
+        background-color: var(--app-primary-color);
       }
     </style>
 
+    <p class="description">Ever wondered what it would cost to buy a Black Lion Claim Ticket with gold? This tool does the math for you, so you don't have to.</p>
+
     <div class="card">
-      <h1 class="headline">Tickets</h1>
+      [[averageBuy]] - [[averageSell]]
     </div>
   </template>
 
   <script>
     class MyTickets extends Polymer.Element {
       static get is() { return 'my-tickets'; }
+
+      static get properties() {
+        return {
+          collectionData: {
+            type: Array,
+            observer: '_calculateAverage'
+          },
+          averageBuy: {
+            type: Number
+          },
+          averageSell: {
+            type: Number
+          }
+        };
+      }
+
+      ready() {
+        super.ready();
+        this._loadCollectionData();
+      }
+
+      _calculateAverage(collectionData) {
+        console.log(collectionData);
+
+        let averageBuy = 0;
+        collectionData.forEach(collection => averageBuy += this._calcTotalPrices(collection.items, "buys"));
+        averageBuy = averageBuy / collectionData.length;
+        this.set('averageBuy', averageBuy);
+
+        let averageSell = 0;
+        collectionData.forEach(collection => averageSell += this._calcTotalPrices(collection.items, "sells"));
+        averageSell = averageSell / collectionData.length;
+        this.set('averageSell', averageSell);
+      }
+
+      _calcTotalPrices(items, buysOrSells) {
+        let totalPrices = 0;
+        let totalAverage = 0;
+
+        switch (buysOrSells) {
+          case 'sells':
+            items.forEach((item) => { totalPrices += item.sells.unit_price });
+            break;
+          case 'buys':
+          default:
+            items.forEach((item) => { totalPrices += item.buys.unit_price });
+            break;
+        }
+
+        totalAverage = totalPrices / items.length;
+        return totalAverage;
+      }
+
+      async _loadCollectionData() {
+        const collectionMeta = await fetch('./src/data/collections.json');
+        const collectionJson = await collectionMeta.json()
+
+        const collectionData = this._filterEntries(collectionJson, 'blacklion');
+        const collectionDataWithPrices = await Promise.all(collectionData.map(async collection => {
+          return Object.assign({}, collection, { items: await this._loadItemData(collection.ids) });
+        }, this));
+        this.set('collectionData', collectionDataWithPrices);
+      }
+
+      async _loadItemData(ids) {
+        const itemsData = await fetch('https://api.guildwars2.com/v2/items?ids=' + ids);
+        const pricesData = await fetch('https://api.guildwars2.com/v2/commerce/prices?ids=' + ids);
+        const itemsJson = await itemsData.json();
+        const pricesJson = await pricesData.json();
+
+        return itemsJson.map(item => {
+          return Object.assign({}, item, pricesJson.find(price => price.id === item.id));
+        });
+      }
+
+      _filterEntries(collections, category) {
+        if (!collections) return;
+        return collections.filter((collection) => {
+          return collection.category == category;
+        });
+      }
     }
 
     window.customElements.define(MyTickets.is, MyTickets);
