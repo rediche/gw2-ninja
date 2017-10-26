@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../bower_components/gw2-coin-output/gw2-coin-output.html">
 <link rel="import" href="shared-styles.html">
 
@@ -29,6 +30,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .title {
         margin: 0;
         font-weight: 300;
+        height: 1.75rem;
+        display: flex;
+        align-items: center;
       }
 
       .card {
@@ -38,16 +42,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       gw2-coin-output {
         display: block;
       }
+
+      paper-spinner {
+        display: none;
+        margin-left: 1rem;
+      }
+
+      paper-spinner[active] {
+        display: inline-block;
+      }
     </style>
 
     <p class="description">Ever wondered what it would cost to buy a Black Lion Claim Ticket with gold? This tool does the math for you, so you don't have to.</p>
 
     <div class="card">
-      <p class="title">Average Listing Price</p>
+      <p class="title">Average Listing Price
+          <paper-spinner active="[[averageSellLoading]]"></paper-spinner></p>
       <gw2-coin-output class="display-3" coin-string="[[averageSell]]"></gw2-coin-output>
     </div>
     <div class="card">
-      <p class="title">Average Order Price</p>
+      <p class="title">Average Order Price
+          <paper-spinner active="[[averageBuyLoading]]"></paper-spinner></p>
       <gw2-coin-output class="display-3" coin-string="[[averageBuy]]"></gw2-coin-output>
     </div>
   </template>
@@ -67,6 +82,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           },
           averageSell: {
             type: Number
+          },
+          averageBuyLoading: {
+            type: Boolean,
+            value: true
+          },
+          averageSellLoading: {
+            type: Boolean,
+            value: true
           }
         };
       }
@@ -77,17 +100,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       _calculateAverage(collectionData) {
-        console.log(collectionData);
+        //console.log(collectionData);
 
         let averageBuy = 0;
         collectionData.forEach(collection => averageBuy += this._calcTotalPrices(collection.items, "buys"));
         averageBuy = averageBuy / collectionData.length;
         this.set('averageBuy', averageBuy);
+        this.set('averageBuyLoading', false);
 
         let averageSell = 0;
         collectionData.forEach(collection => averageSell += this._calcTotalPrices(collection.items, "sells"));
         averageSell = averageSell / collectionData.length;
         this.set('averageSell', averageSell);
+        this.set('averageSellLoading', false);
       }
 
       _calcTotalPrices(items, buysOrSells) {
