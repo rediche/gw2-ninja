@@ -1,36 +1,6 @@
-# Polymer App Toolbox - Starter Kit
+# <gw2-ninja>
 
-[![Build Status](https://travis-ci.org/PolymerElements/polymer-starter-kit.svg?branch=master)](https://travis-ci.org/PolymerElements/polymer-starter-kit)
-
-This template is a starting point for building apps using a drawer-based
-layout. The layout is provided by `app-layout` elements.
-
-This template, along with the `polymer-cli` toolchain, also demonstrates use
-of the "PRPL pattern" This pattern allows fast first delivery and interaction with
-the content at the initial route requested by the user, along with fast subsequent
-navigation by pre-caching the remaining components required by the app and
-progressively loading them on-demand as the user navigates through the app.
-
-The PRPL pattern, in a nutshell:
-
-* **Push** components required for the initial route
-* **Render** initial route ASAP
-* **Pre-cache** components for remaining routes
-* **Lazy-load** and progressively upgrade next routes on-demand
-
-### Migrating from Polymer Starter Kit v1?
-
-[Check out our blog post that covers what's changed in PSK2 and how to migrate!](https://www.polymer-project.org/1.0/blog/2016-08-18-polymer-starter-kit-or-polymer-cli.html)
-
-### Quickstart
-
-We've recorded a Polycast to get you up and running with PSK2 fast!
-
-<p align="center">
-  <a href="https://www.youtube.com/watch?v=HgJ0XCyBwzY&list=PLNYkxOF6rcIDdS7HWIC_BYRunV6MHs5xo&index=10">
-    <img src="https://img.youtube.com/vi/HgJ0XCyBwzY/0.jpg" alt="Polymer Starter Kit 2 video">
-  </a>
-</p>
+Polymer 2 version of [GW2 Ninja](http://gw2.ninja). This version will be going live in the coming weeks.
 
 ### Setup
 
@@ -86,12 +56,3 @@ This command will run [Web Component Tester](https://github.com/Polymer/web-comp
 against the browsers currently installed on your machine:
 
     polymer test
-
-### Adding a new view
-
-You can extend the app by adding more views that will be demand-loaded
-e.g. based on the route, or to progressively render non-critical sections of the
-application. Each new demand-loaded fragment should be added to the list of
-`fragments` in the included `polymer.json` file. This will ensure those
-components and their dependencies are added to the list of pre-cached components
-and will be included in the `bundled` build.
