@@ -1,4 +1,4 @@
-# <gw2-ninja>
+# <gw2-ninja\>
 
 Polymer 2 version of [GW2 Ninja](http://gw2.ninja). This version will be going live in the coming weeks.
 
