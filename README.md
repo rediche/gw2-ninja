@@ -6,16 +6,16 @@ Polymer 2 version of [GW2 Ninja](http://gw2.ninja). This version will be going l
 
 ##### Prerequisites
 
-First, install [Polymer CLI](https://github.com/Polymer/polymer-cli) using
+First, install [Polymer CLI](https://github.com/Polymer/polymer-cli) and Bower using
 [npm](https://www.npmjs.com) (we assume you have pre-installed [node.js](https://nodejs.org)).
 
-    npm install -g polymer-cli
+    npm install -g polymer-cli bower
 
-##### Initialize project from template
+##### Install
 
-    mkdir my-app
+    clone from git repo
     cd my-app
-    polymer init starter-kit
+    bower install
 
 ### Start the development server
 
