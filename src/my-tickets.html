@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/utils/render-status.html">
 <link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../bower_components/gw2-coin-output/gw2-coin-output.html">
 <link rel="import" href="shared-styles.html">
@@ -96,7 +97,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       ready() {
         super.ready();
-        this._loadCollectionData();
+
+        Polymer.RenderStatus.afterNextRender(this, function() {
+          this._loadCollectionData();
+        });
       }
 
       _calculateAverage(collectionData) {
