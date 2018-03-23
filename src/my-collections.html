@@ -61,19 +61,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <iron-pages selected="{{selected}}" attr-for-selected="name" fallback-selection="basic">
       <div name="basic">
         <paper-spinner alt="Loading basic collections..." active="[[basicLoading]]"></paper-spinner>
-        <template is="dom-repeat" items="{{basic}}" as="category" initial-count="5">
+        <template is="dom-repeat" items="{{basic}}" as="category" initial-count="5" target-framerate="60">
           <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
         </template>
       </div>
       <div name="rare">
         <paper-spinner alt="Loading basic collections..." active$="[[rareLoading]]"></paper-spinner>
-        <template is="dom-repeat" items="{{rare}}" as="category" initial-count="5">
+        <template is="dom-repeat" items="{{rare}}" as="category" initial-count="5" target-framerate="60">
           <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
         </template>
       </div>
       <div name="black-lion">
         <paper-spinner alt="Loading basic collections..." active$="[[blacklionLoading]]"></paper-spinner>
-        <template is="dom-repeat" items="{{blacklion}}" as="category" initial-count="5">
+        <template is="dom-repeat" items="{{blacklion}}" as="category" initial-count="5" target-framerate="60">
           <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
         </template>
     </iron-pages>
