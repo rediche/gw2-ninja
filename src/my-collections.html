@@ -113,7 +113,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       ready() {
         super.ready();
-        this._loadCollectionData();
+
+        Polymer.RenderStatus.afterNextRender(this, function() {
+          this._loadCollectionData();
+        });
       }
 
       _getAndSetDataByWorker(collections, category) {
