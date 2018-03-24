@@ -43,6 +43,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           display: flex;
           align-items: flex-start;
         }
+
+        .flex-spacer > div {
+          flex-basis: 50%;
+        }
       }
     </style>
 
@@ -50,14 +54,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <div>
         <div class="card">
           <paper-input label="Item (ID or item code)" value="{{itemId}}"></paper-input>
-          <small>This needs to be the item code (i.e. from trading post or gw2spidy) not the wardrobe ID.</small>
-    
           <paper-input label="Quantity (1–255)" type="number" value="{{quantity}}"></paper-input>
-    
           <paper-input label="Upgrade 1 (ID or code)" value="{{upgrade1Id}}"></paper-input>
-    
           <paper-input label="Upgrade 2 (ID or code)" value="{{upgrade2Id}}"></paper-input>
-    
           <paper-input label="Skin (Wardrobe ID)" value="{{skinId}}"></paper-input>
         </div>
     
