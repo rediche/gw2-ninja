@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-chatcodes">
@@ -19,11 +20,45 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         padding: 10px;
       }
+
+      .card {
+        max-width: 500px;
+      }
+
+      @media screen and (min-width: 1100px) {
+        .flex-spacer {
+          display: flex;
+          flex-direction: row-reverse;
+          align-items: flex-start;
+        }
+      }
     </style>
 
-    <div class="card">
-      <h1 class="headline">Chatcodes</h1>
+    <div class="flex-spacer">
+      <div class="card">
+        <p>To get wardrobe code go to your account wardrobe in-game, find the skin you want, type /wiki in chat, shift-click the icon in the wardrobe, hit enter and copy the skin # from the wiki page that appears.</p>
+      </div>
+  
+      <div>
+        <div class="card">
+          <paper-input label="Item (ID or item code)"></paper-input>
+          <small>This needs to be the item code (i.e. from trading post or gw2spidy) not the wardrobe ID</small>
+    
+          <paper-input label="Quantity (1–255)" value="1"></paper-input>
+    
+          <paper-input label="Upgrade 1 (ID or code)" value="[&AgGWlQAA]"></paper-input>
+    
+          <paper-input label="Upgrade 2 (ID or code)" value="[&AgEkuwAA]"></paper-input>
+    
+          <paper-input label="Skin (Wardrobe ID)" value="[&C94OAAA=]"></paper-input>
+        </div>
+    
+        <div class="card result">
+          Code: <pre>[&AgFzPADg3g4AAJaVAAAkuwAA]</pre>
+        </div>
+      </div>
     </div>
+
   </template>
 
   <script>
