@@ -23,6 +23,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .meta-container {
         position: relative;
+        font-size: .85rem;
       }
 
       .bar {
@@ -33,16 +34,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .meta-name {
         margin: 0 0 .25rem;
-        font-size: .85rem;
       }
 
       .phase {
         padding: .5rem;
+        box-sizing: border-box;
       }
 
       .phase-name {
         font-weight: 800;
-        font-size: .85rem;
       }
     </style>
 
@@ -51,8 +51,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <p class="meta-name">[[ meta.name ]]</p>
         <div class="bar">
           <template is="dom-repeat" items="[[ meta.phases ]]" as="phase">
-            <div class="phase" style$="background: [[ phase.color ]]; width:[[ _calcPhaseWidth(phase.duration) ]]%;" data-offset="0">  
-              <span></span> <span class="phase-name">[[ phase.name ]]</span>
+            <div class="phase" style$="background: [[ phase.color ]]; width:[[ _calcPhaseWidth(phase.duration) ]]%;">  
+              <div class="phase-time">[[ phase.hour ]]:[[ phase.minute ]]</div>
+              <div class="phase-name">[[ phase.name ]]</div>
             </div>
           </template>
         </div>
@@ -67,15 +68,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       static get properties() {
         return {
           metas: {
-            type: Array
+            type: Array,
+            observer: '_updateTimes'
           }
         };
       }
 
       ready() {
         super.ready();
-
-        console.log(moment);
 
         Polymer.RenderStatus.afterNextRender(this, function() {
           this._loadMetas();
@@ -86,16 +86,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         const metasData = await fetch('./src/data/metas.json')
         const metasJson = await metasData.json();
 
-        console.log(metasJson);
         this.set('metas', metasJson);
+
+        setInterval(_updateTimes, 5000);
       }
 
       _calcPhaseWidth(duration) {
         return 100 * duration / 120;
       }
 
-      _updateTimes() {
-        this.set('metas.0', {name: "Test"});
+      _updateTimes(latestMetas) {
+        if (!latestMetas && !this.metas) return;
+
+        let that = this;
+        let metas = latestMetas || this.metas;
+        let currentTime = moment.utc();
+        let startHour = Math.floor(currentTime.hour() / 2) * 2;
+        
+        metas.forEach(function(meta, index) {
+          let offset = 0;
+
+          meta.phases.forEach(function(phase, phaseIndex) {
+            let correctedTime = "" + (startHour + (offset > 59 ? 1 : 0));
+            phase.hour = ("00" + correctedTime).slice(-2);
+            phase.minute = ("00" + (offset % 60)).slice(-2);
+            offset += phase.duration;
+          });
+
+          that.set(`metas.${index}`, meta);
+        });
       }
     }
 
