@@ -100,7 +100,7 @@ async function getSkinId(url, browser) {
   if (idUrl.includes('https://api.guildwars2.com/v2/skins')) {
     return false;
   } else if (idUrl.includes('https://api.guildwars2.com/v2/items')) {
-    let idUrlArray = idUrl.replace('&lang=en').split('=');
+    let idUrlArray = idUrl.replace('&lang=en', '').split('=');
     return idUrlArray[idUrlArray.length - 1];
     //https://api.guildwars2.com/v2/items?ids=86907&lang=en
   } else {
