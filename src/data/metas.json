@@ -1,0 +1,47 @@
+[{
+  "name": "Verdant Brink",
+  "phases": [
+    { "name": "",  "duration": 10, "color": "#84C147" },
+    { "name": "Night Bosses",  "duration": 20, "color": "#6DAC2F" },
+    { "name": "Daytime", "duration": 75,  "color": "#C4E2A5" },
+    { "name": "Night",  "duration": 15, "color": "#84C147" }
+  ]
+},{
+  "name": "Auric Basin",
+  "phases": [
+    { "name": "Pillars",  "duration": 45, "color": "#FFE37F" },
+    { "name": "Challenges",  "duration": 15, "color": "#FFD53D" },
+    { "name": "Octovine",  "duration": 20, "color": "#EAB700" },
+    { "name": "Reset",  "duration": 10, "color": "#FFF1C1" },
+    { "name": "Pillars",  "duration": 30, "color": "#FFE37F" }
+  ]
+},{
+  "name": "Tangled Depths",
+  "phases": [
+    { "name": "",  "duration": 25, "color": "#FFD7D7" },
+    { "name": "Prep",  "duration": 5, "color": "#ffbdbd" },
+    { "name": "Chak Gerent",  "duration": 20, "color": "#f99" },
+    { "name": "Help the Outposts",  "duration": 70, "color": "#FFD7D7" }
+  ]
+},{
+  "name": "Dragon's Stand",
+  "phases": [
+    { "name": "",  "duration": 90, "color": "linear-gradient( 90deg, #c8c5e5, #DFDDF7 )" },
+    { "name": "Start",  "duration": 30, "color": "linear-gradient( 90deg, #9f99cc, #c8c5e5 )" }
+  ]
+},{
+  "name": "Dry Top",
+  "phases": [
+    { "name": "Crash Site", "duration": 40,  "color": "#FCFADC" },
+    { "name": "Sandstorm",  "duration": 20, "color": "#DED98A" },
+    { "name": "Crash Site",  "duration": 40, "color": "#FCFADC" },
+    { "name": "Sandstorm",  "duration": 20, "color": "#DED98A" }
+  ]
+},{
+  "name": "Ley-Line Anomaly",
+  "phases": [
+    { "name": "", "duration": 20, "color": "#e74c3c" },
+    { "name": "Spawn", "duration": 20, "color": "#c0392b"},
+    { "name": "Accumulating", "duration": 80, "color": "#e74c3c" }
+  ]
+}]

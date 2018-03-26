@@ -9,26 +9,94 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="shared-styles.html">
+<link rel="import" href="momentjs.html">
 
 <dom-module id="my-timer">
   <template>
     <style include="shared-styles">
       :host {
         display: block;
+        padding: 1.25rem;
+      }
 
-        padding: 10px;
+      .meta-container {
+        position: relative;
+      }
+
+      .bar {
+        display: flex;
+        flex-wrap: nowrap;
+        margin-bottom: 1rem;
+      }
+
+      .meta-name {
+        margin: 0 0 .25rem;
+        font-size: .85rem;
+      }
+
+      .phase {
+        padding: .5rem;
+      }
+
+      .phase-name {
+        font-weight: 800;
+        font-size: .85rem;
       }
     </style>
 
-    <div class="card">
-      <h1 class="headline">Heart of Thorns Timer</h1>
+    <div class="meta-container">
+      <template is="dom-repeat" items="[[ metas ]]" as="meta" muta>
+        <p class="meta-name">[[ meta.name ]]</p>
+        <div class="bar">
+          <template is="dom-repeat" items="[[ meta.phases ]]" as="phase">
+            <div class="phase" style$="background: [[ phase.color ]]; width:[[ _calcPhaseWidth(phase.duration) ]]%;" data-offset="0">  
+              <span></span> <span class="phase-name">[[ phase.name ]]</span>
+            </div>
+          </template>
+        </div>
+      </template>
     </div>
   </template>
 
   <script>
     class MyTimer extends Polymer.Element {
       static get is() { return 'my-timer'; }
+
+      static get properties() {
+        return {
+          metas: {
+            type: Array
+          }
+        };
+      }
+
+      ready() {
+        super.ready();
+
+        console.log(moment);
+
+        Polymer.RenderStatus.afterNextRender(this, function() {
+          this._loadMetas();
+        });
+      }
+
+      async _loadMetas() {
+        const metasData = await fetch('./src/data/metas.json')
+        const metasJson = await metasData.json();
+
+        console.log(metasJson);
+        this.set('metas', metasJson);
+      }
+
+      _calcPhaseWidth(duration) {
+        return 100 * duration / 120;
+      }
+
+      _updateTimes() {
+        this.set('metas.0', {name: "Test"});
+      }
     }
 
     window.customElements.define(MyTimer.is, MyTimer);
