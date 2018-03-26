@@ -23,7 +23,50 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .meta-container {
         position: relative;
-        font-size: .85rem;
+        font-size: .75rem;
+        padding: 2.75rem 0 .25rem;
+      }
+
+      .pointer {
+        position: absolute;
+        height: 100%;
+        border-left: 2px solid #F44336;
+        z-index: 400;
+        top: 0;
+        transition: left 1s ease-in-out;
+        color: white;
+      }
+
+      .pointer > span {
+        position: absolute;
+        padding: .25rem .375rem;
+      }
+      
+      .pointer > span strong {
+        position: absolute;
+        top: 1.75rem;
+        font-weight: 800;
+        color: #B9B9B9;
+        width: 10rem;
+      }
+
+      .pointer > span.server {
+        left: 0;
+        background: #F44336;
+      }
+
+      .pointer > span.server strong {
+        left: .375rem;
+      }
+
+      .pointer > span.local {
+        right: .125rem;
+        background: #B6B6B6;
+      }
+
+      .pointer > span.local strong {
+        right: .375rem;
+        text-align: right;
       }
 
       .bar {
@@ -33,6 +76,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .meta-name {
+        font-weight: 800;
         margin: 0 0 .25rem;
       }
 
@@ -47,15 +91,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <div class="meta-container">
-      <template is="dom-repeat" items="[[ metas ]]" as="meta" muta>
+      <div class="pointer">
+        <span class="server"><strong>Server time</strong><span>00:00</span></span>
+        <span class="local"><strong>Your time</strong><span>00:00</span></span>
+      </div>
+
+      <template is="dom-repeat" items="[[ metas ]]" as="meta">
         <p class="meta-name">[[ meta.name ]]</p>
         <div class="bar">
+
           <template is="dom-repeat" items="[[ meta.phases ]]" as="phase">
             <div class="phase" style$="background: [[ phase.color ]]; width:[[ _calcPhaseWidth(phase.duration) ]]%;">  
               <div class="phase-time">[[ phase.hour ]]:[[ phase.minute ]]</div>
               <div class="phase-name">[[ phase.name ]]</div>
             </div>
           </template>
+
         </div>
       </template>
     </div>
