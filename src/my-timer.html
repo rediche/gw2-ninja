@@ -18,13 +18,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles">
       :host {
         display: block;
-        padding: 1.25rem;
+        padding: 1.25rem 0 0;
       }
 
       .meta-container {
         position: relative;
         font-size: .75rem;
-        padding: 2.75rem 0 .25rem;
+        padding: 3.75rem 0 .25rem;
       }
 
       .pointer {
@@ -73,6 +73,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: flex;
         flex-wrap: nowrap;
         margin-bottom: 1rem;
+        overflow: hidden;
       }
 
       .meta-name {
@@ -87,6 +88,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .phase-name {
         font-weight: 800;
+      }
+
+      @media screen and (min-width: 640px) {
+        :host {
+          padding: 1.25rem;
+        }
       }
     </style>
 
