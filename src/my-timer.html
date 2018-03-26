@@ -91,9 +91,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <div class="meta-container">
-      <div class="pointer">
-        <span class="server"><strong>Server time</strong><span>00:00</span></span>
-        <span class="local"><strong>Your time</strong><span>00:00</span></span>
+      <div class="pointer" style$="left: [[ pointerPosition ]]%;">
+        <span class="server"><strong>Server time</strong><span>[[ pointerTime ]]</span></span>
+        <span class="local"><strong>Your time</strong><span>[[ pointerLocalTime ]]</span></span>
       </div>
 
       <template is="dom-repeat" items="[[ metas ]]" as="meta">
@@ -121,6 +121,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           metas: {
             type: Array,
             observer: '_updateTimes'
+          },
+          pointerTime: {
+            type: String
+          },
+          pointerLocalTime: {
+            type: String
+          },
+          pointerPosition: {
+            type: Number
           }
         };
       }
@@ -130,6 +139,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         Polymer.RenderStatus.afterNextRender(this, function() {
           this._loadMetas();
+          this._movePointer();
         });
       }
 
@@ -139,7 +149,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         this.set('metas', metasJson);
 
-        setInterval(_updateTimes, 5000);
+        setInterval(this._updateTimes, 10000);
+
+        // Make sure reference to this is kept when calling _movePointer()
+        let that = this;
+        setInterval(function() {
+          that._movePointer();
+        }, 10000);
       }
 
       _calcPhaseWidth(duration) {
@@ -166,6 +182,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           that.set(`metas.${index}`, meta);
         });
+      }
+
+      _movePointer() {
+        // Get the time (server time = UTC time)
+        let currentTime = moment.utc();
+        let localTime = moment();
+        
+        // Format with leading 0s so 09:08 doesn't end up as 9:8
+        let hour = ("00" + currentTime.hour()).slice(-2);
+        let minute = ("00" + currentTime.minute()).slice(-2);
+        
+        let localHour = ("00" + localTime.hour()).slice(-2);
+        let localMinute = ("00" + localTime.minute()).slice(-2);
+        
+        // How far along are we (in  % ) of the current 2 hour event cycles?
+        let percentOfTwoHours = ((hour % 2) + (minute / 60)) * 50;
+        
+        // Set the text and move the pointer to that %
+        this.set('pointerTime', hour + ":" + minute);
+        this.set('pointerLocalTime', localHour + ":" + localMinute);
+        this.set('pointerPosition', percentOfTwoHours);
       }
     }
 
