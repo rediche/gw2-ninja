@@ -11,6 +11,8 @@
     "test": "npm run lint && polymer test"
   },
   "dependencies": {
-    "puppeteer": "^1.2.0"
+    "cheerio": "^1.0.0-rc.2",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2"
   }
 }
