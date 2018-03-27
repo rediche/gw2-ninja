@@ -11,6 +11,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="shared-styles.html">
 
@@ -21,6 +23,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles">
       :host {
         display: block;
+        min-height: calc(100vh - 4rem);
       }
 
       paper-tabs {
@@ -93,8 +96,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]"></directory-entry>
         </template>
       </div>
-
     </iron-pages>
+
+    <paper-toast id="toast" duration="0" text="An error occured."></paper-toast>
     
   </template>
 
@@ -147,6 +151,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           .then((resp) => resp.json())
           .then((data) => {
             this.set('entries', data);
+          })
+          .catch((err) => {
+            console.log(err);
+            this.$.toast.fitInto = this;
+            this.$.toast.open();
           });
       }
 
