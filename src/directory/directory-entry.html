@@ -9,8 +9,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../shared-styles.html">
 
 <dom-module id="directory-entry">
@@ -33,6 +31,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin: 0;
       }
 
+      p {
+        margin-top: .375rem;
+      }
+
       p:last-child {
         margin-bottom: 0;
       }
@@ -46,7 +48,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <a href="[[ url ]]" target="_blank" rel="nofollow">
       <div class="card">
-        <h6>[[ name ]] <iron-icon icon="icons:open-in-new"></iron-icon></h6>
+        <h6>[[ name ]]</h6>
         <p>[[ description ]]</p>
       </div>
     </a>
