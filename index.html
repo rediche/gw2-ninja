@@ -83,6 +83,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background-color: #E0F2F1;
       }
     </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-61776887-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-61776887-1');
+
+      window.addEventListener('location-changed', function() {
+        gtag('config', 'UA-61776887-1', {'page_path': window.location.pathname});
+      });
+    </script>
   </head>
   <body>
     <gw2-ninja></gw2-ninja>
