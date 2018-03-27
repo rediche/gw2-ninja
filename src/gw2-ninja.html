@@ -81,7 +81,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .drawer-list a.iron-selected paper-item {
         font-weight: 800;
+        background-color: rgba(0,0,0,.08);
+        --paper-item-focused-before: {
+          background: rgba(0,0,0,.08);
+        };
       }
+
     </style>
 
     <app-location route="{{route}}"></app-location>
