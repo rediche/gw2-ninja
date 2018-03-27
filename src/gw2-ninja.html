@@ -21,6 +21,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/page-title/page-title.html">
 <link rel="import" href="my-icons.html">
 <link rel="import" href="shared-styles.html">
 
@@ -153,6 +154,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </iron-pages>
       </app-header-layout>
     </app-drawer-layout>
+
+    <page-title base-title="GW2 Ninja" direction="reversed" page-title="[[ _pageTitle(page) ]]"></page-title>
   </template>
 
   <script>
@@ -211,6 +214,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if (!activePage) return;
 
         if (activePage == 'index') return 'Home';
+        if (activePage == 'directory') return 'Directory';
+        if (activePage == 'collections') return 'Collections';
+        if (activePage == 'tickets') return 'Tickets';
         if (activePage == 'chatcodes') return 'Chatcode Generator';
         if (activePage == 'timer') return 'Heart of Thorns Timer';
         if (activePage == 'calc') return 'Trading Post Calculator';
