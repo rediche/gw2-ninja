@@ -14,7 +14,7 @@
   "sources": [
     "src/**/*",
     "images/**/*",
-    "bower.json"
+    ".htaccess"
   ],
   "extraDependencies": [
     "manifest.json",
