@@ -17,9 +17,13 @@ function cheerioTransform(body) {
 }
 
 async function getCollections($) {
+  console.log("Starting scraping...");
+
   const COLLECTIONS_SELECTOR = "#mw-content-text > div > table.mech1.table > tbody > tr.line-top.achievement-row > th:first-child > a > span";
 
   let collections = $(COLLECTIONS_SELECTOR).map(async (i, name) => {
+    console.log("Getting information on:", $(name).text());
+
     // Collection Object
     let collection = {
       name: null,
@@ -43,6 +47,7 @@ async function getCollections($) {
 
   Promise.all(collections.get()).then((result) => {
     console.log(result);
+    console.log("Scraping done.");
   });
 }
 
