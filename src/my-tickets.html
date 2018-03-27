@@ -11,6 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/polymer/lib/utils/render-status.html">
 <link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/gw2-coin-output/gw2-coin-output.html">
 <link rel="import" href="shared-styles.html">
 
@@ -19,6 +20,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles">
       :host {
         display: block;
+        min-height: calc(100vh - 4rem);
       }
 
       .description {
@@ -66,6 +68,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <paper-spinner active="[[averageBuyLoading]]"></paper-spinner></p>
       <gw2-coin-output class="display-3" coin-string="[[averageBuy]]"></gw2-coin-output>
     </div>
+
+    <paper-toast id="toast" duration="0" text="An error occured."></paper-toast>
   </template>
 
   <script>
@@ -104,8 +108,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       _calculateAverage(collectionData) {
-        //console.log(collectionData);
-
         let averageBuy = 0;
         collectionData.forEach(collection => averageBuy += this._calcTotalPrices(collection.items, "buys"));
         averageBuy = averageBuy / collectionData.length;
@@ -139,12 +141,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       async _loadCollectionData() {
         const collectionMeta = await fetch('./src/data/collections.json');
-        const collectionJson = await collectionMeta.json()
 
+        if (collectionMeta.status !== 200) {
+          console.log(collectionMeta.status, collectionMeta.statusText);
+          this.$.toast.fitInto = this;
+          this.$.toast.open();
+        }
+
+        const collectionJson = await collectionMeta.json();
         const collectionData = this._filterEntries(collectionJson, 'blacklion');
         const collectionDataWithPrices = await Promise.all(collectionData.map(async collection => {
           return Object.assign({}, collection, { items: await this._loadItemData(collection.ids) });
         }, this));
+
         this.set('collectionData', collectionDataWithPrices);
       }
 
