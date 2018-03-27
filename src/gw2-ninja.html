@@ -63,7 +63,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .drawer-list {
-        margin: 0 20px;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding-bottom: 1rem;
+        box-sizing: border-box;
+        min-height: calc(100vh - 4rem);
       }
 
       .drawer-list a {
@@ -114,6 +119,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <a name="calc" href="/calc" tabindex="-1">
             <paper-item>TP Calc</paper-item>
           </a>
+          <hr style="margin-top:auto">
+          <a name="about" href="/about" tabindex="-1">
+            <paper-item>About</paper-item>
+          </a>
         </iron-selector>
       </app-drawer>
 
@@ -139,6 +148,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <my-chatcodes   name="chatcodes"></my-chatcodes>
           <my-timer       name="timer"></my-timer>
           <my-calc        name="calc"></my-calc>
+          <my-about       name="about"></my-about>
           <my-view404     name="view404"></my-view404>
         </iron-pages>
       </app-header-layout>
@@ -204,6 +214,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if (activePage == 'chatcodes') return 'Chatcode Generator';
         if (activePage == 'timer') return 'Heart of Thorns Timer';
         if (activePage == 'calc') return 'Trading Post Calculator';
+        if (activePage == 'about') return 'About GW2 Ninja';
 
         return activePage;
       }

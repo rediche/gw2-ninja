@@ -9,7 +9,8 @@
     "src/my-index.html",
     "src/my-tickets.html",
     "src/my-timer.html",
-    "src/my-view404.html"
+    "src/my-view404.html",
+    "src/my-about.html"
   ],
   "sources": [
     "src/**/*",
