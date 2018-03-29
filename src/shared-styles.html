@@ -15,20 +15,60 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <style>
       :root {
-        /* Purple 500 */
-        --app-primary-color: #9C27B0;
+        /* Colors */
+        --color-guild-wars-2: #F44336;
+        --color-heart-of-thorns: #4CAF50;
+        --color-path-of-fire: #9C27B0;
+
+        --app-primary-color: var(--color-path-of-fire);
+        --app-text-color: #212121;
+        --app-background-color: #ffffff;
+
+        /* Generic styles */
+        --app-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+        --app-border-radius: .125rem;
+        --spacer-0: 0;
+        --spacer-1: .25rem;
+        --spacer-2: .5rem;
+        --spacer-3: 1rem;
+        --spacer-4: 1.5rem;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
       }
 
       body {
         color: var(--app-text-color);
       }
 
+      h1, h2, h3, h4, h5, h6 {
+        margin-top: var(--spacer-0);
+        margin-bottom: var(--spacer-2);
+      }
+
+      p,
+      ol,
+      ul {
+        margin-top: var(--spacer-0);
+        margin-bottom: var(--spacer-3);
+      }
+
+      ol ol,
+      ul ul,
+      ol ul,
+      ul ol {
+        margin-bottom: var(--spacer-0);
+      }
+
       .card {
-        margin: 1.25rem;
-        padding: 1rem;
-        border-radius: .125rem;
-        background-color: #fff;
-        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+        margin: var(--spacer-4);
+        padding: var(--spacer-3);
+        border-radius: var(--app-border-radius);
+        background-color: var(--app-background-color);
+        box-shadow: var(--app-box-shadow);
       }
 
       hr {
@@ -36,30 +76,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 1px;
         border: 0;
         border-top: 1px solid var(--paper-grey-300);
-        margin: 1rem 0;
-        padding: 0;
+        margin: var(--spacer-3) var(--spacer-0);
+        padding: var(--spacer-0);
       }
 
       .row {
-        margin: 24px;
+        margin: var(--spacer-4);
       }
 
       .row.narrow {
         max-width: 800px;
         margin-left: auto;
         margin-right: auto;
-      }
-
-      .circle {
-        display: inline-block;
-        width: 64px;
-        height: 64px;
-        text-align: center;
-        color: #555;
-        border-radius: 50%;
-        background: #ddd;
-        font-size: 30px;
-        line-height: 64px;
       }
 
       .text-center {
