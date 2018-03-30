@@ -27,7 +27,8 @@
     "moment": "^2.21.0",
     "paper-toast": "PolymerElements/paper-toast#^2.1.0",
     "paper-button": "PolymerElements/paper-button#^2.1.0",
-    "page-title": "zacharytamas/page-title#^3.0.0"
+    "page-title": "zacharytamas/page-title#^3.0.0",
+    "paper-ripple": "PolymerElements/paper-ripple#^2.1.0"
   },
   "resolutions": {
     "polymer": "^2.0.0"

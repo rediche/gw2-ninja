@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html">
 <link rel="import" href="../shared-styles.html">
 
 <dom-module id="directory-entry">
@@ -25,6 +26,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: var(--app-text-color);
         height: 100%;
         box-sizing: border-box;
+        position: relative;
       }
 
       h6 {
@@ -51,6 +53,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <h6>[[ name ]]</h6>
         <p>[[ description ]]</p>
       </div>
+      <paper-ripple></paper-ripple>
     </a>
   </template>
 
