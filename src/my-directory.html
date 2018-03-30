@@ -10,6 +10,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
@@ -70,7 +73,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
-    <paper-tabs selected="{{selected}}" attr-for-selected="name">
+    <app-location route="{{route}}"></app-location>
+    <app-route route="{{route}}" pattern="/directory/:subview" data="{{subviewData}}"></app-route>
+
+    <paper-tabs selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="websites">
       <paper-tab name="websites">Websites</paper-tab>
       <paper-tab name="twitch">Twitch</paper-tab>
       <paper-tab name="youtube">YouTube</paper-tab>
@@ -80,7 +86,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <input class="search-field" type="text" value="{{searchValue::input}}" placeholder$="Search for [[searchForText]]">
     </div>
 
-    <iron-pages selected="{{selected}}" attr-for-selected="name" fallback-selection="websites">
+    <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="websites">
       <div name="websites" class="directory-list">
         <template is="dom-repeat" items="{{websites}}">
           <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]"></directory-entry>
@@ -108,17 +114,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       static get properties() {
         return {
-          selected: {
-            type: Number,
-            value: 'websites',
-            observer: '_selectedObserver'
+          subviewData: {
+            observer: "_selectedObserver"
           },
           searchValue: {
             type: String
           },
           searchForText: {
             type: String,
-            computed: '_computeSearchForText(selected)'
+            computed: '_computeSearchForText(subviewData.subview)'
           },
           entries: {
             type: Array
@@ -147,7 +151,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       _loadDirectoryData() {
-        fetch('./src/data/directory.json')
+        fetch('/src/data/directory.json')
           .then((resp) => resp.json())
           .then((data) => {
             this.set('entries', data);
