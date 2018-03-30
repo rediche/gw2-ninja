@@ -27,11 +27,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         /* Generic styles */
         --app-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
         --app-border-radius: .125rem;
-        --spacer-0: 0;
-        --spacer-1: .25rem;
-        --spacer-2: .5rem;
-        --spacer-3: 1rem;
-        --spacer-4: 1.5rem;
+        --spacer-none: 0;
+        --spacer-xsmall: .25rem;
+        --spacer-small: .5rem;
+        --spacer-medium: 1rem;
+        --spacer-large: 1.5rem;
       }
 
       *,
@@ -45,27 +45,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       h1, h2, h3, h4, h5, h6 {
-        margin-top: var(--spacer-0);
-        margin-bottom: var(--spacer-2);
+        margin-top: var(--spacer-none);
+        margin-bottom: var(--spacer-small);
       }
 
       p,
       ol,
       ul {
-        margin-top: var(--spacer-0);
-        margin-bottom: var(--spacer-3);
+        margin-top: var(--spacer-none);
+        margin-bottom: var(--spacer-medium);
       }
 
       ol ol,
       ul ul,
       ol ul,
       ul ol {
-        margin-bottom: var(--spacer-0);
+        margin-bottom: var(--spacer-none);
       }
 
       .card {
-        margin: var(--spacer-4);
-        padding: var(--spacer-3);
+        margin: var(--spacer-large);
+        padding: var(--spacer-medium);
         border-radius: var(--app-border-radius);
         background-color: var(--app-background-color);
         box-shadow: var(--app-box-shadow);
@@ -76,12 +76,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 1px;
         border: 0;
         border-top: 1px solid var(--paper-grey-300);
-        margin: var(--spacer-3) var(--spacer-0);
-        padding: var(--spacer-0);
+        margin: var(--spacer-medium) var(--spacer-none);
+        padding: var(--spacer-none);
       }
 
       .row {
-        margin: var(--spacer-4);
+        margin: var(--spacer-large);
       }
 
       .row.narrow {
