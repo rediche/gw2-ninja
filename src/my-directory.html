@@ -9,14 +9,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="shared-styles.html">
 
 <link rel="import" href="./directory/directory-entry.html">
@@ -40,17 +43,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .search {
         margin: 1.25rem;
+        position: relative;
       }
 
       .search-field {
-        padding: 1rem 1rem;
+        padding: .9375rem 3rem .9375rem var(--spacer-medium);
         font-size: 1rem;
         display: block;
         box-sizing: border-box;
         width: 100%;
         border: 0;
-        border-radius: .125rem;
+        border-radius: var(--app-border-radius);
         box-shadow: 0 1px 4px rgba(0,0,0,.12);
+      }
+
+      .search-clear {
+        position: absolute;
+        right: .25rem;
+        top: .25rem;
+        color: #BDBDBD;
       }
 
       .directory-list {
@@ -84,6 +95,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div class="search">
       <input class="search-field" type="text" value="{{searchValue::input}}" placeholder$="Search for [[searchForText]]">
+      <paper-icon-button class="search-clear" icon="icons:cancel" hidden$="[[ _hideClearSearch(searchValue) ]]" on-tap="_clearSearchValue"></paper-icon-button>
     </div>
 
     <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="websites">
@@ -109,7 +121,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
-    class MyDirectory extends Polymer.Element {
+    class MyDirectory extends Polymer.GestureEventListeners(Polymer.Element) {
       static get is() { return 'my-directory'; }
 
       static get properties() {
@@ -201,6 +213,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             return 'Websites';
             break;
         }
+      }
+
+      _hideClearSearch(value) {
+        return value ? false : true;
+      }
+
+      _clearSearchValue() {
+        this.set('searchValue', '');
       }
     }
 
