@@ -89,7 +89,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <paper-tabs selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="websites">
       <paper-tab name="websites">Websites</paper-tab>
-      <paper-tab name="twitch">Twitch</paper-tab>
+      <paper-tab name="streamers">Streamers</paper-tab>
       <paper-tab name="youtube">YouTube</paper-tab>
     </paper-tabs>
 
@@ -104,7 +104,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]"></directory-entry>
         </template>
       </div>
-      <div name="twitch" class="directory-list">
+      <div name="streamers" class="directory-list">
         <template is="dom-repeat" items="{{twitch}}">
           <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]"></directory-entry>
         </template>
@@ -205,8 +205,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           case 'youtube':
             return 'YouTube Channels';
             break;
-          case 'twitch':
-            return 'Twitch Channels';
+          case 'streamers':
+            return 'Streamers';
             break;
           case 'websites':
           default:
