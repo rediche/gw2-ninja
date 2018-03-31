@@ -10,6 +10,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/polymer/lib/utils/render-status.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
@@ -50,15 +52,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
+    <app-location route="{{route}}"></app-location>
+    <app-route route="{{route}}" pattern="/collections/:subview" data="{{subviewData}}"></app-route>
+
     <p class="description">With the collections tool, you can see the prices of items in various collections, which can be bought straight off the trading post.<br> It also calculates a total price of how much the collection is worth.</p>
 
-    <paper-tabs selected="{{selected}}" attr-for-selected="name">
+    <paper-tabs selected="{{subviewData.subview}}" attr-for-selected="name">
       <paper-tab name="basic">Basic</paper-tab>
       <paper-tab name="rare">Rare</paper-tab>
       <paper-tab name="black-lion">Black Lion</paper-tab>
     </paper-tabs>
 
-    <iron-pages selected="{{selected}}" attr-for-selected="name" fallback-selection="basic">
+    <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="basic">
       <div name="basic">
         <paper-spinner alt="Loading basic collections..." active="[[basicLoading]]"></paper-spinner>
         <template is="dom-repeat" items="{{basic}}" as="category" initial-count="5" target-framerate="60">
@@ -122,7 +127,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _getAndSetDataByWorker(collections, category) {
         const that = this;
-        const worker = new Worker('src/workers/collection-worker.js');
+        const worker = new Worker('/src/workers/collection-worker.js');
 
         worker.postMessage({
           'collections': collections,
@@ -138,7 +143,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       async _loadCollectionData() {
-        const collectionMeta = await fetch('./src/data/collections.json');
+        const collectionMeta = await fetch('/src/data/collections.json');
         const collectionJson = await collectionMeta.json();
 
         this._getAndSetDataByWorker(collectionJson, 'basic');
