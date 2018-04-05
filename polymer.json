@@ -19,7 +19,6 @@
   ],
   "extraDependencies": [
     "manifest.json",
-    "bower_components/webcomponentsjs/*.js",
     "bower_components/gw2-coin-input/images/*",
     "bower_components/gw2-coin-output/images/*"
   ],
