@@ -101,17 +101,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="websites">
       <div name="websites" class="directory-list">
         <template is="dom-repeat" items="{{websites}}">
-          <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]"></directory-entry>
+          <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
         </template>
       </div>
       <div name="streamers" class="directory-list">
         <template is="dom-repeat" items="{{streamers}}">
-          <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]"></directory-entry>
+          <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
         </template>
       </div>
       <div name="youtube" class="directory-list">
         <template is="dom-repeat" items="{{youtube}}">
-          <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]"></directory-entry>
+          <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
         </template>
       </div>
     </iron-pages>

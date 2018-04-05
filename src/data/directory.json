@@ -51,7 +51,8 @@
     "name": "Chemsorly",
     "description": "A popular World vs World streamer. Usually streaming guild raids and Guild vs Guild. NOTE: No longer active.",
     "url": "https://twitch.tv/chemsorly",
-    "directory": "streamers"
+    "directory": "streamers",
+    "inactive": true
   },
   {
     "name": "Permanent Harvesting Nodes Route",

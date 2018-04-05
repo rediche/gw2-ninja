@@ -33,6 +33,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin: 0;
       }
 
+      h6 span {
+        color: rgba(0, 0, 0, .4);
+      }
+
       p {
         margin-top: .375rem;
       }
@@ -48,7 +52,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <a href="[[ url ]]" target="_blank" rel="nofollow">
       <div class="card">
-        <h6>[[ name ]]</h6>
+        <h6>[[ name ]] <span hidden$="[[ !inactive ]]">- Inactive</span></h6>
         <p>[[ description ]]</p>
       </div>
       <paper-ripple></paper-ripple>
@@ -69,6 +73,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           },
           description: {
             type: String
+          },
+          inactive: {
+            type: Boolean,
+            value: false
           }
         };
       }
