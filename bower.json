@@ -22,7 +22,7 @@
     "paper-tabs": "PolymerElements/paper-tabs#^2.0.0",
     "paper-styles": "PolymerElements/paper-styles#^2.0.0",
     "iron-icons": "PolymerElements/iron-icons#^2.0.1",
-    "gw2-coin-output": "^1.0.0",
+    "gw2-coin-output": "^1.1.2",
     "paper-spinner": "PolymerElements/paper-spinner#^2.0.0",
     "moment": "^2.21.0",
     "paper-toast": "PolymerElements/paper-toast#^2.1.0",
@@ -31,7 +31,17 @@
     "paper-ripple": "PolymerElements/paper-ripple#^2.1.0"
   },
   "resolutions": {
-    "polymer": "^2.0.0"
+    "polymer": "^2.0.0",
+    "iron-flex-layout": "^2.0",
+    "iron-media-query": "^2.0",
+    "webcomponentsjs": "^v1.1.0",
+    "paper-styles": "^2.0.0",
+    "iron-meta": "1 - 2",
+    "iron-behaviors": "1 - 2",
+    "iron-a11y-announcer": "1 - 2",
+    "iron-a11y-keys-behavior": "1 - 2",
+    "iron-form-element-behavior": "1 - 2",
+    "iron-validatable-behavior": "1 - 2"
   },
   "devDependencies": {
     "web-component-tester": "^6.0.0"

@@ -79,15 +79,15 @@
     <div class="card">
       <div class="category" on-tap="toggleExpanded">
         <p class="category-name">[[categoryName]]</p>
-        <gw2-coin-output coin-string="[[_calcTotalPrices(categoryItems, 'buys')]]"></gw2-coin-output>
-        <gw2-coin-output coin-string="[[_calcTotalPrices(categoryItems, 'sells')]]"></gw2-coin-output>
+        <gw2-coin-output prepend-zeroes coin-string="[[_calcTotalPrices(categoryItems, 'buys')]]"></gw2-coin-output>
+        <gw2-coin-output prepend-zeroes coin-string="[[_calcTotalPrices(categoryItems, 'sells')]]"></gw2-coin-output>
       </div>
       
       <template is="dom-repeat" items="{{categoryItems}}" initial-count="5" target-framerate="60">
         <div class="category-item">
           <p class="category-item-name">[[item.name]]</p>
-          <gw2-coin-output coin-string="[[item.buys.unit_price]]"></gw2-coin-output>
-          <gw2-coin-output coin-string="[[item.sells.unit_price]]"></gw2-coin-output>
+          <gw2-coin-output prepend-zeroes coin-string="[[item.buys.unit_price]]"></gw2-coin-output>
+          <gw2-coin-output prepend-zeroes coin-string="[[item.sells.unit_price]]"></gw2-coin-output>
         </div>
       </template>
     </div>    
