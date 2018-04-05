@@ -36,7 +36,7 @@
       "compile": false
     },
     "css": { "minify": true },
-    "html": { "minify": true },
+    "html": { "minify": false },
     "addServiceWorker": true
   }]
 }
