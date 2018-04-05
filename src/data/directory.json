@@ -1,14 +1,32 @@
 [
   {
+    "name": "Rediche",
+    "description": "WvW player. Necro main. Loves huuuuuge fights.",
+    "url": "https://www.twitch.tv/rediche",
+    "directory": "streamers"
+  },
+  {
+    "name": "MightyTeapot",
+    "description": "",
+    "url": "https://www.twitch.tv/MightyTeapot",
+    "directory": "streamers"
+  },
+  {
+    "name": "Frostball",
+    "description": "PvP Player",
+    "url": "https://www.twitch.tv/frostball99",
+    "directory": "streamers"
+  },
+  {
     "name": "Black Lion Ticket Value",
     "description": "This page shows the value of a Black Lion Claim Ticket",
-    "url": "http://gw2.ninja/tickets",
+    "url": "https://gw2.ninja/tickets",
     "directory": "websites"
   },
   {
     "name": "Collection Prices",
     "description": "Calculates the price (in gold) to complete various Collections in Guild Wars 2",
-    "url": "http://gw2.ninja/collections",
+    "url": "https://gw2.ninja/collections",
     "directory": "websites"
   },
   {
