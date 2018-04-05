@@ -1,26 +1,1028 @@
-[{
-  "name": "Black Lion Ticket Value",
-  "description": "This page shows the value of a Black Lion Claim Ticket.",
-  "url": "http://gw2.ninja/tickets",
-  "directory": "websites"
-},{
-  "name": "Collection Prices",
-  "description": "Calculates the price (in gold) to complete various Collections in Guild Wars 2.",
-  "url": "http://gw2.ninja/collections",
-  "directory": "websites"
-},{
-  "name": "GW2 BLTC",
-  "description": "Evon Gnashblade feels violated by this perfect copy of his Trading Post. Nothing more to say.",
-  "url": "http://gw2bltc.com/",
-  "directory": "websites"
-},{
-  "name": "Rediche",
-  "description": "WvW Streamer",
-  "url": "https://twitch.tv/rediche",
-  "directory": "twitch"
-},{
-  "name": "WoodenPotatoes",
-  "description": "Big GW2 YouTuber",
-  "url": "http://gw2.ninja/tickets",
-  "directory": "youtube"
-}]
+[
+  {
+    "name": "Black Lion Ticket Value",
+    "description": "This page shows the value of a Black Lion Claim Ticket",
+    "url": "http://gw2.ninja/tickets",
+    "directory": "websites"
+  },
+  {
+    "name": "Collection Prices",
+    "description": "Calculates the price (in gold) to complete various Collections in Guild Wars 2",
+    "url": "http://gw2.ninja/collections",
+    "directory": "websites"
+  },
+  {
+    "name": "Aurora Peachy",
+    "description": "\"I'm a Gamer. I'm a Geek. I'm obsessed with Sailor Moon and Guild Wars 1 & 2 more than should be legally allowed. Smile!! :D\" - YT Description",
+    "url": "https://www.youtube.com/user/AuroraPeachy",
+    "directory": "youtube"
+  },
+  {
+    "name": "Bog Otter",
+    "description": "\"Video game commentary, gameplay and impressions by Richie Procopio.\" - YT Description",
+    "url": "https://www.youtube.com/user/bogotter",
+    "directory": "youtube"
+  },
+  {
+    "name": "Unity Jebro",
+    "description": "An Offical Guild Wars 2 Shoutcaster.",
+    "url": "https://www.youtube.com/user/UnityJebro",
+    "directory": "youtube"
+  },
+  {
+    "name": "Chemsorly",
+    "description": "A popular World vs World streamer. Usually streaming guild raids and Guild vs Guild. NOTE: No longer active.",
+    "url": "https://twitch.tv/chemsorly",
+    "directory": "streamers"
+  },
+  {
+    "name": "Permanent Harvesting Nodes Route",
+    "description": "A waypoint optimized route to permanent nodes all around the Tyrian continent.",
+    "url": "http://starbuckguild.com/ore/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 BLTC",
+    "description": "Evon Gnashblade feels violated by this perfect copy of his Trading Post. Nothing more to say.",
+    "url": "http://gw2bltc.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 Shinies",
+    "description": "The allround collection of tools for the GW2 Trading Post and making Shinies online!",
+    "url": "http://www.gw2shinies.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 Spidy",
+    "description": "The father of Guild Wars 2 Graphs for the Trading Post and with extra tools for Crafting.",
+    "url": "http://www.gw2spidy.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2TP.com",
+    "description": "A very simplistic Guild Wars 2 Trading Post right in your internet browser!",
+    "url": "https://www.gw2tp.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2TP.net",
+    "description": "A classic in online trading posts. Especially the interesting tool \"Flippable Items\" should come into mind when using this site.",
+    "url": "http://gw2tp.net/",
+    "directory": "websites"
+  },
+  {
+    "name": "Trading Post Calculator",
+    "description": "A very simple tool that can calculate your earnings when selling items on the Trading Post.",
+    "url": "http://gw2.ninja/calc/",
+    "directory": "websites"
+  },
+  {
+    "name": "CraftChart",
+    "description": "Keep track of what you want to craft and how you are progressing.",
+    "url": "http://www.gw2-craftchart.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 Crafts",
+    "description": "The good, old and super reliable GW2 Crafts gives you everything you need to max out your crafting professions at the lowest costs for you.",
+    "url": "http://gw2crafts.net/",
+    "directory": "websites"
+  },
+  {
+    "name": "Pink Alp Bananas",
+    "description": "A Guild Wars 2 Webcomic. Need a laugh, this is the place.",
+    "url": "http://pinkalpbananas.tumblr.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 Intro 101",
+    "description": "An introductory blog to everything Guild Wars 2. If you're a new player, this is really useful.",
+    "url": "http://gw2intro101.tumblr.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Guild Emblem Creator",
+    "description": "Easy online Guild Emblem creator to preview how you want your next guild emblem to look like.",
+    "url": "http://nailek.net/gw2/emblemeditor.php",
+    "directory": "websites"
+  },
+  {
+    "name": "Argos Soft",
+    "description": "Armor gallery database.",
+    "url": "http://argos-soft.net/",
+    "directory": "websites"
+  },
+  {
+    "name": "Dyealogue",
+    "description": "Dye catalogue of all the dyes in Guild Wars 2.",
+    "url": "http://www.dragonsworn.net/dyes/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 Armor",
+    "description": "Complete Guild Wars 2 Armor Gallery.",
+    "url": "http://www.gw2armor.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "MetaBattle",
+    "description": "Need a build for any occasion? MetaBattle is the place to go. With meta builds for anything from Dungeons to Ranked PvP Arena builds.",
+    "url": "http://metabattle.com/wiki/MetaBattle_Wiki",
+    "directory": "websites"
+  },
+  {
+    "name": "To Dye For",
+    "description": "Database with the best combinations of dye for you armor and add your own combinations.",
+    "url": "http://www.todyeforguildwars2.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Guild Wars 2 Dungeons",
+    "description": "Speedrunning leaderboards, guides and the all-in-one resource for dungeon running.",
+    "url": "http://gw2dungeons.net/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 Stats",
+    "description": "A go-to site when it comes to leaderboards in Guild Wars 2. (This used to be MOS Millenium)",
+    "url": "http://gw2stats.com",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2Tools.de Worldboss Timer",
+    "description": "Yet another worldboss timer.",
+    "url": "http://timer.gw2tools.de/",
+    "directory": "websites"
+  },
+  {
+    "name": "LimitlessFX Worldboss Timer",
+    "description": "Simple and mobile-ready worldboss timer.",
+    "url": "http://gw2.limitlessfx.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Rainmeter Worldboss Timer",
+    "description": "World Boss Timer Overlay build on Rainmeter.",
+    "url": "http://killall-q.deviantart.com/art/Guild-Wars-2-World-Boss-Timer-Overlay-456805634",
+    "directory": "websites"
+  },
+  {
+    "name": "Silver Sunshine Worldboss Timer",
+    "description": "Simple but powerful Worldboss Timer",
+    "url": "http://timer.silversunshine.net/",
+    "directory": "websites"
+  },
+  {
+    "name": "Dulfy Worldboss Timer",
+    "description": "The popular Worldboss timer created by That_Shaman and hosted by Dulfy.",
+    "url": "http://dulfy.net/2014/04/23/event-timer/",
+    "directory": "websites"
+  },
+  {
+    "name": "Dulfy",
+    "description": "Dulfy provide guides on everything PvE, Achievements and more.",
+    "url": "http://dulfy.net/",
+    "directory": "websites"
+  },
+  {
+    "name": "Into the Mists",
+    "description": "Guides, build templates and more.",
+    "url": "http://intothemists.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Tour de Waypoint",
+    "description": "Guides to faster mapcompletion and where to go.",
+    "url": "http://www.postcount.net/index.php?pageid=tdwindex",
+    "directory": "websites"
+  },
+  {
+    "name": "Chronicle of Tyria",
+    "description": "News, podcast, magazine, fanfiction. They just got everything written for sure.",
+    "url": "http://www.chroniclesoftyria.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Dragon Season",
+    "description": "News, Interviews, Guides, Lore, Fan Fiction and more.",
+    "url": "http://dragonseason.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Deroir",
+    "description": "\"I'm a massive fan of the entire Guild Wars universe and enjoy every part of it.\" - YT Description",
+    "url": "https://www.youtube.com/user/DeroirGaming",
+    "directory": "youtube"
+  },
+  {
+    "name": "Dulfy",
+    "description": "\"Videos & Guides from MMOs\" - YT Description",
+    "url": "https://www.youtube.com/user/Dulfycleric",
+    "directory": "youtube"
+  },
+  {
+    "name": "Eexa",
+    "description": "Follow the life of the explorable asura named Eexa.",
+    "url": "https://www.youtube.com/channel/UCK9o3vXOTWiZhgt4ZJpemtw",
+    "directory": "youtube"
+  },
+  {
+    "name": "Guild Mag",
+    "description": "\"GuildMag is a non-profit Guild Wars 2 fansite, serving up unique and fresh content for the Guild Wars 2 community.\" - YT Description",
+    "url": "https://www.youtube.com/user/GuildMag",
+    "directory": "youtube"
+  },
+  {
+    "name": "GW2 Account Viewer",
+    "description": "Inspect your account, when you're not even in game.",
+    "url": "http://mygw2.wvwintel.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 Inventory Cleanup",
+    "description": "Use your API key to get advice on how to clean up your inventory.",
+    "url": "http://gw.zweistein.cz/gw2stacks/",
+    "directory": "websites"
+  },
+  {
+    "name": "The Legendary Quest",
+    "description": "Use your API key to fetch information from your account, to see how many materials (and the value in gold) you need in order to craft certain legendaries.",
+    "url": "http://redglow.github.io/TheLegendaryQuest/",
+    "directory": "websites"
+  },
+  {
+    "name": "Guild Mag",
+    "description": "The unofficial Guild Wars 2 magazine",
+    "url": "http://www.guildmag.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Nerdy Bookahs",
+    "description": "",
+    "url": "https://nerdybookahs.wordpress.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Relics of Orr",
+    "description": "",
+    "url": "http://www.relicsoforr.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "The Egg Baron",
+    "description": "",
+    "url": "http://eggbaron.blogspot.co.uk/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 Nodes",
+    "description": "Select your megaserverinstance IP and find every single node in that instance.",
+    "url": "http://gw2nodes.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Silverwastes Cryptobotanist Map",
+    "description": "Find the current location of the Cryptobotanist on this small, but fantastic tool.",
+    "url": "http://johnweng.com/tools/cryptobotanist/",
+    "directory": "websites"
+  },
+  {
+    "name": "Custom Map Routes",
+    "description": "Create your own map with different routes for nodes or whatever you'd like. You can also browse maps other players made.",
+    "url": "http://www.gw2maps.ch/",
+    "directory": "websites"
+  },
+  {
+    "name": "WvW Intel",
+    "description": "A live Guild Wars 2 World vs. World map that works on every screensize, even mobile devices.",
+    "url": "http://wvwintel.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Abbadon's Mouth [DE]",
+    "description": "",
+    "url": "http://abaddons-mund.eu/",
+    "directory": "websites"
+  },
+  {
+    "name": "Aurora Glade [EU]",
+    "description": "",
+    "url": "http://auroragla.de/",
+    "directory": "websites"
+  },
+  {
+    "name": "Blackgate [NA]",
+    "description": "",
+    "url": "http://gw2blackgate.com/forum/",
+    "directory": "websites"
+  },
+  {
+    "name": "Borlis Pass [NA]",
+    "description": "",
+    "url": "http://borlis.org/",
+    "directory": "websites"
+  },
+  {
+    "name": "Crystal Desert [NA]",
+    "description": "",
+    "url": "http://crystal-desert.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Darkhaven [NA]",
+    "description": "",
+    "url": "http://www.darkhaven.us/",
+    "directory": "websites"
+  },
+  {
+    "name": "Devona's Rest [NA]",
+    "description": "",
+    "url": "http://www.devonasrest.net/",
+    "directory": "websites"
+  },
+  {
+    "name": "Drakkar Lake [DE]",
+    "description": "",
+    "url": "http://www.drakkarsee.de/",
+    "directory": "websites"
+  },
+  {
+    "name": "Ehmry Bay [NA]",
+    "description": "",
+    "url": "http://www.ehmry.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Far Shiverpeaks [EU]",
+    "description": "",
+    "url": "http://farshiverpeaks.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Fort Aspenwood [NA]",
+    "description": "",
+    "url": "http://www.fort-aspenwood.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Gandara [EU]",
+    "description": "",
+    "url": "https://gankdara.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Gunnar's Hold [EU]",
+    "description": "",
+    "url": "http://www.gunnars-hold.eu/",
+    "directory": "websites"
+  },
+  {
+    "name": "Henge of Denravi [NA]",
+    "description": "",
+    "url": "http://www.hengeofdenravi.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Jade Quarry [NA]",
+    "description": "",
+    "url": "http://jadequarry.com/page/index.html",
+    "directory": "websites"
+  },
+  {
+    "name": "Jade Sea [FR]",
+    "description": "",
+    "url": "http://www.merdejade.fr/",
+    "directory": "websites"
+  },
+  {
+    "name": "Maguuma [NA]",
+    "description": "",
+    "url": "http://maguuma.org/",
+    "directory": "websites"
+  },
+  {
+    "name": "Piken Square [EU]",
+    "description": "",
+    "url": "https://piken.eu/",
+    "directory": "websites"
+  },
+  {
+    "name": "Ring of Fire [EU]",
+    "description": "",
+    "url": "http://rof-community.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Sanctum of Rall [NA]",
+    "description": "",
+    "url": "http://www.sanctumofrall.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Seafarer's Rest [EU]",
+    "description": "",
+    "url": "http://www.pevepe.net/gw2",
+    "directory": "websites"
+  },
+  {
+    "name": "Stormbluff Isle [NA]",
+    "description": "",
+    "url": "http://www.stormbluffisle.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Whiteside Ridge [EU]",
+    "description": "",
+    "url": "http://whitesideridge.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Yak's Bend [NA]",
+    "description": "",
+    "url": "http://yaks-bend.enjin.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "ArenaNet",
+    "description": "",
+    "url": "https://www.arena.net/",
+    "directory": "websites"
+  },
+  {
+    "name": "ArenaNet",
+    "description": "\"This is the official YouTube channel for ArenaNet, the company behing the MMORPG Guild Wars 2!\" - YT Description",
+    "url": "https://www.youtube.com/arenanet",
+    "directory": "youtube"
+  },
+  {
+    "name": "Guild Wars 2",
+    "description": "",
+    "url": "https://www.guildwars2.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Guild Wars 2: Heart of Thorns",
+    "description": "",
+    "url": "https://heartofthorns.guildwars2.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Guild Wars 2 Facebook",
+    "description": "",
+    "url": "https://www.facebook.com/GuildWars2",
+    "directory": "websites"
+  },
+  {
+    "name": "Guild Wars 2 Forums",
+    "description": "",
+    "url": "https://en-forum.guildwars2.com/forum",
+    "directory": "websites"
+  },
+  {
+    "name": "Guild Wars 2 Twitter",
+    "description": "",
+    "url": "https://twitter.com/guildwars2",
+    "directory": "websites"
+  },
+  {
+    "name": "Guild Wars 2 Wiki",
+    "description": "",
+    "url": "http://wiki.guildwars2.com/wiki/Main_Page",
+    "directory": "websites"
+  },
+  {
+    "name": "Guild Wars 2",
+    "description": "\"The official YouTube channel for Guild Wars 2, the award-winning and fastest-selling MMORPG.\" - YT Description",
+    "url": "https://www.youtube.com/guildwars2",
+    "directory": "youtube"
+  },
+  {
+    "name": "The Atlas",
+    "description": "This is a sad day. The Atlas was killed. For those in the dark, there is a nice article on the Guild Wars 2 Wiki, where this link not refers to. NOTE: This is not the original link.",
+    "url": "https://wiki.guildwars2.com/wiki/Atlas",
+    "directory": "websites"
+  },
+  {
+    "name": "/r/GuildRecruitment",
+    "description": "",
+    "url": "https://www.reddit.com/r/GuildRecruitment",
+    "directory": "websites"
+  },
+  {
+    "name": "/r/GuildWars2",
+    "description": "",
+    "url": "https://www.reddit.com/r/guildwars2",
+    "directory": "websites"
+  },
+  {
+    "name": "/r/GuildWars2Builds",
+    "description": "",
+    "url": "https://www.reddit.com/r/GuildWars2Builds",
+    "directory": "websites"
+  },
+  {
+    "name": "/r/GuildWars2Funny",
+    "description": "",
+    "url": "https://www.reddit.com/r/GuildWars2Funny",
+    "directory": "websites"
+  },
+  {
+    "name": "/r/GuildWarsDyeJob",
+    "description": "",
+    "url": "https://www.reddit.com/r/GuildWarsDyeJob",
+    "directory": "websites"
+  },
+  {
+    "name": "/r/GuildwarsLore",
+    "description": "",
+    "url": "https://www.reddit.com/r/GuildwarsLore",
+    "directory": "websites"
+  },
+  {
+    "name": "/r/GW2ESports",
+    "description": "",
+    "url": "https://www.reddit.com/r/GW2ESports",
+    "directory": "websites"
+  },
+  {
+    "name": "/r/TrahearneJokes",
+    "description": "Need a GW2 Related joke? This is the place to find it!",
+    "url": "https://www.reddit.com/r/TrahearneJokes",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 Event Timer",
+    "description": "",
+    "url": "https://play.google.com/store/apps/details?id=com.danielling.gw2eventtimer",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 WvW",
+    "description": "\"This app provides real time score and map updates of World vs. World vs. World in Guild Wars 2. You can now use this app to your WvW scouting, commanding and roaming advantage!\" - iTunes Description.",
+    "url": "https://itunes.apple.com/au/app/gw2-wvw/id653987126?mt=8",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 WvW",
+    "description": "\"GW2 WvW allows to monitor the data of the World versus World of Guild Wars 2 in real time.\" - Windows Store Description",
+    "url": "http://www.windowsphone.com/en-US/store/app/gw2-wvw/f74c2a6d-836e-4ab6-86fa-fe2bebfb57bf",
+    "directory": "websites"
+  },
+  {
+    "name": "Identified Dye",
+    "description": "\"Identified Dye allows you to search, sort, preview and price-check any and all available in-game dyes.\" - iTunes Description.",
+    "url": "https://itunes.apple.com/us/app/identified-dye/id660641091?mt=8",
+    "directory": "websites"
+  },
+  {
+    "name": "Stonemist",
+    "description": "\"Stonemist provides realtime World Vs World scores, maps and will even show keeps that have been claimed!\" - iTunes Description.",
+    "url": "https://itunes.apple.com/us/app/stonemist/id653547867?mt=8",
+    "directory": "websites"
+  },
+  {
+    "name": "WvW Monitor",
+    "description": "",
+    "url": "https://play.google.com/store/apps/details?id=com.berbst.gw2.wvw",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 Roleplayers",
+    "description": "A must visit Guild Wars 2 Forum for Roleplayers.",
+    "url": "http://www.guildwars2roleplayers.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 Banker",
+    "description": "This tool is one of the most amazing tools for Guild Wars 2. Simply take a screenshot of your bank, upload and the site will calculate the rest.",
+    "url": "http://mayumi.fi/gw2banker/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 Efficiency",
+    "description": "Keep track on everything on your account. Daily dungeons, worldbosses, even what's in your characters inventory!",
+    "url": "http://gw2efficiency.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 Fashion",
+    "description": "Fashion Wars 2? Yea... Just saying.",
+    "url": "http://gw2-fashion.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 Style",
+    "description": "Even more Fashion Wars 2. They game we all love!",
+    "url": "http://gw2style.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Project Tyria",
+    "description": "Comparing Guild Wars and Guild Wars 2",
+    "url": "http://projecttyria.blogspot.dk/",
+    "directory": "websites"
+  },
+  {
+    "name": "WuVerlay",
+    "description": "World VS World overlay.",
+    "url": "https://wuvoverlay.bitbucket.io/",
+    "directory": "websites"
+  },
+  {
+    "name": "MagicalMike2",
+    "description": "\"A channel dedicated to whatever I want to put here. Which usually includes, but is not limited to Guild Wars related topics.\" - YT Description",
+    "url": "https://www.youtube.com/user/magicalmike2",
+    "directory": "youtube"
+  },
+  {
+    "name": "MightyTeapot",
+    "description": "\"Guild Wars 2 is what appears here vaguely every week!\" - YT Description",
+    "url": "https://www.youtube.com/user/MightyTeapot",
+    "directory": "youtube"
+  },
+  {
+    "name": "MMOINKS",
+    "description": "\"Welcome to my little corner of the internet everyone. This channel is just a place for me to express myself through videos. Mostly about video games, MMOs in particular. I hope you enjoy.\" - YT Description",
+    "url": "https://www.youtube.com/user/MMOINKS",
+    "directory": "youtube"
+  },
+  {
+    "name": "Negativenine",
+    "description": "\"Gamer & Graphic Artist - Featuring Gaming News, Discussion, Guides & More!\" - YT Description",
+    "url": "https://www.youtube.com/user/Kx2D",
+    "directory": "youtube"
+  },
+  {
+    "name": "Super Mega Happy Fun Time Guild",
+    "description": "\"Super Mega Happy Fun Time [MEGA] is a Guild Wars 2 guild based on Northern Shiverpeaks.\" - YT Description",
+    "url": "https://www.youtube.com/channel/UChSRGb2vbvrWsNMjwqVSaDQ",
+    "directory": "youtube"
+  },
+  {
+    "name": "Talking Skritt",
+    "description": "\"This channel is the official home of the Talking Skritt podcast.\" - YT Description",
+    "url": "https://www.youtube.com/user/tinfoiltableflips",
+    "directory": "youtube"
+  },
+  {
+    "name": "The RPG Shack",
+    "description": "\"I've created a comprehensive go-to guide for almost all Living Story achievements, some older ones have sadly been lost to the Mists!\" - YT Description",
+    "url": "https://www.youtube.com/user/theonlyrpgshack",
+    "directory": "youtube"
+  },
+  {
+    "name": "WoodenPotatoes",
+    "description": "\"Guild Wars 2, comprehensive LP's and related game content with a charming potato.\" - YT Description",
+    "url": "https://www.youtube.com/user/WoodenPotatoes",
+    "directory": "youtube"
+  },
+  {
+    "name": "Cuticle",
+    "description": "",
+    "url": "https://www.youtube.com/channel/UCn8VS_NxWP3UPifU5LJ70OA",
+    "directory": "youtube"
+  },
+  {
+    "name": "Hollts",
+    "description": "\"I've been playing the game for about 2 years and almost only play PvP and WvW.\" - YT Description",
+    "url": "https://www.youtube.com/user/HolltsGaming",
+    "directory": "youtube"
+  },
+  {
+    "name": "Phantaram",
+    "description": "High ranked Guild Wars 2 PvP player.",
+    "url": "https://www.youtube.com/user/Phantaram/videos",
+    "directory": "youtube"
+  },
+  {
+    "name": "QQMore.net",
+    "description": "\"QQmore is a learning platform centered around Guild Wars 2 player versus player combat.\" - YT Description",
+    "url": "https://www.youtube.com/channel/UC0IC9msN2_P6yn9zv2G6JOg",
+    "directory": "youtube"
+  },
+  {
+    "name": "Relics of Orr",
+    "description": "\"Here you'll find news, editorials, podcasts, and various other things about Guild Wars, Guild Wars 2, and the Guild Wars community on the whole.\" - YT Description",
+    "url": "https://www.youtube.com/user/relicsoforr",
+    "directory": "youtube"
+  },
+  {
+    "name": "Celestis",
+    "description": "",
+    "url": "https://www.youtube.com/channel/UCJ5Z24gE0DwgNjkSbbJFBtA",
+    "directory": "youtube"
+  },
+  {
+    "name": "Cheezy [vC]",
+    "description": "\"I am Cheezy and I play mainly Guild Wars 2. I am/used to be very active in the Hardcore PvE scene, so you will find content of that nature on this channel.\" - YT Description",
+    "url": "https://www.youtube.com/channel/UCxMQrHncYgdOlxRZuEahxhA",
+    "directory": "youtube"
+  },
+  {
+    "name": "Deathlyhearts qT",
+    "description": "\"Random Gw2 stuff ^^\" - YT Description",
+    "url": "https://www.youtube.com/user/ShadowRX3",
+    "directory": "youtube"
+  },
+  {
+    "name": "DEKeyz2Chaos",
+    "description": "\"Guild Wars 2 guides, dungeons runs, and boss kills.\" - YT Description",
+    "url": "https://www.youtube.com/user/DEKeyz2Chaos",
+    "directory": "youtube"
+  },
+  {
+    "name": "Derpy Moa",
+    "description": "",
+    "url": "https://www.youtube.com/user/xEffinJohnny",
+    "directory": "youtube"
+  },
+  {
+    "name": "Goku [SC]",
+    "description": "",
+    "url": "https://www.youtube.com/channel/UCb3FhPCjdSmuMgwHGi0I-iw",
+    "directory": "youtube"
+  },
+  {
+    "name": "Kirasia",
+    "description": "\"Random Gw2 Videos mostly provided them when i got nothing to do :D\" - YT Description",
+    "url": "https://www.youtube.com/channel/UCkL5cQMAI2qXa9kyMyGmGhA",
+    "directory": "youtube"
+  },
+  {
+    "name": "Nike!",
+    "description": "\"My guild wars 2 video dump. Build guides, speed runs and whatever else I feel is important enough to share!\" - YT Description",
+    "url": "https://www.youtube.com/user/TurboDzan",
+    "directory": "youtube"
+  },
+  {
+    "name": "Painbow",
+    "description": "\"Guild Wars 2 videos about PvE content, notably raids\" - YT Description",
+    "url": "https://www.youtube.com/channel/UC_1HUHjDqZNJ86e0cFcUMlw",
+    "directory": "youtube"
+  },
+  {
+    "name": "Van Gherwen",
+    "description": "",
+    "url": "https://www.youtube.com/channel/UCEUGyr1n3O2SO-r3opvsEzg",
+    "directory": "youtube"
+  },
+  {
+    "name": "BroskeetSunya",
+    "description": "",
+    "url": "https://www.youtube.com/user/BroskeetSunya",
+    "directory": "youtube"
+  },
+  {
+    "name": "DeanyKong",
+    "description": "",
+    "url": "https://www.youtube.com/user/RoboCafaz",
+    "directory": "youtube"
+  },
+  {
+    "name": "Doncpauli",
+    "description": "\"Giveaways, Walkthroughs, Tutorials, Reviews, Gameplay & More!\" - YT Description",
+    "url": "https://www.youtube.com/user/Doncpauli",
+    "directory": "youtube"
+  },
+  {
+    "name": "FQ",
+    "description": "\"I mainly play Guild Wars 2, Necromancer mainer.\" - YT Description",
+    "url": "https://www.youtube.com/user/FQDark",
+    "directory": "youtube"
+  },
+  {
+    "name": "KhaidaG",
+    "description": "\"I've been making stuff for YouTube since my baby steps in Guild Wars 1.\" - YT Description",
+    "url": "https://www.youtube.com/user/KhaidaG",
+    "directory": "youtube"
+  },
+  {
+    "name": "Mikei TheMighty",
+    "description": "\"A channel mainly look at the game Guild Wars 2. Other comical vids may also make an appearance!\" - YT Description",
+    "url": "https://www.youtube.com/channel/UC-7nZVV0tgqUbWhN0YLtNaA",
+    "directory": "youtube"
+  },
+  {
+    "name": "Randomm User",
+    "description": "Mr. /r/GuildWars2 Mod",
+    "url": "https://www.youtube.com/user/MrRandommUser",
+    "directory": "youtube"
+  },
+  {
+    "name": "Sam Ajesté",
+    "description": "",
+    "url": "https://www.youtube.com/user/Darksam745",
+    "directory": "youtube"
+  },
+  {
+    "name": "Sammpo",
+    "description": "\"I'm known as Sammpo on the Internet and I make gaming music videos and machinima as my hobby!\" - YT Description",
+    "url": "https://www.youtube.com/user/SammpoStudios",
+    "directory": "youtube"
+  },
+  {
+    "name": "that_shaman",
+    "description": "The beloved dataminer.",
+    "url": "https://www.youtube.com/user/thatshaman000",
+    "directory": "youtube"
+  },
+  {
+    "name": "WorldofEnders",
+    "description": "\"Welcome to our channel, home of Minecraft with my Girlfriend, and various Guild Wars 2 fun times! \" - YT Description",
+    "url": "https://www.youtube.com/user/WorldofEnders",
+    "directory": "youtube"
+  },
+  {
+    "name": "WubdoR",
+    "description": "\"I'm mostly focused on Guild Wars 2 and making people cry by giving away (or receiving!) legendaries. You know, the usual.\" - YT Description",
+    "url": "https://www.youtube.com/user/WubdoR",
+    "directory": "youtube"
+  },
+  {
+    "name": "Choxie808",
+    "description": "\"My name is Choxie and my channel mostly consists of Touhou, and Guild Wars 2 highlighting Necromancer Gameplay and other shenanigans.\" - YT Description #NecroThings",
+    "url": "https://www.youtube.com/user/Choxie808",
+    "directory": "youtube"
+  },
+  {
+    "name": "Wolfineer",
+    "description": "Wolfineer is not active more. But his link will stay as a tribute to all the hard work he did on his Engineer guides.",
+    "url": "https://www.youtube.com/user/Wolfineer",
+    "directory": "youtube"
+  },
+  {
+    "name": "Chemsorly",
+    "description": "Chemsorly provided content for the WvW fans for a long time. He's not playing the game currently, but his link will remain as a tribute to his hard work.",
+    "url": "https://www.youtube.com/channel/UCTwstgtfGtAs__90pp5YICw",
+    "directory": "youtube"
+  },
+  {
+    "name": "Shinryuku",
+    "description": "\"Here you'll find many of my Twitch.tv stream highlights, as well as other content regarding the games I play!\" - YT Description",
+    "url": "https://www.youtube.com/user/Shinryuku",
+    "directory": "youtube"
+  },
+  {
+    "name": "SirKoroshi",
+    "description": "\"I have been an avid gamer since I was very young, jumping in to PvP mmo's around seven years ago. With my most recent one being Guild Wars 2.\" - YT Description",
+    "url": "https://www.youtube.com/user/SirKoroshi",
+    "directory": "youtube"
+  },
+  {
+    "name": "Corvus",
+    "description": "\"The place I dump videos of my music, opinions on Guild Wars and other stuff!\" - YT Description",
+    "url": "https://www.youtube.com/user/CorvusPlays",
+    "directory": "youtube"
+  },
+  {
+    "name": "GenesisOf Wrath",
+    "description": "",
+    "url": "https://www.youtube.com/channel/UCDZJWJQE_mrtI-TirMplMYQ",
+    "directory": "youtube"
+  },
+  {
+    "name": "Levi",
+    "description": "\"I do GW2 videos and draw stuff.\" - YT Description",
+    "url": "https://www.youtube.com/user/TheThruno",
+    "directory": "youtube"
+  },
+  {
+    "name": "Musical Necromancy",
+    "description": "\"This channel encourages MANUAL PLAY for the in-game instruments of Guild Wars2. It will take PRACTICE, but everyone is capable of learning everything on this channel.\" - YT Description",
+    "url": "https://www.youtube.com/channel/UCFS-MUip4PdlfsfLUJugMLg",
+    "directory": "youtube"
+  },
+  {
+    "name": "Musician's Guild of Tyria",
+    "description": "\"The Musician's Guild of Tyria is dedicated to bringing the beauty of music to Guild Wars 2!\" - YT Description",
+    "url": "https://www.youtube.com/user/mucisianguildoftyria",
+    "directory": "youtube"
+  },
+  {
+    "name": "Yuwen Taiji",
+    "description": "",
+    "url": "https://www.youtube.com/user/rainiaxe",
+    "directory": "youtube"
+  },
+  {
+    "name": "Guildnews [German]",
+    "description": "\"Dieser Kanal gehört zur Seite Guildnews.de und beschäftigt sich mit Guild Wars 2. Hier findet ihr Guides, Story, unseren Podcast und verschiedene Let's Plays zum MMO.\" - YT Description",
+    "url": "https://www.youtube.com/user/Sputtele/featured",
+    "directory": "youtube"
+  },
+  {
+    "name": "GW2CommunityDE [German]",
+    "description": "",
+    "url": "https://www.youtube.com/user/gw2communityDE",
+    "directory": "youtube"
+  },
+  {
+    "name": "WilsonStorm",
+    "description": "",
+    "url": "http://www.twitch.tv/wilsonstorm",
+    "directory": "streamers"
+  },
+  {
+    "name": "Leeto",
+    "description": "",
+    "url": "http://www.twitch.tv/leet0",
+    "directory": "streamers"
+  },
+  {
+    "name": "Bodydoc",
+    "description": "",
+    "url": "http://www.twitch.tv/bodydoc/",
+    "directory": "streamers"
+  },
+  {
+    "name": "The Lord Helseth",
+    "description": "High ranked PvP player.",
+    "url": "http://www.twitch.tv/thelordhelseth/",
+    "directory": "streamers"
+  },
+  {
+    "name": "MMOINKS",
+    "description": "",
+    "url": "http://www.twitch.tv/mmoinks",
+    "directory": "streamers"
+  },
+  {
+    "name": "Unity Jebro",
+    "description": "An Official Guild Wars 2 Shoutcaster.",
+    "url": "http://www.twitch.tv/jebrounity",
+    "directory": "streamers"
+  },
+  {
+    "name": "Silveress's Public Tradepost Sheet",
+    "description": "Data spreadsheet with various research that can come in handy for even the most experienced Trading Post player.",
+    "url": "https://docs.google.com/spreadsheets/d/1wLhXy3u0rWMasneeBsU3gvLmEGJS31hrFfcvIadRtDY/",
+    "directory": "websites"
+  },
+  {
+    "name": "Noxxi, the Noxxian",
+    "description": "\"My name is Noxxi, I'm an avid fan of Guild Wars (both \"1\" and 2). I (try to :p) make funny, interesting, entertaining, parody and occasionally guide videos.\" - YT Description",
+    "url": "https://www.youtube.com/c/NoxxitheNoxxian",
+    "directory": "youtube"
+  },
+  {
+    "name": "TP Notificator",
+    "description": "Track your Guild Wars 2 auction buying and selling orders and get notifications when you sold or bought anything. Works for Google Chrome and Opera",
+    "url": "https://github.com/terron-kun/tp-notificator",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 Sidekick",
+    "description": "This application intends to be the best mobile game companion.",
+    "url": "https://play.google.com/store/apps/details?id=com.mwgames.gw2sidekick.free",
+    "directory": "websites"
+  },
+  {
+    "name": "Kaineng [NA]",
+    "description": "",
+    "url": "http://kaineng.enjin.com",
+    "directory": "websites"
+  },
+  {
+    "name": "The Silver Wastes",
+    "description": "Salvaging for maximum profit.",
+    "url": "https://silverwastes.loltools.net/index.html",
+    "directory": "websites"
+  },
+  {
+    "name": "Tekkit's Workshop",
+    "description": "Tekkit creates very useful and in-depth guides on everything from making gold to how meta events work on different maps.",
+    "url": "https://www.youtube.com/channel/UC0Feu7AF3QW-WvqRAgs1ycw",
+    "directory": "youtube"
+  },
+  {
+    "name": "GW2 Armory",
+    "description": "Search for characters, accounts, check out their gear and more.",
+    "url": "https://gw2armory.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "AyinMaiden",
+    "description": "Creates guides for Guild Wars 2 JPs amongst other things.",
+    "url": "https://www.youtube.com/user/AyinMaiden",
+    "directory": "youtube"
+  },
+  {
+    "name": "TiffyMissWiffy",
+    "description": "Gaming walkthroughs with a focus in Guild Wars 2 (and a lot of Jumping Puzzles)",
+    "url": "https://www.youtube.com/user/TiffyMissWiffy/",
+    "directory": "youtube"
+  },
+  {
+    "name": "Jazz X Man",
+    "description": "",
+    "url": "https://www.youtube.com/channel/UC7djDGHziSnUayKmXri7AbA",
+    "directory": "youtube"
+  },
+  {
+    "name": "Guild Wars 2: Path of Fire",
+    "description": "",
+    "url": "https://www.guildwars2.com/en/path-of-fire/",
+    "directory": "websites"
+  }
+]

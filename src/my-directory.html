@@ -105,7 +105,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </template>
       </div>
       <div name="streamers" class="directory-list">
-        <template is="dom-repeat" items="{{twitch}}">
+        <template is="dom-repeat" items="{{streamers}}">
           <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]"></directory-entry>
         </template>
       </div>
@@ -146,7 +146,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           websites: {
             type: Array
           },
-          twitch: {
+          streamers: {
             type: Array
           },
           youtube: {
@@ -189,7 +189,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         this.set('websites', this._filterEntries(entriesFiltered, 'websites'));
-        this.set('twitch', this._filterEntries(entriesFiltered, 'twitch'));
+        this.set('streamers', this._filterEntries(entriesFiltered, 'streamers'));
         this.set('youtube', this._filterEntries(entriesFiltered, 'youtube'));
       }
 
