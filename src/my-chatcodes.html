@@ -19,8 +19,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
 
-      .title {
-        margin: 0;
+      .flex-spacer {
+        padding: var(--spacer-large);
       }
 
       p {
@@ -29,6 +29,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .card,
       .credits {
+        margin-bottom: var(--spacer-large);
         max-width: 500px;
       }
 
@@ -44,7 +45,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         .flex-spacer > div {
-          flex-basis: 50%;
+          flex-basis: 500px;
+        }
+
+        .flex-spacer > div:first-child {
+          margin-right: var(--spacer-large);
         }
       }
     </style>

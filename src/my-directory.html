@@ -42,7 +42,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .search {
-        margin: 1.25rem;
+        margin: var(--spacer-large);
         position: relative;
       }
 
@@ -69,17 +69,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         justify-content: space-between;
         align-items: stretch;
         flex-wrap: wrap;
-        margin: 1.25rem;
+        margin: var(--spacer-large);
       }
 
       directory-entry {
         flex-basis: 100%;
-        margin-bottom: 1.25rem;
+        margin-bottom: var(--spacer-large);
       }
 
       @media screen and (min-width: 768px) {
         directory-entry {
-          flex-basis: calc(100% / 2 - .625rem);
+          flex-basis: calc(100% / 2 - var(--spacer-large) / 2);
         }
       }
     </style>
