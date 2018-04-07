@@ -1,7 +1,14 @@
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule .* /
+<IfModule mod_rewrite.c>
+  RewriteEngine On 
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^/?(.*) https://%{HTTP_HOST}/$1 [R,L]
+
+  #RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !src/
+  RewriteRule (.*) index.html [L,QSA]
+</IfModule>
 
 <IfModule mod_headers.c>
   <FilesMatch ".(js|css|xml|gz|html)$">
