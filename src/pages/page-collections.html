@@ -1,16 +1,16 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/polymer/lib/utils/render-status.html">
-<link rel="import" href="../bower_components/polymer/lib/utils/debounce.html">
-<link rel="import" href="../bower_components/app-route/app-location.html">
-<link rel="import" href="../bower_components/app-route/app-route.html">
-<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
-<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
-<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
-<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
-<link rel="import" href="shared-styles.html">
-<link rel="import" href="./collections/collection-list.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/utils/render-status.html">
+<link rel="import" href="../../bower_components/polymer/lib/utils/debounce.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../shared-styles.html">
+<link rel="import" href="../collections/collection-list.html">
 
-<dom-module id="my-collections">
+<dom-module id="page-collections">
   <template>
     <style include="shared-styles">
       :host {
@@ -73,8 +73,8 @@
   </template>
 
   <script>
-    class MyCollections extends Polymer.Element {
-      static get is() { return 'my-collections'; }
+    class PageCollections extends Polymer.Element {
+      static get is() { return 'page-collections'; }
 
       static get properties() {
         return {
@@ -192,6 +192,6 @@
       }
     }
 
-    window.customElements.define(MyCollections.is, MyCollections);
+    window.customElements.define(PageCollections.is, PageCollections);
   </script>
 </dom-module>

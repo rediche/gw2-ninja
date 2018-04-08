@@ -1,0 +1,24 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="page-index">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+
+    <h1 class="text-center">Welcome to GW2 Ninja</h1>
+  </template>
+
+  <script>
+    class PageIndex extends Polymer.Element {
+      static get is() { return 'page-index'; }
+    }
+
+    window.customElements.define(PageIndex.is, PageIndex);
+  </script>
+</dom-module>

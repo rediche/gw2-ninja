@@ -1,7 +1,7 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="shared-styles.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../shared-styles.html">
 
-<dom-module id="my-about">
+<dom-module id="page-about">
   <template>
     <style include="shared-styles">
       :host {
@@ -37,19 +37,19 @@
 
   <script>
     /**
-     * `my-about` Description
+     * `page-about` Description
      *
      * @summary ShortDescription.
      * @customElement
      * @polymer
      * @extends {Polymer.Element}
      */
-    class MyAbout extends Polymer.Element {
+    class PageAbout extends Polymer.Element {
       /**
        * String providing the tag name to register the element under.
        */
       static get is() {
-        return 'my-about';
+        return 'page-about';
       }
 
       /**
@@ -83,6 +83,6 @@
 
     }
 
-    window.customElements.define(MyAbout.is, MyAbout);
+    window.customElements.define(PageAbout.is, PageAbout);
   </script>
 </dom-module>

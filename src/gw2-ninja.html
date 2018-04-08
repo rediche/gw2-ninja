@@ -151,15 +151,15 @@
             attr-for-selected="name"
             fallback-selection="view404"
             role="main">
-          <my-index       name="index"></my-index>
-          <my-directory   name="directory"></my-directory>
-          <my-collections name="collections"></my-collections>
-          <my-tickets     name="tickets"></my-tickets>
-          <my-chatcodes   name="chatcodes"></my-chatcodes>
-          <my-timer       name="timer"></my-timer>
-          <my-calc        name="calc"></my-calc>
-          <my-about       name="about"></my-about>
-          <my-view404     name="view404"></my-view404>
+          <page-index       name="index"></page-index>
+          <page-directory   name="directory"></page-directory>
+          <page-collections name="collections"></page-collections>
+          <page-tickets     name="tickets"></page-tickets>
+          <page-chatcodes   name="chatcodes"></page-chatcodes>
+          <page-timer       name="timer"></page-timer>
+          <page-calc        name="calc"></page-calc>
+          <page-about       name="about"></page-about>
+          <page-view404     name="view404"></page-view404>
         </iron-pages>
       </app-header-layout>
     </app-drawer-layout>
@@ -207,7 +207,7 @@
 
       _pageChanged(page) {
         // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
+        var resolvedPageUrl = this.resolveUrl('pages/page-' + page + '.html');
         Polymer.importHref(
             resolvedPageUrl,
             null,

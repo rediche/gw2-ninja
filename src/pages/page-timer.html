@@ -1,9 +1,9 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
-<link rel="import" href="shared-styles.html">
-<link rel="import" href="momentjs.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../shared-styles.html">
+<link rel="import" href="../momentjs.html">
 
-<dom-module id="my-timer">
+<dom-module id="page-timer">
   <template>
     <style include="shared-styles">
       :host {
@@ -111,8 +111,8 @@
   </template>
 
   <script>
-    class MyTimer extends Polymer.Element {
-      static get is() { return 'my-timer'; }
+    class PageTimer extends Polymer.Element {
+      static get is() { return 'page-timer'; }
 
       static get properties() {
         return {
@@ -204,6 +204,6 @@
       }
     }
 
-    window.customElements.define(MyTimer.is, MyTimer);
+    window.customElements.define(PageTimer.is, PageTimer);
   </script>
 </dom-module>

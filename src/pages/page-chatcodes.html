@@ -1,8 +1,8 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/paper-input/paper-input.html">
-<link rel="import" href="shared-styles.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../shared-styles.html">
 
-<dom-module id="my-chatcodes">
+<dom-module id="page-chatcodes">
   <template>
     <style include="shared-styles">
       :host {
@@ -72,8 +72,8 @@
   </template>
 
   <script>
-    class MyChatcodes extends Polymer.Element {
-      static get is() { return 'my-chatcodes'; }
+    class PageChatcodes extends Polymer.Element {
+      static get is() { return 'page-chatcodes'; }
 
       static get properties() {
         return {
@@ -189,6 +189,6 @@
       }
     }
 
-    window.customElements.define(MyChatcodes.is, MyChatcodes);
+    window.customElements.define(PageChatcodes.is, PageChatcodes);
   </script>
 </dom-module>
