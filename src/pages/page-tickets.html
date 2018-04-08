@@ -92,35 +92,40 @@
       }
 
       _calculateAverage(collectionData) {
-        let averageBuy = 0;
-        collectionData.forEach(collection => averageBuy += this._calcTotalPrices(collection.items, "buys"));
-        averageBuy = averageBuy / collectionData.length;
+        let totalWeapons = 0;
+        let totalTickets = 0;
+        let totalBuy = 0;
+        let totalSell = 0;
+
+        collectionData.forEach(collection => {
+          let tempTotals = this._calcTotalPrices(collection.items);
+          totalBuy += tempTotals.buys;
+          totalSell += tempTotals.sells;
+          totalWeapons += collection.items.length;
+          totalTickets += collection.tickets * collection.items.length;
+        });
+
+        let averageBuy = (totalBuy / totalWeapons) / (totalTickets / totalWeapons);
         this.set('averageBuy', averageBuy);
         this.set('averageBuyLoading', false);
-
-        let averageSell = 0;
-        collectionData.forEach(collection => averageSell += this._calcTotalPrices(collection.items, "sells"));
-        averageSell = averageSell / collectionData.length;
+        
+        let averageSell = (totalSell / totalWeapons) / (totalTickets / totalWeapons);
         this.set('averageSell', averageSell);
         this.set('averageSellLoading', false);
       }
 
-      _calcTotalPrices(items, buysOrSells) {
-        let totalPrices = 0;
-        let totalAverage = 0;
+      _calcTotalPrices(items) {
+        let totals = {
+          buys: 0,
+          sells: 0
+        };
 
-        switch (buysOrSells) {
-          case 'sells':
-            items.forEach((item) => { totalPrices += item.sells.unit_price });
-            break;
-          case 'buys':
-          default:
-            items.forEach((item) => { totalPrices += item.buys.unit_price });
-            break;
-        }
-
-        totalAverage = totalPrices / items.length;
-        return totalAverage;
+        items.forEach((item) => { 
+          totals.sells += item.sells.unit_price;
+          totals.buys += item.buys.unit_price;
+        });
+    
+        return totals;
       }
 
       async _loadCollectionData() {
@@ -142,6 +147,7 @@
       }
 
       async _loadItemData(ids) {
+        /* TODO: Don't load all item-data. Just get the prices. */
         const itemsData = await fetch('https://api.guildwars2.com/v2/items?ids=' + ids);
         const pricesData = await fetch('https://api.guildwars2.com/v2/commerce/prices?ids=' + ids);
         const itemsJson = await itemsData.json();
