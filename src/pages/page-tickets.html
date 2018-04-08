@@ -14,11 +14,7 @@
       }
 
       .title {
-        margin: 0;
-        font-weight: 300;
-        height: 1.75rem;
-        display: flex;
-        align-items: center;
+        margin-bottom: 0;
       }
 
       .card {
@@ -31,26 +27,22 @@
       }
 
       paper-spinner {
-        display: none;
-        margin-left: var(--spacer-medium);
-      }
-
-      paper-spinner[active] {
-        display: inline-block;
+        margin: 1.75rem 0;
+        display: block;
       }
     </style>
 
     <p class="description">Ever wondered what it would cost to buy a Black Lion Claim Ticket with gold?<br> This tool does the math for you, so you don't have to.</p>
 
     <div class="card">
-      <p class="title">Average Listing Price
-          <paper-spinner active="[[averageSellLoading]]"></paper-spinner></p>
-      <gw2-coin-output class="display-3" coin-string="[[averageSell]]"></gw2-coin-output>
+      <p class="title">Average Listing Price</p>
+      <paper-spinner active="[[averageSellLoading]]" hidden$="[[!averageSellLoading]]"></paper-spinner>
+      <gw2-coin-output class="display-3" coin-string="[[averageSell]]" hidden$="[[averageSellLoading]]"></gw2-coin-output>
     </div>
     <div class="card">
-      <p class="title">Average Order Price
-          <paper-spinner active="[[averageBuyLoading]]"></paper-spinner></p>
-      <gw2-coin-output class="display-3" coin-string="[[averageBuy]]"></gw2-coin-output>
+      <p class="title">Average Order Price</p>
+      <paper-spinner active="[[averageBuyLoading]]" hidden$="[[!averageBuyLoading]]"></paper-spinner>
+      <gw2-coin-output class="display-3" coin-string="[[averageBuy]]" hidden$="[[averageBuyLoading]]"></gw2-coin-output>
     </div>
 
     <paper-toast id="toast" duration="0" text="An error occured."></paper-toast>
