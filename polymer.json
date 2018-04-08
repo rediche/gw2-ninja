@@ -2,15 +2,15 @@
   "entrypoint": "index.html",
   "shell": "src/gw2-ninja.html",
   "fragments": [
-    "src/my-calc.html",
-    "src/my-chatcodes.html",
-    "src/my-collections.html",
-    "src/my-directory.html",
-    "src/my-index.html",
-    "src/my-tickets.html",
-    "src/my-timer.html",
-    "src/my-view404.html",
-    "src/my-about.html"
+    "src/pages/page-calc.html",
+    "src/pages/page-chatcodes.html",
+    "src/pages/page-collections.html",
+    "src/pages/page-directory.html",
+    "src/pages/page-index.html",
+    "src/pages/page-tickets.html",
+    "src/pages/page-timer.html",
+    "src/pages/page-view404.html",
+    "src/pages/page-about.html"
   ],
   "sources": [
     "src/**/*",
