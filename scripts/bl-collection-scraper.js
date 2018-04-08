@@ -61,7 +61,7 @@ async function getSkinsAsync(url) {
 
       let skinIds = $(SKIN_SELECTOR).map(async (i, skin) => {
         let skinId = await getSkinIdAsync(skin.attribs.href);
-        return skinId;
+        return (skinId) ? Number(skinId) : skinId;
       });
 
       return Promise.all(skinIds.get()).then((result) => {
