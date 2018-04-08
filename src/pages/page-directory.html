@@ -79,7 +79,7 @@
     <paper-tabs selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="websites">
       <paper-tab name="websites">Websites</paper-tab>
       <paper-tab name="streamers">Streamers</paper-tab>
-      <paper-tab name="youtube">YouTube</paper-tab>
+      <paper-tab name="youtubers">YouTubers</paper-tab>
     </paper-tabs>
 
     <div class="search">
@@ -98,7 +98,7 @@
           <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
         </template>
       </div>
-      <div name="youtube" class="directory-list">
+      <div name="youtubers" class="directory-list">
         <template is="dom-repeat" items="{{youtube}}">
           <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
         </template>
@@ -191,7 +191,7 @@
 
       _computeSearchForText(selected) {
         switch (selected) {
-          case 'youtube':
+          case 'youtubers':
             return 'YouTube Channels';
             break;
           case 'streamers':
