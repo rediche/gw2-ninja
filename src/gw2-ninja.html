@@ -75,6 +75,10 @@
         line-height: 40px;
       }
 
+      .drawer-list a:last-child {
+        margin-bottom: 1rem;
+      }
+
       .drawer-list a.iron-selected paper-item {
         font-weight: 800;
         background-color: rgba(0,0,0,.08);
@@ -85,6 +89,23 @@
 
       app-drawer app-toolbar {
         padding-left: var(--spacer-medium);
+        position: fixed;
+        top: 7.5rem;
+        width: 100%;
+        z-index: 1;
+        background-color: var(--app-background-color);
+        box-shadow: var(--app-box-shadow);
+      }
+
+      .drawer-scroll {
+        height: 100%;
+        overflow-y: auto;
+        position: relative;
+        padding-top: 5rem;
+        padding-bottom: 1rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
       }
 
       @media screen and (min-width: 641px) {
@@ -104,37 +125,39 @@
     <app-drawer-layout>
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer">
-        <app-toolbar>GW2 Ninja</app-toolbar>
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="index" href="/" tabindex="-1">
-            <paper-item>Home</paper-item>
-          </a>
-          <hr>
-          <a name="directory" href="/directory/websites" tabindex="-1">
-            <paper-item>Directory</paper-item>
-          </a>
-          <hr>
-          <a name="collections" href="/collections/basic" tabindex="-1">
-            <paper-item>Collections</paper-item>
-          </a>
-          <a name="tickets" href="/tickets" tabindex="-1">
-            <paper-item>Tickets</paper-item>
-          </a>
-          <hr>
-          <a name="chatcodes" href="/chatcodes" tabindex="-1">
-            <paper-item>Chatcodes</paper-item>
-          </a>
-          <a name="timer" href="/timer" tabindex="-1">
-            <paper-item>HoT Timer</paper-item>
-          </a>
-          <a name="calc" href="/calc" tabindex="-1">
-            <paper-item>TP Calc</paper-item>
-          </a>
-          <hr style="margin-top:auto">
-          <a name="about" href="/about" tabindex="-1">
-            <paper-item>About</paper-item>
-          </a>
-        </iron-selector>
+        <div class="drawer-scroll">
+          <app-toolbar>GW2 Ninja</app-toolbar>
+          <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+            <a name="index" href="/" tabindex="-1">
+              <paper-item>Home</paper-item>
+            </a>
+            <hr>
+            <a name="directory" href="/directory/websites" tabindex="-1">
+              <paper-item>Directory</paper-item>
+            </a>
+            <hr>
+            <a name="collections" href="/collections/basic" tabindex="-1">
+              <paper-item>Collections</paper-item>
+            </a>
+            <a name="tickets" href="/tickets" tabindex="-1">
+              <paper-item>Tickets</paper-item>
+            </a>
+            <hr>
+            <a name="chatcodes" href="/chatcodes" tabindex="-1">
+              <paper-item>Chatcodes</paper-item>
+            </a>
+            <a name="timer" href="/timer" tabindex="-1">
+              <paper-item>HoT Timer</paper-item>
+            </a>
+            <a name="calc" href="/calc" tabindex="-1">
+              <paper-item>TP Calc</paper-item>
+            </a>
+            <hr style="margin-top:auto">
+            <a name="about" href="/about" tabindex="-1">
+              <paper-item>About</paper-item>
+            </a>
+          </iron-selector>
+        </div>
       </app-drawer>
 
       <!-- Main content -->
