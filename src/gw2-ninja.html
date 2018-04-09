@@ -34,7 +34,7 @@
         padding-left: .675rem;
       }
 
-      app-toolbar paper-icon-button {
+      app-header app-toolbar paper-icon-button {
         margin-right: .675rem;
       }
 
@@ -126,7 +126,10 @@
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer">
         <div class="drawer-scroll">
-          <app-toolbar>GW2 Ninja</app-toolbar>
+          <app-toolbar>
+            <div main-title>GW2 Ninja</div>
+            <paper-icon-button icon="my-icons:close" drawer-toggle></paper-icon-button>
+          </app-toolbar>
           <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
             <a name="index" href="/" tabindex="-1">
               <paper-item>Home</paper-item>
