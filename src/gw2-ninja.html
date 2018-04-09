@@ -20,6 +20,7 @@
     <style include="shared-styles">
       :host {
         display: block;
+        min-height: 100vh;
 
         --app-primary-color: #009688;
         --app-secondary-color: black;
@@ -100,7 +101,7 @@
         data="{{routeData}}"
         tail="{{subroute}}"></app-route>
 
-    <app-drawer-layout fullbleed>
+    <app-drawer-layout>
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer">
         <app-toolbar>GW2 Ninja</app-toolbar>
@@ -137,7 +138,7 @@
       </app-drawer>
 
       <!-- Main content -->
-      <app-header-layout has-scrolling-region>
+      <app-header-layout>
 
         <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
