@@ -3,8 +3,8 @@
   "short_name": "GW2 Ninja",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#F44336",
-  "background_color": "#F44336",
+  "theme_color": "#9C27B0",
+  "background_color": "#9C27B0",
   "icons": [
     {
       "src": "images/manifest/icon-192x192.png",

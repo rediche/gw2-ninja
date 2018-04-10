@@ -9,6 +9,7 @@
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../bower_components/page-title/page-title.html">
@@ -57,6 +58,12 @@
 
       app-toolbar [main-title] {
         text-transform: capitalize;
+        display: flex;
+        align-items: center;
+      }
+
+      app-toolbar [main-title] iron-icon {
+        margin-right: var(--spacer-small);
       }
 
       .drawer-list {
@@ -125,7 +132,10 @@
       <app-drawer id="drawer" slot="drawer">
         <div class="drawer-scroll">
           <app-toolbar>
-            <div main-title>GW2 Ninja</div>
+            <div main-title>
+              <iron-icon icon="my-icons:logo"></iron-icon>
+              GW2 Ninja
+            </div>
             <paper-icon-button icon="my-icons:close" drawer-toggle aria-label="Close menu"></paper-icon-button>
           </app-toolbar>
           <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
