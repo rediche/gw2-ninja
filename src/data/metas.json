@@ -71,6 +71,30 @@
   ],
   "category": "pof"
 },{
+  "name": "Desert Highlands",
+  "phases": [
+    { "name": "", "duration": 60, "color": "#FFB74D" },
+    { "name": "Buried Treasure", "duration": 20, "color": "#FB8C00" },
+    { "name": "", "duration": 40, "color": "#EF6C00" }
+  ],
+  "category": "pof"
+},{
+  "name": "Domain of Vabbi",
+  "phases": [
+    { "name": "", "duration": 60, "color": "#FFB74D" },
+    { "name": "Zealots", "duration": 30, "color": "#FB8C00" },
+    { "name": "", "duration": 30, "color": "#EF6C00" }
+  ],
+  "category": "pof"
+},{
+  "name": "Domain of Istan",
+  "phases": [
+    { "name": "Palawadan", "duration": 15, "color": "#FFB74D" },
+    { "name": "", "duration": 90, "color": "#FB8C00" },
+    { "name": "Palawadan", "duration": 15, "color": "#EF6C00" }
+  ],
+  "category": "pof"
+},{
   "name": "Ley-Line Anomaly",
   "phases": [
     { "name": "", "duration": 20, "color": "#e74c3c" },
