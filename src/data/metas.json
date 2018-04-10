@@ -1,11 +1,11 @@
 [{
   "name": "Day and night",
   "phases": [
-    { "name": "Day", "duration": 40,  "color": "#F0F4C3" },
-    { "name": "Dusk", "duration": 5, "color": "#D4E157" },
-    { "name": "Night", "duration": 40, "color": "#9E9D24"},
+    { "name": "Night", "duration": 25, "color": "#9E9D24"},
     { "name": "Dawn", "duration": 5, "color": "#D4E157"},
-    { "name": "Day", "duration": 30, "color": "#F0F4C3"}
+    { "name": "Day", "duration": 70,  "color": "#F0F4C3" },
+    { "name": "Dusk", "duration": 5, "color": "#D4E157" },
+    { "name": "Night", "duration": 15, "color": "#9E9D24"}
   ],
   "category": "other"
 },{
