@@ -25,7 +25,7 @@
     { "name": "Daytime", "duration": 75,  "color": "#C4E2A5" },
     { "name": "Night",  "duration": 15, "color": "#84C147" }
   ],
-  "category": "hot"
+  "category": "heart-of-thorns"
 },{
   "name": "Auric Basin",
   "phases": [
@@ -35,7 +35,7 @@
     { "name": "Reset",  "duration": 10, "color": "#FFF1C1" },
     { "name": "Pillars",  "duration": 30, "color": "#FFE37F" }
   ],
-  "category": "hot"
+  "category": "heart-of-thorns"
 },{
   "name": "Tangled Depths",
   "phases": [
@@ -44,14 +44,14 @@
     { "name": "Chak Gerent",  "duration": 20, "color": "#f99" },
     { "name": "Help the Outposts",  "duration": 70, "color": "#FFD7D7" }
   ],
-  "category": "hot"
+  "category": "heart-of-thorns"
 },{
   "name": "Dragon's Stand",
   "phases": [
     { "name": "",  "duration": 90, "color": "linear-gradient( 90deg, #c8c5e5, #DFDDF7 )" },
     { "name": "Start",  "duration": 30, "color": "linear-gradient( 90deg, #9f99cc, #c8c5e5 )" }
   ],
-  "category": "hot"
+  "category": "heart-of-thorns"
 },{
   "name": "Lake Doric",
   "phases": [
@@ -60,7 +60,7 @@
     { "name": "Saidra's Haven", "duration": 45, "color": "#FF5722" },
     { "name": "New Loamhurst", "duration": 15, "color": "#FF8A65" }
   ],
-  "category": "hot"
+  "category": "heart-of-thorns"
 },{
   "name": "Crystal Oasis",
   "phases": [
@@ -69,7 +69,7 @@
     { "name": "Pinata / Reset", "duration": 9, "color": "#EF6C00" },
     { "name": "", "duration": 90, "color": "#FFB74D" }
   ],
-  "category": "pof"
+  "category": "path-of-fire"
 },{
   "name": "Desert Highlands",
   "phases": [
@@ -77,7 +77,7 @@
     { "name": "Buried Treasure", "duration": 20, "color": "#FB8C00" },
     { "name": "", "duration": 40, "color": "#EF6C00" }
   ],
-  "category": "pof"
+  "category": "path-of-fire"
 },{
   "name": "Domain of Vabbi",
   "phases": [
@@ -85,7 +85,7 @@
     { "name": "Zealots", "duration": 30, "color": "#FB8C00" },
     { "name": "", "duration": 30, "color": "#EF6C00" }
   ],
-  "category": "pof"
+  "category": "path-of-fire"
 },{
   "name": "Domain of Istan",
   "phases": [
@@ -93,7 +93,7 @@
     { "name": "", "duration": 90, "color": "#FB8C00" },
     { "name": "Palawadan", "duration": 15, "color": "#EF6C00" }
   ],
-  "category": "pof"
+  "category": "path-of-fire"
 },{
   "name": "Ley-Line Anomaly",
   "phases": [

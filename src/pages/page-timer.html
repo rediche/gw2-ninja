@@ -1,5 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../shared-styles.html">
 <link rel="import" href="../momentjs.html">
@@ -99,11 +101,14 @@
       }
     </style>
 
-    <paper-tabs selected="{{ selectedMeta }}" attr-for-selected="name" fallback-selection="all">
+    <app-location route="{{route}}"></app-location>
+    <app-route route="{{route}}" pattern="/timer/:subview" data="{{subviewData}}"></app-route>
+
+    <paper-tabs selected="{{ subviewData.subview }}" attr-for-selected="name" fallback-selection="all">
       <paper-tab name="all">All</paper-tab>
       <paper-tab name="core">Core</paper-tab>
-      <paper-tab name="hot">Heart of Thorns</paper-tab>
-      <paper-tab name="pof">Path of Fire</paper-tab>
+      <paper-tab name="heart-of-thorns">Heart of Thorns</paper-tab>
+      <paper-tab name="path-of-fire">Path of Fire</paper-tab>
       <paper-tab name="other">Other</paper-tab>
     </paper-tabs>
 
@@ -114,7 +119,7 @@
       </div>
 
       <template is="dom-repeat" items="[[ metas ]]" as="meta">
-        <div hidden$="[[ _metaCategoryMatchesSelected(meta.category, selectedMeta) ]]">
+        <div hidden$="[[ _metaCategoryMatchesSelected(meta.category, subviewData.subview) ]]">
           <p class="meta-name">[[ meta.name ]]</p>
           <div class="bar">
 
@@ -137,9 +142,6 @@
 
       static get properties() {
         return {
-          selectedMeta: {
-            type: String
-          },
           metas: {
             type: Array,
             observer: '_updateTimes'
@@ -172,7 +174,7 @@
       }
 
       async _loadMetas() {
-        const metasData = await fetch('./src/data/metas.json')
+        const metasData = await fetch('/src/data/metas.json')
         const metasJson = await metasData.json();
 
         this.set('metas', metasJson);
