@@ -138,6 +138,12 @@
         color: #ffffff;
         background-color: var(--app-primary-color);
       }
+
+      .sticky-tabs {
+        position: sticky;
+        top: 4rem;
+        z-index: 401; /* 401 because it needs to be higher than z-index 400 on timer page */
+      }
     </style>
   </template>
 </dom-module>

@@ -74,7 +74,7 @@
     <app-location route="{{route}}"></app-location>
     <app-route route="{{route}}" pattern="/directory/:subview" data="{{subviewData}}"></app-route>
 
-    <paper-tabs selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="websites">
+    <paper-tabs class="sticky-tabs" selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="websites">
       <paper-tab name="websites">Websites</paper-tab>
       <paper-tab name="streamers">Streamers</paper-tab>
       <paper-tab name="youtubers">YouTubers</paper-tab>

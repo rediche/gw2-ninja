@@ -11,7 +11,6 @@
     <style include="shared-styles">
       :host {
         display: block;
-        overflow: hidden;
       }
 
       paper-tabs {
@@ -25,6 +24,7 @@
       }
 
       .meta-container {
+        overflow: hidden;
         position: relative;
         font-size: .75rem;
         padding: 3.75rem 0 .25rem;
@@ -104,7 +104,7 @@
     <app-location route="{{route}}"></app-location>
     <app-route route="{{route}}" pattern="/timer/:subview" data="{{subviewData}}"></app-route>
 
-    <paper-tabs selected="{{ subviewData.subview }}" attr-for-selected="name" fallback-selection="all">
+    <paper-tabs class="sticky-tabs" selected="{{ subviewData.subview }}" attr-for-selected="name" fallback-selection="all">
       <paper-tab name="all">All</paper-tab>
       <paper-tab name="core">Core</paper-tab>
       <paper-tab name="heart-of-thorns">Heart of Thorns</paper-tab>
