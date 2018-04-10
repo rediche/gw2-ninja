@@ -48,7 +48,7 @@
       }
 
       app-header {
-        color: #fff;
+        color: var(--app-text-color-light);
         background-color: var(--app-primary-color);
       }
 
@@ -100,7 +100,6 @@
         width: 100%;
         z-index: 1;
         background-color: var(--app-background-color);
-        box-shadow: var(--app-box-shadow);
       }
 
       .drawer-scroll {
@@ -174,7 +173,7 @@
       <!-- Main content -->
       <app-header-layout>
 
-        <app-header slot="header" condenses reveals effects="waterfall">
+        <app-header slot="header" fixed>
           <app-toolbar>
             <paper-icon-button icon="my-icons:menu" drawer-toggle aria-label="Open menu"></paper-icon-button>
             <div main-title>[[ _pageTitle(page) ]]</div>
