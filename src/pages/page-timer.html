@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../shared-styles.html">
 <link rel="import" href="../momentjs.html">
 
@@ -8,8 +9,17 @@
     <style include="shared-styles">
       :host {
         display: block;
-        padding: var(--spacer-large) 0 0;
         overflow: hidden;
+      }
+
+      paper-tabs {
+        margin-bottom: var(--spacer-large);
+        background-color: var(--app-primary-color);
+        --paper-tabs-selection-bar-color: #ffffff;
+      }
+
+      paper-tab {
+        color: white;
       }
 
       .meta-container {
@@ -70,6 +80,7 @@
       .meta-name {
         font-weight: 800;
         margin: 0 0 .25rem;
+        margin-left: var(--spacer-medium);
       }
 
       .phase {
@@ -83,10 +94,18 @@
 
       @media screen and (min-width: 640px) {
         :host {
-          padding: var(--spacer-large);
+          padding-bottom: var(--spacer-large);
         }
       }
     </style>
+
+    <paper-tabs selected="{{ selectedMeta }}" attr-for-selected="name" fallback-selection="all">
+      <paper-tab name="all">All</paper-tab>
+      <paper-tab name="core">Core</paper-tab>
+      <paper-tab name="hot">Heart of Thorns</paper-tab>
+      <paper-tab name="pof">Path of Fire</paper-tab>
+      <paper-tab name="other">Other</paper-tab>
+    </paper-tabs>
 
     <div class="meta-container">
       <div class="pointer" style$="left: [[ pointerPosition ]]%;">
@@ -95,16 +114,18 @@
       </div>
 
       <template is="dom-repeat" items="[[ metas ]]" as="meta">
-        <p class="meta-name">[[ meta.name ]]</p>
-        <div class="bar">
+        <div hidden$="[[ _metaCategoryMatchesSelected(meta.category, selectedMeta) ]]">
+          <p class="meta-name">[[ meta.name ]]</p>
+          <div class="bar">
 
-          <template is="dom-repeat" items="[[ meta.phases ]]" as="phase">
-            <div class="phase" style$="background: [[ phase.color ]]; width:[[ _calcPhaseWidth(phase.duration) ]]%;">  
-              <div class="phase-time">[[ phase.hour ]]:[[ phase.minute ]]</div>
-              <div class="phase-name">[[ phase.name ]]</div>
-            </div>
-          </template>
+            <template is="dom-repeat" items="[[ meta.phases ]]" as="phase">
+              <div class="phase" style$="background: [[ phase.color ]]; width:[[ _calcPhaseWidth(phase.duration) ]]%;">  
+                <div class="phase-time">[[ phase.hour ]]:[[ phase.minute ]]</div>
+                <div class="phase-name">[[ phase.name ]]</div>
+              </div>
+            </template>
 
+          </div>
         </div>
       </template>
     </div>
@@ -116,6 +137,9 @@
 
       static get properties() {
         return {
+          selectedMeta: {
+            type: String
+          },
           metas: {
             type: Array,
             observer: '_updateTimes'
@@ -139,6 +163,12 @@
           this._loadMetas();
           this._movePointer();
         });
+      }
+
+      _metaCategoryMatchesSelected(category, selectedMeta) {
+        console.log(category, selectedMeta);
+        if (selectedMeta == "all") return false;
+        return category == selectedMeta ? false : true;
       }
 
       async _loadMetas() {

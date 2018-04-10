@@ -5,7 +5,8 @@
     { "name": "Night Bosses",  "duration": 20, "color": "#6DAC2F" },
     { "name": "Daytime", "duration": 75,  "color": "#C4E2A5" },
     { "name": "Night",  "duration": 15, "color": "#84C147" }
-  ]
+  ],
+  "category": "hot"
 },{
   "name": "Auric Basin",
   "phases": [
@@ -14,7 +15,8 @@
     { "name": "Octovine",  "duration": 20, "color": "#EAB700" },
     { "name": "Reset",  "duration": 10, "color": "#FFF1C1" },
     { "name": "Pillars",  "duration": 30, "color": "#FFE37F" }
-  ]
+  ],
+  "category": "hot"
 },{
   "name": "Tangled Depths",
   "phases": [
@@ -22,13 +24,15 @@
     { "name": "Prep",  "duration": 5, "color": "#ffbdbd" },
     { "name": "Chak Gerent",  "duration": 20, "color": "#f99" },
     { "name": "Help the Outposts",  "duration": 70, "color": "#FFD7D7" }
-  ]
+  ],
+  "category": "hot"
 },{
   "name": "Dragon's Stand",
   "phases": [
     { "name": "",  "duration": 90, "color": "linear-gradient( 90deg, #c8c5e5, #DFDDF7 )" },
     { "name": "Start",  "duration": 30, "color": "linear-gradient( 90deg, #9f99cc, #c8c5e5 )" }
-  ]
+  ],
+  "category": "hot"
 },{
   "name": "Dry Top",
   "phases": [
@@ -36,12 +40,14 @@
     { "name": "Sandstorm",  "duration": 20, "color": "#DED98A" },
     { "name": "Crash Site",  "duration": 40, "color": "#FCFADC" },
     { "name": "Sandstorm",  "duration": 20, "color": "#DED98A" }
-  ]
+  ],
+  "category": "core"
 },{
   "name": "Ley-Line Anomaly",
   "phases": [
     { "name": "", "duration": 20, "color": "#e74c3c" },
     { "name": "Spawn", "duration": 20, "color": "#c0392b"},
     { "name": "Accumulating", "duration": 80, "color": "#e74c3c" }
-  ]
+  ],
+  "category": "other"
 }]
