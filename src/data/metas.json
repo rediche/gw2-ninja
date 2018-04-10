@@ -1,4 +1,14 @@
 [{
+  "name": "Day and night",
+  "phases": [
+    { "name": "Day", "duration": 40,  "color": "#F0F4C3" },
+    { "name": "Dusk", "duration": 5, "color": "#D4E157" },
+    { "name": "Night", "duration": 40, "color": "#9E9D24"},
+    { "name": "Dawn", "duration": 5, "color": "#D4E157"},
+    { "name": "Day", "duration": 30, "color": "#F0F4C3"}
+  ],
+  "category": "other"
+},{
   "name": "Verdant Brink",
   "phases": [
     { "name": "",  "duration": 10, "color": "#84C147" },
