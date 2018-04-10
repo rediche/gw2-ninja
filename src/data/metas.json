@@ -9,6 +9,15 @@
   ],
   "category": "other"
 },{
+  "name": "Dry Top",
+  "phases": [
+    { "name": "Crash Site", "duration": 40,  "color": "#FCFADC" },
+    { "name": "Sandstorm",  "duration": 20, "color": "#DED98A" },
+    { "name": "Crash Site",  "duration": 40, "color": "#FCFADC" },
+    { "name": "Sandstorm",  "duration": 20, "color": "#DED98A" }
+  ],
+  "category": "core"
+},{
   "name": "Verdant Brink",
   "phases": [
     { "name": "",  "duration": 10, "color": "#84C147" },
@@ -44,14 +53,23 @@
   ],
   "category": "hot"
 },{
-  "name": "Dry Top",
+  "name": "Lake Doric",
   "phases": [
-    { "name": "Crash Site", "duration": 40,  "color": "#FCFADC" },
-    { "name": "Sandstorm",  "duration": 20, "color": "#DED98A" },
-    { "name": "Crash Site",  "duration": 40, "color": "#FCFADC" },
-    { "name": "Sandstorm",  "duration": 20, "color": "#DED98A" }
+    { "name": "New Loamhurst", "duration": 30, "color": "#FF8A65" },
+    { "name": "Noran's Homestead", "duration": 30, "color": "#FF7043" },
+    { "name": "Saidra's Haven", "duration": 45, "color": "#FF5722" },
+    { "name": "New Loamhurst", "duration": 15, "color": "#FF8A65" }
   ],
-  "category": "core"
+  "category": "hot"
+},{
+  "name": "Crystal Oasis",
+  "phases": [
+    { "name": "", "duration": 5, "color": "#FFB74D" },
+    { "name": "Rounds 1 to 3", "duration": 16, "color": "#FB8C00" },
+    { "name": "Pinata / Reset", "duration": 9, "color": "#EF6C00" },
+    { "name": "", "duration": 90, "color": "#FFB74D" }
+  ],
+  "category": "pof"
 },{
   "name": "Ley-Line Anomaly",
   "phases": [
