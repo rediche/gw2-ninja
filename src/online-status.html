@@ -1,0 +1,81 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="./shared-styles.html">
+
+<dom-module id="online-status">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+    </style>
+
+    
+  </template>
+  
+  <script>
+    /**
+     * `online-status` Description
+     *
+     * @summary ShortDescription.
+     * @customElement
+     * @polymer
+     * @extends {Polymer.Element}
+     */
+    class OnlineStatus extends Polymer.Element {
+      /**
+       * String providing the tag name to register the element under.
+       */
+      static get is() {
+        return 'online-status';
+      }
+
+      /**
+       * Object describing property-related metadata used by Polymer features
+       */
+      static get properties() {
+        return {
+          onlineStatus: {
+            type: Boolean,
+            notify: true
+          }
+        };
+      }
+
+      /**
+       * Instance of the element is created/upgraded. Use: initializing state,
+       * set up event listeners, create shadow dom.
+       * @constructor
+       */
+      constructor() {
+        super();
+        this._boundStatusChangeListener = this.statusChange.bind(this);
+      }
+      
+      connectedCallback() {
+        super.connectedCallback();
+        window.addEventListener('online', this._boundStatusChangeListener);
+        window.addEventListener('offline', this._boundStatusChangeListener);
+      }
+      
+      disconnectedCallback() {
+        super.disconnectedCallback();
+        window.removeEventListener('online', this._boundStatusChangeListener);
+        window.removeEventListener('offline', this._boundStatusChangeListener);
+      }
+
+      ready() {
+        super.ready();
+
+        Polymer.RenderStatus.afterNextRender(this, function() {
+          this.statusChange();
+        });
+      }
+
+      statusChange() {
+        this.set('onlineStatus', navigator.onLine);
+      }
+    }
+
+    window.customElements.define(OnlineStatus.is, OnlineStatus);
+  </script>
+</dom-module>

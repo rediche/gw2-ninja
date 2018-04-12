@@ -12,9 +12,11 @@
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/page-title/page-title.html">
 <link rel="import" href="my-icons.html">
 <link rel="import" href="shared-styles.html">
+<link rel="import" href="online-status.html">
 
 <dom-module id="gw2-ninja">
   <template>
@@ -112,9 +114,19 @@
         flex-direction: column;
       }
 
+      #onlineStatusToast {
+        bottom: 0;
+        top: auto !important;
+      }
+
       @media screen and (min-width: 641px) {
         app-toolbar {
           padding-left: var(--spacer-large);
+        }
+
+        #onlineStatusToast {
+          left: 256px !important;
+          width: calc(100% - 256px);
         }
       }
     </style>
@@ -171,7 +183,10 @@
       </app-drawer>
 
       <!-- Main content -->
-      <app-header-layout>
+      <app-header-layout id="appHeaderLayout">
+
+        <online-status online-status="{{ onlineStatus }}"></online-status>
+        <paper-toast id="onlineStatusToast" class="fit-bottom" opened="[[ !onlineStatus ]]" duration="0" text="You appear to be offline. Some tools might not work correctly."></paper-toast>
 
         <app-header slot="header" fixed>
           <app-toolbar>
@@ -179,6 +194,7 @@
             <div main-title>[[ _pageTitle(page) ]]</div>
           </app-toolbar>
         </app-header>
+
 
         <iron-pages
             selected="[[page]]"
@@ -213,6 +229,9 @@
             reflectToAttribute: true,
             observer: '_pageChanged',
           },
+          onlineStatus: {
+            type: Boolean
+          }
         };
       }
 
@@ -220,6 +239,15 @@
         return [
           '_routePageChanged(routeData.page)',
         ];
+      }
+
+      ready() {
+        super.ready();
+
+        Polymer.RenderStatus.afterNextRender(this, function() {
+          /* console.log(this.$.onlineStatusToast, this.$.appHeaderLayout, this); */
+          this.$.onlineStatusToast.fitInto = this.$.appHeaderLayout;
+        });
       }
 
       _routePageChanged(page) {
