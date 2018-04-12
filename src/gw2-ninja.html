@@ -96,12 +96,16 @@
       }
 
       app-drawer app-toolbar {
-        padding-left: var(--spacer-medium);
+        padding-left: var(--spacer-xsmall);
         position: fixed;
         top: 7.5rem;
         width: 100%;
         z-index: 1;
         background-color: var(--app-background-color);
+      }
+
+      app-drawer app-toolbar [main-title] {
+        margin-left: var(--spacer-small);
       }
 
       .drawer-scroll {
@@ -143,11 +147,11 @@
       <app-drawer id="drawer" slot="drawer">
         <div class="drawer-scroll">
           <app-toolbar>
+            <paper-icon-button icon="my-icons:close" drawer-toggle aria-label="Close menu"></paper-icon-button>
             <div main-title>
               <iron-icon icon="my-icons:logo"></iron-icon>
               GW2 Ninja
             </div>
-            <paper-icon-button icon="my-icons:close" drawer-toggle aria-label="Close menu"></paper-icon-button>
           </app-toolbar>
           <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
             <a name="index" href="/" tabindex="-1">
