@@ -35,7 +35,13 @@
       "compile": false
     },
     "css": { "minify": true },
-    "html": { "minify": false },
+    "html": { 
+      "minify": {
+        "exclude": [
+          "bower_components/gw2-coin-output/gw2-coin-output.html"
+        ]
+      }
+    },
     "addServiceWorker": true
   }]
 }
