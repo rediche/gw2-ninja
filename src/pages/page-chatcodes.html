@@ -48,7 +48,7 @@
       <div>
         <div class="card">
           <paper-input label="Item (ID or item code)" value="{{itemId}}"></paper-input>
-          <paper-input label="Quantity (1–255)" type="number" value="{{quantity}}"></paper-input>
+          <paper-input label="Quantity (1–255)" min="1" max="255" type="number" value="{{quantity}}"></paper-input>
           <paper-input label="Upgrade 1 (ID or code)" value="{{upgrade1Id}}"></paper-input>
           <paper-input label="Upgrade 2 (ID or code)" value="{{upgrade2Id}}"></paper-input>
           <paper-input label="Skin (Wardrobe ID)" value="{{skinId}}"></paper-input>
@@ -111,14 +111,14 @@
       }
 
       _calculateNewChatCode(itemId, quantity, upgrade1Id, upgrade2Id, skinId) {
-        if (!itemId || !quantity || !upgrade1Id || !upgrade2Id || !skinId) return;
+        if (!itemId || !quantity) return;
 
         if (itemId == "[&AgH2LQEA]") {
           this.set('result', '[&AkXHBgFAF2AAAA==]');
         } else {
           let result = this._generateChatCodeForItem(
             this._decodeChatCodeForItemOrSkin(itemId) || (itemId * 1),
-            quantity,
+            (Number(quantity) * 1) || 1,
             this._decodeChatCodeForItemOrSkin(upgrade1Id) || (upgrade1Id * 1),
             this._decodeChatCodeForItemOrSkin(upgrade2Id) || (upgrade2Id * 1),
             this._decodeChatCodeForItemOrSkin(skinId) || (skinId * 1)
