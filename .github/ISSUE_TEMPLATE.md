@@ -1,4 +1,3 @@
-<!-- Instructions: https://github.com/PolymerElements/polymer-starter-kit/CONTRIBUTING.md#filing-issues -->
 ### Description
 <!-- Example: The `paper-foo` element causes the page to turn pink when clicked. -->
 
@@ -9,9 +8,6 @@
 ### Actual outcome
 
 <!-- Example: The page turns pink. -->
-
-### Live Demo
-<!-- Example: https://jsbin.com/cagaye/edit?html,output -->
 
 ### Steps to reproduce
 
