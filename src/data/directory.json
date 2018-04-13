@@ -1045,5 +1045,41 @@
     "description": "",
     "url": "https://www.guildwars2.com/en/path-of-fire/",
     "directory": "websites"
+  },
+  {
+    "name": "GW2 Material Heatmap",
+    "description": "Get a heatmap of your material storage to find valuable materials.",
+    "url": "http://windwarrior.github.io/GW2MaterialHeatmap/",
+    "directory": "websites"
+  },
+  {
+    "name": "Wardrobe Unlock Analyser",
+    "description": "Analyse your account to find items you still need to buy to make Wardrobe unlocks more valuable.",
+    "url": "http://immortius.net.au/wardrobe-unlock-analyser/",
+    "directory": "websites"
+  },
+  {
+    "name": "Daily Achivements",
+    "description": "Get a list of todays and tomorrows daily achivements in your browser. Made by that_shaman.",
+    "url": "https://www.thatshaman.com/tools/daily/",
+    "directory": "websites"
+  },
+  {
+    "name": "That_shaman's Historical Guide to Tyria",
+    "description": "The Google Maps for Tyria. Also allows you to compare the GW1 and GW2 maps. Made by that_shaman.",
+    "url": "https://www.thatshaman.com/tools/guide/",
+    "directory": "websites"
+  },
+  {
+    "name": "Patch Countdown",
+    "description": "Attempt to predict the next update to Guild Wars 2. Made by that_shaman.",
+    "url": "https://www.thatshaman.com/tools/countdown/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2 Hook",
+    "description": "Addon that allows you to do visual changes to how the game renders.",
+    "url": "https://04348.github.io/Gw2Hook/",
+    "directory": "websites"
   }
 ]
