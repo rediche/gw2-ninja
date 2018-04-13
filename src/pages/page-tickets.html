@@ -138,15 +138,9 @@
       }
 
       async _loadItemData(ids) {
-        /* TODO: Don't load all item-data. Just get the prices. */
-        const itemsData = await fetch('https://api.guildwars2.com/v2/items?ids=' + ids + '&lang=en');
         const pricesData = await fetch('https://api.guildwars2.com/v2/commerce/prices?ids=' + ids + '&lang=en');
-        const itemsJson = await itemsData.json();
         const pricesJson = await pricesData.json();
-
-        return itemsJson.map(item => {
-          return Object.assign({}, item, pricesJson.find(price => price.id === item.id));
-        });
+        return pricesJson;
       }
 
       _filterEntries(collections, category) {
