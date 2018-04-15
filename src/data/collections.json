@@ -967,9 +967,10 @@
     "category": "blacklion",
     "tickets": 3
   },
-  { "name": "Keepsake Weapon Collection",
-    "ids": 
-    [ 81236,
+  {
+    "name": "Keepsake Weapon Collection",
+    "ids": [
+      81236,
       81220,
       81269,
       81264,
@@ -984,12 +985,15 @@
       81260,
       81248,
       81231,
-      81208 ],
+      81208
+    ],
     "category": "blacklion",
     "tickets": 3
-  },{ "name": "Devoted Weapon Collection",
-    "ids": 
-    [ 80398,
+  },
+  {
+    "name": "Devoted Weapon Collection",
+    "ids": [
+      80398,
       80617,
       80299,
       80392,
@@ -1004,12 +1008,15 @@
       80246,
       80307,
       80395,
-      80665 ],
+      80665
+    ],
     "category": "blacklion",
     "tickets": 3
-  },{ "name": "Abaddon's Weapon Collection",
-    "ids": 
-    [ 81797,
+  },
+  {
+    "name": "Abaddon's Weapon Collection",
+    "ids": [
+      81797,
       81937,
       82034,
       81933,
@@ -1024,13 +1031,15 @@
       82066,
       81842,
       81711,
-      81884 ],
+      81884
+    ],
     "category": "blacklion",
     "tickets": 3
   },
-  { "name": "Frostforged Weapon Collection",
-    "ids": 
-    [ 79992,
+  {
+    "name": "Frostforged Weapon Collection",
+    "ids": [
+      79992,
       80061,
       80014,
       80020,
@@ -1045,12 +1054,15 @@
       80035,
       79977,
       79963,
-      80039 ],
-    "category": "blacklion", 
+      80039
+    ],
+    "category": "blacklion",
     "tickets": 1
-  },{ "name": "Embellished Weapon Collection",
-    "ids": 
-    [ 79192,
+  },
+  {
+    "name": "Embellished Weapon Collection",
+    "ids": [
+      79192,
       79277,
       79162,
       79125,
@@ -1065,32 +1077,38 @@
       79109,
       79101,
       79307,
-      79209 ],
+      79209
+    ],
     "category": "blacklion",
     "tickets": 3
-  }, { "name": "Beastslayer Weapon Collection",
-    "ids": 
-     [ 80969,
-       80934,
-       80964,
-       80945,
-       80916,
-       80910,
-       80943,
-       80942,
-       80891,
-       80880,
-       80902,
-       80926,
-       80955,
-       80873,
-       80911,
-       80944 ],
+  },
+  {
+    "name": "Beastslayer Weapon Collection",
+    "ids": [
+      80969,
+      80934,
+      80964,
+      80945,
+      80916,
+      80910,
+      80943,
+      80942,
+      80891,
+      80880,
+      80902,
+      80926,
+      80955,
+      80873,
+      80911,
+      80944
+    ],
     "category": "blacklion",
     "tickets": 3
-  },{ "name": "Dwayna's Weapon Collection",
-    "ids": 
-    [ 70167,
+  },
+  {
+    "name": "Dwayna's Weapon Collection",
+    "ids": [
+      70167,
       70176,
       70183,
       70130,
@@ -1105,13 +1123,15 @@
       70221,
       70208,
       70219,
-      70195 ],
+      70195
+    ],
     "category": "blacklion",
     "tickets": 3
   },
-  { "name": "Glacial Weapon Collection",
-    "ids": 
-    [ 86442,
+  {
+    "name": "Glacial Weapon Collection",
+    "ids": [
+      86442,
       86592,
       86539,
       86598,
@@ -1126,13 +1146,15 @@
       86487,
       86725,
       86543,
-      86479 ],
+      86479
+    ],
     "category": "blacklion",
     "tickets": 3
   },
-  { "name": "The Kaiser",
-    "ids":
-    [ 78105,
+  {
+    "name": "The Kaiser",
+    "ids": [
+      78105,
       78024,
       78013,
       78077,
@@ -1147,12 +1169,13 @@
       78048,
       78023,
       78067,
-      78050 ],
+      78050
+    ],
     "category": "rare"
   },
   {
     "name": "Alchemist Weapons",
-    "ids":[
+    "ids": [
       86949,
       86940,
       86954,
@@ -1175,7 +1198,7 @@
   },
   {
     "name": "Inquest Mark II Weapon Collection",
-    "ids":[
+    "ids": [
       87436,
       87409,
       87448,
@@ -1195,5 +1218,27 @@
     ],
     "category": "blacklion",
     "tickets": 1
+  },
+  {
+    "name": "The Super Adventure",
+    "ids": [
+      46540,
+      46546,
+      46539,
+      46544,
+      41952,
+      41964,
+      46542,
+      41955,
+      46543,
+      46541,
+      41946,
+      46547,
+      41949,
+      46545,
+      41958,
+      41961
+    ],
+    "category": "rare"
   }
 ]
