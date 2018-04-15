@@ -28,7 +28,8 @@
     "paper-button": "PolymerElements/paper-button#^2.1",
     "page-title": "zacharytamas/page-title#^3.0.0",
     "paper-ripple": "PolymerElements/paper-ripple#^2.1",
-    "iron-image": "PolymerElements/iron-image#^2.2"
+    "iron-image": "PolymerElements/iron-image#^2.2",
+    "font-roboto": "StartPolymer/empty-elements#1.1.x"
   },
   "devDependencies": {
     "web-component-tester": "^6.5.0"
