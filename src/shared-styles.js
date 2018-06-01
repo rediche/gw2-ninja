@@ -1,7 +1,8 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+import "@polymer/polymer/polymer-element.js";
 
-<!-- shared styles for all views -->
-<dom-module id="shared-styles">
+const $_documentContainer = document.createElement("template");
+$_documentContainer.setAttribute("style", "display: none;");
+$_documentContainer.innerHTML = `<dom-module id="shared-styles">
   <template>
     <style>
       :root {
@@ -164,4 +165,6 @@
       }
     </style>
   </template>
-</dom-module>
+</dom-module>`;
+
+document.head.appendChild($_documentContainer.content);
