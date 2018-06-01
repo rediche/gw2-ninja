@@ -1,6 +1,6 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/gw2-tpcalc/gw2-tpcalc.html">
-<link rel="import" href="../shared-styles.html">
+<script type="module" src="../../../@polymer/polymer/polymer-element.js"></script>
+<script type="module" src="../../../gw2-tpcalc/gw2-tpcalc.js"></script>
+<script type="module" src="../shared-styles.js"></script>
 
 <dom-module id="page-calc">
   <template>
@@ -31,5 +31,13 @@
     }
 
     window.customElements.define(PageCalc.is, PageCalc);
-  </script>
-</dom-module>
+  <script type="module">
+import { PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
+import '../../../gw2-tpcalc/gw2-tpcalc.js';
+import '../shared-styles.js';
+class PageCalc extends PolymerElement {
+  static get is() { return 'page-calc' }
+}
+
+window.customElements.define(PageCalc.is, PageCalc);
+</script>

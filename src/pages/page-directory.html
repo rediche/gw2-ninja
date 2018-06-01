@@ -1,16 +1,16 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
-<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
-<link rel="import" href="../../bower_components/app-route/app-location.html">
-<link rel="import" href="../../bower_components/app-route/app-route.html">
-<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
-<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
-<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="../shared-styles.html">
-<link rel="import" href="../directory/directory-entry.html">
+<script type="module" src="../../../@polymer/polymer/polymer-element.js"></script>
+<script type="module" src="../../../@polymer/polymer/lib/mixins/gesture-event-listeners.js"></script>
+<script type="module" src="../../../@polymer/polymer/lib/elements/dom-repeat.js"></script>
+<script type="module" src="../../../@polymer/app-route/app-location.js"></script>
+<script type="module" src="../../../@polymer/app-route/app-route.js"></script>
+<script type="module" src="../../../@polymer/paper-tabs/paper-tabs.js"></script>
+<script type="module" src="../../../@polymer/paper-button/paper-button.js"></script>
+<script type="module" src="../../../@polymer/paper-icon-button/paper-icon-button.js"></script>
+<script type="module" src="../../../@polymer/paper-toast/paper-toast.js"></script>
+<script type="module" src="../../../@polymer/iron-pages/iron-pages.js"></script>
+<script type="module" src="../../../@polymer/iron-icons/iron-icons.js"></script>
+<script type="module" src="../shared-styles.js"></script>
+<script type="module" src="../directory/directory-entry.js"></script>
 
 <dom-module id="page-directory">
   <template>
@@ -122,95 +122,123 @@
           searchForText: {
             type: String,
             computed: '_computeSearchForText(subviewData.subview)'
-          },
-          entries: {
-            type: Array
-          },
-          entriesFiltered: {
-            type: Array,
-            computed: '_entriesFilteredObserver(entries, searchValue)',
-          },
-          websites: {
-            type: Array
-          },
-          streamers: {
-            type: Array
-          },
-          youtube: {
-            type: Array
-          }
-        };
+  <script type="module">
+import { PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
+import { GestureEventListeners } from '../../../@polymer/polymer/lib/mixins/gesture-event-listeners.js';
+import '../../../@polymer/polymer/lib/elements/dom-repeat.js';
+import '../../../@polymer/app-route/app-location.js';
+import '../../../@polymer/app-route/app-route.js';
+import '../../../@polymer/paper-tabs/paper-tabs.js';
+import '../../../@polymer/paper-button/paper-button.js';
+import '../../../@polymer/paper-icon-button/paper-icon-button.js';
+import '../../../@polymer/paper-toast/paper-toast.js';
+import '../../../@polymer/iron-pages/iron-pages.js';
+import '../../../@polymer/iron-icons/iron-icons.js';
+import '../shared-styles.js';
+import '../directory/directory-entry.js';
+import { afterNextRender } from '../../../@polymer/polymer/lib/utils/render-status.js';
+class PageDirectory extends GestureEventListeners(PolymerElement) {
+  static get is() { return 'page-directory'; }
+
+  static get properties() {
+    return {
+      subviewData: {
+        observer: "_selectedObserver"
+      },
+      searchValue: {
+        type: String
+      },
+      searchForText: {
+        type: String,
+        computed: '_computeSearchForText(subviewData.subview)'
+      },
+      entries: {
+        type: Array
+      },
+      entriesFiltered: {
+        type: Array,
+        computed: '_entriesFilteredObserver(entries, searchValue)',
+      },
+      websites: {
+        type: Array
+      },
+      streamers: {
+        type: Array
+      },
+      youtube: {
+        type: Array
       }
+    };
+  }
 
-      ready() {
-        super.ready();
-        Polymer.RenderStatus.afterNextRender(this, function() {
-          this._loadDirectoryData();
-        });
-      }
+  ready() {
+    super.ready();
+    afterNextRender(this, function() {
+      this._loadDirectoryData();
+    });
+  }
 
-      _loadDirectoryData() {
-        fetch('/src/data/directory.json')
-          .then((resp) => resp.json())
-          .then((data) => {
-            this.set('entries', data);
-          })
-          .catch((err) => {
-            console.log(err);
-            this.$.toast.fitInto = this;
-            this.$.toast.open();
-          });
-      }
+  _loadDirectoryData() {
+    fetch('/src/data/directory.json')
+      .then((resp) => resp.json())
+      .then((data) => {
+        this.set('entries', data);
+      })
+      .catch((err) => {
+        console.log(err);
+        this.$.toast.fitInto = this;
+        this.$.toast.open();
+      });
+  }
 
-      _selectedObserver(selected) {
-        this.set('searchValue', '');
-      }
+  _selectedObserver(selected) {
+    this.set('searchValue', '');
+  }
 
-      _entriesFilteredObserver(entries, searchValue) {
-        let entriesFiltered = entries;
+  _entriesFilteredObserver(entries, searchValue) {
+    let entriesFiltered = entries;
 
-        if (searchValue !== '') {
-          entriesFiltered = entries.filter((entry) => {
-            return entry.name.toLowerCase().includes(searchValue.toLowerCase()) || entry.description.toLowerCase().includes(searchValue.toLowerCase());
-          });
-        }
-
-        this.set('websites', this._filterEntries(entriesFiltered, 'websites'));
-        this.set('streamers', this._filterEntries(entriesFiltered, 'streamers'));
-        this.set('youtube', this._filterEntries(entriesFiltered, 'youtube'));
-      }
-
-      _filterEntries(entries, directory) {
-        if (!entries) return;
-        return entries.filter((entry) => {
-          return entry.directory == directory;
-        });
-      }
-
-      _computeSearchForText(selected) {
-        switch (selected) {
-          case 'youtubers':
-            return 'YouTube Channels';
-            break;
-          case 'streamers':
-            return 'Streamers';
-            break;
-          case 'websites':
-          default:
-            return 'Websites';
-            break;
-        }
-      }
-
-      _hideClearSearch(value) {
-        return value ? false : true;
-      }
-
-      _clearSearchValue() {
-        this.set('searchValue', '');
-      }
+    if (searchValue !== '') {
+      entriesFiltered = entries.filter((entry) => {
+        return entry.name.toLowerCase().includes(searchValue.toLowerCase()) || entry.description.toLowerCase().includes(searchValue.toLowerCase());
+      });
     }
 
-    window.customElements.define(PageDirectory.is, PageDirectory);
-  </script>
-</dom-module>
+    this.set('websites', this._filterEntries(entriesFiltered, 'websites'));
+    this.set('streamers', this._filterEntries(entriesFiltered, 'streamers'));
+    this.set('youtube', this._filterEntries(entriesFiltered, 'youtube'));
+  }
+
+  _filterEntries(entries, directory) {
+    if (!entries) return;
+    return entries.filter((entry) => {
+      return entry.directory == directory;
+    });
+  }
+
+  _computeSearchForText(selected) {
+    switch (selected) {
+      case 'youtubers':
+        return 'YouTube Channels';
+        break;
+      case 'streamers':
+        return 'Streamers';
+        break;
+      case 'websites':
+      default:
+        return 'Websites';
+        break;
+    }
+  }
+
+  _hideClearSearch(value) {
+    return value ? false : true;
+  }
+
+  _clearSearchValue() {
+    this.set('searchValue', '');
+  }
+}
+
+window.customElements.define(PageDirectory.is, PageDirectory);
+</script>

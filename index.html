@@ -49,19 +49,18 @@
     </script>
 
     <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
-    <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-
-    <!-- Load your application shell -->
-    <link rel="import" href="/src/gw2-ninja.html">
-
-    <!-- Add any global styles for body, document, etc. -->
-    <style>
+    <script type="module">
+import '/src/gw2-ninja.js';
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/service-worker.js');
+  });
+}
+</script><style>
       body {
         margin: 0;
         font-family: -apple-system, 
-               BlinkMacSystemFont, 
-               "Segoe UI", 
-               Roboto, 
+    <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>to, 
                Oxygen,
                Ubuntu,
                Cantarell,
@@ -88,8 +87,14 @@
   </head>
   <body>
     <gw2-ninja></gw2-ninja>
-    <!-- Built with love using Polymer Starter Kit -->
+    <script type="module">
+import '/src/gw2-ninja.js';
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-61776887-1');
 
-    <noscript>This website requires JavaScript to run.</noscript>
-  </body>
-</html>
+window.addEventListener('location-changed', function() {
+  gtag('config', 'UA-61776887-1', {'page_path': window.location.pathname});
+});
+</script>
