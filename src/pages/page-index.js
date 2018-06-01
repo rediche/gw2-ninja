@@ -1,9 +1,11 @@
-import { PolymerElement, html } from '../../../node_modules/@polymer/polymer/polymer-element.js';
-import '../../../node_modules/@polymer/iron-image/iron-image.js';
-import '../shared-styles.js';
+import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
+import "@polymer/iron-image/iron-image.js";
+import "../shared-styles.js";
 
 class PageIndex extends PolymerElement {
-  static get is() { return 'page-index'; }
+  static get is() {
+    return "page-index";
+  }
 
   static get template() {
     return html`

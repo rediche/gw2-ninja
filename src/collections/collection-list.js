@@ -1,10 +1,10 @@
 import {
   PolymerElement,
   html
-} from "../../../node_modules/@polymer/polymer/polymer-element.js";
-import { GestureEventListeners } from "../../../node_modules/@polymer/polymer/lib/mixins/gesture-event-listeners.js";
-import "../../../node_modules/@polymer/polymer/lib/elements/dom-repeat.js";
-import "../../../node_modules/gw2-coin-output/gw2-coin-output.js";
+} from "@polymer/polymer/polymer-element.js";
+import { GestureEventListeners } from "@polymer/polymer/lib/mixins/gesture-event-listeners.js";
+import "@polymer/polymer/lib/elements/dom-repeat.js";
+import "gw2-coin-output/gw2-coin-output.js";
 import "../shared-styles.js";
 
 /**

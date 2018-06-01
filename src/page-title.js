@@ -1,4 +1,4 @@
-import { PolymerElement, html } from "../node_modules/@polymer/polymer/polymer-element.js";
+import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 
 /* Polymer 3 version of https://github.com/zacharytamas/page-title */
 

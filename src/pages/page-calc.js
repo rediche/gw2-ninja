@@ -1,8 +1,8 @@
 import {
   PolymerElement,
   html
-} from "../../../node_modules/@polymer/polymer/polymer-element.js";
-import "../../../node_modules/gw2-tpcalc/gw2-tpcalc.js";
+} from "@polymer/polymer/polymer-element.js";
+import "gw2-tpcalc/gw2-tpcalc.js";
 import "../shared-styles.js";
 
 class PageCalc extends PolymerElement {

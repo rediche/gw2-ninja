@@ -1,13 +1,13 @@
 import {
   PolymerElement,
   html
-} from "../../../node_modules/@polymer/polymer/polymer-element.js";
-import { afterNextRender } from "../../../node_modules/@polymer/polymer/lib/utils/render-status.js";
-import "../../../node_modules/@polymer/polymer/lib/elements/dom-repeat.js";
-import moment from "../../../node_modules/moment/src/moment.js";
-import "../../../node_modules/@polymer/app-route/app-location.js";
-import "../../../node_modules/@polymer/app-route/app-route.js";
-import "../../../node_modules/@polymer/paper-tabs/paper-tabs.js";
+} from "@polymer/polymer/polymer-element.js";
+import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
+import "@polymer/polymer/lib/elements/dom-repeat.js";
+import moment from "moment/src/moment.js";
+import "@polymer/app-route/app-location.js";
+import "@polymer/app-route/app-route.js";
+import "@polymer/paper-tabs/paper-tabs.js";
 import "../shared-styles.js";
 
 class PageTimer extends PolymerElement {

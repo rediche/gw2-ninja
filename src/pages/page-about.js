@@ -1,5 +1,5 @@
-import { PolymerElement, html } from "../../../node_modules/@polymer/polymer/polymer-element.js";
-import { afterNextRender } from "../../../node_modules/@polymer/polymer/lib/utils/render-status.js";
+import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
+import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
 import "../shared-styles.js";
 
 /**

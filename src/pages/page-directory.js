@@ -1,18 +1,18 @@
 import {
   PolymerElement,
   html
-} from "../../../node_modules/@polymer/polymer/polymer-element.js";
-import { GestureEventListeners } from "../../../node_modules/@polymer/polymer/lib/mixins/gesture-event-listeners.js";
-import { afterNextRender } from "../../../node_modules/@polymer/polymer/lib/utils/render-status.js";
-import "../../../node_modules/@polymer/polymer/lib/elements/dom-repeat.js";
-import "../../../node_modules/@polymer/app-route/app-location.js";
-import "../../../node_modules/@polymer/app-route/app-route.js";
-import "../../../node_modules/@polymer/paper-tabs/paper-tabs.js";
-import "../../../node_modules/@polymer/paper-button/paper-button.js";
-import "../../../node_modules/@polymer/paper-icon-button/paper-icon-button.js";
-import "../../../node_modules/@polymer/paper-toast/paper-toast.js";
-import "../../../node_modules/@polymer/iron-pages/iron-pages.js";
-import "../../../node_modules/@polymer/iron-icons/iron-icons.js";
+} from "@polymer/polymer/polymer-element.js";
+import { GestureEventListeners } from "@polymer/polymer/lib/mixins/gesture-event-listeners.js";
+import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
+import "@polymer/polymer/lib/elements/dom-repeat.js";
+import "@polymer/app-route/app-location.js";
+import "@polymer/app-route/app-route.js";
+import "@polymer/paper-tabs/paper-tabs.js";
+import "@polymer/paper-button/paper-button.js";
+import "@polymer/paper-icon-button/paper-icon-button.js";
+import "@polymer/paper-toast/paper-toast.js";
+import "@polymer/iron-pages/iron-pages.js";
+import "@polymer/iron-icons/iron-icons.js";
 import "../shared-styles.js";
 import "../directory/directory-entry.js";
 

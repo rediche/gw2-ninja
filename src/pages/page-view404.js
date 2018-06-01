@@ -1,8 +1,10 @@
-import { PolymerElement, html } from '../../../node_modules/@polymer/polymer/polymer-element.js';
-import '../shared-styles.js';
+import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
+import "../shared-styles.js";
 
 class PageView404 extends PolymerElement {
-  static get is() { return 'page-view404'; }
+  static get is() {
+    return "page-view404";
+  }
 
   static get template() {
     return html`

@@ -1,16 +1,16 @@
 import {
   PolymerElement,
   html
-} from "../../../node_modules/@polymer/polymer/polymer-element.js";
-import { afterNextRender } from "../../../node_modules/@polymer/polymer/lib/utils/render-status.js";
-import { Debouncer } from "../../../node_modules/@polymer/polymer/lib/utils/debounce.js";
-import { microTask } from "../../../node_modules/@polymer/polymer/lib/utils/async.js";
-import "../../../node_modules/@polymer/app-route/app-location.js";
-import "../../../node_modules/@polymer/app-route/app-route.js";
-import "../../../node_modules/@polymer/iron-pages/iron-pages.js";
-import "../../../node_modules/@polymer/paper-tabs/paper-tabs.js";
-import "../../../node_modules/@polymer/paper-spinner/paper-spinner.js";
-import "../../../node_modules/@polymer/paper-toast/paper-toast.js";
+} from "@polymer/polymer/polymer-element.js";
+import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
+import { Debouncer } from "@polymer/polymer/lib/utils/debounce.js";
+import { microTask } from "@polymer/polymer/lib/utils/async.js";
+import "@polymer/app-route/app-location.js";
+import "@polymer/app-route/app-route.js";
+import "@polymer/iron-pages/iron-pages.js";
+import "@polymer/paper-tabs/paper-tabs.js";
+import "@polymer/paper-spinner/paper-spinner.js";
+import "@polymer/paper-toast/paper-toast.js";
 import "../shared-styles.js";
 import "../collections/collection-list.js";
 
