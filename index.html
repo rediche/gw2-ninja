@@ -40,11 +40,25 @@
   <meta name="msapplication-TileColor" content="#9C27B0">
   <meta name="msapplication-tap-highlight" content="no">
 
-  <!-- Load and register pre-caching Service Worker -->
-  <script> 
+  <script>
+    /**
+    * [polymer-root-path]
+    *
+    * Leave this line unchanged if you intend to serve your app from the root
+    * path (e.g., with URLs like `my.domain/` and `my.domain/view1`).
+    *
+    * If you intend to serve your app from a non-root path (e.g., with URLs
+    * like `my.domain/my-app/` and `my.domain/my-app/view1`), edit this line
+    * to indicate the path from which you'll be serving, including leading
+    * and trailing slashes (e.g., `/my-app/`).
+    */
+    window.MyAppGlobals = { rootPath: '/' };
+    // Load and register pre-caching Service Worker
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/service-worker.js');
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('service-worker.js', {
+          scope: MyAppGlobals.rootPath
+        });
       });
     }
   </script>
