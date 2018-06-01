@@ -1,21 +1,20 @@
-import { PolymerElement, html } from '../../@polymer/polymer/polymer-element.js';
-import { afterNextRender } from '../../@polymer/polymer/lib/utils/render-status.js';
-import { importHref } from '../../@polymer/polymer/lib/utils/import-href.js';
-import '../../@polymer/app-layout/app-drawer/app-drawer.js';
-import '../../@polymer/app-layout/app-drawer-layout/app-drawer-layout.js';
-import '../../@polymer/app-layout/app-header/app-header.js';
-import '../../@polymer/app-layout/app-header-layout/app-header-layout.js';
-import '../../@polymer/app-layout/app-scroll-effects/app-scroll-effects.js';
-import '../../@polymer/app-layout/app-toolbar/app-toolbar.js';
-import '../../@polymer/app-route/app-location.js';
-import '../../@polymer/app-route/app-route.js';
-import '../../@polymer/iron-pages/iron-pages.js';
-import '../../@polymer/iron-selector/iron-selector.js';
-import '../../@polymer/iron-icon/iron-icon.js';
-import '../../@polymer/paper-icon-button/paper-icon-button.js';
-import '../../@polymer/paper-item/paper-item.js';
-import '../../@polymer/paper-toast/paper-toast.js';
-import '../../page-title/page-title.js';
+import { PolymerElement, html } from '../../node_modules/@polymer/polymer/polymer-element.js';
+import { afterNextRender } from '../../node_modules/@polymer/polymer/lib/utils/render-status.js';
+import '../../node_modules/@polymer/app-layout/app-drawer/app-drawer.js';
+import '../../node_modules/@polymer/app-layout/app-drawer-layout/app-drawer-layout.js';
+import '../../node_modules/@polymer/app-layout/app-header/app-header.js';
+import '../../node_modules/@polymer/app-layout/app-header-layout/app-header-layout.js';
+import '../../node_modules/@polymer/app-layout/app-scroll-effects/app-scroll-effects.js';
+import '../../node_modules/@polymer/app-layout/app-toolbar/app-toolbar.js';
+import '../../node_modules/@polymer/app-route/app-location.js';
+import '../../node_modules/@polymer/app-route/app-route.js';
+import '../../node_modules/@polymer/iron-pages/iron-pages.js';
+import '../../node_modules/@polymer/iron-selector/iron-selector.js';
+import '../../node_modules/@polymer/iron-icon/iron-icon.js';
+import '../../node_modules/@polymer/paper-icon-button/paper-icon-button.js';
+import '../../node_modules/@polymer/paper-item/paper-item.js';
+import '../../node_modules/@polymer/paper-toast/paper-toast.js';
+import './page-title.js';
 import './my-icons.js';
 import './shared-styles.js';
 import './online-status.js';
@@ -266,12 +265,12 @@ class GW2Ninja extends PolymerElement {
 
   _pageChanged(page) {
     // Load page import on demand. Show 404 page if fails
-    var resolvedPageUrl = this.resolveUrl('pages/page-' + page + '.html');
+    /* var resolvedPageUrl = this.resolveUrl('pages/page-' + page + '.html');
     importHref(
         resolvedPageUrl,
         null,
         this._showPage404.bind(this),
-        true);
+        true); */
   }
 
   _showPage404() {

@@ -1,6 +1,6 @@
-import { PolymerElement, html } from '../../@polymer/polymer/polymer-element.js';
-import { afterNextRender } from '../../@polymer/polymer/lib/utils/render-status.js';
-import './shared-styles.js';
+import { PolymerElement, html } from "../../node_modules/@polymer/polymer/polymer-element.js";
+import { afterNextRender } from "../../node_modules/@polymer/polymer/lib/utils/render-status.js";
+import "./shared-styles.js";
 
 /**
  * `online-status` Description
@@ -25,7 +25,7 @@ class OnlineStatus extends PolymerElement {
    * String providing the tag name to register the element under.
    */
   static get is() {
-    return 'online-status';
+    return "online-status";
   }
 
   /**
@@ -52,14 +52,14 @@ class OnlineStatus extends PolymerElement {
 
   connectedCallback() {
     super.connectedCallback();
-    window.addEventListener('online', this._boundStatusChangeListener);
-    window.addEventListener('offline', this._boundStatusChangeListener);
+    window.addEventListener("online", this._boundStatusChangeListener);
+    window.addEventListener("offline", this._boundStatusChangeListener);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    window.removeEventListener('online', this._boundStatusChangeListener);
-    window.removeEventListener('offline', this._boundStatusChangeListener);
+    window.removeEventListener("online", this._boundStatusChangeListener);
+    window.removeEventListener("offline", this._boundStatusChangeListener);
   }
 
   ready() {
@@ -71,7 +71,7 @@ class OnlineStatus extends PolymerElement {
   }
 
   statusChange() {
-    this.set('onlineStatus', navigator.onLine);
+    this.set("onlineStatus", navigator.onLine);
   }
 }
 
