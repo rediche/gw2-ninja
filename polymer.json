@@ -20,6 +20,7 @@
   "extraDependencies": [
     "manifest.json",
     "node_modules/@webcomponents/webcomponentsjs/bundles/**",
+    "node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js",
     "node_modules/gw2-coin-input/images/*",
     "node_modules/gw2-coin-output/images/*"
   ],
