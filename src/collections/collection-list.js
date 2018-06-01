@@ -1,19 +1,23 @@
-import { PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
-import '../../../@polymer/polymer/lib/elements/dom-repeat.js';
-import { GestureEventListeners } from '../../../@polymer/polymer/lib/mixins/gesture-event-listeners.js';
-import '../../../gw2-coin-output/gw2-coin-output.js';
-import '../shared-styles.js';
+import {
+  PolymerElement,
+  html
+} from "../../../node_modules/@polymer/polymer/polymer-element.js";
+import { GestureEventListeners } from "../../../node_modules/@polymer/polymer/lib/mixins/gesture-event-listeners.js";
+import "../../../node_modules/@polymer/polymer/lib/elements/dom-repeat.js";
+import "../../../node_modules/gw2-coin-output/gw2-coin-output.js";
+import "../shared-styles.js";
+
 /**
  * `collection-list` Description
  *
  * @summary ShortDescription.
  * @customElement
  * @polymer
- * @extends {Polymer.Element}
+ * @extends {PolymerElement}
  */
 class CollectionList extends GestureEventListeners(PolymerElement) {
   static get template() {
-    return Polymer.html`
+    return html`
     <style include="shared-styles">
       :host {
         display: block;
@@ -107,7 +111,7 @@ class CollectionList extends GestureEventListeners(PolymerElement) {
    * String providing the tag name to register the element under.
    */
   static get is() {
-    return 'collection-list';
+    return "collection-list";
   }
 
   /**
@@ -133,20 +137,24 @@ class CollectionList extends GestureEventListeners(PolymerElement) {
     let totalPrices = 0;
 
     switch (buysOrSells) {
-      case 'sells':
-        items.forEach((item) => { totalPrices += item.sells.unit_price });
+      case "sells":
+        items.forEach(item => {
+          totalPrices += item.sells.unit_price;
+        });
         break;
-      case 'buys':
+      case "buys":
       default:
-        items.forEach((item) => { totalPrices += item.buys.unit_price });
+        items.forEach(item => {
+          totalPrices += item.buys.unit_price;
+        });
         break;
     }
-    
+
     return totalPrices;
   }
 
   toggleExpanded(e) {
-    this.set('expanded', !this.expanded);
+    this.set("expanded", !this.expanded);
   }
 
   /**
@@ -159,7 +167,7 @@ class CollectionList extends GestureEventListeners(PolymerElement) {
   } */
 
   /**
-   * Use for one-time configuration of your component after local DOM is initialized. 
+   * Use for one-time configuration of your component after local DOM is initialized.
    */
   /* ready() {
     super.ready();

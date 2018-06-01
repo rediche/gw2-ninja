@@ -1,18 +1,23 @@
-import { PolymerElement, html } from '../../../@polymer/polymer/polymer-element.js';
-import { afterNextRender } from '../../../@polymer/polymer/lib/utils/render-status.js';
-import { Debouncer } from '../../../@polymer/polymer/lib/utils/debounce.js';
-import { microTask } from '../../../@polymer/polymer/lib/utils/async.js';
-import '../../../@polymer/app-route/app-location.js';
-import '../../../@polymer/app-route/app-route.js';
-import '../../../@polymer/iron-pages/iron-pages.js';
-import '../../../@polymer/paper-tabs/paper-tabs.js';
-import '../../../@polymer/paper-spinner/paper-spinner.js';
-import '../../../@polymer/paper-toast/paper-toast.js';
-import '../shared-styles.js';
-import '../collections/collection-list.js';
+import {
+  PolymerElement,
+  html
+} from "../../../node_modules/@polymer/polymer/polymer-element.js";
+import { afterNextRender } from "../../../node_modules/@polymer/polymer/lib/utils/render-status.js";
+import { Debouncer } from "../../../node_modules/@polymer/polymer/lib/utils/debounce.js";
+import { microTask } from "../../../node_modules/@polymer/polymer/lib/utils/async.js";
+import "../../../node_modules/@polymer/app-route/app-location.js";
+import "../../../node_modules/@polymer/app-route/app-route.js";
+import "../../../node_modules/@polymer/iron-pages/iron-pages.js";
+import "../../../node_modules/@polymer/paper-tabs/paper-tabs.js";
+import "../../../node_modules/@polymer/paper-spinner/paper-spinner.js";
+import "../../../node_modules/@polymer/paper-toast/paper-toast.js";
+import "../shared-styles.js";
+import "../collections/collection-list.js";
 
 class PageCollections extends PolymerElement {
-  static get is() { return 'page-collections'; }
+  static get is() {
+    return "page-collections";
+  }
 
   static get template() {
     return html`
@@ -109,9 +114,7 @@ class PageCollections extends PolymerElement {
   }
 
   static get observers() {
-    return [
-      '_subviewObserver(subviewData.subview, collections)',
-    ];
+    return ["_subviewObserver(subviewData.subview, collections)"];
   }
 
   ready() {
@@ -126,7 +129,7 @@ class PageCollections extends PolymerElement {
     if (!subview || !collections) return;
 
     // Debounce since subview will update twice
-    this._debounceJob = Debouncer.debounce(this._debounceJob, microTask, () => { 
+    this._debounceJob = Debouncer.debounce(this._debounceJob, microTask, () => {
       this._loadCollection(subview, collections);
     });
   }
@@ -141,14 +144,14 @@ class PageCollections extends PolymerElement {
   }
 
   async _loadCollectionData() {
-    fetch('/src/data/collections.json')
-      .then((response) => {
+    fetch("/src/data/collections.json")
+      .then(response => {
         return response.json();
       })
-      .then((json) => {
-        this.set('collections', json);
+      .then(json => {
+        this.set("collections", json);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
         this.$.toast.fitInto = this;
         this.$.toast.open();
@@ -158,35 +161,49 @@ class PageCollections extends PolymerElement {
   async _filterAndSort(json, categoryName) {
     const category = this._filterEntries(json, categoryName);
 
-    const categoryWithPrices = await Promise.all(category.map(async collection => {
-      return Object.assign({}, collection, { items: await this._loadItemData(collection.ids) });
-    }, this));
+    const categoryWithPrices = await Promise.all(
+      category.map(async collection => {
+        return Object.assign({}, collection, {
+          items: await this._loadItemData(collection.ids)
+        });
+      }, this)
+    );
 
-    const categorySortedAlphabetically = categoryWithPrices.slice().sort((a, b) => {
-      const aName = a.name.toLowerCase();
-      const bName = b.name.toLowerCase();
-      if (aName < bName) return -1;
-      if (aName > bName) return 1;
-      return 0;
-    });
+    const categorySortedAlphabetically = categoryWithPrices
+      .slice()
+      .sort((a, b) => {
+        const aName = a.name.toLowerCase();
+        const bName = b.name.toLowerCase();
+        if (aName < bName) return -1;
+        if (aName > bName) return 1;
+        return 0;
+      });
 
     return categorySortedAlphabetically;
-  };
+  }
 
   async _loadItemData(ids) {
-    const itemsData = await fetch('https://api.guildwars2.com/v2/items?ids=' + ids + '&lang=en');
-    const pricesData = await fetch('https://api.guildwars2.com/v2/commerce/prices?ids=' + ids + '&lang=en');
+    const itemsData = await fetch(
+      "https://api.guildwars2.com/v2/items?ids=" + ids + "&lang=en"
+    );
+    const pricesData = await fetch(
+      "https://api.guildwars2.com/v2/commerce/prices?ids=" + ids + "&lang=en"
+    );
     const itemsJson = await itemsData.json();
     const pricesJson = await pricesData.json();
 
     return itemsJson.map(item => {
-      return Object.assign({}, item, pricesJson.find(price => price.id === item.id));
+      return Object.assign(
+        {},
+        item,
+        pricesJson.find(price => price.id === item.id)
+      );
     });
   }
 
   _filterEntries(collections, category) {
     if (!collections) return;
-    return collections.filter((collection) => {
+    return collections.filter(collection => {
       return collection.category == category;
     });
   }

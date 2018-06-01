@@ -1,8 +1,11 @@
-import { PolymerElement, html } from "../../../@polymer/polymer/polymer-element.js";
-import { afterNextRender } from "../../../@polymer/polymer/lib/utils/render-status.js";
-import "../../../@polymer/paper-spinner/paper-spinner.js";
-import "../../../@polymer/paper-toast/paper-toast.js";
-import "../../../gw2-coin-output/gw2-coin-output.js";
+import {
+  PolymerElement,
+  html
+} from "../../../node_modules/@polymer/polymer/polymer-element.js";
+import { afterNextRender } from "../../../node_modules/@polymer/polymer/lib/utils/render-status.js";
+import "../../../node_modules/@polymer/paper-spinner/paper-spinner.js";
+import "../../../node_modules/@polymer/paper-toast/paper-toast.js";
+import "../../../node_modules/gw2-coin-output/gw2-coin-output.js";
 import "../shared-styles.js";
 
 class PageTickets extends PolymerElement {

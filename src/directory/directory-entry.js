@@ -1,9 +1,10 @@
-import { PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
-import '../../../@polymer/paper-ripple/paper-ripple.js';
-import '../shared-styles.js';
+import { PolymerElement, html } from "../../../node_modules/@polymer/polymer/polymer-element.js";
+import "../../../node_modules/@polymer/paper-ripple/paper-ripple.js";
+import "../shared-styles.js";
+
 class DirectoryEntry extends PolymerElement {
   static get template() {
-    return Polymer.html`
+    return html`
     <style include="shared-styles">
       :host {
         display: block;
@@ -50,7 +51,9 @@ class DirectoryEntry extends PolymerElement {
 `;
   }
 
-  static get is() { return 'directory-entry'; }
+  static get is() {
+    return "directory-entry";
+  }
 
   static get properties() {
     return {

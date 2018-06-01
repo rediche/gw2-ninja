@@ -1,20 +1,25 @@
-import { PolymerElement, html } from '../../../@polymer/polymer/polymer-element.js';
-import { GestureEventListeners } from '../../../@polymer/polymer/lib/mixins/gesture-event-listeners.js';
-import { afterNextRender } from '../../../@polymer/polymer/lib/utils/render-status.js';
-import '../../../@polymer/polymer/lib/elements/dom-repeat.js';
-import '../../../@polymer/app-route/app-location.js';
-import '../../../@polymer/app-route/app-route.js';
-import '../../../@polymer/paper-tabs/paper-tabs.js';
-import '../../../@polymer/paper-button/paper-button.js';
-import '../../../@polymer/paper-icon-button/paper-icon-button.js';
-import '../../../@polymer/paper-toast/paper-toast.js';
-import '../../../@polymer/iron-pages/iron-pages.js';
-import '../../../@polymer/iron-icons/iron-icons.js';
-import '../shared-styles.js';
-import '../directory/directory-entry.js';
+import {
+  PolymerElement,
+  html
+} from "../../../node_modules/@polymer/polymer/polymer-element.js";
+import { GestureEventListeners } from "../../../node_modules/@polymer/polymer/lib/mixins/gesture-event-listeners.js";
+import { afterNextRender } from "../../../node_modules/@polymer/polymer/lib/utils/render-status.js";
+import "../../../node_modules/@polymer/polymer/lib/elements/dom-repeat.js";
+import "../../../node_modules/@polymer/app-route/app-location.js";
+import "../../../node_modules/@polymer/app-route/app-route.js";
+import "../../../node_modules/@polymer/paper-tabs/paper-tabs.js";
+import "../../../node_modules/@polymer/paper-button/paper-button.js";
+import "../../../node_modules/@polymer/paper-icon-button/paper-icon-button.js";
+import "../../../node_modules/@polymer/paper-toast/paper-toast.js";
+import "../../../node_modules/@polymer/iron-pages/iron-pages.js";
+import "../../../node_modules/@polymer/iron-icons/iron-icons.js";
+import "../shared-styles.js";
+import "../directory/directory-entry.js";
 
 class PageDirectory extends GestureEventListeners(PolymerElement) {
-  static get is() { return 'page-directory'; }
+  static get is() {
+    return "page-directory";
+  }
 
   static get template() {
     return html`
@@ -113,14 +118,14 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
       },
       searchForText: {
         type: String,
-        computed: '_computeSearchForText(subviewData.subview)'
+        computed: "_computeSearchForText(subviewData.subview)"
       },
       entries: {
         type: Array
       },
       entriesFiltered: {
         type: Array,
-        computed: '_entriesFilteredObserver(entries, searchValue)',
+        computed: "_entriesFilteredObserver(entries, searchValue)"
       },
       websites: {
         type: Array
@@ -142,12 +147,12 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
   }
 
   _loadDirectoryData() {
-    fetch('/src/data/directory.json')
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.set('entries', data);
+    fetch("/src/data/directory.json")
+      .then(resp => resp.json())
+      .then(data => {
+        this.set("entries", data);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
         this.$.toast.fitInto = this;
         this.$.toast.open();
@@ -155,41 +160,44 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
   }
 
   _selectedObserver(selected) {
-    this.set('searchValue', '');
+    this.set("searchValue", "");
   }
 
   _entriesFilteredObserver(entries, searchValue) {
     let entriesFiltered = entries;
 
-    if (searchValue !== '') {
-      entriesFiltered = entries.filter((entry) => {
-        return entry.name.toLowerCase().includes(searchValue.toLowerCase()) || entry.description.toLowerCase().includes(searchValue.toLowerCase());
+    if (searchValue !== "") {
+      entriesFiltered = entries.filter(entry => {
+        return (
+          entry.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+          entry.description.toLowerCase().includes(searchValue.toLowerCase())
+        );
       });
     }
 
-    this.set('websites', this._filterEntries(entriesFiltered, 'websites'));
-    this.set('streamers', this._filterEntries(entriesFiltered, 'streamers'));
-    this.set('youtube', this._filterEntries(entriesFiltered, 'youtube'));
+    this.set("websites", this._filterEntries(entriesFiltered, "websites"));
+    this.set("streamers", this._filterEntries(entriesFiltered, "streamers"));
+    this.set("youtube", this._filterEntries(entriesFiltered, "youtube"));
   }
 
   _filterEntries(entries, directory) {
     if (!entries) return;
-    return entries.filter((entry) => {
+    return entries.filter(entry => {
       return entry.directory == directory;
     });
   }
 
   _computeSearchForText(selected) {
     switch (selected) {
-      case 'youtubers':
-        return 'YouTube Channels';
+      case "youtubers":
+        return "YouTube Channels";
         break;
-      case 'streamers':
-        return 'Streamers';
+      case "streamers":
+        return "Streamers";
         break;
-      case 'websites':
+      case "websites":
       default:
-        return 'Websites';
+        return "Websites";
         break;
     }
   }
@@ -199,7 +207,7 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
   }
 
   _clearSearchValue() {
-    this.set('searchValue', '');
+    this.set("searchValue", "");
   }
 }
 

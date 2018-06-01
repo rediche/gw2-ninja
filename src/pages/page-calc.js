@@ -1,9 +1,14 @@
-import { PolymerElement, html } from '../../../@polymer/polymer/polymer-element.js';
-import '../../../gw2-tpcalc/gw2-tpcalc.js';
-import '../shared-styles.js';
+import {
+  PolymerElement,
+  html
+} from "../../../node_modules/@polymer/polymer/polymer-element.js";
+import "../../../node_modules/gw2-tpcalc/gw2-tpcalc.js";
+import "../shared-styles.js";
 
 class PageCalc extends PolymerElement {
-  static get is() { return 'page-calc' }
+  static get is() {
+    return "page-calc";
+  }
 
   static get template() {
     return html`

@@ -1,23 +1,26 @@
-import { PolymerElement, html } from '../../node_modules/@polymer/polymer/polymer-element.js';
-import { afterNextRender } from '../../node_modules/@polymer/polymer/lib/utils/render-status.js';
-import '../../node_modules/@polymer/app-layout/app-drawer/app-drawer.js';
-import '../../node_modules/@polymer/app-layout/app-drawer-layout/app-drawer-layout.js';
-import '../../node_modules/@polymer/app-layout/app-header/app-header.js';
-import '../../node_modules/@polymer/app-layout/app-header-layout/app-header-layout.js';
-import '../../node_modules/@polymer/app-layout/app-scroll-effects/app-scroll-effects.js';
-import '../../node_modules/@polymer/app-layout/app-toolbar/app-toolbar.js';
-import '../../node_modules/@polymer/app-route/app-location.js';
-import '../../node_modules/@polymer/app-route/app-route.js';
-import '../../node_modules/@polymer/iron-pages/iron-pages.js';
-import '../../node_modules/@polymer/iron-selector/iron-selector.js';
-import '../../node_modules/@polymer/iron-icon/iron-icon.js';
-import '../../node_modules/@polymer/paper-icon-button/paper-icon-button.js';
-import '../../node_modules/@polymer/paper-item/paper-item.js';
-import '../../node_modules/@polymer/paper-toast/paper-toast.js';
-import './page-title.js';
-import './my-icons.js';
-import './shared-styles.js';
-import './online-status.js';
+import {
+  PolymerElement,
+  html
+} from "../../node_modules/@polymer/polymer/polymer-element.js";
+import { afterNextRender } from "../../node_modules/@polymer/polymer/lib/utils/render-status.js";
+import "../../node_modules/@polymer/app-layout/app-drawer/app-drawer.js";
+import "../../node_modules/@polymer/app-layout/app-drawer-layout/app-drawer-layout.js";
+import "../../node_modules/@polymer/app-layout/app-header/app-header.js";
+import "../../node_modules/@polymer/app-layout/app-header-layout/app-header-layout.js";
+import "../../node_modules/@polymer/app-layout/app-scroll-effects/app-scroll-effects.js";
+import "../../node_modules/@polymer/app-layout/app-toolbar/app-toolbar.js";
+import "../../node_modules/@polymer/app-route/app-location.js";
+import "../../node_modules/@polymer/app-route/app-route.js";
+import "../../node_modules/@polymer/iron-pages/iron-pages.js";
+import "../../node_modules/@polymer/iron-selector/iron-selector.js";
+import "../../node_modules/@polymer/iron-icon/iron-icon.js";
+import "../../node_modules/@polymer/paper-icon-button/paper-icon-button.js";
+import "../../node_modules/@polymer/paper-item/paper-item.js";
+import "../../node_modules/@polymer/paper-toast/paper-toast.js";
+import "./page-title.js";
+import "./my-icons.js";
+import "./shared-styles.js";
+import "./online-status.js";
 
 class GW2Ninja extends PolymerElement {
   static get template() {
@@ -216,14 +219,16 @@ class GW2Ninja extends PolymerElement {
 `;
   }
 
-  static get is() { return 'gw2-ninja'; }
+  static get is() {
+    return "gw2-ninja";
+  }
 
   static get properties() {
     return {
       page: {
         type: String,
         reflectToAttribute: true,
-        observer: '_pageChanged',
+        observer: "_pageChanged"
       },
       onlineStatus: {
         type: Boolean
@@ -232,9 +237,7 @@ class GW2Ninja extends PolymerElement {
   }
 
   static get observers() {
-    return [
-      '_routePageChanged(routeData.page)',
-    ];
+    return ["_routePageChanged(routeData.page)"];
   }
 
   ready() {
@@ -247,15 +250,28 @@ class GW2Ninja extends PolymerElement {
   }
 
   _routePageChanged(page) {
-    // Polymer 2.0 will call with `undefined` on initialization.
-    // Ignore until we are properly called with a string.
-    if (page === undefined) {
-      return;
-    }
-
+    // Show the corresponding page according to the route.
+    //
     // If no page was found in the route data, page will be an empty string.
-    // Deault to 'index' in that case.
-    this.page = page || 'index';
+    // Show 'index' in that case. And if the page doesn't exist, show 'view404'.
+    if (!page) {
+      this.page = "index";
+    } else if (
+      [
+        "index",
+        "about",
+        "calc",
+        "chatcodes",
+        "collections",
+        "directory",
+        "tickets",
+        "timer"
+      ].indexOf(page) !== -1
+    ) {
+      this.page = page;
+    } else {
+      this.page = "view404";
+    }
 
     // Close a non-persistent drawer when the page & route are changed.
     if (!this.$.drawer.persistent) {
@@ -264,31 +280,57 @@ class GW2Ninja extends PolymerElement {
   }
 
   _pageChanged(page) {
-    // Load page import on demand. Show 404 page if fails
-    /* var resolvedPageUrl = this.resolveUrl('pages/page-' + page + '.html');
-    importHref(
-        resolvedPageUrl,
-        null,
-        this._showPage404.bind(this),
-        true); */
+    // Import the page component on demand.
+    //
+    // Note: `polymer build` doesn't like string concatenation in the import
+    // statement, so break it up.
+    switch (page) {
+      case "index":
+        import("./pages/page-index.js");
+        break;
+      case "about":
+        import("./pages/page-about.js");
+        break;
+      case "calc":
+        import("./pages/page-calc.js");
+        break;
+      case "chatcodes":
+        import("./pages/page-chatcodes.js");
+        break;
+      case "collections":
+        import("./pages/page-collections.js");
+        break;
+      case "directory":
+        import("./pages/page-directory.js");
+        break;
+      case "tickets":
+        import("./pages/page-tickets.js");
+        break;
+      case "timer":
+        import("./pages/page-timer.js");
+        break;
+      case "view404":
+        import("./pages/page-view404.js");
+        break;
+    }
   }
 
   _showPage404() {
-    this.page = 'view404';
+    this.page = "view404";
   }
 
   _pageTitle(activePage) {
     if (!activePage) return;
 
-    if (activePage == 'index') return 'Home';
-    if (activePage == 'directory') return 'Directory';
-    if (activePage == 'collections') return 'Collections';
-    if (activePage == 'tickets') return 'Tickets';
-    if (activePage == 'chatcodes') return 'Chatcode Generator';
-    if (activePage == 'timer') return 'Meta Timer';
-    if (activePage == 'calc') return 'Trading Post Calculator';
-    if (activePage == 'about') return 'About GW2 Ninja';
-    if (activePage == 'view404') return 'Page not found';
+    if (activePage == "index") return "Home";
+    if (activePage == "directory") return "Directory";
+    if (activePage == "collections") return "Collections";
+    if (activePage == "tickets") return "Tickets";
+    if (activePage == "chatcodes") return "Chatcode Generator";
+    if (activePage == "timer") return "Meta Timer";
+    if (activePage == "calc") return "Trading Post Calculator";
+    if (activePage == "about") return "About GW2 Ninja";
+    if (activePage == "view404") return "Page not found";
 
     return activePage;
   }

@@ -1,5 +1,5 @@
-import { PolymerElement, html } from "../../../@polymer/polymer/polymer-elements.js";
-import { afterNextRender } from "../../../@polymer/polymer/lib/utils/render-status.js";
+import { PolymerElement, html } from "../../../node_modules/@polymer/polymer/polymer-element.js";
+import { afterNextRender } from "../../../node_modules/@polymer/polymer/lib/utils/render-status.js";
 import "../shared-styles.js";
 
 /**
@@ -19,7 +19,7 @@ class PageAbout extends PolymerElement {
 
   static get template() {
     return html`
-    <style>
+    <style include="shared-styles">
     :host {
       display: block;
       padding: var(--spacer-large);
@@ -53,7 +53,6 @@ class PageAbout extends PolymerElement {
   <div class="card">
     <small>&copy; 2012 ArenaNet, Inc. All rights reserved. NCsoft, the interlocking NC logo, ArenaNet, Arena.net, Guild Wars, Guild Wars Factions, Factions, Guild Wars Nightfall, Nightfall, Guild Wars: Eye of the North, Eye of the North, Guild Wars 2, and all associated logos and designs are trademarks or registered trademarks of NCsoft Corporation. All other trademarks are the property of their respective owners.</small>
   </div>
-`;
     `;
   }
 

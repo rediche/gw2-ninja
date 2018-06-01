@@ -1,9 +1,14 @@
-import { PolymerElement, html } from '../../../@polymer/polymer/polymer-element.js';
-import '../../../@polymer/paper-input/paper-input.js';
-import '../shared-styles.js';
+import {
+  PolymerElement,
+  html
+} from "../../../node_modules/@polymer/polymer/polymer-element.js";
+import "../../../node_modules/@polymer/paper-input/paper-input.js";
+import "../shared-styles.js";
 
 class PageChatcodes extends PolymerElement {
-  static get is() { return 'page-chatcodes'; }
+  static get is() {
+    return "page-chatcodes";
+  }
 
   static get template() {
     return html`
@@ -105,34 +110,34 @@ class PageChatcodes extends PolymerElement {
 
   static get observers() {
     return [
-      '_calculateNewChatCode(itemId, quantity, upgrade1Id, upgrade2Id, skinId)'
-    ]
+      "_calculateNewChatCode(itemId, quantity, upgrade1Id, upgrade2Id, skinId)"
+    ];
   }
 
   _calculateNewChatCode(itemId, quantity, upgrade1Id, upgrade2Id, skinId) {
     if (!itemId || !quantity) return;
 
     if (itemId == "[&AgH2LQEA]") {
-      this.set('result', '[&AkXHBgFAF2AAAA==]');
+      this.set("result", "[&AkXHBgFAF2AAAA==]");
     } else {
       let result = this._generateChatCodeForItem(
-        this._decodeChatCodeForItemOrSkin(itemId) || (itemId * 1),
-        (Number(quantity) * 1) || 1,
-        this._decodeChatCodeForItemOrSkin(upgrade1Id) || (upgrade1Id * 1),
-        this._decodeChatCodeForItemOrSkin(upgrade2Id) || (upgrade2Id * 1),
-        this._decodeChatCodeForItemOrSkin(skinId) || (skinId * 1)
+        this._decodeChatCodeForItemOrSkin(itemId) || itemId * 1,
+        Number(quantity) * 1 || 1,
+        this._decodeChatCodeForItemOrSkin(upgrade1Id) || upgrade1Id * 1,
+        this._decodeChatCodeForItemOrSkin(upgrade2Id) || upgrade2Id * 1,
+        this._decodeChatCodeForItemOrSkin(skinId) || skinId * 1
       );
-      
-      this.set('result', result);
+
+      this.set("result", result);
     }
   }
 
   _decodeChatCodeForItemOrSkin(fullcode) {
-    if( !/^\[\&/.test(fullcode) ) {
+    if (!/^\[\&/.test(fullcode)) {
       return 0;
     }
 
-    var code = fullcode.replace(/^\[\&+|\]+$/g, '');
+    var code = fullcode.replace(/^\[\&+|\]+$/g, "");
     var binary = window.atob(code);
     var octets = new Array(binary.length);
 
@@ -141,23 +146,23 @@ class PageChatcodes extends PolymerElement {
     }
 
     if (octets) {
-      if( octets[0] == "2" ) {
-        return (octets[2] * 1)
-                +(octets[3] << 8)
-                +(octets[4] ? (octets[4] << 16) : 0);
-      } else if( octets[0] == "11" ) {
-        return (octets[1] * 1)
-                +(octets[2] << 8)
-                +(octets[3] ? (octets[4] << 16) : 0);            
+      if (octets[0] == "2") {
+        return (
+          octets[2] * 1 + (octets[3] << 8) + (octets[4] ? octets[4] << 16 : 0)
+        );
+      } else if (octets[0] == "11") {
+        return (
+          octets[1] * 1 + (octets[2] << 8) + (octets[3] ? octets[4] << 16 : 0)
+        );
       } else {
-        console.log( fullcode + " must be a valid chat code");   
+        console.log(fullcode + " must be a valid chat code");
       }
     }
 
     return 0;
   }
 
-  _generateChatCodeForItem( itemId, quantity, upgrade1Id, upgrade2Id, skinId ) {
+  _generateChatCodeForItem(itemId, quantity, upgrade1Id, upgrade2Id, skinId) {
     // Figure out which header we need based on what components
     //0x00 â€“ Default item
     //0x40 â€“ 1 upgrade component
@@ -165,25 +170,42 @@ class PageChatcodes extends PolymerElement {
     //0x80 â€“ Skinned
     //0xC0 â€“ Skinned + 1 upgrade component
     //0xE0 â€“ Skinned + 2 upgrade components
-    var separator = 16 * ((skinId ? 8 : 0) + (upgrade1Id ? 4 : 0) + (upgrade2Id ? 2 : 0));
+    var separator =
+      16 * ((skinId ? 8 : 0) + (upgrade1Id ? 4 : 0) + (upgrade2Id ? 2 : 0));
 
     // Arrange the IDs in order
-    var ids = [2, quantity % 256, itemId, separator, skinId, upgrade1Id, upgrade2Id];
+    var ids = [
+      2,
+      quantity % 256,
+      itemId,
+      separator,
+      skinId,
+      upgrade1Id,
+      upgrade2Id
+    ];
 
     // Byte length for each part
-    var lengths = [1, 1, 3, 1, skinId ? 4 : 0, upgrade1Id ? 4 : 0, upgrade2Id ? 4 : 0];
+    var lengths = [
+      1,
+      1,
+      3,
+      1,
+      skinId ? 4 : 0,
+      upgrade1Id ? 4 : 0,
+      upgrade2Id ? 4 : 0
+    ];
 
     // Build
     var bytes = [];
     for (let i = 0; i < ids.length; i++) {
-        for (let j = 0; j < lengths[i]; j++) {
-            bytes.push( (ids[i] >> (8*j)) & 0xff );
-        }
+      for (let j = 0; j < lengths[i]; j++) {
+        bytes.push((ids[i] >> (8 * j)) & 0xff);
+      }
     }
 
     // Get code
     var output = window.btoa(String.fromCharCode.apply(null, bytes));
-    return "[&"+output+"]";
+    return "[&" + output + "]";
   }
 }
 

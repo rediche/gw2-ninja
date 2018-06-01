@@ -1,14 +1,19 @@
-import { PolymerElement, html } from '../../../@polymer/polymer/polymer-element.js';
-import { afterNextRender } from '../../../@polymer/polymer/lib/utils/render-status.js';
-import '../../../@polymer/polymer/lib/elements/dom-repeat.js';
-import '../../../@polymer/app-route/app-location.js';
-import '../../../@polymer/app-route/app-route.js';
-import '../../../@polymer/paper-tabs/paper-tabs.js';
-import '../../../moment/min/moment.min.js';
-import '../shared-styles.js';
+import {
+  PolymerElement,
+  html
+} from "../../../node_modules/@polymer/polymer/polymer-element.js";
+import { afterNextRender } from "../../../node_modules/@polymer/polymer/lib/utils/render-status.js";
+import "../../../node_modules/@polymer/polymer/lib/elements/dom-repeat.js";
+import moment from "../../../node_modules/moment/src/moment.js";
+import "../../../node_modules/@polymer/app-route/app-location.js";
+import "../../../node_modules/@polymer/app-route/app-route.js";
+import "../../../node_modules/@polymer/paper-tabs/paper-tabs.js";
+import "../shared-styles.js";
 
 class PageTimer extends PolymerElement {
-  static get is() { return 'page-timer'; }
+  static get is() {
+    return "page-timer";
+  }
 
   static get template() {
     return html`
@@ -145,7 +150,7 @@ class PageTimer extends PolymerElement {
     return {
       metas: {
         type: Array,
-        observer: '_updateTimes'
+        observer: "_updateTimes"
       },
       pointerTime: {
         type: String
@@ -174,10 +179,10 @@ class PageTimer extends PolymerElement {
   }
 
   async _loadMetas() {
-    const metasData = await fetch('/src/data/metas.json')
+    const metasData = await fetch("/src/data/metas.json");
     const metasJson = await metasData.json();
 
-    this.set('metas', metasJson);
+    this.set("metas", metasJson);
 
     setInterval(this._updateTimes, 10000);
 
@@ -199,14 +204,14 @@ class PageTimer extends PolymerElement {
     let metas = latestMetas || this.metas;
     let currentTime = moment.utc();
     let startHour = Math.floor(currentTime.hour() / 2) * 2;
-    
+
     metas.forEach(function(meta, index) {
       let offset = 0;
 
       meta.phases.forEach(function(phase, phaseIndex) {
         let correctedTime = "" + (startHour + (offset > 59 ? 1 : 0));
         phase.hour = ("00" + correctedTime).slice(-2);
-        phase.minute = ("00" + (offset % 60)).slice(-2);
+        phase.minute = ("00" + offset % 60).slice(-2);
         offset += phase.duration;
       });
 
@@ -218,21 +223,21 @@ class PageTimer extends PolymerElement {
     // Get the time (server time = UTC time)
     let currentTime = moment.utc();
     let localTime = moment();
-    
+
     // Format with leading 0s so 09:08 doesn't end up as 9:8
     let hour = ("00" + currentTime.hour()).slice(-2);
     let minute = ("00" + currentTime.minute()).slice(-2);
-    
+
     let localHour = ("00" + localTime.hour()).slice(-2);
     let localMinute = ("00" + localTime.minute()).slice(-2);
-    
+
     // How far along are we (in  % ) of the current 2 hour event cycles?
-    let percentOfTwoHours = ((hour % 2) + (minute / 60)) * 50;
-    
+    let percentOfTwoHours = (hour % 2 + minute / 60) * 50;
+
     // Set the text and move the pointer to that %
-    this.set('pointerTime', hour + ":" + minute);
-    this.set('pointerLocalTime', localHour + ":" + localMinute);
-    this.set('pointerPosition', percentOfTwoHours);
+    this.set("pointerTime", hour + ":" + minute);
+    this.set("pointerLocalTime", localHour + ":" + localMinute);
+    this.set("pointerPosition", percentOfTwoHours);
   }
 }
 
