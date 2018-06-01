@@ -1,9 +1,12 @@
-<script type="module" src="../../../@polymer/polymer/polymer-element.js"></script>
-<script type="module" src="../../../@polymer/paper-input/paper-input.js"></script>
-<script type="module" src="../shared-styles.js"></script>
+import { PolymerElement, html } from '../../../@polymer/polymer/polymer-element.js';
+import '../../../@polymer/paper-input/paper-input.js';
+import '../shared-styles.js';
 
-<dom-module id="page-chatcodes">
-  <template>
+class PageChatcodes extends PolymerElement {
+  static get is() { return 'page-chatcodes'; }
+
+  static get template() {
+    return html`
     <style include="shared-styles">
       :host {
         display: block;
@@ -68,28 +71,8 @@
         <small class="credits text-center">The original code was made in a <a href="https://jsfiddle.net/fffam/cg3njdu6/" target="_blank">JSFiddle</a> by the <a href="https://wiki.guildwars2.com/wiki/Talk:Chat_link_format#Quick_app_for_generating_item_codes" target="_blank">GW2 Wikiuser Fam</a>.</small>
       </div>
     </div>
-
-  </template>
-
-  <script>
-    class PageChatcodes extends Polymer.Element {
-      static get is() { return 'page-chatcodes'; }
-
-      static get properties() {
-        return {
-          itemId: {
-            type: String,
-            value: "[&AgFzPAAA]"
-          },
-          quantity: {
-            type: Number,
-            value: 1
-  <script type="module">
-import { PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
-import '../../../@polymer/paper-input/paper-input.js';
-import '../shared-styles.js';
-class PageChatcodes extends PolymerElement {
-  static get is() { return 'page-chatcodes'; }
+    `;
+  }
 
   static get properties() {
     return {
@@ -205,4 +188,3 @@ class PageChatcodes extends PolymerElement {
 }
 
 window.customElements.define(PageChatcodes.is, PageChatcodes);
-</script>

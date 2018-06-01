@@ -1,23 +1,24 @@
-import { PolymerElement } from '../../@polymer/polymer/polymer-element.js';
-import './shared-styles.js';
+import { PolymerElement, html } from '../../@polymer/polymer/polymer-element.js';
 import { afterNextRender } from '../../@polymer/polymer/lib/utils/render-status.js';
+import './shared-styles.js';
+
 /**
  * `online-status` Description
  *
  * @summary ShortDescription.
  * @customElement
  * @polymer
- * @extends {Polymer.Element}
+ * @extends {PolymerElement}
  */
 class OnlineStatus extends PolymerElement {
   static get template() {
-    return Polymer.html`
+    return html`
     <style include="shared-styles">
       :host {
         display: block;
       }
     </style>
-`;
+    `;
   }
 
   /**

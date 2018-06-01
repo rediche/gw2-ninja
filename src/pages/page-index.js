@@ -1,9 +1,12 @@
-<script type="module" src="../../../@polymer/polymer/polymer-element.js"></script>
-<script type="module" src="../../../@polymer/iron-image/iron-image.js"></script>
-<script type="module" src="../shared-styles.js"></script>
+import { PolymerElement, html } from '../../../@polymer/polymer/polymer-element.js';
+import '../../../@polymer/iron-image/iron-image.js';
+import '../shared-styles.js';
 
-<dom-module id="page-index">
-  <template>
+class PageIndex extends PolymerElement {
+  static get is() { return 'page-index'; }
+
+  static get template() {
+    return html`
     <style include="shared-styles">
       :host {
         display: block;
@@ -90,23 +93,8 @@
         <p class="title">TP Calculator</p>
       </a>
     </div>
-  </template>
-
-  <script>
-    class PageIndex extends Polymer.Element {
-      static get is() { return 'page-index'; }
-    }
-
-    window.customElements.define(PageIndex.is, PageIndex);
-  </script>
-</dom-module>
-<script type="module">
-import { PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
-import '../../../@polymer/iron-image/iron-image.js';
-import '../shared-styles.js';
-class PageIndex extends PolymerElement {
-  static get is() { return 'page-index'; }
+    `;
+  }
 }
 
 window.customElements.define(PageIndex.is, PageIndex);
-</script>

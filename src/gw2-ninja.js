@@ -1,4 +1,6 @@
-import { PolymerElement } from '../../@polymer/polymer/polymer-element.js';
+import { PolymerElement, html } from '../../@polymer/polymer/polymer-element.js';
+import { afterNextRender } from '../../@polymer/polymer/lib/utils/render-status.js';
+import { importHref } from '../../@polymer/polymer/lib/utils/import-href.js';
 import '../../@polymer/app-layout/app-drawer/app-drawer.js';
 import '../../@polymer/app-layout/app-drawer-layout/app-drawer-layout.js';
 import '../../@polymer/app-layout/app-header/app-header.js';
@@ -17,11 +19,10 @@ import '../../page-title/page-title.js';
 import './my-icons.js';
 import './shared-styles.js';
 import './online-status.js';
-import { afterNextRender } from '../../@polymer/polymer/lib/utils/render-status.js';
-import { importHref } from '../../@polymer/polymer/lib/utils/import-href.js';
+
 class GW2Ninja extends PolymerElement {
   static get template() {
-    return Polymer.html`
+    return html`
     <style include="shared-styles">
       :host {
         display: block;

@@ -1,38 +1,38 @@
-<script type="module" src="../../../@polymer/polymer/polymer-element.js"></script>
-<script type="module" src="../../../@polymer/polymer/lib/mixins/gesture-event-listeners.js"></script>
-<script type="module" src="../../../@polymer/polymer/lib/elements/dom-repeat.js"></script>
-<script type="module" src="../../../@polymer/app-route/app-location.js"></script>
-<script type="module" src="../../../@polymer/app-route/app-route.js"></script>
-<script type="module" src="../../../@polymer/paper-tabs/paper-tabs.js"></script>
-<script type="module" src="../../../@polymer/paper-button/paper-button.js"></script>
-<script type="module" src="../../../@polymer/paper-icon-button/paper-icon-button.js"></script>
-<script type="module" src="../../../@polymer/paper-toast/paper-toast.js"></script>
-<script type="module" src="../../../@polymer/iron-pages/iron-pages.js"></script>
-<script type="module" src="../../../@polymer/iron-icons/iron-icons.js"></script>
-<script type="module" src="../shared-styles.js"></script>
-<script type="module" src="../directory/directory-entry.js"></script>
+import { PolymerElement, html } from '../../../@polymer/polymer/polymer-element.js';
+import { GestureEventListeners } from '../../../@polymer/polymer/lib/mixins/gesture-event-listeners.js';
+import { afterNextRender } from '../../../@polymer/polymer/lib/utils/render-status.js';
+import '../../../@polymer/polymer/lib/elements/dom-repeat.js';
+import '../../../@polymer/app-route/app-location.js';
+import '../../../@polymer/app-route/app-route.js';
+import '../../../@polymer/paper-tabs/paper-tabs.js';
+import '../../../@polymer/paper-button/paper-button.js';
+import '../../../@polymer/paper-icon-button/paper-icon-button.js';
+import '../../../@polymer/paper-toast/paper-toast.js';
+import '../../../@polymer/iron-pages/iron-pages.js';
+import '../../../@polymer/iron-icons/iron-icons.js';
+import '../shared-styles.js';
+import '../directory/directory-entry.js';
 
-<dom-module id="page-directory">
-  <template>
+class PageDirectory extends GestureEventListeners(PolymerElement) {
+  static get is() { return 'page-directory'; }
+
+  static get template() {
+    return html`
     <style include="shared-styles">
       :host {
         display: block;
       }
-
       paper-tabs {
         background-color: var(--app-primary-color);
         --paper-tabs-selection-bar-color: var(--app-text-color-light);
       }
-
       paper-tab {
         color: var(--app-text-color-light);
       }
-
       .search {
         margin: var(--spacer-large);
         position: relative;
       }
-
       .search-field {
         padding: .9375rem 3rem .9375rem var(--spacer-medium);
         font-size: 1rem;
@@ -43,14 +43,12 @@
         border-radius: var(--app-border-radius);
         box-shadow: 0 1px 4px rgba(0,0,0,.12);
       }
-
       .search-clear {
         position: absolute;
         right: .25rem;
         top: .25rem;
         color: #BDBDBD;
       }
-
       .directory-list {
         display: flex;
         justify-content: space-between;
@@ -58,12 +56,10 @@
         flex-wrap: wrap;
         margin: var(--spacer-large);
       }
-
       directory-entry {
         flex-basis: 100%;
         margin-bottom: var(--spacer-large);
       }
-
       @media screen and (min-width: 768px) {
         directory-entry {
           flex-basis: calc(100% / 2 - var(--spacer-large) / 2);
@@ -104,41 +100,8 @@
     </iron-pages>
 
     <paper-toast id="toast" duration="0" text="An error occured."></paper-toast>
-    
-  </template>
-
-  <script>
-    class PageDirectory extends Polymer.GestureEventListeners(Polymer.Element) {
-      static get is() { return 'page-directory'; }
-
-      static get properties() {
-        return {
-          subviewData: {
-            observer: "_selectedObserver"
-          },
-          searchValue: {
-            type: String
-          },
-          searchForText: {
-            type: String,
-            computed: '_computeSearchForText(subviewData.subview)'
-  <script type="module">
-import { PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
-import { GestureEventListeners } from '../../../@polymer/polymer/lib/mixins/gesture-event-listeners.js';
-import '../../../@polymer/polymer/lib/elements/dom-repeat.js';
-import '../../../@polymer/app-route/app-location.js';
-import '../../../@polymer/app-route/app-route.js';
-import '../../../@polymer/paper-tabs/paper-tabs.js';
-import '../../../@polymer/paper-button/paper-button.js';
-import '../../../@polymer/paper-icon-button/paper-icon-button.js';
-import '../../../@polymer/paper-toast/paper-toast.js';
-import '../../../@polymer/iron-pages/iron-pages.js';
-import '../../../@polymer/iron-icons/iron-icons.js';
-import '../shared-styles.js';
-import '../directory/directory-entry.js';
-import { afterNextRender } from '../../../@polymer/polymer/lib/utils/render-status.js';
-class PageDirectory extends GestureEventListeners(PolymerElement) {
-  static get is() { return 'page-directory'; }
+    `;
+  }
 
   static get properties() {
     return {
@@ -241,4 +204,3 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
 }
 
 window.customElements.define(PageDirectory.is, PageDirectory);
-</script>

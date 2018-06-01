@@ -1,12 +1,17 @@
-<script type="module" src="../../../@polymer/polymer/polymer-element.js"></script>
-<script type="module" src="../../../@polymer/polymer/lib/utils/render-status.js"></script>
-<script type="module" src="../../../@polymer/paper-spinner/paper-spinner.js"></script>
-<script type="module" src="../../../@polymer/paper-toast/paper-toast.js"></script>
-<script type="module" src="../../../gw2-coin-output/gw2-coin-output.js"></script>
-<script type="module" src="../shared-styles.js"></script>
+import { PolymerElement, html } from "../../../@polymer/polymer/polymer-element.js";
+import { afterNextRender } from "../../../@polymer/polymer/lib/utils/render-status.js";
+import "../../../@polymer/paper-spinner/paper-spinner.js";
+import "../../../@polymer/paper-toast/paper-toast.js";
+import "../../../gw2-coin-output/gw2-coin-output.js";
+import "../shared-styles.js";
 
-<dom-module id="page-tickets">
-  <template>
+class PageTickets extends PolymerElement {
+  static get is() {
+    return "page-tickets";
+  }
+
+  static get template() {
+    return html`
     <style include="shared-styles">
       :host {
         display: block;
@@ -45,32 +50,14 @@
     </div>
 
     <paper-toast id="toast" duration="0" text="An error occured."></paper-toast>
-  </template>
-
-  <script>
-    class PageTickets extends Polymer.Element {
-      static get is() { return 'page-tickets'; }
-
-      static get properties() {
-        return {
-          collectionData: {
-            type: Array,
-            observer: '_calculateAverage'
-  <script type="module">
-import { PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
-import { afterNextRender } from '../../../@polymer/polymer/lib/utils/render-status.js';
-import '../../../@polymer/paper-spinner/paper-spinner.js';
-import '../../../@polymer/paper-toast/paper-toast.js';
-import '../../../gw2-coin-output/gw2-coin-output.js';
-import '../shared-styles.js';
-class PageTickets extends PolymerElement {
-  static get is() { return 'page-tickets'; }
+    `;
+  }
 
   static get properties() {
     return {
       collectionData: {
         type: Array,
-        observer: '_calculateAverage'
+        observer: "_calculateAverage"
       },
       averageBuy: {
         type: Number
@@ -111,13 +98,13 @@ class PageTickets extends PolymerElement {
       totalTickets += collection.tickets * collection.items.length;
     });
 
-    let averageBuy = (totalBuy / totalWeapons) / (totalTickets / totalWeapons);
-    this.set('averageBuy', averageBuy);
-    this.set('averageBuyLoading', false);
-    
-    let averageSell = (totalSell / totalWeapons) / (totalTickets / totalWeapons);
-    this.set('averageSell', averageSell);
-    this.set('averageSellLoading', false);
+    let averageBuy = totalBuy / totalWeapons / (totalTickets / totalWeapons);
+    this.set("averageBuy", averageBuy);
+    this.set("averageBuyLoading", false);
+
+    let averageSell = totalSell / totalWeapons / (totalTickets / totalWeapons);
+    this.set("averageSell", averageSell);
+    this.set("averageSellLoading", false);
   }
 
   _calcTotalPrices(items) {
@@ -126,7 +113,7 @@ class PageTickets extends PolymerElement {
       sells: 0
     };
 
-    items.forEach((item) => { 
+    items.forEach(item => {
       totals.sells += item.sells.unit_price;
       totals.buys += item.buys.unit_price;
     });
@@ -135,7 +122,7 @@ class PageTickets extends PolymerElement {
   }
 
   async _loadCollectionData() {
-    const collectionMeta = await fetch('./src/data/collections.json');
+    const collectionMeta = await fetch("./src/data/collections.json");
 
     if (collectionMeta.status !== 200) {
       console.log(collectionMeta.status, collectionMeta.statusText);
@@ -144,27 +131,32 @@ class PageTickets extends PolymerElement {
     }
 
     const collectionJson = await collectionMeta.json();
-    const collectionData = this._filterEntries(collectionJson, 'blacklion');
-    const collectionDataWithPrices = await Promise.all(collectionData.map(async collection => {
-      return Object.assign({}, collection, { items: await this._loadItemData(collection.ids) });
-    }, this));
+    const collectionData = this._filterEntries(collectionJson, "blacklion");
+    const collectionDataWithPrices = await Promise.all(
+      collectionData.map(async collection => {
+        return Object.assign({}, collection, {
+          items: await this._loadItemData(collection.ids)
+        });
+      }, this)
+    );
 
-    this.set('collectionData', collectionDataWithPrices);
+    this.set("collectionData", collectionDataWithPrices);
   }
 
   async _loadItemData(ids) {
-    const pricesData = await fetch('https://api.guildwars2.com/v2/commerce/prices?ids=' + ids + '&lang=en');
+    const pricesData = await fetch(
+      "https://api.guildwars2.com/v2/commerce/prices?ids=" + ids + "&lang=en"
+    );
     const pricesJson = await pricesData.json();
     return pricesJson;
   }
 
   _filterEntries(collections, category) {
     if (!collections) return;
-    return collections.filter((collection) => {
+    return collections.filter(collection => {
       return collection.category == category;
     });
   }
 }
 
 window.customElements.define(PageTickets.is, PageTickets);
-</script>
