@@ -23,9 +23,6 @@
     "node_modules/gw2-coin-input/images/*",
     "node_modules/gw2-coin-output/images/*"
   ],
-  "lint": {
-    "rules": ["polymer-2"]
-  },
   "builds": [{
     "bundle": {
       "stripComments": true,
@@ -44,5 +41,12 @@
       }
     },
     "addServiceWorker": true
-  }]
+  }],
+  "moduleResolution": "node",
+  "npm": true,
+  "lint": {
+    "rules": [
+      "polymer-3"
+    ]
+  }
 }
