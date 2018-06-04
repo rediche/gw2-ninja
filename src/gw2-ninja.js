@@ -4,6 +4,7 @@ import {
   setPassiveTouchGestures,
   setRootPath
 } from "@polymer/polymer/lib/utils/settings.js";
+import { GestureEventListeners } from "@polymer/polymer/lib/mixins/gesture-event-listeners.js";
 import "@polymer/app-layout/app-drawer/app-drawer.js";
 import "@polymer/app-layout/app-drawer-layout/app-drawer-layout.js";
 import "@polymer/app-layout/app-header/app-header.js";
@@ -22,6 +23,7 @@ import "./page-title.js";
 import "./my-icons.js";
 import "./shared-styles.js";
 import "./online-status.js";
+import "./gwn-settings.js";
 
 import { SharedStyles } from "./shared-styles.js";
 
@@ -33,7 +35,7 @@ setPassiveTouchGestures(true);
 // in `index.html`.
 setRootPath(MyAppGlobals.rootPath);
 
-class GW2Ninja extends PolymerElement {
+class GW2Ninja extends GestureEventListeners(PolymerElement) {
   static get template() {
     return html`
     ${SharedStyles}
@@ -54,7 +56,7 @@ class GW2Ninja extends PolymerElement {
         padding-left: .675rem;
       }
 
-      app-header app-toolbar paper-icon-button {
+      app-header app-toolbar paper-icon-button:first-of-type {
         margin-right: .675rem;
       }
 
@@ -207,11 +209,11 @@ class GW2Ninja extends PolymerElement {
 
         <app-header slot="header" fixed="">
           <app-toolbar>
-            <paper-icon-button icon="my-icons:menu" drawer-toggle="" aria-label="Open menu"></paper-icon-button>
-            <div main-title="">[[ _pageTitle(page) ]]</div>
+            <paper-icon-button icon="my-icons:menu" drawer-toggle="" aria-label="Open Menu"></paper-icon-button>
+            <div main-title>[[ _pageTitle(page) ]]</div>
+            <paper-icon-button icon="my-icons:settings" aria-label="Open Settings" on-tap="_toggleSettings"></paper-icon-button>
           </app-toolbar>
         </app-header>
-
 
         <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
           <page-index name="index"></page-index>
@@ -228,7 +230,8 @@ class GW2Ninja extends PolymerElement {
     </app-drawer-layout>
 
     <page-title base-title="GW2 Ninja" direction="reversed" page-title="[[ _pageTitle(page) ]]"></page-title>
-`;
+    <gwn-settings open="{{settingsOpen}}"></gwn-settings>
+    `;
   }
 
   static get is() {
@@ -244,6 +247,10 @@ class GW2Ninja extends PolymerElement {
       },
       onlineStatus: {
         type: Boolean
+      },
+      settingsOpen: {
+        type: Boolean,
+        value: false
       }
     };
   }
@@ -345,6 +352,10 @@ class GW2Ninja extends PolymerElement {
     if (activePage == "view404") return "Page not found";
 
     return activePage;
+  }
+
+  _toggleSettings() {
+    this.set('settingsOpen', !this.settingsOpen);
   }
 }
 
