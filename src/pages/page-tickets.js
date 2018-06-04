@@ -1,7 +1,4 @@
-import {
-  PolymerElement,
-  html
-} from "@polymer/polymer/polymer-element.js";
+import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
 import "@polymer/paper-spinner/paper-spinner.js";
 import "@polymer/paper-toast/paper-toast.js";
@@ -15,7 +12,7 @@ class PageTickets extends PolymerElement {
 
   static get template() {
     return html`
-    ${ SharedStyles }
+    ${SharedStyles}
     <style>
       :host {
         display: block;

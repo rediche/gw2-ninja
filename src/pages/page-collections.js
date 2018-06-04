@@ -10,6 +10,7 @@ import "@polymer/paper-spinner/paper-spinner.js";
 import "@polymer/paper-toast/paper-toast.js";
 import { SharedStyles } from "../shared-styles.js";
 import "../collections/collection-list.js";
+import "../utilities/gwn-sync-settings.js";
 
 class PageCollections extends PolymerElement {
   static get is() {
@@ -18,64 +19,67 @@ class PageCollections extends PolymerElement {
 
   static get template() {
     return html`
-    ${SharedStyles}
-    <style>
-    :host {
-      display: block;
-      box-sizing: border-box;
-    }
+      ${SharedStyles}
+      <style>
+        :host {
+          display: block;
+          box-sizing: border-box;
+        }
 
-    paper-tabs {
-      background-color: var(--app-primary-color);
-      --paper-tabs-selection-bar-color: #ffffff;
-    }
+        paper-tabs {
+          background-color: var(--app-primary-color);
+          --paper-tabs-selection-bar-color: #ffffff;
+        }
 
-    paper-tab {
-      color: white;
-    }
+        paper-tab {
+          color: white;
+        }
 
-    paper-spinner {
-      margin: 1.25rem auto;
-      display: none;
-    }
+        paper-spinner {
+          margin: 1.25rem auto;
+          display: none;
+        }
 
-    paper-spinner[active] {
-      display: block;
-    }
-  </style>
+        paper-spinner[active] {
+          display: block;
+        }
+      </style>
 
-  <app-location route="{{route}}"></app-location>
-  <app-route route="{{route}}" pattern="/collections/:subview" data="{{subviewData}}"></app-route>
+      <app-location route="{{route}}"></app-location>
+      <app-route route="{{route}}" pattern="/collections/:subview" data="{{subviewData}}"></app-route>
 
-  <p class="description">With the collections tool, you can see the prices of items in various collections, which can be bought straight off the trading post.<br> It also calculates a total price of how much the collection is worth.</p>
+      <p class="description">With the collections tool, you can see the prices of items in various collections, which can be bought straight off the trading post.<br> It also calculates a total price of how much the collection is worth.</p>
 
-  <paper-tabs class="sticky-tabs" selected="{{subviewData.subview}}" attr-for-selected="name">
-    <paper-tab name="basic">Basic</paper-tab>
-    <paper-tab name="rare">Rare</paper-tab>
-    <paper-tab name="black-lion">Black Lion</paper-tab>
-  </paper-tabs>
+      <paper-tabs class="sticky-tabs" selected="{{subviewData.subview}}" attr-for-selected="name">
+        <paper-tab name="basic">Basic</paper-tab>
+        <paper-tab name="rare">Rare</paper-tab>
+        <paper-tab name="black-lion">Black Lion</paper-tab>
+      </paper-tabs>
 
-  <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="basic">
-    <div name="basic">
-      <paper-spinner alt="Loading basic collections..." active="[[basicLoading]]"></paper-spinner>
-      <template is="dom-repeat" items="{{basic}}" as="category" initial-count="5" target-framerate="60">
-        <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
-      </template>
-    </div>
-    <div name="rare">
-      <paper-spinner alt="Loading basic collections..." active$="[[rareLoading]]"></paper-spinner>
-      <template is="dom-repeat" items="{{rare}}" as="category" initial-count="5" target-framerate="60">
-        <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
-      </template>
-    </div>
-    <div name="black-lion">
-      <paper-spinner alt="Loading basic collections..." active$="[[blacklionLoading]]"></paper-spinner>
-      <template is="dom-repeat" items="{{blacklion}}" as="category" initial-count="5" target-framerate="60">
-        <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
-      </template>
-  </iron-pages>
+      <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="basic">
+        <div name="basic">
+          <paper-spinner alt="Loading basic collections..." active="[[basicLoading]]"></paper-spinner>
+          <template is="dom-repeat" items="{{basic}}" as="category" initial-count="5" target-framerate="60">
+            <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
+          </template>
+        </div>
+        <div name="rare">
+          <paper-spinner alt="Loading basic collections..." active$="[[rareLoading]]"></paper-spinner>
+          <template is="dom-repeat" items="{{rare}}" as="category" initial-count="5" target-framerate="60">
+            <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
+          </template>
+        </div>
+        <div name="black-lion">
+          <paper-spinner alt="Loading basic collections..." active$="[[blacklionLoading]]"></paper-spinner>
+          <template is="dom-repeat" items="{{blacklion}}" as="category" initial-count="5" target-framerate="60">
+            <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
+          </template>
+      </iron-pages>
 
-  <paper-toast id="toast" duration="0" text="An error occured."></paper-toast>
+      <paper-toast id="toast" duration="0" text="An error occured."></paper-toast>
+      <gwn-sync-settings
+        value="{{language}}"
+        setting="gwn-lang"><gwn-sync-settings>
     `;
   }
 
@@ -107,6 +111,9 @@ class PageCollections extends PolymerElement {
       blacklionLoading: {
         type: Boolean,
         value: true
+      },
+      language: {
+        type: String
       }
     };
   }
@@ -182,10 +189,12 @@ class PageCollections extends PolymerElement {
 
   async _loadItemData(ids) {
     const itemsData = await fetch(
-      "https://api.guildwars2.com/v2/items?ids=" + ids + "&lang=en"
+      `https://api.guildwars2.com/v2/items?ids=${ids}&lang=${this.language}`
     );
     const pricesData = await fetch(
-      "https://api.guildwars2.com/v2/commerce/prices?ids=" + ids + "&lang=en"
+      `https://api.guildwars2.com/v2/commerce/prices?ids=${ids}&lang=${
+        this.language
+      }`
     );
     const itemsJson = await itemsData.json();
     const pricesJson = await pricesData.json();

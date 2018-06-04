@@ -23,7 +23,7 @@ import "./page-title.js";
 import "./my-icons.js";
 import "./shared-styles.js";
 import "./online-status.js";
-import "./gwn-settings.js";
+import "./settings/gwn-settings.js";
 
 import { SharedStyles } from "./shared-styles.js";
 

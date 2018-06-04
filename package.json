@@ -26,8 +26,10 @@
     "@polymer/iron-pages": "^3.0.0-pre.18",
     "@polymer/iron-selector": "^3.0.0-pre.18",
     "@polymer/paper-button": "^3.0.0-pre.18",
+    "@polymer/paper-dropdown-menu": "^3.0.0-pre.19",
     "@polymer/paper-icon-button": "^3.0.0-pre.18",
-    "@polymer/paper-item": "^3.0.0-pre.18",
+    "@polymer/paper-item": "^3.0.0-pre.19",
+    "@polymer/paper-listbox": "^3.0.0-pre.19",
     "@polymer/paper-ripple": "^3.0.0-pre.18",
     "@polymer/paper-spinner": "^3.0.0-pre.18",
     "@polymer/paper-styles": "^3.0.0-pre.18",
@@ -41,7 +43,8 @@
     "gw2-tpcalc": "^2.1.0",
     "moment": "^2.22.2",
     "request": "^2.85.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "web-animations-js": "^2.3.1"
   },
   "version": "1.0.0",
   "resolutions": {
