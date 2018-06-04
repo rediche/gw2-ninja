@@ -1,9 +1,6 @@
-import {
-  PolymerElement,
-  html
-} from "@polymer/polymer/polymer-element.js";
+import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import "gw2-tpcalc/gw2-tpcalc.js";
-import "../shared-styles.js";
+import { SharedStyles } from "../shared-styles.js";
 
 class PageCalc extends PolymerElement {
   static get is() {
@@ -12,7 +9,8 @@ class PageCalc extends PolymerElement {
 
   static get template() {
     return html`
-    <style include="shared-styles">
+    ${SharedStyles}
+    <style>
       :host {
         display: block;
 

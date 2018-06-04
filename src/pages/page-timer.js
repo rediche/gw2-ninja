@@ -1,14 +1,11 @@
-import {
-  PolymerElement,
-  html
-} from "@polymer/polymer/polymer-element.js";
+import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
 import "@polymer/polymer/lib/elements/dom-repeat.js";
 import moment from "moment/src/moment.js";
 import "@polymer/app-route/app-location.js";
 import "@polymer/app-route/app-route.js";
 import "@polymer/paper-tabs/paper-tabs.js";
-import "../shared-styles.js";
+import { SharedStyles } from "../shared-styles.js";
 
 class PageTimer extends PolymerElement {
   static get is() {
@@ -17,7 +14,8 @@ class PageTimer extends PolymerElement {
 
   static get template() {
     return html`
-    <style include="shared-styles">
+    ${SharedStyles}
+    <style>
     :host {
       display: block;
     }

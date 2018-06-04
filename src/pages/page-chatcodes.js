@@ -3,7 +3,7 @@ import {
   html
 } from "@polymer/polymer/polymer-element.js";
 import "@polymer/paper-input/paper-input.js";
-import "../shared-styles.js";
+import { SharedStyles } from "../shared-styles.js";
 
 class PageChatcodes extends PolymerElement {
   static get is() {
@@ -12,7 +12,8 @@ class PageChatcodes extends PolymerElement {
 
   static get template() {
     return html`
-    <style include="shared-styles">
+    ${SharedStyles}
+    <style>
       :host {
         display: block;
       }

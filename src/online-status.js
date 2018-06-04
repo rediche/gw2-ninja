@@ -1,6 +1,6 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
-import "./shared-styles.js";
+import { SharedStyles } from "./shared-styles.js";
 
 /**
  * `online-status` Description
@@ -13,7 +13,8 @@ import "./shared-styles.js";
 class OnlineStatus extends PolymerElement {
   static get template() {
     return html`
-    <style include="shared-styles">
+    ${SharedStyles}
+    <style>
       :host {
         display: block;
       }

@@ -6,7 +6,7 @@ import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
 import "@polymer/paper-spinner/paper-spinner.js";
 import "@polymer/paper-toast/paper-toast.js";
 import "gw2-coin-output/gw2-coin-output.js";
-import "../shared-styles.js";
+import { SharedStyles } from "../shared-styles.js";
 
 class PageTickets extends PolymerElement {
   static get is() {
@@ -15,7 +15,8 @@ class PageTickets extends PolymerElement {
 
   static get template() {
     return html`
-    <style include="shared-styles">
+    ${ SharedStyles }
+    <style>
       :host {
         display: block;
       }

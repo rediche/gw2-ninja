@@ -1,6 +1,6 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import "@polymer/iron-image/iron-image.js";
-import "../shared-styles.js";
+import { SharedStyles } from "../shared-styles.js";
 
 class PageIndex extends PolymerElement {
   static get is() {
@@ -9,7 +9,8 @@ class PageIndex extends PolymerElement {
 
   static get template() {
     return html`
-    <style include="shared-styles">
+    ${SharedStyles}
+    <style>
       :host {
         display: block;
         padding: var(--spacer-large) var(--spacer-large) 0;
