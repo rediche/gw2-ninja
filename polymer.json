@@ -12,11 +12,7 @@
     "src/pages/page-view404.js",
     "src/pages/page-about.js"
   ],
-  "sources": [
-    "src/**/*",
-    "images/**/*",
-    ".htaccess"
-  ],
+  "sources": ["src/**/*", "images/**/*", ".htaccess"],
   "extraDependencies": [
     "manifest.json",
     "node_modules/@webcomponents/webcomponentsjs/bundles/**",
@@ -24,30 +20,30 @@
     "node_modules/gw2-coin-input/images/*",
     "node_modules/gw2-coin-output/images/*"
   ],
-  "builds": [{
-    "bundle":  {
-      "stripComments": true,
-      "inlineCss": true
-    },
-    "js": {
-      "minify": true,
-      "compile": false
-    },
-    "css": { "minify": true },
-    "html": { 
-      "minify": {
-        "exclude": [
-          "node_modules/gw2-coin-output/gw2-coin-output.js"
-        ]
-      }
-    },
-    "addServiceWorker": true
-  }],
+  "builds": [
+    {
+      "name": "es6-bundled",
+      "browserCapabilities": ["es2015"],
+      "js": {
+        "compile": "es2015",
+        "minify": true,
+        "transformModulesToAmd": true
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": {
+          "exclude": ["node_modules/gw2-coin-output/gw2-coin-output.js"]
+        }
+      },
+      "bundle": true,
+      "addServiceWorker": true
+    }
+  ],
   "moduleResolution": "node",
   "npm": true,
   "lint": {
-    "rules": [
-      "polymer-3"
-    ]
+    "rules": ["polymer-3"]
   }
 }

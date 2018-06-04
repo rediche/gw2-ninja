@@ -9,7 +9,16 @@
   <title>GW2 Ninja</title>
   <meta name="description" content="A collection of Guild Wars 2 Tools.">
   <meta name="author" content="Rediche">
-  <meta name="copyright" content="GW2 Ninja, Copyright (c) 2017">
+  <meta name="copyright" content="GW2 Ninja, Copyright (c) 2018">
+
+  <!--
+    The `<base>` tag below is present to support two advanced deployment options:
+    1) Differential serving. 2) Serving from a non-root path.
+    Instead of manually editing the `<base>` tag yourself, you should generally either:
+    a) Add a `basePath` property to the build configuration in your `polymer.json`.
+    b) Use the `--base-path` command-line option for `polymer build`.
+  -->
+  <base href="/">
 
   <link rel="icon" href="/images/favicon.png">
 
@@ -55,17 +64,13 @@
     window.MyAppGlobals = { rootPath: '/' };
     // Load and register pre-caching Service Worker
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('service-worker.js', {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('./service-worker.js', {
           scope: MyAppGlobals.rootPath
         });
       });
     }
   </script>
-
-  <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
-  <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-  <script type="module" src="/src/gw2-ninja.js"></script>
 
   <style>
     body {
@@ -80,9 +85,12 @@
 
 <body>
   <gw2-ninja></gw2-ninja>
-  
+
   <noscript>This website requires JavaScript to run.</noscript>
-  
+  <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
+  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script type="module" src="src/gw2-ninja.js"></script>
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-61776887-1"></script>
   <script>
