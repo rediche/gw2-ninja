@@ -1,11 +1,8 @@
-import {
-  PolymerElement,
-  html
-} from "@polymer/polymer/polymer-element.js";
+import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import { GestureEventListeners } from "@polymer/polymer/lib/mixins/gesture-event-listeners.js";
 import "@polymer/polymer/lib/elements/dom-repeat.js";
 import "gw2-coin-output/gw2-coin-output.js";
-import "../shared-styles.js";
+import { SharedStyles } from "../shared-styles.js";
 
 /**
  * `collection-list` Description
@@ -18,7 +15,8 @@ import "../shared-styles.js";
 class CollectionList extends GestureEventListeners(PolymerElement) {
   static get template() {
     return html`
-    <style include="shared-styles">
+    ${SharedStyles}
+    <style>
       :host {
         display: block;
         margin: var(--spacer-large);

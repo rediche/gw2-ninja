@@ -1,9 +1,9 @@
-import {
-  PolymerElement,
-  html
-} from "@polymer/polymer/polymer-element.js";
+import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
-import { setPassiveTouchGestures, setRootPath } from '@polymer/polymer/lib/utils/settings.js';
+import {
+  setPassiveTouchGestures,
+  setRootPath
+} from "@polymer/polymer/lib/utils/settings.js";
 import "@polymer/app-layout/app-drawer/app-drawer.js";
 import "@polymer/app-layout/app-drawer-layout/app-drawer-layout.js";
 import "@polymer/app-layout/app-header/app-header.js";
@@ -23,6 +23,8 @@ import "./my-icons.js";
 import "./shared-styles.js";
 import "./online-status.js";
 
+import { SharedStyles } from "./shared-styles.js";
+
 // Gesture events like tap and track generated from touch will not be
 // preventable, allowing for better scrolling performance.
 setPassiveTouchGestures(true);
@@ -34,7 +36,8 @@ setRootPath(MyAppGlobals.rootPath);
 class GW2Ninja extends PolymerElement {
   static get template() {
     return html`
-    <style include="shared-styles">
+    ${SharedStyles}
+    <style>
       :host {
         display: block;
         min-height: 100vh;

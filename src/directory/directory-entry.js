@@ -1,11 +1,12 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import "@polymer/paper-ripple/paper-ripple.js";
-import "../shared-styles.js";
+import { SharedStyles } from "../shared-styles.js";
 
 class DirectoryEntry extends PolymerElement {
   static get template() {
     return html`
-    <style include="shared-styles">
+    ${SharedStyles}
+    <style>
       :host {
         display: block;
         box-sizing: border-box;

@@ -7,6 +7,7 @@
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !src/
+  RewriteCond %{REQUEST_FILENAME} !node_modules/
   RewriteCond %{REQUEST_FILENAME} !precursors/
   RewriteRule (.*) index.html [L,QSA]
 </IfModule>

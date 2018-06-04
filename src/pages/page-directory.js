@@ -1,7 +1,4 @@
-import {
-  PolymerElement,
-  html
-} from "@polymer/polymer/polymer-element.js";
+import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import { GestureEventListeners } from "@polymer/polymer/lib/mixins/gesture-event-listeners.js";
 import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
 import "@polymer/polymer/lib/elements/dom-repeat.js";
@@ -13,7 +10,7 @@ import "@polymer/paper-icon-button/paper-icon-button.js";
 import "@polymer/paper-toast/paper-toast.js";
 import "@polymer/iron-pages/iron-pages.js";
 import "@polymer/iron-icons/iron-icons.js";
-import "../shared-styles.js";
+import { SharedStyles } from "../shared-styles.js";
 import "../directory/directory-entry.js";
 
 class PageDirectory extends GestureEventListeners(PolymerElement) {
@@ -23,7 +20,8 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
 
   static get template() {
     return html`
-    <style include="shared-styles">
+    ${SharedStyles}
+    <style>
       :host {
         display: block;
       }

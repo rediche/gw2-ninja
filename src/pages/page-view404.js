@@ -1,5 +1,5 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
-import "../shared-styles.js";
+import { SharedStyles } from "../shared-styles.js";
 
 class PageView404 extends PolymerElement {
   static get is() {
@@ -8,7 +8,8 @@ class PageView404 extends PolymerElement {
 
   static get template() {
     return html`
-    <style include="shared-styles">
+    ${SharedStyles}
+    <style>
     :host {
       display: block;
       padding: var(--spacer-large);

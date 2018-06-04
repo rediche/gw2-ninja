@@ -1,7 +1,4 @@
-import {
-  PolymerElement,
-  html
-} from "@polymer/polymer/polymer-element.js";
+import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
 import { Debouncer } from "@polymer/polymer/lib/utils/debounce.js";
 import { microTask } from "@polymer/polymer/lib/utils/async.js";
@@ -11,7 +8,7 @@ import "@polymer/iron-pages/iron-pages.js";
 import "@polymer/paper-tabs/paper-tabs.js";
 import "@polymer/paper-spinner/paper-spinner.js";
 import "@polymer/paper-toast/paper-toast.js";
-import "../shared-styles.js";
+import { SharedStyles } from "../shared-styles.js";
 import "../collections/collection-list.js";
 
 class PageCollections extends PolymerElement {
@@ -21,7 +18,8 @@ class PageCollections extends PolymerElement {
 
   static get template() {
     return html`
-    <style include="shared-styles">
+    ${SharedStyles}
+    <style>
     :host {
       display: block;
       box-sizing: border-box;
