@@ -270,8 +270,13 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
     afterNextRender(this, function() {
       /* console.log(this.$.onlineStatusToast, this.$.appHeaderLayout, this); */
       this.$.onlineStatusToast.fitInto = this.$.appHeaderLayout;
+      /* this.addEventListener('themechange', this._themeChange); */
     });
   }
+
+  /* _themeChange(e) {
+    this.set('theme', e.detail.theme);
+  } */
 
   _routePageChanged(page) {
     // Show the corresponding page according to the route.
