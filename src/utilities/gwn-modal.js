@@ -57,7 +57,7 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           padding: .5rem .5rem 1rem .5rem;
         }
 
-        ::slotted(*) {
+        ::slotted(*:not(.backdrop)) {
           margin: 0 .5rem;
         }
 
