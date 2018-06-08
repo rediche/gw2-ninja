@@ -9,13 +9,6 @@ import { SettingsStyles } from "./gwn-settings-styles.js";
 class GWNSettingTheme extends PolymerElement {
   static get properties() {
     return {
-      open: {
-        type: Boolean,
-        notify: true
-      },
-      language: {
-        type: String
-      },
       theme: {
         type: String
       }
