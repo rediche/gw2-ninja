@@ -14,7 +14,8 @@ class GWNSyncSettings extends PolymerElement {
       defaultValues: {
         type: Object,
         value: {
-          "gwn-lang": "en"
+          "gwn-lang": "en",
+          "gwn-theme": "pof"
         }
       }
     };

@@ -21,9 +21,9 @@ import "@polymer/paper-item/paper-item.js";
 import "@polymer/paper-toast/paper-toast.js";
 import "./page-title.js";
 import "./my-icons.js";
-import "./shared-styles.js";
 import "./online-status.js";
 import "./settings/gwn-settings.js";
+import "./utilities/gwn-sync-settings.js";
 
 import { SharedStyles } from "./shared-styles.js";
 
@@ -43,9 +43,6 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
       :host {
         display: block;
         min-height: 100vh;
-
-        --app-primary-color: #009688;
-        --app-secondary-color: black;
 
         --app-text-color: #333333;
         --app-text-color-inverted: #ffffff;
@@ -217,11 +214,11 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
 
         <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
           <page-index name="index"></page-index>
-          <page-directory name="directory"></page-directory>
-          <page-collections name="collections"></page-collections>
-          <page-tickets name="tickets"></page-tickets>
+          <page-directory theme$="[[theme]]" name="directory"></page-directory>
+          <page-collections theme$="[[theme]]" name="collections"></page-collections>
+          <page-tickets theme$="[[theme]]" name="tickets"></page-tickets>
           <page-chatcodes name="chatcodes"></page-chatcodes>
-          <page-timer name="timer"></page-timer>
+          <page-timer theme$="[[theme]]" name="timer"></page-timer>
           <page-calc name="calc"></page-calc>
           <page-about name="about"></page-about>
           <page-view404 name="view404"></page-view404>
@@ -231,6 +228,10 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
 
     <page-title base-title="GW2 Ninja" direction="reversed" page-title="[[ _pageTitle(page) ]]"></page-title>
     <gwn-settings open="{{settingsOpen}}"></gwn-settings>
+
+    <gwn-sync-settings 
+      value="{{theme}}"
+      setting="gwn-theme"></gwn-sync-settings>
     `;
   }
 
@@ -251,6 +252,10 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
       settingsOpen: {
         type: Boolean,
         value: false
+      },
+      theme: {
+        type: String,
+        reflectToAttribute: true
       }
     };
   }
@@ -355,7 +360,7 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
   }
 
   _toggleSettings() {
-    this.set('settingsOpen', !this.settingsOpen);
+    this.set("settingsOpen", !this.settingsOpen);
   }
 }
 

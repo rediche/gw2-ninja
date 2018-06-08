@@ -2,7 +2,7 @@ import { html } from "@polymer/polymer/polymer-element.js";
 
 export const SharedStyles = html`
 <style>
-  :root {
+  :host {
     /* Colors */
     --color-guild-wars-2: #F44336;
     --color-guild-wars-2-dark: #C62828;
@@ -28,6 +28,16 @@ export const SharedStyles = html`
     --spacer-small: .5rem;
     --spacer-medium: 1rem;
     --spacer-large: 1.5rem;
+  }
+
+  :host([theme="core"]) {
+    --app-primary-color: var(--color-guild-wars-2);
+    --app-primary-color-dark: var(--color-guild-wars-2-dark);
+  }
+
+  :host([theme="hot"]) {
+    --app-primary-color: var(--color-heart-of-thorns);
+    --app-primary-color-dark: var(--color-heart-of-thorns-dark);
   }
 
   *,
