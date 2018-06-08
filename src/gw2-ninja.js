@@ -4,6 +4,7 @@ import {
   setPassiveTouchGestures,
   setRootPath
 } from "@polymer/polymer/lib/utils/settings.js";
+import { GestureEventListeners } from "@polymer/polymer/lib/mixins/gesture-event-listeners.js";
 import "@polymer/app-layout/app-drawer/app-drawer.js";
 import "@polymer/app-layout/app-drawer-layout/app-drawer-layout.js";
 import "@polymer/app-layout/app-header/app-header.js";
@@ -20,8 +21,9 @@ import "@polymer/paper-item/paper-item.js";
 import "@polymer/paper-toast/paper-toast.js";
 import "./page-title.js";
 import "./my-icons.js";
-import "./shared-styles.js";
 import "./online-status.js";
+import "./settings/gwn-settings.js";
+import "./utilities/gwn-sync-settings.js";
 
 import { SharedStyles } from "./shared-styles.js";
 
@@ -33,7 +35,7 @@ setPassiveTouchGestures(true);
 // in `index.html`.
 setRootPath(MyAppGlobals.rootPath);
 
-class GW2Ninja extends PolymerElement {
+class GW2Ninja extends GestureEventListeners(PolymerElement) {
   static get template() {
     return html`
     ${SharedStyles}
@@ -41,9 +43,6 @@ class GW2Ninja extends PolymerElement {
       :host {
         display: block;
         min-height: 100vh;
-
-        --app-primary-color: #009688;
-        --app-secondary-color: black;
 
         --app-text-color: #333333;
         --app-text-color-inverted: #ffffff;
@@ -54,7 +53,7 @@ class GW2Ninja extends PolymerElement {
         padding-left: .675rem;
       }
 
-      app-header app-toolbar paper-icon-button {
+      app-header app-toolbar paper-icon-button:first-of-type {
         margin-right: .675rem;
       }
 
@@ -207,19 +206,19 @@ class GW2Ninja extends PolymerElement {
 
         <app-header slot="header" fixed="">
           <app-toolbar>
-            <paper-icon-button icon="my-icons:menu" drawer-toggle="" aria-label="Open menu"></paper-icon-button>
-            <div main-title="">[[ _pageTitle(page) ]]</div>
+            <paper-icon-button icon="my-icons:menu" drawer-toggle="" aria-label="Open Menu"></paper-icon-button>
+            <div main-title>[[ _pageTitle(page) ]]</div>
+            <paper-icon-button icon="my-icons:settings" aria-label="Open Settings" on-tap="_toggleSettings"></paper-icon-button>
           </app-toolbar>
         </app-header>
 
-
         <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
           <page-index name="index"></page-index>
-          <page-directory name="directory"></page-directory>
-          <page-collections name="collections"></page-collections>
-          <page-tickets name="tickets"></page-tickets>
+          <page-directory theme$="[[theme]]" name="directory"></page-directory>
+          <page-collections theme$="[[theme]]" name="collections"></page-collections>
+          <page-tickets theme$="[[theme]]" name="tickets"></page-tickets>
           <page-chatcodes name="chatcodes"></page-chatcodes>
-          <page-timer name="timer"></page-timer>
+          <page-timer theme$="[[theme]]" name="timer"></page-timer>
           <page-calc name="calc"></page-calc>
           <page-about name="about"></page-about>
           <page-view404 name="view404"></page-view404>
@@ -228,7 +227,12 @@ class GW2Ninja extends PolymerElement {
     </app-drawer-layout>
 
     <page-title base-title="GW2 Ninja" direction="reversed" page-title="[[ _pageTitle(page) ]]"></page-title>
-`;
+    <gwn-settings open="{{settingsOpen}}"></gwn-settings>
+
+    <gwn-sync-settings 
+      value="{{theme}}"
+      setting="gwn-theme"></gwn-sync-settings>
+    `;
   }
 
   static get is() {
@@ -244,6 +248,14 @@ class GW2Ninja extends PolymerElement {
       },
       onlineStatus: {
         type: Boolean
+      },
+      settingsOpen: {
+        type: Boolean,
+        value: false
+      },
+      theme: {
+        type: String,
+        reflectToAttribute: true
       }
     };
   }
@@ -258,8 +270,13 @@ class GW2Ninja extends PolymerElement {
     afterNextRender(this, function() {
       /* console.log(this.$.onlineStatusToast, this.$.appHeaderLayout, this); */
       this.$.onlineStatusToast.fitInto = this.$.appHeaderLayout;
+      /* this.addEventListener('themechange', this._themeChange); */
     });
   }
+
+  /* _themeChange(e) {
+    this.set('theme', e.detail.theme);
+  } */
 
   _routePageChanged(page) {
     // Show the corresponding page according to the route.
@@ -345,6 +362,10 @@ class GW2Ninja extends PolymerElement {
     if (activePage == "view404") return "Page not found";
 
     return activePage;
+  }
+
+  _toggleSettings() {
+    this.set("settingsOpen", !this.settingsOpen);
   }
 }
 
