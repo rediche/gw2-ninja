@@ -1,6 +1,6 @@
 # <gw2-ninja\>
 
-Polymer 2 version of [GW2 Ninja](http://gw2.ninja).
+Polymer 3 version of [GW2 Ninja](http://gw2.ninja).
 
 ## Setup
 
@@ -15,14 +15,14 @@ First, install [Polymer CLI](https://github.com/Polymer/polymer-cli) and Bower u
 
     clone from git repo
     cd gw2-ninja
-    bower install
+    npm install
 
 ## Start the development server
 
 This command serves the app at `http://localhost:8080` and provides basic URL
 routing for the app:
 
-    polymer serve --open
+    polymer serve
 
 ## Build
 
