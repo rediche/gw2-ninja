@@ -19,7 +19,7 @@ import "@polymer/iron-icon/iron-icon.js";
 import "@polymer/paper-icon-button/paper-icon-button.js";
 import "@polymer/paper-item/paper-item.js";
 import "@polymer/paper-toast/paper-toast.js";
-import "./page-title.js";
+import "./page-metadata.js";
 import "./my-icons.js";
 import "./online-status.js";
 import "./settings/gwn-settings.js";
@@ -226,7 +226,11 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
       </app-header-layout>
     </app-drawer-layout>
 
-    <page-title base-title="GW2 Ninja" direction="reversed" page-title="[[ _pageTitle(page) ]]"></page-title>
+    <page-metadata 
+      base-title="GW2 Ninja" 
+      fallback-description="A collection of Guild Wars 2 Tools."
+      direction="reversed" 
+      page="[[ page ]]"></page-metadata>
     <gwn-settings open="{{settingsOpen}}"></gwn-settings>
 
     <gwn-sync-settings 
@@ -268,15 +272,9 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
     super.ready();
 
     afterNextRender(this, function() {
-      /* console.log(this.$.onlineStatusToast, this.$.appHeaderLayout, this); */
       this.$.onlineStatusToast.fitInto = this.$.appHeaderLayout;
-      /* this.addEventListener('themechange', this._themeChange); */
     });
   }
-
-  /* _themeChange(e) {
-    this.set('theme', e.detail.theme);
-  } */
 
   _routePageChanged(page) {
     // Show the corresponding page according to the route.

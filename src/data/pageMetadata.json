@@ -1,0 +1,50 @@
+[
+  {
+    "page": "index",
+    "title": "Home",
+    "description":
+      "Guild Wars 2 Event Meta Timers, Trading Post tools, Chatcode Generator and the largest directory of fansites, YouTubers and streamers."
+  },
+  {
+    "page": "directory",
+    "title": "Directory",
+    "description":
+      "The largest directory of Guild Wars 2 related fansites, Trading Post tools, YouTubers and streamers."
+  },
+  {
+    "page": "collections",
+    "title": "Collections",
+    "description":
+      "Get a good overview of the total value of certain basic, rare and black lion weapon collections from Guild Wars 2."
+  },
+  {
+    "page": "tickets",
+    "title": "Tickets",
+    "description":
+      "A tool that looks through the Guild Wars 2 Trading Post to find the actual value of a Black Lion Ticket."
+  },
+  {
+    "page": "chatcodes",
+    "title": "GW2 Chatcode Generator",
+    "description":
+      "Generate chat codes for Guild Wars 2. You can even make it seem like weapons or armor have upgrades they should not be able to have. Or just make fun weapon names."
+  },
+  {
+    "page": "timer",
+    "title": "Guild Wars 2 Event Timer",
+    "description":
+      "Guild Wars 2 event timers with events from core, Heart of Thorns, Path of Fire and living world."
+  },
+  {
+    "page": "calc",
+    "title": "Trading Post Calculator",
+    "description":
+      "Guild Wars 2 Trading Post calulator, to make sure you can make a profit, before you invest."
+  },
+  {
+    "page": "about",
+    "title": "About",
+    "description":
+      "Behind the scenes of GW2 Ninja, how it came to be and how you can contribute to make it even better."
+  }
+]
