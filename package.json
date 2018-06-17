@@ -47,7 +47,7 @@
     "request-promise": "^4.2.2",
     "web-animations-js": "^2.3.1"
   },
-  "version": "1.0.0",
+  "version": "1.1.0",
   "resolutions": {
     "inherits": "2.0.3",
     "samsam": "1.1.3",
