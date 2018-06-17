@@ -42,6 +42,7 @@
     "gw2-coin-output": "^2.0.1",
     "gw2-tpcalc": "^2.1.0",
     "moment": "^2.22.2",
+    "pwa-helpers": "^0.8.2",
     "request": "^2.85.0",
     "request-promise": "^4.2.2",
     "web-animations-js": "^2.3.1"
