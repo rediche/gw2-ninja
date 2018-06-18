@@ -1081,5 +1081,11 @@
     "description": "Addon that allows you to do visual changes to how the game renders.",
     "url": "https://04348.github.io/Gw2Hook/",
     "directory": "websites"
+  },
+  {
+    "name": "Loot, Palawadan, and Everything",
+    "description": "Testifye's Istan Profit Model.",
+    "url": "https://sites.google.com/view/gw2-tipm/home",
+    "directory": "websites"
   }
 ]
