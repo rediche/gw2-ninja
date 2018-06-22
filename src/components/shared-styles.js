@@ -22,6 +22,7 @@ export const SharedStyles = html`
 
     /* Generic styles */
     --app-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+    --app-box-shadow-reverse: 0 -1px 4px rgba(0, 0, 0, 0.12);
     --app-border-radius: .125rem;
     --spacer-none: 0;
     --spacer-xsmall: .25rem;

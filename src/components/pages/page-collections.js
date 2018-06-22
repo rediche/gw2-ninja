@@ -11,6 +11,7 @@ import "@polymer/paper-toast/paper-toast.js";
 import { SharedStyles } from "../shared-styles.js";
 import "../collections/collection-list.js";
 import "../utilities/gwn-sync-settings.js";
+import "../utilities/gwn-modal.js";
 
 class PageCollections extends PolymerElement {
   static get is() {
@@ -74,6 +75,7 @@ class PageCollections extends PolymerElement {
           <template is="dom-repeat" items="{{blacklion}}" as="category" initial-count="5" target-framerate="60">
             <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
           </template>
+        </div>
       </iron-pages>
 
       <paper-toast id="toast" duration="0" text="An error occured."></paper-toast>

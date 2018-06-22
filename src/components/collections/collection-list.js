@@ -1,6 +1,24 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import { GestureEventListeners } from "@polymer/polymer/lib/mixins/gesture-event-listeners.js";
 import "@polymer/polymer/lib/elements/dom-repeat.js";
+
+import { connect } from "pwa-helpers/connect-mixin.js";
+
+// Load redux store
+import { store } from "../../store.js";
+
+// These are the actions needed by this element.
+import {
+  OPEN_COLLECTION_MODAL,
+  SELECT_COLLECTION
+} from "../../actions/collections.js";
+
+// Lazy load reducers
+import collections from "../../reducers/collections.js";
+store.addReducers({
+  collections
+});
+
 import "gw2-coin-output/gw2-coin-output.js";
 import { SharedStyles } from "../shared-styles.js";
 
@@ -12,7 +30,9 @@ import { SharedStyles } from "../shared-styles.js";
  * @polymer
  * @extends {PolymerElement}
  */
-class CollectionList extends GestureEventListeners(PolymerElement) {
+class CollectionList extends connect(store)(
+  GestureEventListeners(PolymerElement)
+) {
   static get template() {
     return html`
     ${SharedStyles}
@@ -30,8 +50,7 @@ class CollectionList extends GestureEventListeners(PolymerElement) {
         font-weight: 800;
       }
 
-      .category,
-      .category-item {
+      .category {
         padding: var(--spacer-medium);
         border-bottom: 1px solid rgba(0,0,0,.12);
         display: flex;
@@ -45,21 +64,11 @@ class CollectionList extends GestureEventListeners(PolymerElement) {
         border-bottom: none;
       }
 
-      .category-item {
-        background-color: rgba(0,0,0,.025);
-        display: none;
-      }
-
-      :host([expanded]) .category-item {
-        display: flex;
-      }
-
       :host([expanded]) .category {
         box-shadow: 0 2px 4px rgba(0,0,0,.12);
       }
 
-      .category-name,
-      .category-item-name {
+      .category-name {
         margin: 0 0 var(--spacer-small);
         width: 100%;
       }
@@ -70,13 +79,11 @@ class CollectionList extends GestureEventListeners(PolymerElement) {
       }
 
       @media screen and (min-width: 900px) {
-        .category,
-        .category-item {
+        .category {
           flex-wrap: nowrap;
         }
 
-        .category-name,
-        .category-item-name {
+        .category-name {
           margin: 0;
           width: 40%;
         }
@@ -88,28 +95,12 @@ class CollectionList extends GestureEventListeners(PolymerElement) {
     </style>
 
     <div class="card">
-      <div class="category" on-tap="toggleExpanded">
+      <div class="category" on-tap="openModal">
         <p class="category-name">[[categoryName]]</p>
         <gw2-coin-output prepend-zeroes="" coin-string="[[_calcTotalPrices(categoryItems, 'buys')]]"></gw2-coin-output>
         <gw2-coin-output prepend-zeroes="" coin-string="[[_calcTotalPrices(categoryItems, 'sells')]]"></gw2-coin-output>
       </div>
-      
-      <template is="dom-repeat" items="{{categoryItems}}" initial-count="5" target-framerate="60">
-        <div class="category-item">
-          <p class="category-item-name">[[item.name]]</p>
-          <gw2-coin-output prepend-zeroes="" coin-string="[[item.buys.unit_price]]"></gw2-coin-output>
-          <gw2-coin-output prepend-zeroes="" coin-string="[[item.sells.unit_price]]"></gw2-coin-output>
-        </div>
-      </template>
-    </div>    
-`;
-  }
-
-  /**
-   * String providing the tag name to register the element under.
-   */
-  static get is() {
-    return "collection-list";
+    </div>`;
   }
 
   /**
@@ -122,11 +113,6 @@ class CollectionList extends GestureEventListeners(PolymerElement) {
       },
       categoryItems: {
         type: Array
-      },
-      expanded: {
-        type: Boolean,
-        value: false,
-        reflectToAttribute: true
       }
     };
   }
@@ -151,29 +137,24 @@ class CollectionList extends GestureEventListeners(PolymerElement) {
     return totalPrices;
   }
 
-  toggleExpanded(e) {
-    this.set("expanded", !this.expanded);
+  openModal(e) {
+    store.dispatch({ 
+      type: SELECT_COLLECTION, 
+      selectedCollection: {
+        name: this.categoryName,
+        items: this.categoryItems,
+        totalBuy: this._calcTotalPrices(this.categoryItems, "buys"),
+        totalSell: this._calcTotalPrices(this.categoryItems, "sells")
+      } 
+    });
+    store.dispatch({ type: OPEN_COLLECTION_MODAL });
   }
 
-  /**
-   * Instance of the element is created/upgraded. Use: initializing state,
-   * set up event listeners, create shadow dom.
-   * @constructor
-   */
-  /* constructor() {
-    super();
-  } */
-
-  /**
-   * Use for one-time configuration of your component after local DOM is initialized.
-   */
-  /* ready() {
-    super.ready();
-
-    Polymer.RenderStatus.afterNextRender(this, function() {
-      
-    });
-  } */
+  // This is called every time something is updated in the store.
+  _stateChanged(state) {
+    if (!state) return;
+    //this.set('open', state.collections.collectionModalOpened);
+  }
 }
 
-window.customElements.define(CollectionList.is, CollectionList);
+window.customElements.define("collection-list", CollectionList);
