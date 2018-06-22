@@ -1,6 +1,24 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import { GestureEventListeners } from "@polymer/polymer/lib/mixins/gesture-event-listeners.js";
 import "@polymer/polymer/lib/elements/dom-repeat.js";
+
+import { connect } from "pwa-helpers/connect-mixin.js";
+
+// Load redux store
+import { store } from "../../store.js";
+
+// These are the actions needed by this element.
+import {
+  OPEN_COLLECTION_MODAL,
+  SELECT_COLLECTION
+} from "../../actions/collections.js";
+
+// Lazy load reducers
+import collections from "../../reducers/collections.js";
+store.addReducers({
+  collections
+});
+
 import "gw2-coin-output/gw2-coin-output.js";
 import { SharedStyles } from "../shared-styles.js";
 
@@ -12,7 +30,9 @@ import { SharedStyles } from "../shared-styles.js";
  * @polymer
  * @extends {PolymerElement}
  */
-class CollectionList extends GestureEventListeners(PolymerElement) {
+class CollectionList extends connect(store)(
+  GestureEventListeners(PolymerElement)
+) {
   static get template() {
     return html`
     ${SharedStyles}
@@ -88,19 +108,11 @@ class CollectionList extends GestureEventListeners(PolymerElement) {
     </style>
 
     <div class="card">
-      <div class="category" on-tap="triggerOpenEvent">
+      <div class="category" on-tap="openModal">
         <p class="category-name">[[categoryName]]</p>
         <gw2-coin-output prepend-zeroes="" coin-string="[[_calcTotalPrices(categoryItems, 'buys')]]"></gw2-coin-output>
         <gw2-coin-output prepend-zeroes="" coin-string="[[_calcTotalPrices(categoryItems, 'sells')]]"></gw2-coin-output>
       </div>
-      
-      <template is="dom-repeat" items="{{categoryItems}}" initial-count="5" target-framerate="60">
-        <div class="category-item">
-          <p class="category-item-name">[[item.name]]</p>
-          <gw2-coin-output prepend-zeroes="" coin-string="[[item.buys.unit_price]]"></gw2-coin-output>
-          <gw2-coin-output prepend-zeroes="" coin-string="[[item.sells.unit_price]]"></gw2-coin-output>
-        </div>
-      </template>
     </div>`;
   }
 
@@ -114,11 +126,6 @@ class CollectionList extends GestureEventListeners(PolymerElement) {
       },
       categoryItems: {
         type: Array
-      },
-      expanded: {
-        type: Boolean,
-        value: false,
-        reflectToAttribute: true
       }
     };
   }
@@ -143,17 +150,21 @@ class CollectionList extends GestureEventListeners(PolymerElement) {
     return totalPrices;
   }
 
-  toggleExpanded(e) {
-    this.set("expanded", !this.expanded);
-  }
-
-  triggerOpenEvent(e) {
-    this.dispatchEvent(new CustomEvent("collection-selected", {
-      detail: {
+  openModal(e) {
+    store.dispatch({ 
+      type: SELECT_COLLECTION, 
+      selectedCollection: {
         name: this.categoryName,
         items: this.categoryItems
-      }
-    }))
+      } 
+    });
+    store.dispatch({ type: OPEN_COLLECTION_MODAL });
+  }
+
+  // This is called every time something is updated in the store.
+  _stateChanged(state) {
+    if (!state) return;
+    //this.set('open', state.collections.collectionModalOpened);
   }
 }
 
