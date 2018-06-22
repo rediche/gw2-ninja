@@ -1,16 +1,16 @@
 {
   "entrypoint": "index.html",
-  "shell": "src/gw2-ninja.js",
+  "shell": "src/components/gw2-ninja.js",
   "fragments": [
-    "src/pages/page-calc.js",
-    "src/pages/page-chatcodes.js",
-    "src/pages/page-collections.js",
-    "src/pages/page-directory.js",
-    "src/pages/page-index.js",
-    "src/pages/page-tickets.js",
-    "src/pages/page-timer.js",
-    "src/pages/page-view404.js",
-    "src/pages/page-about.js"
+    "src/components/pages/page-calc.js",
+    "src/components/pages/page-chatcodes.js",
+    "src/components/pages/page-collections.js",
+    "src/components/pages/page-directory.js",
+    "src/components/pages/page-index.js",
+    "src/components/pages/page-tickets.js",
+    "src/components/pages/page-timer.js",
+    "src/components/pages/page-view404.js",
+    "src/components/pages/page-about.js"
   ],
   "sources": ["src/**/*", "images/**/*", ".htaccess"],
   "extraDependencies": [

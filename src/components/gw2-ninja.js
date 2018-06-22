@@ -24,6 +24,7 @@ import "./my-icons.js";
 import "./online-status.js";
 import "./settings/gwn-settings.js";
 import "./utilities/gwn-sync-settings.js";
+import "./collections/collection-modal.js";
 
 import { SharedStyles } from "./shared-styles.js";
 
@@ -236,6 +237,8 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
     <gwn-sync-settings 
       value="{{theme}}"
       setting="gwn-theme"></gwn-sync-settings>
+
+    <collection-modal></collection-modal>
     `;
   }
 

@@ -88,7 +88,7 @@ class CollectionList extends GestureEventListeners(PolymerElement) {
     </style>
 
     <div class="card">
-      <div class="category" on-tap="toggleExpanded">
+      <div class="category" on-tap="triggerOpenEvent">
         <p class="category-name">[[categoryName]]</p>
         <gw2-coin-output prepend-zeroes="" coin-string="[[_calcTotalPrices(categoryItems, 'buys')]]"></gw2-coin-output>
         <gw2-coin-output prepend-zeroes="" coin-string="[[_calcTotalPrices(categoryItems, 'sells')]]"></gw2-coin-output>
@@ -101,15 +101,7 @@ class CollectionList extends GestureEventListeners(PolymerElement) {
           <gw2-coin-output prepend-zeroes="" coin-string="[[item.sells.unit_price]]"></gw2-coin-output>
         </div>
       </template>
-    </div>    
-`;
-  }
-
-  /**
-   * String providing the tag name to register the element under.
-   */
-  static get is() {
-    return "collection-list";
+    </div>`;
   }
 
   /**
@@ -155,25 +147,14 @@ class CollectionList extends GestureEventListeners(PolymerElement) {
     this.set("expanded", !this.expanded);
   }
 
-  /**
-   * Instance of the element is created/upgraded. Use: initializing state,
-   * set up event listeners, create shadow dom.
-   * @constructor
-   */
-  /* constructor() {
-    super();
-  } */
-
-  /**
-   * Use for one-time configuration of your component after local DOM is initialized.
-   */
-  /* ready() {
-    super.ready();
-
-    Polymer.RenderStatus.afterNextRender(this, function() {
-      
-    });
-  } */
+  triggerOpenEvent(e) {
+    this.dispatchEvent(new CustomEvent("collection-selected", {
+      detail: {
+        name: this.categoryName,
+        items: this.categoryItems
+      }
+    }))
+  }
 }
 
-window.customElements.define(CollectionList.is, CollectionList);
+window.customElements.define("collection-list", CollectionList);
