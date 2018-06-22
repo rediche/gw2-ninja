@@ -8,7 +8,12 @@ import {
 const collections = (
   state = {
     collectionModalOpened: false,
-    selectedCollection: null
+    selectedCollection: {
+      name: "",
+      items: [],
+      totalBuy: 0,
+      totalSell: 0
+    }
   },
   action
 ) => {
