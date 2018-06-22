@@ -33,10 +33,10 @@ class CollectionModal extends connect(store)(PolymerElement) {
         .headline {
           margin-bottom: 0;
           font-weight: bold;
+          font-size: 20px;
         }
 
         .table-scroll {
-          margin-top: .5rem;
           overflow-x: auto;
         }
 
@@ -45,34 +45,68 @@ class CollectionModal extends connect(store)(PolymerElement) {
           border-collapse: collapse;
           border-spacing: 0;
           min-width: 600px;
+          table-layout: fixed;
+        }
+
+        thead, tfoot {
+          display: table;
+          width: 100%;
+          table-layout: fixed;
+          box-shadow: var(--app-box-shadow);
+        }
+
+        tfoot {
+          box-shadow: var(--app-box-shadow-reverse);
+        }
+
+        tbody {
+          overflow-y: auto;
+          width: 100%;
+          max-height: calc(100vh - 1.5rem * 2 - 56px - 45px - 53px);
+          display: block;
+        }
+
+        tbody tr {
+          display: table;
+          width: 100%;
+          table-layout: fixed;
+        }
+
+        td {
+          padding: 4px;
+          text-overflow: ellipsis;
+          overflow: hidden; 
+          white-space: nowrap;
         }
 
         th {
           text-align: left;
           font-size: .9rem;
           font-weight: 800;
+          padding: 1rem 4px;
         }
 
-        td, th {
-          padding: 4px;
+        thead th {
+          padding-top: .5rem;
+        }
+
+        tr td:first-child, tr th:first-child {
+          padding-left: 1rem;
+        }
+
+        tr td:last-child, tr th:last-child {
+          padding-right: 1rem;
         }
 
         tr:nth-child(2n) {
-          background-color: rgba(0, 0, 0, .025);
+          background-color: rgba(0, 0, 0, .04);
         }
 
         gwn-modal {
           --gwn-modal-width: 800px;
-          /* --gwn-modal-padding: 0; */
+          --gwn-modal-content-padding: 0;
+          --gwn-modal-content-overflow-y: none;
         }
-/*
-        [slot="title"] {
-          margin: .5rem 1rem;
-        }
-
-        [slot="content"] {
-          margin: 0;
-        } */
 
         .align-right {
           text-align: right;
@@ -83,6 +117,12 @@ class CollectionModal extends connect(store)(PolymerElement) {
           height: auto;
           margin-right: .5rem;
           vertical-align: middle;
+        }
+
+        @media screen and (min-width: 600px) {
+          .headline {
+            font-size: 24px;
+          }
         }
       </style>
 
@@ -104,7 +144,7 @@ class CollectionModal extends connect(store)(PolymerElement) {
                   <tr>
                     <td>
                       <img class="icon" src="[[item.icon]]" alt="[[item.name]]"> 
-                      <span>[[item.name]]</span>
+                      <span title="[[item.name]]">[[item.name]]</span>
                     </td>
                     <td class="align-right">
                       <gw2-coin-output prepend-zeroes coin-string="[[item.buys.unit_price]]"></gw2-coin-output>

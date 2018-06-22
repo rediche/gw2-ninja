@@ -61,10 +61,6 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           box-sizing: border-box;
         }
 
-        /* ::slotted([slot="content"]) {
-          overflow-y: auto;
-        }*/
-
         header {
           display: flex;
           justify-content: space-between;
@@ -74,9 +70,13 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           padding: var(--gwn-modal-padding) var(--gwn-modal-padding) 0 calc(var(--gwn-modal-padding) * 2);
         }
 
+        paper-icon-button {
+          flex: none;
+        }
+
         ::slotted([slot="content"]) {
-          padding: 0 calc(var(--gwn-modal-padding) * 2) calc(var(--gwn-modal-padding) * 2);
-          overflow-y: auto;
+          padding: var(--gwn-modal-content-padding, 0 calc(var(--gwn-modal-padding) * 2) calc(var(--gwn-modal-padding) * 2));
+          overflow-y: var(--gwn-modal-content-overflow-y, auto);
         }
       </style>
 
