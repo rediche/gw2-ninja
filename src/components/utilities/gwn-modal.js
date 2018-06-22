@@ -74,8 +74,9 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           padding: var(--gwn-modal-padding) var(--gwn-modal-padding) 0 calc(var(--gwn-modal-padding) * 2);
         }
 
-        .content {
+        ::slotted([slot="content"]) {
           padding: 0 calc(var(--gwn-modal-padding) * 2) calc(var(--gwn-modal-padding) * 2);
+          overflow-y: auto;
         }
       </style>
 
@@ -86,9 +87,7 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           <slot name="title"></slot>
           <paper-icon-button icon="my-icons:close" on-tap="close">Close</paper-icon-button>
         </header>
-        <div class="content">
-          <slot name="content"></slot>
-        </div>
+        <slot name="content"></slot>
       </div>
     `;
   }
