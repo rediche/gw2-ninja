@@ -18,7 +18,7 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
     return html`
       <style>
         :host {
-          --gwn-modal-padding: 1.5rem;
+          --gwn-modal-spacing: 1.5rem;
 
           display: block;
           position: fixed;
@@ -31,7 +31,7 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           justify-content: center;
           align-items: flex-start;
           box-sizing: border-box;
-          padding: var(--gwn-modal-padding);
+          padding: var(--gwn-modal-spacing);
         }
         
         :host([hidden]) {
@@ -53,12 +53,12 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           flex-direction: column;
           width: var(--gwn-modal-width, 500px);
           max-width: var(--gwn-modal-max-width, 100%);
-          max-height: calc(100vh - var(--gwn-modal-padding) * 2);
+          max-height: calc(100vh - var(--gwn-modal-spacing) * 2);
           background-color: white; 
           border-radius: 2px;
           box-shadow: 0 2px 4px rgba(0,0,0,.12);
           box-sizing: border-box;
-          padding: .5rem .5rem 1rem .5rem;
+          padding: var(--gwn-modal-padding, .5rem .5rem 1rem .5rem);
         }
 
         ::slotted(:not(.backdrop)) {

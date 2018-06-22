@@ -50,8 +50,7 @@ class CollectionList extends connect(store)(
         font-weight: 800;
       }
 
-      .category,
-      .category-item {
+      .category {
         padding: var(--spacer-medium);
         border-bottom: 1px solid rgba(0,0,0,.12);
         display: flex;
@@ -65,21 +64,11 @@ class CollectionList extends connect(store)(
         border-bottom: none;
       }
 
-      .category-item {
-        background-color: rgba(0,0,0,.025);
-        display: none;
-      }
-
-      :host([expanded]) .category-item {
-        display: flex;
-      }
-
       :host([expanded]) .category {
         box-shadow: 0 2px 4px rgba(0,0,0,.12);
       }
 
-      .category-name,
-      .category-item-name {
+      .category-name {
         margin: 0 0 var(--spacer-small);
         width: 100%;
       }
@@ -90,13 +79,11 @@ class CollectionList extends connect(store)(
       }
 
       @media screen and (min-width: 900px) {
-        .category,
-        .category-item {
+        .category {
           flex-wrap: nowrap;
         }
 
-        .category-name,
-        .category-item-name {
+        .category-name {
           margin: 0;
           width: 40%;
         }
@@ -155,7 +142,9 @@ class CollectionList extends connect(store)(
       type: SELECT_COLLECTION, 
       selectedCollection: {
         name: this.categoryName,
-        items: this.categoryItems
+        items: this.categoryItems,
+        totalBuy: this._calcTotalPrices(this.categoryItems, "buys"),
+        totalSell: this._calcTotalPrices(this.categoryItems, "sells")
       } 
     });
     store.dispatch({ type: OPEN_COLLECTION_MODAL });
