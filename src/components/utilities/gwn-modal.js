@@ -18,7 +18,8 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
     return html`
       <style>
         :host {
-          --gwn-modal-spacing: 1.5rem;
+          --gwn-modal-margin: 1.5rem;
+          --gwn-modal-padding: .5rem;
 
           display: block;
           position: fixed;
@@ -31,7 +32,7 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           justify-content: center;
           align-items: flex-start;
           box-sizing: border-box;
-          padding: var(--gwn-modal-spacing);
+          padding: var(--gwn-modal-margin);
         }
         
         :host([hidden]) {
@@ -53,21 +54,16 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           flex-direction: column;
           width: var(--gwn-modal-width, 500px);
           max-width: var(--gwn-modal-max-width, 100%);
-          max-height: calc(100vh - var(--gwn-modal-spacing) * 2);
+          max-height: calc(100vh - var(--gwn-modal-margin) * 2);
           background-color: white; 
           border-radius: 2px;
           box-shadow: 0 2px 4px rgba(0,0,0,.12);
           box-sizing: border-box;
-          padding: var(--gwn-modal-padding, .5rem .5rem 1rem .5rem);
         }
 
-        ::slotted(:not(.backdrop)) {
-          margin: 0 .5rem;
-        }
-
-        ::slotted([slot="content"]) {
+        /* ::slotted([slot="content"]) {
           overflow-y: auto;
-        }
+        }*/
 
         header {
           display: flex;
@@ -75,6 +71,11 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           align-items: center;
           margin-bottom: .5rem;
           flex: 1 0 auto;
+          padding: var(--gwn-modal-padding) var(--gwn-modal-padding) 0 calc(var(--gwn-modal-padding) * 2);
+        }
+
+        .content {
+          padding: 0 calc(var(--gwn-modal-padding) * 2) calc(var(--gwn-modal-padding) * 2);
         }
       </style>
 
@@ -85,7 +86,9 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           <slot name="title"></slot>
           <paper-icon-button icon="my-icons:close" on-tap="close">Close</paper-icon-button>
         </header>
-        <slot name="content"></slot>
+        <div class="content">
+          <slot name="content"></slot>
+        </div>
       </div>
     `;
   }
