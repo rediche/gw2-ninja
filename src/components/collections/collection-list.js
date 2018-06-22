@@ -39,39 +39,49 @@ class CollectionList extends connect(store)(
     <style>
       :host {
         display: block;
-        margin: var(--spacer-large);
+      }
+
+      table {
+        width: calc(100% - var(--spacer-large) * 2);
+        text-align: left;
+      }
+
+      th {
+        padding: .5rem 4px;
+      }
+
+      td {
+        padding: .5rem 4px;
+        cursor: pointer;
+      }
+
+      tbody tr:hover {
+        background-color: rgba(0, 0, 0, .1);
+      }
+
+      tr td:first-child, tr th:first-child {
+        padding-left: 1rem;
+      }
+
+      tr td:last-child, tr th:last-child {
+        padding-right: 1rem;
+      }
+
+      tr:nth-child(2n) {
+        background-color: rgba(0, 0, 0, .04);
       }
 
       .card {
-        padding: 0;
+        padding: .5rem 0;
+      }
+
+      .align-right {
+        text-align: right;
       }
 
       .category-name {
-        font-weight: 800;
-      }
-
-      .category {
-        padding: var(--spacer-medium);
-        border-bottom: 1px solid rgba(0,0,0,.12);
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-      }
-
-      .category {
-        cursor: pointer;
-        border-bottom: none;
-      }
-
-      :host([expanded]) .category {
-        box-shadow: 0 2px 4px rgba(0,0,0,.12);
-      }
-
-      .category-name {
-        margin: 0 0 var(--spacer-small);
         width: 100%;
-      }
+      } 
 
       gw2-coin-output {
         text-align: right;
@@ -79,12 +89,7 @@ class CollectionList extends connect(store)(
       }
 
       @media screen and (min-width: 900px) {
-        .category {
-          flex-wrap: nowrap;
-        }
-
         .category-name {
-          margin: 0;
           width: 40%;
         }
 
@@ -94,13 +99,29 @@ class CollectionList extends connect(store)(
       }
     </style>
 
-    <div class="card">
-      <div class="category" on-tap="openModal">
-        <p class="category-name">[[categoryName]]</p>
-        <gw2-coin-output prepend-zeroes="" coin-string="[[_calcTotalPrices(categoryItems, 'buys')]]"></gw2-coin-output>
-        <gw2-coin-output prepend-zeroes="" coin-string="[[_calcTotalPrices(categoryItems, 'sells')]]"></gw2-coin-output>
-      </div>
-    </div>`;
+    <table class="card row" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Collection</th>
+          <th class="align-right">Buy Order</th>
+          <th class="align-right">Sell Listing</th>
+        </tr>
+      </thead>
+      <tbody>
+        <template is="dom-repeat" items="[[collectionData]]" as="collection" initial-count="5" target-framerate="60">
+          <tr on-tap="openModal">
+            <td>[[ collection.name ]]</td>
+            <td class="align-right">
+              <gw2-coin-output prepend-zeroes coin-string="[[_calcTotalPrices(collection.items, 'buys')]]"></gw2-coin-output>
+            </td>
+            <td class="align-right">
+              <gw2-coin-output prepend-zeroes="" coin-string="[[_calcTotalPrices(collection.items, 'sells')]]"></gw2-coin-output>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+    `;
   }
 
   /**
@@ -108,12 +129,7 @@ class CollectionList extends connect(store)(
    */
   static get properties() {
     return {
-      categoryName: {
-        type: String
-      },
-      categoryItems: {
-        type: Array
-      }
+      collectionData: Array
     };
   }
 
@@ -138,14 +154,16 @@ class CollectionList extends connect(store)(
   }
 
   openModal(e) {
-    store.dispatch({ 
-      type: SELECT_COLLECTION, 
+    if (!e.model.collection) return;
+
+    store.dispatch({
+      type: SELECT_COLLECTION,
       selectedCollection: {
-        name: this.categoryName,
-        items: this.categoryItems,
-        totalBuy: this._calcTotalPrices(this.categoryItems, "buys"),
-        totalSell: this._calcTotalPrices(this.categoryItems, "sells")
-      } 
+        name: e.model.collection.name,
+        items: e.model.collection.items,
+        totalBuy: this._calcTotalPrices(e.model.collection.items, "buys"),
+        totalSell: this._calcTotalPrices(e.model.collection.items, "sells")
+      }
     });
     store.dispatch({ type: OPEN_COLLECTION_MODAL });
   }

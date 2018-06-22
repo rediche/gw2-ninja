@@ -27,6 +27,10 @@ class PageCollections extends PolymerElement {
           box-sizing: border-box;
         }
 
+        .card {
+          padding: 0;
+        }
+
         paper-tabs {
           background-color: var(--app-primary-color);
           --paper-tabs-selection-bar-color: #ffffff;
@@ -60,21 +64,15 @@ class PageCollections extends PolymerElement {
       <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="basic">
         <div name="basic">
           <paper-spinner alt="Loading basic collections..." active="[[basicLoading]]"></paper-spinner>
-          <template is="dom-repeat" items="{{basic}}" as="category" initial-count="5" target-framerate="60">
-            <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
-          </template>
+            <collection-list collection-data="{{basic}}" category-items="[[category.items]]" hidden$="[[basicLoading]]"></collection-list>
         </div>
         <div name="rare">
           <paper-spinner alt="Loading basic collections..." active$="[[rareLoading]]"></paper-spinner>
-          <template is="dom-repeat" items="{{rare}}" as="category" initial-count="5" target-framerate="60">
-            <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
-          </template>
+          <collection-list collection-data="{{rare}}" hidden$=[[rareLoading]]></collection-list>
         </div>
         <div name="black-lion">
           <paper-spinner alt="Loading basic collections..." active$="[[blacklionLoading]]"></paper-spinner>
-          <template is="dom-repeat" items="{{blacklion}}" as="category" initial-count="5" target-framerate="60">
-            <collection-list category-name="[[category.name]]" category-items="[[category.items]]"></collection-list>
-          </template>
+            <collection-list collection-data="{{blacklion}}" hidden$="[[blacklionLoading]]"></collection-list>
         </div>
       </iron-pages>
 
