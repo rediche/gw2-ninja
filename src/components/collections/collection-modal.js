@@ -15,6 +15,7 @@ store.addReducers({
 });
 
 import "../utilities/gwn-modal.js";
+import "../utilities/gwn-item-icon.js";
 import { SharedStyles } from "../shared-styles.js";
 
 class CollectionModal extends connect(store)(PolymerElement) {
@@ -143,7 +144,11 @@ class CollectionModal extends connect(store)(PolymerElement) {
                 <template is="dom-repeat" items="[[collectionItems]]" initial-count="5" target-framerate="60">
                   <tr>
                     <td>
-                      <img class="icon" src="[[item.icon]]" alt="[[item.name]]"> 
+                      <gwn-item-icon 
+                        class="icon" 
+                        name="[[item.name]]" 
+                        icon="[[item.icon]]" 
+                        rarity="[[item.rarity]]"></gwn-item-icon>
                       <span title="[[item.name]]">[[item.name]]</span>
                     </td>
                     <td class="align-right">
