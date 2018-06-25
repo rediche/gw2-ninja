@@ -172,6 +172,10 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
         type: Boolean,
         value: false
       },
+      page: {
+        type: String,
+        observer: "_pageObserver"
+      },
       precursors: {
         type: Array,
         value: [
@@ -207,7 +211,6 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
     return ["_startRain(rainReady)"];
   }
 
-  /* TODO: Turn off audio when navigating away from the page */
   _startRain(rainReady) {
     const audioPlayPromise = this.$.audio.play();
 
@@ -270,6 +273,11 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
     });
 
     this.$.items.appendChild(item);
+  }
+
+  _pageObserver(page) {
+    if (!page || page !== "precursors") return this.$.audio.pause();
+    this.$.audio.play();
   }
 
   randomInt(min, max) {

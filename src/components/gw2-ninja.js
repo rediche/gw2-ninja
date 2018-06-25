@@ -222,7 +222,7 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
           <page-timer theme$="[[theme]]" name="timer"></page-timer>
           <page-calc name="calc"></page-calc>
           <page-about name="about"></page-about>
-          <page-precursors name="precursors"></page-precursors>
+          <page-precursors name="precursors" page="[[page]]"></page-precursors>
           <page-view404 name="view404"></page-view404>
         </iron-pages>
       </app-header-layout>
