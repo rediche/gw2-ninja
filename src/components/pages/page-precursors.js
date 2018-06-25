@@ -1,8 +1,10 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
+import { GestureEventListeners } from "@polymer/polymer/lib/mixins/gesture-event-listeners.js";
+import { afterNextRender } from '@polymer/polymer/lib/utils/render-status.js';
 import "../utilities/gwn-item-icon.js";
 import { SharedStyles } from "../shared-styles.js";
 
-class PagePrecursors extends PolymerElement {
+class PagePrecursors extends GestureEventListeners(PolymerElement) {
   static get template() {
     return html`
     ${SharedStyles}
@@ -67,10 +69,23 @@ class PagePrecursors extends PolymerElement {
           transform: translateY(calc(100vh - 4rem + 100%));
         }
       }
+
+      .play svg {
+        fill: white;
+        width: 4rem;
+        height: 4rem;
+        cursor: pointer;
+      }
     </style>
 
     <div class="prepare" hidden$="[[rainReady]]">
       PLEASE PREPARE YOUR EXOTICS
+    </div>
+
+    <div class="play prepare" hidden$="[[!requiresInteraction]]" on-tap="_playAudio">
+      <svg viewBox="0 0 24 24">
+        <path d="M8,5.14V19.14L19,12.14L8,5.14Z" />
+      </svg>
     </div>
 
     <div id="items"></div>
@@ -90,6 +105,10 @@ class PagePrecursors extends PolymerElement {
         computed: "_ready(audio)"
       },
       audio: {
+        type: Boolean,
+        value: false
+      },
+      requiresInteraction: {
         type: Boolean,
         value: false
       },
@@ -130,7 +149,26 @@ class PagePrecursors extends PolymerElement {
 
   /* TODO: Turn off audio when navigating away from the page */
   _startRain(rainReady) {
-    this.$.audio.play();
+    this._playAudio();
+
+    for (let i = 0; i < 30; i++) {
+      afterNextRender(this, () => {
+        this._createItem();
+      });
+    }
+  }
+
+  _playAudio() {
+    const audioPlayPromise = this.$.audio.play();
+
+    // Autoplay restrictions in browsers. Ugh.
+    if (audioPlayPromise !== undefined) {
+      audioPlayPromise.then(_ => {
+        this.set('requiresInteraction', false);
+      }).catch(error => {
+        this.set('requiresInteraction', true);
+      });
+    }
   }
 
   _ready(audio) {
