@@ -45,7 +45,7 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           position: absolute;
           height: 100%;
           width: 100%;
-          background-color: rgba(0, 0, 0, .2);
+          background-color: rgba(0, 0, 0, .5);
         }
 
         .modal {
