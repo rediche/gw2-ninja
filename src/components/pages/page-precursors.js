@@ -70,7 +70,7 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
         }
       }
 
-      .colin-so-handsome {
+      #colin {
         position: absolute;
         left: 0;
         bottom: 0;
@@ -80,8 +80,48 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
         transition-duration: 5s;
       }
 
-      .colin-so-handsome.show {
+      #colin.show {
         transform: translateY(0) scale(1,1);
+      }
+
+      #mikeo {
+        position: absolute;
+        right: 0;
+        top: 10%;
+        opacity: 0;
+        transition: 1s opacity;
+      }
+
+      #mikeo img {
+        width: 100px;
+        animation: rotate 2s linear infinite;
+      }
+      
+      #mikeo.show {
+        opacity: 1;
+        animation: bounce 0.5s;
+        animation-direction: alternate;
+        animation-timing-function: cubic-bezier(.5,0.05,1,.5);
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes bounce {
+        from { transform: translate3d(-200%, 0, 0); }
+        to   { transform: translate3d(0, 0, 0); }
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotate(0deg) scale(1);
+        }
+
+        50% {
+          transform: rotate(180deg) scale(1.5);
+        }
+
+        100% {
+          transform: rotate(360deg) scale(1);
+        }
       }
 
       .play svg {
@@ -89,6 +129,7 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
         width: 4rem;
         height: 4rem;
         cursor: pointer;
+        filter: drop-shadow(0 1px 3px rgba(0,0,0,.12));
       }
     </style>
 
@@ -104,7 +145,10 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
 
     <div id="items"></div>
 
-    <img class="colin-so-handsome" id="colin" src="/src/images/precursors/precursors_colin.png" alt="Colin SoHandsome">
+    <img id="colin" src="/src/images/precursors/precursors_colin.png" alt="Colin SoHandsome">
+    <div id="mikeo">
+      <img src="/src/images/precursors/precursors_mikeo.png" alt="Mike Oreos">
+    </div>
 
     <audio id="audio" on-canplaythrough="_audioReady" loop>
       <source src="/src/sounds/gaben.ogg" type="audio/ogg">
@@ -184,8 +228,12 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
         // Queue Colin
         afterNextRender(this, () => {
           setTimeout(() => {
-            this.$.colin.classList.add('show');
+            this.$.colin.classList.add("show");
           }, 5000);
+
+          setTimeout(() => {
+            this.$.mikeo.classList.add("show");
+          }, 20000);
         });
       })
       .catch(error => {
