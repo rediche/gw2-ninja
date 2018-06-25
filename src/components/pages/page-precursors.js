@@ -70,6 +70,20 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
         }
       }
 
+      .colin-so-handsome {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        max-width: 100%;
+        width: 400px;
+        transform: translateY(100%) scale(0.2,0.2);
+        transition-duration: 5s;
+      }
+
+      .colin-so-handsome.show {
+        transform: translateY(0) scale(1,1);
+      }
+
       .play svg {
         fill: white;
         width: 4rem;
@@ -89,6 +103,8 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
     </div>
 
     <div id="items"></div>
+
+    <img class="colin-so-handsome" id="colin" src="/src/images/precursors/precursors_colin.png" alt="Colin SoHandsome">
 
     <audio id="audio" on-canplaythrough="_audioReady" loop>
       <source src="/src/sounds/gaben.ogg" type="audio/ogg">
@@ -164,6 +180,13 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
             this._createItem();
           });
         }
+
+        // Queue Colin
+        afterNextRender(this, () => {
+          setTimeout(() => {
+            this.$.colin.classList.add('show');
+          }, 5000);
+        });
       })
       .catch(error => {
         this.set("requiresInteraction", true);
