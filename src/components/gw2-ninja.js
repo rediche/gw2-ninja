@@ -222,6 +222,7 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
           <page-timer theme$="[[theme]]" name="timer"></page-timer>
           <page-calc name="calc"></page-calc>
           <page-about name="about"></page-about>
+          <page-precursors name="precursors"></page-precursors>
           <page-view404 name="view404"></page-view404>
         </iron-pages>
       </app-header-layout>
@@ -240,10 +241,6 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
 
     <collection-modal></collection-modal>
     `;
-  }
-
-  static get is() {
-    return "gw2-ninja";
   }
 
   static get properties() {
@@ -295,7 +292,8 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
         "collections",
         "directory",
         "tickets",
-        "timer"
+        "timer",
+        "precursors"
       ].indexOf(page) !== -1
     ) {
       this.page = page;
@@ -339,6 +337,9 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
       case "timer":
         import("./pages/page-timer.js");
         break;
+      case "precursors":
+        import("./pages/page-precursors.js");
+        break;
       case "view404":
         import("./pages/page-view404.js");
         break;
@@ -360,6 +361,7 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
     if (activePage == "timer") return "Meta Timer";
     if (activePage == "calc") return "Trading Post Calculator";
     if (activePage == "about") return "About GW2 Ninja";
+    if (activePage == "precursors") return "Precursor Rain. HALLELUJAH!";
     if (activePage == "view404") return "Page not found";
 
     return activePage;
@@ -370,4 +372,4 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
   }
 }
 
-window.customElements.define(GW2Ninja.is, GW2Ninja);
+window.customElements.define("gw2-ninja", GW2Ninja);
