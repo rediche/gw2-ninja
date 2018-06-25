@@ -44,6 +44,8 @@ class PagePrecursors extends PolymerElement {
         animation-name: rain;
         animation-duration: 2s;
         animation-timing-function: cubic-bezier(0.600, 0.040, 0.980, 0.335);
+        animation-timing-function: ease-in;
+        box-shadow: var(--app-box-shadow);
       }
 
       @keyframes rain {
@@ -73,7 +75,7 @@ class PagePrecursors extends PolymerElement {
 
     <div id="items"></div>
 
-    <audio id="audio" on-canplaythrough="_audioReady">
+    <audio id="audio" on-canplaythrough="_audioReady" loop>
       <source src="/src/sounds/gaben.ogg" type="audio/ogg">
       <source src="/src/sounds/gaben.mp3" type="audio/mp3">
       Your browser does not support the audio tag.
@@ -141,6 +143,7 @@ class PagePrecursors extends PolymerElement {
   }
 
   _createItem() {
+    const that = this;
     const precursorChoice = this.precursors[
       this.randomInt(0, this.precursors.length - 1)
     ];
@@ -149,10 +152,11 @@ class PagePrecursors extends PolymerElement {
     item.icon = `https://render.guildwars2.com/file/${precursorChoice}.png`;
     item.rarity = "Exotic";
     item.style.left = `calc(${this.randomInt(0, 100)}% - 20px)`;
-    item.style.animationDuration = `${this.randomInt(500, 5000)}ms`;
+    item.style.animationDuration = `${this.randomInt(500, 3000)}ms`;
 
     item.addEventListener("animationend", function(e) {
       e.target.remove();
+      that._createItem();
     });
 
     this.$.items.appendChild(item);
