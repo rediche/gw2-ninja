@@ -51,18 +51,10 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
 
       app-toolbar {
         font-weight: 800;
-        padding-left: .675rem;
-      }
-
-      app-header app-toolbar paper-icon-button:first-of-type {
-        margin-right: .675rem;
-      }
-
-      app-drawer-layout:not([narrow]) [drawer-toggle] {
-        display: none;
       }
 
       app-drawer {
+        z-index: 99999;
         box-shadow: 1px 0 4px rgba(0,0,0,.12);
       }
 
@@ -79,6 +71,7 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
         text-transform: capitalize;
         display: flex;
         align-items: center;
+        padding: 0 var(--spacer-medium);
       }
 
       app-toolbar [main-title] iron-icon {
@@ -141,10 +134,6 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
       }
 
       @media screen and (min-width: 641px) {
-        app-toolbar {
-          padding-left: var(--spacer-large);
-        }
-
         #onlineStatusToast {
           left: 256px !important;
           width: calc(100% - 256px);
@@ -155,78 +144,76 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
     <app-location route="{{route}}"></app-location>
     <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
-    <app-drawer-layout>
-      <!-- Drawer content -->
-      <app-drawer id="drawer" slot="drawer">
-        <div class="drawer-scroll">
-          <app-toolbar>
-            <paper-icon-button icon="my-icons:close" drawer-toggle="" aria-label="Close menu"></paper-icon-button>
-            <div main-title="">
-              <iron-icon icon="my-icons:logo"></iron-icon>
-              GW2 Ninja
-            </div>
-          </app-toolbar>
-          <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-            <a name="index" href="/" tabindex="-1">
-              <paper-item>Home</paper-item>
-            </a>
-            <hr>
-            <a name="directory" href="/directory/websites" tabindex="-1">
-              <paper-item>Directory</paper-item>
-            </a>
-            <hr>
-            <a name="collections" href="/collections/basic" tabindex="-1">
-              <paper-item>Collections</paper-item>
-            </a>
-            <a name="tickets" href="/tickets" tabindex="-1">
-              <paper-item>Tickets</paper-item>
-            </a>
-            <hr>
-            <a name="chatcodes" href="/chatcodes" tabindex="-1">
-              <paper-item>Chatcodes</paper-item>
-            </a>
-            <a name="timer" href="/timer/all" tabindex="-1">
-              <paper-item>Meta Timer</paper-item>
-            </a>
-            <a name="calc" href="/calc" tabindex="-1">
-              <paper-item>TP Calc</paper-item>
-            </a>
-            <hr style="margin-top:auto">
-            <a name="about" href="/about" tabindex="-1">
-              <paper-item>About</paper-item>
-            </a>
-          </iron-selector>
-        </div>
-      </app-drawer>
+    <!-- Main content -->
 
-      <!-- Main content -->
-      <app-header-layout id="appHeaderLayout">
+    <online-status online-status="{{ onlineStatus }}"></online-status>
+    <paper-toast id="onlineStatusToast" class="fit-bottom" opened="[[ !onlineStatus ]]" duration="0" text="You appear to be offline. Some tools might not work correctly."></paper-toast>
 
-        <online-status online-status="{{ onlineStatus }}"></online-status>
-        <paper-toast id="onlineStatusToast" class="fit-bottom" opened="[[ !onlineStatus ]]" duration="0" text="You appear to be offline. Some tools might not work correctly."></paper-toast>
+    <app-header-layout>
+      <app-header slot="header" fixed>
+        <app-toolbar>
+          <paper-icon-button icon="my-icons:menu" on-tap="_openDrawer" aria-label="Open Menu"></paper-icon-button>
+          <div main-title>[[ _pageTitle(page) ]]</div>
+          <paper-icon-button icon="my-icons:settings" aria-label="Open Settings" on-tap="_toggleSettings"></paper-icon-button>
+        </app-toolbar>
+      </app-header>
 
-        <app-header slot="header" fixed="">
-          <app-toolbar>
-            <paper-icon-button icon="my-icons:menu" drawer-toggle="" aria-label="Open Menu"></paper-icon-button>
-            <div main-title>[[ _pageTitle(page) ]]</div>
-            <paper-icon-button icon="my-icons:settings" aria-label="Open Settings" on-tap="_toggleSettings"></paper-icon-button>
-          </app-toolbar>
-        </app-header>
+      <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
+        <page-index name="index"></page-index>
+        <page-directory theme$="[[theme]]" name="directory"></page-directory>
+        <page-collections theme$="[[theme]]" name="collections"></page-collections>
+        <page-tickets theme$="[[theme]]" name="tickets"></page-tickets>
+        <page-chatcodes name="chatcodes"></page-chatcodes>
+        <page-timer theme$="[[theme]]" name="timer"></page-timer>
+        <page-calc name="calc"></page-calc>
+        <page-about name="about"></page-about>
+        <page-precursors name="precursors" page="[[page]]"></page-precursors>
+        <page-view404 name="view404"></page-view404>
+      </iron-pages>
+    </app-header-layout>
 
-        <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
-          <page-index name="index"></page-index>
-          <page-directory theme$="[[theme]]" name="directory"></page-directory>
-          <page-collections theme$="[[theme]]" name="collections"></page-collections>
-          <page-tickets theme$="[[theme]]" name="tickets"></page-tickets>
-          <page-chatcodes name="chatcodes"></page-chatcodes>
-          <page-timer theme$="[[theme]]" name="timer"></page-timer>
-          <page-calc name="calc"></page-calc>
-          <page-about name="about"></page-about>
-          <page-precursors name="precursors" page="[[page]]"></page-precursors>
-          <page-view404 name="view404"></page-view404>
-        </iron-pages>
-      </app-header-layout>
-    </app-drawer-layout>
+    <!-- Drawer content -->
+    <app-drawer id="drawer" swipe-open opened="{{drawer}}">
+      <div class="drawer-scroll">
+        <app-toolbar>
+          <paper-icon-button icon="my-icons:close" on-tap="_closeDrawer" aria-label="Close menu"></paper-icon-button>
+          <div main-title>
+            <iron-icon icon="my-icons:logo"></iron-icon>
+            GW2 Ninja
+          </div>
+        </app-toolbar>
+        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+          <a name="index" href="/" tabindex="-1">
+            <paper-item>Home</paper-item>
+          </a>
+          <hr>
+          <a name="directory" href="/directory/websites" tabindex="-1">
+            <paper-item>Directory</paper-item>
+          </a>
+          <hr>
+          <a name="collections" href="/collections/basic" tabindex="-1">
+            <paper-item>Collections</paper-item>
+          </a>
+          <a name="tickets" href="/tickets" tabindex="-1">
+            <paper-item>Tickets</paper-item>
+          </a>
+          <hr>
+          <a name="chatcodes" href="/chatcodes" tabindex="-1">
+            <paper-item>Chatcodes</paper-item>
+          </a>
+          <a name="timer" href="/timer/all" tabindex="-1">
+            <paper-item>Meta Timer</paper-item>
+          </a>
+          <a name="calc" href="/calc" tabindex="-1">
+            <paper-item>TP Calc</paper-item>
+          </a>
+          <hr style="margin-top:auto">
+          <a name="about" href="/about" tabindex="-1">
+            <paper-item>About</paper-item>
+          </a>
+        </iron-selector>
+      </div>
+    </app-drawer>
 
     <page-metadata 
       base-title="GW2 Ninja" 
@@ -249,6 +236,10 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
         type: String,
         reflectToAttribute: true,
         observer: "_pageChanged"
+      },
+      drawer: {
+        type: Boolean,
+        value: false
       },
       onlineStatus: {
         type: Boolean
@@ -369,6 +360,14 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
 
   _toggleSettings() {
     this.set("settingsOpen", !this.settingsOpen);
+  }
+
+  _openDrawer() {
+    this.set("drawer", true);
+  }
+
+  _closeDrawer() {
+    this.set("drawer", false);
   }
 }
 
