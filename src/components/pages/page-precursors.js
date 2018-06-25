@@ -41,6 +41,29 @@ class PagePrecursors extends PolymerElement {
       gwn-item-icon {
         width: 40px;
         position: absolute;
+        animation-name: rain;
+        animation-duration: 2s;
+        animation-timing-function: cubic-bezier(0.600, 0.040, 0.980, 0.335);
+      }
+
+      @keyframes rain {
+        0% {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+
+        2% {
+          opacity: 1;
+        }
+
+        98% {
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 0;
+          transform: translateY(calc(100vh - 4rem + 100%));
+        }
       }
     </style>
 
@@ -107,7 +130,6 @@ class PagePrecursors extends PolymerElement {
 
   _ready(audio) {
     if (!audio) return false;
-    console.log("ready");
     return true;
   }
 
@@ -122,6 +144,11 @@ class PagePrecursors extends PolymerElement {
     item.icon = `/src/images/precursors/icons/${precursorChoice}.png`;
     item.rarity = "Exotic";
     item.style.left = `calc(${this.randomInt(0, 100)}% - 20px)`;
+    item.style.animationDuration = `${this.randomInt(500, 5000)}ms`;
+
+    item.addEventListener('animationend', function(e) {
+      e.target.remove();
+    });
 
     this.$.items.appendChild(item);
   }
