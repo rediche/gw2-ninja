@@ -1,6 +1,6 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import { GestureEventListeners } from "@polymer/polymer/lib/mixins/gesture-event-listeners.js";
-import { afterNextRender } from '@polymer/polymer/lib/utils/render-status.js';
+import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
 import "../utilities/gwn-item-icon.js";
 import { SharedStyles } from "../shared-styles.js";
 
@@ -82,7 +82,7 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
       PLEASE PREPARE YOUR EXOTICS
     </div>
 
-    <div class="play prepare" hidden$="[[!requiresInteraction]]" on-tap="_playAudio">
+    <div class="play prepare" hidden$="[[!requiresInteraction]]" on-tap="_startRain">
       <svg viewBox="0 0 24 24">
         <path d="M8,5.14V19.14L19,12.14L8,5.14Z" />
       </svg>
@@ -149,26 +149,25 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
 
   /* TODO: Turn off audio when navigating away from the page */
   _startRain(rainReady) {
-    this._playAudio();
-
-    for (let i = 0; i < 30; i++) {
-      afterNextRender(this, () => {
-        this._createItem();
-      });
-    }
-  }
-
-  _playAudio() {
     const audioPlayPromise = this.$.audio.play();
 
     // Autoplay restrictions in browsers. Ugh.
-    if (audioPlayPromise !== undefined) {
-      audioPlayPromise.then(_ => {
-        this.set('requiresInteraction', false);
-      }).catch(error => {
-        this.set('requiresInteraction', true);
+    if (audioPlayPromise === undefined)
+      return console.error("Couldn't find audio to play.");
+
+    audioPlayPromise
+      .then(_ => {
+        this.set("requiresInteraction", false);
+
+        for (let i = 0; i < 30; i++) {
+          afterNextRender(this, () => {
+            this._createItem();
+          });
+        }
+      })
+      .catch(error => {
+        this.set("requiresInteraction", true);
       });
-    }
   }
 
   _ready(audio) {
@@ -194,7 +193,9 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
 
     item.addEventListener("animationend", function(e) {
       e.target.remove();
-      that._createItem();
+      afterNextRender(this, () => {
+        that._createItem();
+      });
     });
 
     this.$.items.appendChild(item);
