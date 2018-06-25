@@ -39,7 +39,7 @@
         }
       },
       "bundle": true,
-      "addServiceWorker": false
+      "addServiceWorker": true
     }
   ],
   "moduleResolution": "node",
