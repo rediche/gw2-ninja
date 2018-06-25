@@ -94,26 +94,29 @@ class PagePrecursors extends PolymerElement {
       precursors: {
         type: Array,
         value: [
-          "Tooth_of_Frostfang",
-          "Spark",
-          "The_Energizer",
-          "Chaos_Gun",
-          "Tsunami",
-          "Zap",
-          "The_Bard",
-          "The_Chosen",
-          "Rodgorts_Flame",
-          "Howl",
-          "Dawn",
-          "Dusk",
-          "The_Colossus",
-          "Leaf_of_Kudzu",
-          "The_Hunter",
-          "The_Lover",
-          "The_Legend",
-          "Dragonfury",
-          "Rage",
-          "Venom"
+          "3D361A4B187B5747FED095C6D5431EB3E65B01FB/1200349",
+          "C90B71ED53030EB7422A9F59F17C492BC9E2DBE7/1202122",
+          "4BD07B7E400564DBBF5060611400F2CA1FD874F1/1203189",
+          "5B770B9432601D04CFD235E4712B52927EDF734B/1204293",
+          "AF3EB0E29F4B25AC3F5BE2B7BA64ABC1A62EB30E/1206078",
+          "4C4FDD15CE97DFD1F13F0BA9B7740FB110F00675/1206760",
+          "251B42DA1EC4902BB2F50F7B671DEA921DC522A2/1202277",
+          "488003DB422EC8A580EA4E16D22DF56B4E90F7CA/1206236",
+          "9640FF61723ECC0367B5CC041AC8C50F05C0EC64/1206986",
+          "FF282CD37AD618457F6878356739587916E5BF17/1207245",
+          "3FFD779A1401D250E6FBAABB1E544DF5FFB3C9DD/1202490",
+          "6BE1D2BE3BAE4A9B08CF6EB1AFFFA4F20D7F9091/1202492",
+          "15ED060C6B47716174FC6FB9A60118B5553EEB90/1202804",
+          "16E4FC0E74FB0174317E380021570AF92D3F1992/1200915",
+          "381F0719363580D4172E2A0BDEA978E1F0059D2A/1205943",
+          "044C67CBFC9F5151BAFDE625349238DCD19FE248/1200924",
+          "DA7AF6E3D970799A7847B3F10801FC1C1E98109E/1206503",
+          "51FF0303B8A85468B60BD2D431550CDE0A59B206/1202902",
+          "A077090AC85279D351200F77267E060C326BF75B/1206366",
+          "6D2C107DA4507DE3F247D15B54794BD31C73532A/1207112",
+          "C6C697BAF9D1092F5626CE39016DB0CCA19169C2/1200331",
+          "A1F4414914050FFF403603AF9CC1131E5DF4600E/1204305",
+          "ABBCE10A62C94F9DA832377DE7D063615E44176C/1206519"
         ]
       }
     };
@@ -138,15 +141,17 @@ class PagePrecursors extends PolymerElement {
   }
 
   _createItem() {
-    const precursorChoice = this.precursors[this.randomInt(0, this.precursors.length - 1)];
-    const item = document.createElement('gwn-item-icon');
+    const precursorChoice = this.precursors[
+      this.randomInt(0, this.precursors.length - 1)
+    ];
+    const item = document.createElement("gwn-item-icon");
 
-    item.icon = `/src/images/precursors/icons/${precursorChoice}.png`;
+    item.icon = `https://render.guildwars2.com/file/${precursorChoice}.png`;
     item.rarity = "Exotic";
     item.style.left = `calc(${this.randomInt(0, 100)}% - 20px)`;
     item.style.animationDuration = `${this.randomInt(500, 5000)}ms`;
 
-    item.addEventListener('animationend', function(e) {
+    item.addEventListener("animationend", function(e) {
       e.target.remove();
     });
 
