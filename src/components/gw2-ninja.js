@@ -168,6 +168,7 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
         <page-calc name="calc"></page-calc>
         <page-about name="about"></page-about>
         <page-precursors name="precursors" page="[[page]]"></page-precursors>
+        <page-stream-tools name="stream"></page-stream-tools>
         <page-view404 name="view404"></page-view404>
       </iron-pages>
     </app-header-layout>
@@ -206,6 +207,10 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
           </a>
           <a name="calc" href="/calc" tabindex="-1">
             <paper-item>TP Calc</paper-item>
+          </a>
+          <hr>
+          <a name="stream" href="/stream" tabindex="-1">
+            <paper-item>Stream Tools</paper-item>
           </a>
           <hr style="margin-top:auto">
           <a name="about" href="/about" tabindex="-1">
@@ -284,7 +289,8 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
         "directory",
         "tickets",
         "timer",
-        "precursors"
+        "precursors",
+        "stream"
       ].indexOf(page) !== -1
     ) {
       this.page = page;
@@ -331,6 +337,9 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
       case "precursors":
         import("./pages/page-precursors.js");
         break;
+      case "stream":
+        import("./pages/page-stream-tools.js");
+        break;
       case "view404":
         import("./pages/page-view404.js");
         break;
@@ -353,6 +362,7 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
     if (activePage == "calc") return "Trading Post Calculator";
     if (activePage == "about") return "About GW2 Ninja";
     if (activePage == "precursors") return "Precursor Rain. HALLELUJAH!";
+    if (activePage == "stream") return "Stream Tools";
     if (activePage == "view404") return "Page not found";
 
     return activePage;

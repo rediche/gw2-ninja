@@ -1,6 +1,7 @@
 # Next release
 
-- 
+- Add stream tools section
+- Add chatbot API interface generator to stream tools
 
 # June 25, 2018
 
