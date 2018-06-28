@@ -208,11 +208,11 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
           <a name="calc" href="/calc" tabindex="-1">
             <paper-item>TP Calc</paper-item>
           </a>
-          <hr>
+          <hr style="margin-top:auto">
           <a name="stream" href="/stream" tabindex="-1">
             <paper-item>Stream Tools</paper-item>
           </a>
-          <hr style="margin-top:auto">
+          <hr>
           <a name="about" href="/about" tabindex="-1">
             <paper-item>About</paper-item>
           </a>
