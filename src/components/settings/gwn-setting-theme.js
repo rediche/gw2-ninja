@@ -2,15 +2,31 @@ import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import "@polymer/paper-dropdown-menu/paper-dropdown-menu.js";
 import "@polymer/paper-listbox/paper-listbox.js";
 import "@polymer/paper-item/paper-item.js";
-import "../utilities/gwn-sync-settings.js";
+
+import { connect } from 'pwa-helpers/connect-mixin.js';
+
+// Load redux store
+import { store } from '../../store.js';
+
+// These are the actions needed by this element.
+import { changeTheme } from '../../actions/settings.js';
+
+// Lazy load reducers
+import settings from '../../reducers/settings.js';
+store.addReducers({
+  settings
+});
+
 import { SharedStyles } from "../shared-styles.js";
 import { SettingsStyles } from "./gwn-settings-styles.js";
 
-class GWNSettingTheme extends PolymerElement {
+class GWNSettingTheme extends connect(store)(PolymerElement) {
   static get properties() {
     return {
       theme: {
-        type: String
+        type: String,
+        value: "pof",
+        observer: "_themeChanged"
       }
     };
   }
@@ -63,11 +79,17 @@ class GWNSettingTheme extends PolymerElement {
           <paper-item value="pof">Path of Fire (Purple)</paper-item>
         </paper-listbox>
       </paper-dropdown-menu>
-
-      <gwn-sync-settings 
-        value="{{theme}}"
-        setting="gwn-theme"></gwn-sync-settings>
     `;
+  }
+
+  _themeChanged(theme) {
+    if (!theme) return;
+    store.dispatch(changeTheme(theme));
+  }
+
+  _stateChanged(state) {
+    if (!state || !state.settings) return;
+    this.set('theme', state.settings.theme);
   }
 }
 

@@ -23,8 +23,18 @@ import "./page-metadata.js";
 import "./my-icons.js";
 import "./online-status.js";
 import "./settings/gwn-settings.js";
-import "./utilities/gwn-sync-settings.js";
 import "./collections/collection-modal.js";
+
+import { connect } from 'pwa-helpers/connect-mixin.js';
+
+// Load redux store
+import { store } from '../store.js';
+
+// Lazy load reducers
+import settings from '../reducers/settings.js';
+store.addReducers({
+  settings
+});
 
 import { SharedStyles } from "./shared-styles.js";
 
@@ -36,7 +46,7 @@ setPassiveTouchGestures(true);
 // in `index.html`.
 setRootPath(MyAppGlobals.rootPath);
 
-class GW2Ninja extends GestureEventListeners(PolymerElement) {
+class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
   static get template() {
     return html`
     ${SharedStyles}
@@ -227,10 +237,6 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
       page="[[ page ]]"></page-metadata>
     <gwn-settings open="{{settingsOpen}}"></gwn-settings>
 
-    <gwn-sync-settings 
-      value="{{theme}}"
-      setting="gwn-theme"></gwn-sync-settings>
-
     <collection-modal></collection-modal>
     `;
   }
@@ -378,6 +384,11 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
 
   _closeDrawer() {
     this.set("drawer", false);
+  }
+
+  _stateChanged(state) {
+    if (!state || !state.settings) return;
+    this.set('theme', state.settings.theme);
   }
 }
 
