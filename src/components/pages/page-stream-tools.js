@@ -73,7 +73,7 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
           flex-basis: calc(50% - .5rem);
         }
 
-        paper-input {
+        gwn-setting-api-key {
           margin-bottom: 1rem;
         }
 
