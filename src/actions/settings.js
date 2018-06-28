@@ -1,5 +1,6 @@
 export const CHANGE_LANGUAGE = "CHANGE_LANGUAGE";
 export const CHANGE_THEME = "CHANGE_THEME";
+export const CHANGE_API_KEY = "CHANGE_API_KEY";
 
 export const changeLanguage = language => dispatch => {
   const acceptedLanguages = ["en", "de", "fr", "es"];

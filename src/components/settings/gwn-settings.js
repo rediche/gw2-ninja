@@ -5,6 +5,7 @@ import "@polymer/paper-item/paper-item.js";
 import "../utilities/gwn-modal.js";
 import "./gwn-setting-theme.js";
 import "./gwn-setting-lang.js";
+import "./gwn-setting-api-key.js";
 import { SharedStyles } from "../shared-styles.js";
 import { SettingsStyles } from "./gwn-settings-styles.js";
 
@@ -41,6 +42,7 @@ class GWNSettings extends PolymerElement {
         <div slot="content">
           <gwn-setting-lang></gwn-setting-lang>
           <gwn-setting-theme></gwn-setting-theme>
+          <gwn-setting-api-key></gwn-setting-api-key>
         </div>
       </gwn-modal>
     `;

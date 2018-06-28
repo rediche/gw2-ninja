@@ -1,6 +1,7 @@
 import { 
   CHANGE_LANGUAGE,
-  CHANGE_THEME
+  CHANGE_THEME,
+  CHANGE_API_KEY
 } from "../actions/settings.js";
 
 const settings = (
@@ -21,6 +22,11 @@ const settings = (
       return {
         ...state,
         theme: action.theme
+      }
+    case CHANGE_API_KEY:
+      return {
+        ...state,
+        apiKey: action.apiKey
       }
     default:
       return state;

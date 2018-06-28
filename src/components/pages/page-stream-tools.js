@@ -8,6 +8,7 @@ import { SharedStyles } from "../shared-styles.js";
 import "../my-icons.js";
 import "../stream-tools/type-selector.js";
 import "../stream-tools/command-selector.js";
+import "../settings/gwn-setting-api-key.js";
 
 /**
  * `page-stream-tools`
@@ -102,7 +103,7 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
               selected-type="[[ selectedType ]]"></command-selector>
           </div>
 
-          <paper-input label="Guild Wars 2 API Key" value="{{ apiKey }}"></paper-input>
+          <gwn-setting-api-key no-save api-key="{{ apiKey }}"></gwn-setting-api-key>
 
           <label id="chatbot-label">Chatbot:</label>
           <paper-radio-group aria-labelledby="chatbot-label" selected="{{ selectedChatbot }}">
