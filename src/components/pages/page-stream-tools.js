@@ -1,4 +1,5 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
+import { GestureEventListeners } from "@polymer/polymer/lib/mixins/gesture-event-listeners.js";
 import "@polymer/paper-input/paper-input.js";
 import "@polymer/paper-radio-group/paper-radio-group.js";
 import "@polymer/paper-radio-button/paper-radio-button.js";
@@ -15,7 +16,7 @@ import "../stream-tools/command-selector.js";
  * @customElement
  * @extends {Polymer.Element}
  */
-class PageStreamTools extends PolymerElement {
+class PageStreamTools extends GestureEventListeners(PolymerElement) {
   static get template() {
     return html`
       ${SharedStyles}
@@ -43,6 +44,7 @@ class PageStreamTools extends PolymerElement {
 
         .max-width {
           max-width: 40rem;
+          margin: 0 auto;
         }
 
         label {
@@ -77,6 +79,7 @@ class PageStreamTools extends PolymerElement {
         .bottom {
           border-top: 1px solid #eeeeee;
           display: flex;
+          min-height: 49px;
           align-items: center;
           justify-content: space-between;
           padding: var(--spacer-xsmall) var(--spacer-xsmall) var(--spacer-xsmall) var(--spacer-medium);
@@ -111,7 +114,10 @@ class PageStreamTools extends PolymerElement {
         <div class="bottom inner">
           <pre class="result" hidden$="[[!_hasResult(result)]]">[[ result ]]</pre>
           <pre class="placeholder-result" hidden$="[[_hasResult(result)]]">Fill out the form, to get your command.</pre>
-          <paper-icon-button icon="my-icons:content-copy"></paper-icon-button>
+          <paper-icon-button 
+            icon="my-icons:content-copy" 
+            hidden$="[[!_supportsClipboardApi()]]"
+            on-tap="_attemptCopy"></paper-icon-button>
         </div>
       </div>
 
@@ -157,6 +163,23 @@ class PageStreamTools extends PolymerElement {
   
   _hasResult(result) {
     return result !== "" ? true : false;
+  }
+
+  _supportsClipboardApi() {
+    return navigator.clipboard ? true : false;
+  }
+
+  _attemptCopy(e) {
+    if (!navigator.clipboard) return console.log("No clipboard support");
+    if (!this.result) return console.log("No result generated");
+
+    navigator.clipboard.writeText(this.result)
+      .then(() => {
+        console.log("Copied to clipboard!");
+      })
+      .catch(err => {
+        console.log("Could not copy to clipboard", err);
+      });
   }
 }
 
