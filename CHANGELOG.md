@@ -1,10 +1,15 @@
 # Next release
 
+-
+
+# June 28, 2018
+
 - Add stream tools section, #29
 - Add chatbot API interface generator to stream tools
 - Save state of app in localStorage
 - Add API Key to settings
 - Validate API Key
+- Show API Key permissions
 
 # June 25, 2018
 
