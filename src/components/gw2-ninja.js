@@ -23,8 +23,18 @@ import "./page-metadata.js";
 import "./my-icons.js";
 import "./online-status.js";
 import "./settings/gwn-settings.js";
-import "./utilities/gwn-sync-settings.js";
 import "./collections/collection-modal.js";
+
+import { connect } from 'pwa-helpers/connect-mixin.js';
+
+// Load redux store
+import { store } from '../store.js';
+
+// Lazy load reducers
+import settings from '../reducers/settings.js';
+store.addReducers({
+  settings
+});
 
 import { SharedStyles } from "./shared-styles.js";
 
@@ -36,7 +46,7 @@ setPassiveTouchGestures(true);
 // in `index.html`.
 setRootPath(MyAppGlobals.rootPath);
 
-class GW2Ninja extends GestureEventListeners(PolymerElement) {
+class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
   static get template() {
     return html`
     ${SharedStyles}
@@ -168,6 +178,7 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
         <page-calc name="calc"></page-calc>
         <page-about name="about"></page-about>
         <page-precursors name="precursors" page="[[page]]"></page-precursors>
+        <page-stream-tools name="stream"></page-stream-tools>
         <page-view404 name="view404"></page-view404>
       </iron-pages>
     </app-header-layout>
@@ -208,6 +219,10 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
             <paper-item>TP Calc</paper-item>
           </a>
           <hr style="margin-top:auto">
+          <a name="stream" href="/stream" tabindex="-1">
+            <paper-item>Stream Tools</paper-item>
+          </a>
+          <hr>
           <a name="about" href="/about" tabindex="-1">
             <paper-item>About</paper-item>
           </a>
@@ -221,10 +236,6 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
       direction="reversed" 
       page="[[ page ]]"></page-metadata>
     <gwn-settings open="{{settingsOpen}}"></gwn-settings>
-
-    <gwn-sync-settings 
-      value="{{theme}}"
-      setting="gwn-theme"></gwn-sync-settings>
 
     <collection-modal></collection-modal>
     `;
@@ -284,7 +295,8 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
         "directory",
         "tickets",
         "timer",
-        "precursors"
+        "precursors",
+        "stream"
       ].indexOf(page) !== -1
     ) {
       this.page = page;
@@ -331,6 +343,9 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
       case "precursors":
         import("./pages/page-precursors.js");
         break;
+      case "stream":
+        import("./pages/page-stream-tools.js");
+        break;
       case "view404":
         import("./pages/page-view404.js");
         break;
@@ -353,6 +368,7 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
     if (activePage == "calc") return "Trading Post Calculator";
     if (activePage == "about") return "About GW2 Ninja";
     if (activePage == "precursors") return "Precursor Rain. HALLELUJAH!";
+    if (activePage == "stream") return "Stream Tools";
     if (activePage == "view404") return "Page not found";
 
     return activePage;
@@ -368,6 +384,11 @@ class GW2Ninja extends GestureEventListeners(PolymerElement) {
 
   _closeDrawer() {
     this.set("drawer", false);
+  }
+
+  _stateChanged(state) {
+    if (!state || !state.settings) return;
+    this.set('theme', state.settings.theme);
   }
 }
 

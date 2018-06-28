@@ -2,15 +2,31 @@ import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import "@polymer/paper-dropdown-menu/paper-dropdown-menu.js";
 import "@polymer/paper-listbox/paper-listbox.js";
 import "@polymer/paper-item/paper-item.js";
-import "../utilities/gwn-sync-settings.js";
+
+import { connect } from 'pwa-helpers/connect-mixin.js';
+
+// Load redux store
+import { store } from '../../store.js';
+
+// These are the actions needed by this element.
+import { changeLanguage } from '../../actions/settings.js';
+
+// Lazy load reducers
+import settings from '../../reducers/settings.js';
+store.addReducers({
+  settings
+});
+
 import { SharedStyles } from "../shared-styles.js";
 import { SettingsStyles } from "./gwn-settings-styles.js";
 
-class GWNSettingLang extends PolymerElement {
+class GWNSettingLang extends connect(store)(PolymerElement) {
   static get properties() {
     return {
       language: {
-        type: String
+        type: String,
+        value: "en",
+        observer: "_languageChanged"
       }
     };
   }
@@ -37,11 +53,17 @@ class GWNSettingLang extends PolymerElement {
           <paper-item value="fr">Français</paper-item>
         </paper-listbox>
       </paper-dropdown-menu>
-
-      <gwn-sync-settings 
-        value="{{language}}"
-        setting="gwn-lang"></gwn-sync-settings>
     `;
+  }
+
+  _languageChanged(language) {
+    if (!language) return;
+    store.dispatch(changeLanguage(language));
+  }
+
+  _stateChanged(state) {
+    if (!state || !state.settings) return;
+    this.set('language', state.settings.language);
   }
 }
 

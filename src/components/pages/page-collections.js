@@ -10,7 +10,6 @@ import "@polymer/paper-spinner/paper-spinner.js";
 import "@polymer/paper-toast/paper-toast.js";
 import { SharedStyles } from "../shared-styles.js";
 import "../collections/collection-list.js";
-import "../utilities/gwn-sync-settings.js";
 import "../utilities/gwn-modal.js";
 
 class PageCollections extends PolymerElement {
@@ -77,9 +76,6 @@ class PageCollections extends PolymerElement {
       </iron-pages>
 
       <paper-toast id="toast" duration="0" text="An error occured."></paper-toast>
-      <gwn-sync-settings
-        value="{{language}}"
-        setting="gwn-lang"><gwn-sync-settings>
     `;
   }
 

@@ -171,5 +171,9 @@ export const SharedStyles = html`
     top: 4rem;
     z-index: 401; /* 401 because it needs to be higher than z-index 400 on timer page */
   }
+
+  paper-item {
+    cursor: pointer;
+  }
 </style>
 `;
