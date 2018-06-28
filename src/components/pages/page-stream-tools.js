@@ -2,7 +2,9 @@ import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import "@polymer/paper-input/paper-input.js";
 import "@polymer/paper-radio-group/paper-radio-group.js";
 import "@polymer/paper-radio-button/paper-radio-button.js";
+import "@polymer/paper-icon-button/paper-icon-button.js";
 import { SharedStyles } from "../shared-styles.js";
+import "../my-icons.js";
 import "../stream-tools/type-selector.js";
 import "../stream-tools/command-selector.js";
 
@@ -25,6 +27,10 @@ class PageStreamTools extends PolymerElement {
 
         :host([hidden]) {
           display: none;
+        }
+
+        .title {
+          margin: 0;
         }
 
         .card {
@@ -70,11 +76,22 @@ class PageStreamTools extends PolymerElement {
 
         .bottom {
           border-top: 1px solid #eeeeee;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: var(--spacer-xsmall) var(--spacer-xsmall) var(--spacer-xsmall) var(--spacer-medium);
+        }
+
+        paper-icon-button {
+          flex: none;
+          margin-left: var(--spacer-small);
         }
       </style>
 
       <div class="card max-width">
         <div class="inner">
+          <h1 class="title">Generate API Commands</h1>
+
           <div class="horisontal-spacer">
             <type-selector selected="{{ selectedType }}"></type-selector>
             <command-selector 
@@ -93,7 +110,8 @@ class PageStreamTools extends PolymerElement {
 
         <div class="bottom inner">
           <pre class="result" hidden$="[[!_hasResult(result)]]">[[ result ]]</pre>
-          <pre class="placeholder-result" hidden$="[[_hasResult(result)]]">Please fill out the form, to get your command.</pre>
+          <pre class="placeholder-result" hidden$="[[_hasResult(result)]]">Fill out the form, to get your command.</pre>
+          <paper-icon-button icon="my-icons:content-copy"></paper-icon-button>
         </div>
       </div>
 
