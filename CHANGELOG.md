@@ -4,6 +4,7 @@
 - Add chatbot API interface generator to stream tools
 - Save state of app in localStorage
 - Add API Key to settings
+- Validate API Key
 
 # June 25, 2018
 
