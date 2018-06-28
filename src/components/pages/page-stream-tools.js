@@ -115,10 +115,12 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
         <div class="bottom inner">
           <pre class="result" hidden$="[[!_hasResult(result)]]">[[ result ]]</pre>
           <pre class="placeholder-result" hidden$="[[_hasResult(result)]]">Fill out the form, to get your command.</pre>
-          <paper-icon-button 
-            icon="my-icons:content-copy" 
-            hidden$="[[!_supportsClipboardApi()]]"
-            on-tap="_attemptCopy"></paper-icon-button>
+          <span hidden$="[[!_hasResult(result)]]">
+            <paper-icon-button 
+              icon="my-icons:content-copy" 
+              hidden$="[[!_supportsClipboardApi()]]"
+              on-tap="_attemptCopy"></paper-icon-button>
+          </span>
         </div>
       </div>
 
