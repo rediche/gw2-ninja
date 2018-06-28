@@ -40,9 +40,12 @@ class GWNSettings extends PolymerElement {
       <gwn-modal hidden="{{!open}}">
         <h3 class="headline" slot="title">Settings</h3>
         <div slot="content">
-          <gwn-setting-lang></gwn-setting-lang>
+          <p class="section">General</p>
           <gwn-setting-theme></gwn-setting-theme>
-          <gwn-setting-api-key></gwn-setting-api-key>
+
+          <p class="section">API</p>
+          <gwn-setting-lang></gwn-setting-lang>
+          <gwn-setting-api-key show-permissions></gwn-setting-api-key>
         </div>
       </gwn-modal>
     `;

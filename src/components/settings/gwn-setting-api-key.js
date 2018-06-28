@@ -1,12 +1,14 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
-
 import { connect } from "pwa-helpers/connect-mixin.js";
 
 // Load redux store
 import { store } from "../../store.js";
 
 // These are the actions needed by this element.
-import { CHANGE_API_KEY } from "../../actions/settings.js";
+import {
+  CHANGE_API_KEY,
+  CHANGE_API_PERMISSIONS
+} from "../../actions/settings.js";
 
 // Lazy load reducers
 import settings from "../../reducers/settings.js";
@@ -16,6 +18,7 @@ store.addReducers({
 
 import "@polymer/paper-input/paper-input.js";
 import "@polymer/paper-item/paper-item.js";
+import "../utilities/gwn-api-permissions-list.js";
 
 import { SharedStyles } from "../shared-styles.js";
 import { SettingsStyles } from "./gwn-settings-styles.js";
@@ -28,6 +31,7 @@ class GWNSettingApiKey extends connect(store)(PolymerElement) {
         notify: true,
         observer: "_apiKeyChanged"
       },
+      apiPermissions: Array,
       /* Prevent changes from being sent to redux store */
       noSave: {
         type: Boolean,
@@ -36,7 +40,11 @@ class GWNSettingApiKey extends connect(store)(PolymerElement) {
       invalid: {
         type: Boolean,
         value: false
-      }
+      },
+      showPermissions: {
+        type: Boolean,
+        value: false
+      },
     };
   }
 
@@ -67,20 +75,21 @@ class GWNSettingApiKey extends connect(store)(PolymerElement) {
         invalid="[[ invalid ]]"
         maxlength="72"
         minlength="72"></paper-input>
+
+      <gwn-api-permissions-list permissions="[[ apiPermissions ]]" hidden$="[[ !showPermissions ]]"></gwn-api-permissions-list>
     `;
   }
 
   async _apiKeyChanged(apiKey) {
     if (!apiKey) return;
 
-    const valid = await this.validateApiKey(apiKey);
+    if (!this.apiPatternValidation(apiKey)) return this.set("invalid", true);
 
-    if (!valid) {
-      this.set('invalid', true);
-      return;
-    }
+    const tokenInfo = await this.fetchTokenInfo(apiKey);
 
-    this.set('invalid', false);
+    if (!tokenInfo) return this.set("invalid", true);
+
+    this.set("invalid", false);
 
     if (this.noSave) return;
 
@@ -88,17 +97,17 @@ class GWNSettingApiKey extends connect(store)(PolymerElement) {
       type: CHANGE_API_KEY,
       apiKey: apiKey
     });
+
+    store.dispatch({
+      type: CHANGE_API_PERMISSIONS,
+      apiPermissions: tokenInfo.permissions
+    });
   }
 
   _stateChanged(state) {
     if (!state || !state.settings) return;
     this.set("apiKey", state.settings.apiKey);
-  }
-
-  async validateApiKey(apiKey) {
-    if (!apiKey) return false;
-    if (!this.apiPatternValidation(apiKey)) return false;
-    return await this.apiOnlineValidation(apiKey);
+    this.set("apiPermissions", state.settings.apiPermissions);
   }
 
   apiPatternValidation(apiKey) {
@@ -107,10 +116,15 @@ class GWNSettingApiKey extends connect(store)(PolymerElement) {
     return apiKeyPattern.test(apiKey);
   }
 
-  async apiOnlineValidation(apiKey) {
+  async fetchTokenInfo(apiKey) {
     const url = `https://api.guildwars2.com/v2/tokeninfo?access_token=${apiKey}`;
     const response = await fetch(url);
-    return response.status === 200 ? true : false;
+
+    if (response.status !== 200) return false;
+
+    const json = await response.json();
+
+    return json;
   }
 }
 

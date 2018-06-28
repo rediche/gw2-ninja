@@ -1,14 +1,16 @@
 import { 
   CHANGE_LANGUAGE,
   CHANGE_THEME,
-  CHANGE_API_KEY
+  CHANGE_API_KEY,
+  CHANGE_API_PERMISSIONS
 } from "../actions/settings.js";
 
 const settings = (
   state = {
     language: "en",
     theme: "pof",
-    apiKey: null
+    apiKey: null,
+    apiPermissions: []
   },
   action
 ) => {
@@ -27,6 +29,11 @@ const settings = (
       return {
         ...state,
         apiKey: action.apiKey
+      }
+    case CHANGE_API_PERMISSIONS:
+      return {
+        ...state,
+        apiPermissions: action.apiPermissions
       }
     default:
       return state;
