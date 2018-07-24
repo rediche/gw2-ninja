@@ -42,6 +42,11 @@
       "Guild Wars 2 Trading Post calulator, to make sure you can make a profit, before you invest."
   },
   {
+    "page": "wvw",
+    "title": "World vs World",
+    "description": ""
+  },
+  {
     "page": "about",
     "title": "About",
     "description":
