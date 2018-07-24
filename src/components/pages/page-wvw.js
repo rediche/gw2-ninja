@@ -4,6 +4,7 @@ import "@polymer/app-route/app-route.js";
 import "@polymer/iron-pages/iron-pages.js";
 import "@polymer/paper-tabs/paper-tabs.js";
 import { SharedStyles } from "../shared-styles.js";
+import "../wvw/wvw-map";
 
 /**
  * `page-wvw`
@@ -29,6 +30,10 @@ class PageWvw extends PolymerElement {
       paper-tab {
         color: white;
       }
+
+      wvw-map {
+        height: calc(100vh - 7rem);
+      }
     </style>
 
     <app-location route="{{route}}"></app-location>
@@ -39,6 +44,12 @@ class PageWvw extends PolymerElement {
       <paper-tab name="test1">Test 1</paper-tab>
       <paper-tab name="test2">Test 2</paper-tab>
     </paper-tabs>
+
+    <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="map">
+      <wvw-map name="map"></wvw-map>
+      <div name="test1">Test 1</div>
+      <div name="test2">Test 2</div>
+    </iron-pages>
     `;
   }
 
