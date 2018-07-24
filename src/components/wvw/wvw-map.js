@@ -59,11 +59,11 @@ class WvwMap extends PolymerElement {
 
   _initMap() {
     const map = new Map(this.$.map, {
-      minZoom: 0,
+      minZoom: 3,
       maxZoom: 6,
       crs: CRS.Simple,
       maxBoundsViscosity: 1
-    }).setView([0, 170], 3);
+    }).setView([0, 163], 3);
 
     const southWest = this.unproject([0, 16384], map);
     const northEast = this.unproject([16384, 8192], map);

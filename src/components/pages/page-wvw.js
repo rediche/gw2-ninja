@@ -40,15 +40,23 @@ class PageWvw extends PolymerElement {
     <app-route route="{{route}}" pattern="/wvw/:subview" data="{{subviewData}}"></app-route>
 
     <paper-tabs class="sticky-tabs" selected="{{subviewData.subview}}" attr-for-selected="name">
+      <paper-tab name="overview">Region Overview</paper-tab>
       <paper-tab name="map">Live Map</paper-tab>
-      <paper-tab name="test1">Test 1</paper-tab>
-      <paper-tab name="test2">Test 2</paper-tab>
+      <paper-tab name="stats">Matchup Stats</paper-tab>
+      <paper-tab name="leaderboards">Leaderboards</paper-tab>
     </paper-tabs>
 
     <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="map">
       <wvw-map name="map"></wvw-map>
-      <div name="test1">Test 1</div>
-      <div name="test2">Test 2</div>
+      <div name="overview">
+        Region Overview, overview of the different matches in your region (EU or NA)
+      </div>
+      <div name="stats">
+        Matchup Stats, tables, graphs etc of your current matchup
+      </div>
+      <div name="leaderboards">
+        Leaderboards. Compare stats between all servers on all regions.
+      </div>
     </iron-pages>
     `;
   }
