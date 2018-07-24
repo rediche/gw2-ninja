@@ -60,7 +60,7 @@ class PageWvw extends PolymerElement {
     <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="map">
       <div name="map">
         <wvw-map></wvw-map>
-        <wvw-map-stats></wvw-map-stats>
+        <!--<wvw-map-stats></wvw-map-stats>-->
       </div>
       <div name="overview">
         Region Overview, overview of the different matches in your region (EU or NA)

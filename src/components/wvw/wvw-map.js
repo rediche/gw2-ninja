@@ -3,6 +3,7 @@ import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
 
 import { Map } from "leaflet/src/map";
 import { TileLayer } from "leaflet/src/layer/tile";
+import { Marker, Icon } from "leaflet/src/layer/marker";
 import { LatLngBounds, CRS } from "leaflet/src/geo";
 
 import { SharedStyles } from "../shared-styles.js";
@@ -39,7 +40,12 @@ class WvwMap extends PolymerElement {
    * Object describing property-related metadata used by Polymer features
    */
   static get properties() {
-    return {};
+    return {
+      map: {
+        type: Object,
+        observer: "_mapUpdated"
+      }
+    };
   }
 
   /**
@@ -73,11 +79,51 @@ class WvwMap extends PolymerElement {
       subdomains: ["tiles", "tiles1", "tiles2", "tiles3", "tiles4"]
     }).addTo(map);
 
-    map.addEventListener('click', (e) => {
-      console.log(map.project(e.latlng));
+    const camp = new Icon({
+      iconUrl: "https://render.guildwars2.com/file/015D365A08AAE105287A100AAE04529FDAE14155/102532.png",
+      iconSize: [32, 32],
+      className: "blue"
     });
 
-    //this.set("map", map);
+    new Marker(this.unproject([10743.8, 9492.51], map), {
+      icon: camp
+    }).addTo(map);
+
+    this.set("map", map);
+  }
+
+  async _mapUpdated(map) {
+    console.log("map was initiated");
+    const objectives = await this.getObjectives();
+
+    const addedObjectives = objectives.map((objective) => {
+      return this.addObjective(objective, map);
+    });
+
+    console.log(addedObjectives);
+  }
+
+  async getObjectives() {
+    const response = await fetch("https://api.guildwars2.com/v2/wvw/objectives?ids=all");
+    const objectives = await response.json();
+    return objectives;
+  }
+
+  addObjective(objective, map) {
+    if (!objective.marker || !objective.coord) return;
+
+    const icon = new Icon({
+      iconUrl: objective.marker,
+      iconSize: [32, 32]
+    });
+
+    const marker = {
+      mapMarker: new Marker(this.unproject([objective.coord[0], objective.coord[1]], map), {
+        icon: icon
+      }).addTo(map)
+    };
+
+    return Object.assign({}, objective, marker);
   }
 
   unproject(coord, map) {
