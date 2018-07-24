@@ -39,11 +39,7 @@ class WvwMap extends PolymerElement {
    * Object describing property-related metadata used by Polymer features
    */
   static get properties() {
-    return {
-     /*  map: Object,
-      southWest: Object,
-      northEast: Object */
-    };
+    return {};
   }
 
   /**

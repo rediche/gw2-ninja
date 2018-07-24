@@ -3,8 +3,11 @@ import "@polymer/app-route/app-location.js";
 import "@polymer/app-route/app-route.js";
 import "@polymer/iron-pages/iron-pages.js";
 import "@polymer/paper-tabs/paper-tabs.js";
+
 import { SharedStyles } from "../shared-styles.js";
+
 import "../wvw/wvw-map";
+import "../wvw/wvw-map-stats";
 
 /**
  * `page-wvw`
@@ -20,6 +23,7 @@ class PageWvw extends PolymerElement {
     <style>
       :host {
         display: block;
+        position: relative;
       }
 
       paper-tabs {
@@ -34,6 +38,13 @@ class PageWvw extends PolymerElement {
       wvw-map {
         height: calc(100vh - 7rem);
       }
+
+      wvw-map-stats {
+        z-index: 1000;
+        position: absolute;
+        top: calc(3rem + var(--spacer-large));
+        left: var(--spacer-large);
+      }
     </style>
 
     <app-location route="{{route}}"></app-location>
@@ -47,7 +58,10 @@ class PageWvw extends PolymerElement {
     </paper-tabs>
 
     <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="map">
-      <wvw-map name="map"></wvw-map>
+      <div name="map">
+        <wvw-map></wvw-map>
+        <wvw-map-stats></wvw-map-stats>
+      </div>
       <div name="overview">
         Region Overview, overview of the different matches in your region (EU or NA)
       </div>
@@ -68,6 +82,9 @@ class PageWvw extends PolymerElement {
     return {
       subviewData: {
         type: Object
+      },
+      theme: {
+        type: String
       }
     };
   }
