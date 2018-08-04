@@ -62,7 +62,7 @@ class PageWvw extends PolymerElement {
 
     <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="map">
       <div name="map">
-        <wvw-map map-data="[[currentMatchup.maps]]"></wvw-map>
+        <wvw-map map-data="[[currentMatchup.maps]]" active="[[mapActive]]"></wvw-map>
         <!--<wvw-map-stats></wvw-map-stats>-->
       </div>
       <div name="overview">
@@ -88,6 +88,10 @@ class PageWvw extends PolymerElement {
       },
       theme: {
         type: String
+      },
+      mapActive: {
+        type: Boolean,
+        computed: "_checkActiveMap(subviewData)"
       },
       matches: {
         type: Array
@@ -152,6 +156,10 @@ class PageWvw extends PolymerElement {
     );
     const worlds = await response.json();
     this.set("worlds", worlds);
+  }
+
+  _checkActiveMap(route) {
+    return route.subview == "map" ? true : false;
   }
 }
 

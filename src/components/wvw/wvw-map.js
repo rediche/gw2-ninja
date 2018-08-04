@@ -52,12 +52,17 @@ class WvwMap extends PolymerElement {
       },
       mapData: {
         type: Array
+      },
+      active: {
+        type: Boolean,
+        value: false
       }
     };
   }
 
   static get observers() {
     return [
+      "_invalidateMap(active, map)",
       "_mapUpdated(map, icons)",
       "_mapDataChanged(mapData, objectives, icons)"
     ];
@@ -213,6 +218,14 @@ class WvwMap extends PolymerElement {
           ];
         objectives[index].mapMarker.setIcon(icon);
       }
+    });
+  }
+
+  _invalidateMap(active, map) {
+    if (!active || !map) return;
+    
+    afterNextRender(this, function() {
+      map.invalidateSize();
     });
   }
 }
