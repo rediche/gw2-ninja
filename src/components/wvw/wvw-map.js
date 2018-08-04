@@ -60,7 +60,7 @@ class WvwMap extends PolymerElement {
     return [
       "_mapUpdated(map, icons)",
       "_mapDataChanged(mapData, objectives, icons)"
-    ]
+    ];
   }
 
   /**
@@ -71,7 +71,7 @@ class WvwMap extends PolymerElement {
 
     afterNextRender(this, function() {
       this._initMap();
-      this.set('icons', this._generateIcons());
+      this.set("icons", this._generateIcons());
     });
   }
 
@@ -102,7 +102,7 @@ class WvwMap extends PolymerElement {
     const iconPrefix = "src/images/map-icons/";
 
     return new Icon({
-      iconUrl: iconPrefix + iconUrl + '.png',
+      iconUrl: iconPrefix + iconUrl + ".png",
       iconSize: [32, 32]
     });
   }
@@ -112,31 +112,42 @@ class WvwMap extends PolymerElement {
 
     const objectives = await this.getObjectives();
 
-    const objectivesFiltered = objectives.filter((objective) => {
-      if (!objective.marker || !objective.coord || !objective.type || objective.map_type == "EdgeOfTheMists") return false;
+    const objectivesFiltered = objectives.filter(objective => {
+      if (
+        !objective.marker ||
+        !objective.coord ||
+        !objective.type ||
+        objective.map_type == "EdgeOfTheMists"
+      )
+        return false;
       return true;
     });
-    
-    const addedObjectives = objectivesFiltered.map((objective) => {
+
+    const addedObjectives = objectivesFiltered.map(objective => {
       return this.addObjective(objective, map);
     });
 
-    this.set('objectives', addedObjectives);
+    this.set("objectives", addedObjectives);
   }
 
   async getObjectives() {
-    const response = await fetch("https://api.guildwars2.com/v2/wvw/objectives?ids=all");
+    const response = await fetch(
+      "https://api.guildwars2.com/v2/wvw/objectives?ids=all"
+    );
     const objectives = await response.json();
     return objectives;
   }
 
   addObjective(objective, map) {
-    if (!objective.type || !map) return; 
+    if (!objective.type || !map) return;
 
     const marker = {
-      mapMarker: new Marker(this.unproject([objective.coord[0], objective.coord[1]], map), {
-        icon: this.icons[objective.type.toLowerCase()].neutral
-      }).addTo(map)
+      mapMarker: new Marker(
+        this.unproject([objective.coord[0], objective.coord[1]], map),
+        {
+          icon: this.icons[objective.type.toLowerCase()].neutral
+        }
+      ).addTo(map)
     };
 
     return Object.assign({}, objective, marker);
@@ -189,10 +200,15 @@ class WvwMap extends PolymerElement {
     }, []);
 
     currentMapObjectives.forEach(mapObjective => {
-      const index = objectives.findIndex(objective => mapObjective.id == objective.id);
+      const index = objectives.findIndex(
+        objective => mapObjective.id == objective.id
+      );
 
       if (index !== -1) {
-        const icon = icons[mapObjective.type.toLowerCase()][mapObjective.owner.toLowerCase()];
+        const icon =
+          icons[mapObjective.type.toLowerCase()][
+            mapObjective.owner.toLowerCase()
+          ];
         objectives[index].mapMarker.setIcon(icon);
       }
     });

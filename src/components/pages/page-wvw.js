@@ -102,9 +102,7 @@ class PageWvw extends PolymerElement {
   }
 
   static get observers() {
-    return [
-      "_selectedServerChanged(serverId, matches)"
-    ]
+    return ["_selectedServerChanged(serverId, matches)"];
   }
 
   ready() {
@@ -118,20 +116,29 @@ class PageWvw extends PolymerElement {
   }
 
   async _getMatches() {
-    const response = await fetch("https://api.guildwars2.com/v2/wvw/matches?ids=all");
+    const response = await fetch(
+      "https://api.guildwars2.com/v2/wvw/matches?ids=all"
+    );
     const matches = await response.json();
-    this.set('matches', matches);
+    this.set("matches", matches);
   }
 
   _selectedServerChanged(serverId, matches) {
     if (!serverId || !matches) return;
 
-    const foundMatchup = matches.filter(match => (match.all_worlds.blue.includes(serverId) || match.all_worlds.red.includes(serverId) || match.all_worlds.green.includes(serverId)) ? true : false)[0];
+    const foundMatchup = matches.filter(
+      match =>
+        match.all_worlds.blue.includes(serverId) ||
+        match.all_worlds.red.includes(serverId) ||
+        match.all_worlds.green.includes(serverId)
+          ? true
+          : false
+    )[0];
 
-    if (!foundMatchup) return console.log("No matchup was found for the server provided.");
+    if (!foundMatchup)
+      return console.log("No matchup was found for the server provided.");
 
-    this.set('currentMatchup', foundMatchup);
-
+    this.set("currentMatchup", foundMatchup);
   }
 }
 
