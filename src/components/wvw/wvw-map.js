@@ -42,10 +42,19 @@ class WvwMap extends PolymerElement {
   static get properties() {
     return {
       map: {
-        type: Object,
-        observer: "_mapUpdated"
+        type: Object
+      },
+      icons: {
+        type: Object
+      },
+      objectives: {
+        type: Array
       }
     };
+  }
+
+  static get observers() {
+    return ["_mapUpdated(map, icons)"]
   }
 
   /**
@@ -56,6 +65,7 @@ class WvwMap extends PolymerElement {
 
     afterNextRender(this, function() {
       this._initMap();
+      this.set('icons', this._generateIcons());
     });
   }
 
@@ -79,28 +89,51 @@ class WvwMap extends PolymerElement {
       subdomains: ["tiles", "tiles1", "tiles2", "tiles3", "tiles4"]
     }).addTo(map);
 
-    const camp = new Icon({
-      iconUrl: "https://render.guildwars2.com/file/015D365A08AAE105287A100AAE04529FDAE14155/102532.png",
-      iconSize: [32, 32],
-      className: "blue"
-    });
-
-    new Marker(this.unproject([10743.8, 9492.51], map), {
-      icon: camp
-    }).addTo(map);
-
     this.set("map", map);
   }
 
-  async _mapUpdated(map) {
-    console.log("map was initiated");
+  _generateIcons() {
+    return {
+      ruins: {
+        neutral: this._newIcon("https://render.guildwars2.com/file/52B43242E55961770D78B80ED77BC764F0E57BF2/1635237.png")
+      },
+      camp: {
+        neutral: this._newIcon("https://render.guildwars2.com/file/015D365A08AAE105287A100AAE04529FDAE14155/102532.png")
+      },
+      tower: {
+        neutral: this._newIcon("https://render.guildwars2.com/file/ABEC80C79576A103EA33EC66FCB99B77291A2F0D/102531.png")
+      },
+      keep: {
+        neutral: this._newIcon("https://render.guildwars2.com/file/DB580419C8AD9449309A96C8E7C3D61631020EBB/102535.png")
+      },
+      castle: {
+        neutral: this._newIcon("https://render.guildwars2.com/file/F0F1DA1C807444F4DF53090343F43BED02E50523/102608.png")
+      }
+    };
+  }
+
+  _newIcon(iconUrl) {
+    return new Icon({
+      iconUrl: iconUrl,
+      iconSize: [32, 32]
+    });
+  }
+
+  async _mapUpdated(map, icons) {
+    if (!map || !icons) return;
+
     const objectives = await this.getObjectives();
 
-    const addedObjectives = objectives.map((objective) => {
+    const objectivesFiltered = objectives.filter((objective) => {
+      if (!objective.marker || !objective.coord || !objective.type || objective.type == "Generic" || objective.type == "Resource") return false;
+      return true;
+    });
+    
+    const addedObjectives = objectivesFiltered.map((objective) => {
       return this.addObjective(objective, map);
     });
 
-    console.log(addedObjectives);
+    this.set('objectives', addedObjectives);
   }
 
   async getObjectives() {
@@ -110,16 +143,11 @@ class WvwMap extends PolymerElement {
   }
 
   addObjective(objective, map) {
-    if (!objective.marker || !objective.coord) return;
-
-    const icon = new Icon({
-      iconUrl: objective.marker,
-      iconSize: [32, 32]
-    });
-
+    if (!objective.type || !map) return; 
+    
     const marker = {
       mapMarker: new Marker(this.unproject([objective.coord[0], objective.coord[1]], map), {
-        icon: icon
+        icon: this.icons[objective.type.toLowerCase()].neutral
       }).addTo(map)
     };
 
