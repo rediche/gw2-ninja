@@ -145,7 +145,9 @@ class WvwMap extends PolymerElement {
       mapMarker: new Marker(
         this.unproject([objective.coord[0], objective.coord[1]], map),
         {
-          icon: this.icons[objective.type.toLowerCase()].neutral
+          icon: this.icons[objective.type.toLowerCase()].neutral,
+          title: objective.name || "",
+          alt: objective.name || ""
         }
       ).addTo(map)
     };
