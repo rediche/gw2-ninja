@@ -92,29 +92,11 @@ class WvwMap extends PolymerElement {
     this.set("map", map);
   }
 
-  _generateIcons() {
-    return {
-      ruins: {
-        neutral: this._newIcon("https://render.guildwars2.com/file/52B43242E55961770D78B80ED77BC764F0E57BF2/1635237.png")
-      },
-      camp: {
-        neutral: this._newIcon("https://render.guildwars2.com/file/015D365A08AAE105287A100AAE04529FDAE14155/102532.png")
-      },
-      tower: {
-        neutral: this._newIcon("https://render.guildwars2.com/file/ABEC80C79576A103EA33EC66FCB99B77291A2F0D/102531.png")
-      },
-      keep: {
-        neutral: this._newIcon("https://render.guildwars2.com/file/DB580419C8AD9449309A96C8E7C3D61631020EBB/102535.png")
-      },
-      castle: {
-        neutral: this._newIcon("https://render.guildwars2.com/file/F0F1DA1C807444F4DF53090343F43BED02E50523/102608.png")
-      }
-    };
-  }
-
   _newIcon(iconUrl) {
+    const iconPrefix = "src/images/map-icons/";
+
     return new Icon({
-      iconUrl: iconUrl,
+      iconUrl: iconPrefix + iconUrl + '.png',
       iconSize: [32, 32]
     });
   }
@@ -152,6 +134,41 @@ class WvwMap extends PolymerElement {
     };
 
     return Object.assign({}, objective, marker);
+  }
+
+  _generateIcons() {
+    return {
+      ruins: {
+        neutral: this._newIcon("ruins_neutral"),
+        red: this._newIcon("ruins_red"),
+        blue: this._newIcon("ruins_blue"),
+        green: this._newIcon("ruins_green")
+      },
+      camp: {
+        neutral: this._newIcon("camp_neutral"),
+        red: this._newIcon("camp_red"),
+        blue: this._newIcon("camp_blue"),
+        green: this._newIcon("camp_green")
+      },
+      tower: {
+        neutral: this._newIcon("tower_neutral"),
+        red: this._newIcon("tower_red"),
+        blue: this._newIcon("tower_blue"),
+        green: this._newIcon("tower_green")
+      },
+      keep: {
+        neutral: this._newIcon("keep_neutral"),
+        red: this._newIcon("keep_red"),
+        blue: this._newIcon("keep_blue"),
+        green: this._newIcon("keep_green")
+      },
+      castle: {
+        neutral: this._newIcon("castle_neutral"),
+        red: this._newIcon("castle_red"),
+        blue: this._newIcon("castle_blue"),
+        green: this._newIcon("castle_green")
+      }
+    };
   }
 
   unproject(coord, map) {
