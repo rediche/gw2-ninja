@@ -10,6 +10,7 @@ import { SharedStyles } from "../shared-styles.js";
 
 import "../wvw/wvw-map";
 import "../wvw/wvw-map-stats";
+import "../wvw/wvw-region";
 
 /**
  * `page-wvw`
@@ -65,7 +66,7 @@ class PageWvw extends PolymerElement {
         <!--<wvw-map-stats></wvw-map-stats>-->
       </div>
       <div name="overview">
-        Region Overview, overview of the different matches in your region (EU or NA)
+        <wvw-region matches="[[matches]]" worlds="[[worlds]]"></wvw-region>
       </div>
       <div name="stats">
         Matchup Stats, tables, graphs etc of your current matchup
@@ -91,6 +92,9 @@ class PageWvw extends PolymerElement {
       matches: {
         type: Array
       },
+      worlds: {
+        type: Array
+      },
       serverId: {
         type: Number,
         value: 2010
@@ -110,8 +114,9 @@ class PageWvw extends PolymerElement {
 
     afterNextRender(this, function() {
       const that = this;
+      this._getWorlds();
       this._getMatches();
-      setInterval(that._getMatches.bind(that), 5000);
+      //setInterval(that._getMatches.bind(that), 5000);
     });
   }
 
@@ -139,6 +144,14 @@ class PageWvw extends PolymerElement {
       return console.log("No matchup was found for the server provided.");
 
     this.set("currentMatchup", foundMatchup);
+  }
+
+  async _getWorlds() {
+    const response = await fetch(
+      "https://api.guildwars2.com/v2/worlds?ids=all"
+    );
+    const worlds = await response.json();
+    this.set("worlds", worlds);
   }
 }
 
