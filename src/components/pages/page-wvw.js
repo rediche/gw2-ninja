@@ -111,17 +111,16 @@ class PageWvw extends PolymerElement {
     super.ready();
 
     afterNextRender(this, function() {
-      this._getMatches()
-        .then((matches) => {
-          this.set('matches', matches);
-        });
+      const that = this;
+      this._getMatches();
+      setInterval(that._getMatches.bind(that), 5000);
     });
   }
 
   async _getMatches() {
     const response = await fetch("https://api.guildwars2.com/v2/wvw/matches?ids=all");
     const matches = await response.json();
-    return matches;
+    this.set('matches', matches);
   }
 
   _selectedServerChanged(serverId, matches) {
