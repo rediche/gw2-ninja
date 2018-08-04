@@ -23,8 +23,9 @@ class WvwRegion extends PolymerElement {
       }
 
       .card {
-        margin-bottom: var(--spacer-medium);
         padding: 0;
+        max-width: 1100px;
+        margin: 0 auto var(--spacer-medium);
       }
 
       .title {
