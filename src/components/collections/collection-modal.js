@@ -17,11 +17,13 @@ store.addReducers({
 import "../utilities/gwn-modal.js";
 import "../utilities/gwn-item-icon.js";
 import { SharedStyles } from "../shared-styles.js";
+import { SharedTableStyles } from "../shared-table-styles.js";
 
 class CollectionModal extends connect(store)(PolymerElement) {
   static get template() {
     return html`
       ${SharedStyles}
+      ${SharedTableStyles}
       <style>
         :host {
           display: block;
@@ -37,70 +39,16 @@ class CollectionModal extends connect(store)(PolymerElement) {
           font-size: 20px;
         }
 
-        .table-scroll {
-          overflow-x: auto;
-        }
-
-        table {
-          width: 100%;
-          border-collapse: collapse;
-          border-spacing: 0;
-          min-width: 600px;
-          table-layout: fixed;
-        }
-
-        thead, tfoot {
-          display: table;
-          width: 100%;
-          table-layout: fixed;
+        thead {
           box-shadow: var(--app-box-shadow);
+        }
+
+        tbody {
+          max-height: calc(100vh - 1.5rem * 2 - 56px - 45px - 53px);
         }
 
         tfoot {
           box-shadow: var(--app-box-shadow-reverse);
-        }
-
-        tbody {
-          overflow-y: auto;
-          width: 100%;
-          max-height: calc(100vh - 1.5rem * 2 - 56px - 45px - 53px);
-          display: block;
-        }
-
-        tbody tr {
-          display: table;
-          width: 100%;
-          table-layout: fixed;
-        }
-
-        td {
-          padding: 4px;
-          text-overflow: ellipsis;
-          overflow: hidden; 
-          white-space: nowrap;
-        }
-
-        th {
-          text-align: left;
-          font-size: .9rem;
-          font-weight: 800;
-          padding: 1rem 4px;
-        }
-
-        thead th {
-          padding-top: .5rem;
-        }
-
-        tr td:first-child, tr th:first-child {
-          padding-left: 1rem;
-        }
-
-        tr td:last-child, tr th:last-child {
-          padding-right: 1rem;
-        }
-
-        tr:nth-child(2n) {
-          background-color: rgba(0, 0, 0, .04);
         }
 
         gwn-modal {

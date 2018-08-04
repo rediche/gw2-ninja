@@ -2,6 +2,7 @@ import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import "@polymer/polymer/lib/elements/dom-repeat.js";
 
 import { SharedStyles } from "../shared-styles.js";
+import { SharedTableStyles } from "../shared-table-styles.js";
 
 /**
  * `wvw-region`
@@ -14,6 +15,7 @@ class WvwRegion extends PolymerElement {
   static get template() {
     return html`
     ${SharedStyles}
+    ${SharedTableStyles}
     <style>
       :host {
         display: block;
@@ -22,48 +24,84 @@ class WvwRegion extends PolymerElement {
 
       .card {
         margin-bottom: var(--spacer-medium);
+        padding: 0;
       }
 
-      table {
-        width: 100%;
-      }
-
-      th {
-        text-align: left;
+      .title {
+        padding: var(--spacer-medium) var(--spacer-medium) 0;
       }
     </style>
 
     <div class="card">
       <h2 class="title">Europe</h2>
-      <table>
-        <thead>
-          <th>#</th>
-          <th>Server</th>
-          <th>Victory Points</th>
-          <th>Total Score</th>
-        </thead>
-        <tbody>
-          <template is="dom-repeat" items="{{euMatches}}">
-            <tr>
-              <td></td>
-              <td>[[ _generateWorldLinkNames(item.all_worlds.green, item.worlds.green, worlds) ]]</td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>[[ _generateWorldLinkNames(item.all_worlds.blue, item.worlds.blue, worlds) ]]</td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>[[ _generateWorldLinkNames(item.all_worlds.red, item.worlds.red, worlds) ]]</td>
-            </tr>
-          </template>
-        </tbody>
-      </table>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <th>#</th>
+            <th>Server</th>
+            <th>Victory Points</th>
+            <th>Total Score</th>
+          </thead>
+          <tbody>
+            <template is="dom-repeat" items="{{euMatches}}">
+              <tr>
+                <td></td>
+                <td>
+                  <div>[[ _generateWorldLinkNames(item.all_worlds.green, item.worlds.green, worlds) ]]</div>
+                  <div>[[ _generateWorldLinkNames(item.all_worlds.blue, item.worlds.blue, worlds) ]]</div>
+                  <div>[[ _generateWorldLinkNames(item.all_worlds.red, item.worlds.red, worlds) ]]</div>
+                </td>
+                <td>
+                  <div>[[ item.victory_points.green ]]</div>
+                  <div>[[ item.victory_points.blue ]]</div>
+                  <div>[[ item.victory_points.red ]]</div>
+                </td>
+                <td>
+                  <div>[[ item.scores.green ]]</div>
+                  <div>[[ item.scores.blue ]]</div>
+                  <div>[[ item.scores.red ]]</div>
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="card">
       <h2 class="title">North America</h2>
-      <p>Region Overview, overview of the different matches in your region (EU or NA)</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <th>#</th>
+            <th>Server</th>
+            <th>Victory Points</th>
+            <th>Total Score</th>
+          </thead>
+          <tbody>
+            <template is="dom-repeat" items="{{naMatches}}">
+              <tr>
+                <td></td>
+                <td>
+                  <div>[[ _generateWorldLinkNames(item.all_worlds.green, item.worlds.green, worlds) ]]</div>
+                  <div>[[ _generateWorldLinkNames(item.all_worlds.blue, item.worlds.blue, worlds) ]]</div>
+                  <div>[[ _generateWorldLinkNames(item.all_worlds.red, item.worlds.red, worlds) ]]</div>
+                </td>
+                <td>
+                  <div>[[ item.victory_points.green ]]</div>
+                  <div>[[ item.victory_points.blue ]]</div>
+                  <div>[[ item.victory_points.red ]]</div>
+                </td>
+                <td>
+                  <div>[[ item.scores.green ]]</div>
+                  <div>[[ item.scores.blue ]]</div>
+                  <div>[[ item.scores.red ]]</div>
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
     </div>
     `;
   }
