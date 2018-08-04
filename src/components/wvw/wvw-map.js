@@ -125,7 +125,7 @@ class WvwMap extends PolymerElement {
     const objectives = await this.getObjectives();
 
     const objectivesFiltered = objectives.filter((objective) => {
-      if (!objective.marker || !objective.coord || !objective.type || objective.type == "Generic" || objective.type == "Resource") return false;
+      if (!objective.marker || !objective.coord || !objective.type || objective.map_type == "EdgeOfTheMists") return false;
       return true;
     });
     
@@ -144,7 +144,7 @@ class WvwMap extends PolymerElement {
 
   addObjective(objective, map) {
     if (!objective.type || !map) return; 
-    
+
     const marker = {
       mapMarker: new Marker(this.unproject([objective.coord[0], objective.coord[1]], map), {
         icon: this.icons[objective.type.toLowerCase()].neutral
