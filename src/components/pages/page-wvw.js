@@ -1,4 +1,6 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
+import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
+
 import "@polymer/app-route/app-location.js";
 import "@polymer/app-route/app-route.js";
 import "@polymer/iron-pages/iron-pages.js";
@@ -59,7 +61,7 @@ class PageWvw extends PolymerElement {
 
     <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="map">
       <div name="map">
-        <wvw-map></wvw-map>
+        <wvw-map map-data="[[currentMatchup.maps]]"></wvw-map>
         <!--<wvw-map-stats></wvw-map-stats>-->
       </div>
       <div name="overview">
@@ -85,24 +87,52 @@ class PageWvw extends PolymerElement {
       },
       theme: {
         type: String
+      },
+      matches: {
+        type: Array
+      },
+      serverId: {
+        type: Number,
+        value: 2010
+      },
+      currentMatch: {
+        type: Object
       }
     };
   }
 
-  /**
-   * Instance of the element is created/upgraded. Use: initializing state,
-   * set up event listeners, create shadow dom.
-   * @constructor
-   */
-  constructor() {
-    super();
+  static get observers() {
+    return [
+      "_selectedServerChanged(serverId, matches)"
+    ]
   }
 
-  /**
-   * Use for one-time configuration of your component after local DOM is initialized.
-   */
   ready() {
     super.ready();
+
+    afterNextRender(this, function() {
+      this._getMatches()
+        .then((matches) => {
+          this.set('matches', matches);
+        });
+    });
+  }
+
+  async _getMatches() {
+    const response = await fetch("https://api.guildwars2.com/v2/wvw/matches?ids=all");
+    const matches = await response.json();
+    return matches;
+  }
+
+  _selectedServerChanged(serverId, matches) {
+    if (!serverId || !matches) return;
+
+    const foundMatchup = matches.filter(match => (match.all_worlds.blue.includes(serverId) || match.all_worlds.red.includes(serverId) || match.all_worlds.green.includes(serverId)) ? true : false)[0];
+
+    if (!foundMatchup) return console.log("No matchup was found for the server provided.");
+
+    this.set('currentMatchup', foundMatchup);
+
   }
 }
 

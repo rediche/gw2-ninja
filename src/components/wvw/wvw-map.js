@@ -49,12 +49,18 @@ class WvwMap extends PolymerElement {
       },
       objectives: {
         type: Array
+      },
+      mapData: {
+        type: Array
       }
     };
   }
 
   static get observers() {
-    return ["_mapUpdated(map, icons)"]
+    return [
+      "_mapUpdated(map, icons)",
+      "_mapDataChanged(mapData, objectives, icons)"
+    ]
   }
 
   /**
@@ -173,6 +179,23 @@ class WvwMap extends PolymerElement {
 
   unproject(coord, map) {
     return map.unproject(coord, map.getMaxZoom());
+  }
+
+  _mapDataChanged(mapData, objectives, icons) {
+    if (!mapData || !objectives || !icons) return;
+
+    const currentMapObjectives = mapData.reduce((objectives, map) => {
+      return objectives.concat(map.objectives);
+    }, []);
+
+    currentMapObjectives.forEach(mapObjective => {
+      const index = objectives.findIndex(objective => mapObjective.id == objective.id);
+
+      if (index !== -1) {
+        const icon = icons[mapObjective.type.toLowerCase()][mapObjective.owner.toLowerCase()];
+        objectives[index].mapMarker.setIcon(icon);
+      }
+    });
   }
 }
 
