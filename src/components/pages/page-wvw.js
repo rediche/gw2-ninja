@@ -1,10 +1,14 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
+import "@polymer/polymer/lib/elements/dom-repeat.js";
 
 import "@polymer/app-route/app-location.js";
 import "@polymer/app-route/app-route.js";
 import "@polymer/iron-pages/iron-pages.js";
 import "@polymer/paper-tabs/paper-tabs.js";
+import "@polymer/paper-dropdown-menu/paper-dropdown-menu.js";
+import "@polymer/paper-listbox/paper-listbox.js";
+import "@polymer/paper-item/paper-item.js";
 
 import { SharedStyles } from "../shared-styles.js";
 
@@ -29,8 +33,29 @@ class PageWvw extends PolymerElement {
         position: relative;
       }
 
-      paper-tabs {
+      .sticky-tabs {
+        display: flex;
+        align-items: flex-end;
         background-color: var(--app-primary-color);
+        padding: 0 var(--spacer-large);
+      }
+
+      paper-dropdown-menu {
+        flex: none;
+        margin-right: var(--spacer-large);
+        --iron-icon-fill-color: var(--app-text-color-light);
+        --paper-input-container-color: var(--app-text-color-light);
+        --paper-input-container-focus-color: var(--app-text-color-light);;
+        --paper-input-container-input: {
+          color: var(--app-text-color-light);
+        };
+        --paper-input-container-label: {
+          color: var(--app-text-color-light);
+        };
+      }
+
+      paper-tabs {
+        flex: auto;
         --paper-tabs-selection-bar-color: #ffffff;
       }
 
@@ -39,7 +64,7 @@ class PageWvw extends PolymerElement {
       }
 
       wvw-map {
-        height: calc(100vh - 7rem);
+        height: calc(100vh - 8rem);
       }
 
       wvw-map-stats {
@@ -53,12 +78,22 @@ class PageWvw extends PolymerElement {
     <app-location route="{{route}}"></app-location>
     <app-route route="{{route}}" pattern="/wvw/:subview" data="{{subviewData}}"></app-route>
 
-    <paper-tabs class="sticky-tabs" selected="{{subviewData.subview}}" attr-for-selected="name">
-      <paper-tab name="overview">Region Overview</paper-tab>
-      <paper-tab name="map">Live Map</paper-tab>
-      <paper-tab name="stats">Matchup Stats</paper-tab>
-      <paper-tab name="leaderboards">Leaderboards</paper-tab>
-    </paper-tabs>
+    <div class="sticky-tabs">
+      <paper-dropdown-menu label="World">
+        <paper-listbox slot="dropdown-content" selected="{{serverId}}" class="dropdown-content" attr-for-selected="value">
+          <template is="dom-repeat" items="[[worlds]]" as="world">
+            <paper-item value="[[world.id]]">[[world.name]]</paper-item>
+          </template>
+        </paper-listbox>
+      </paper-dropdown-menu>
+
+      <paper-tabs selected="{{subviewData.subview}}" attr-for-selected="name">
+        <paper-tab name="overview">Region Overview</paper-tab>
+        <paper-tab name="map">Live Map</paper-tab>
+        <paper-tab name="stats">Matchup Stats</paper-tab>
+        <paper-tab name="leaderboards">Leaderboards</paper-tab>
+      </paper-tabs>
+    </div>
 
     <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="map">
       <div name="map">
