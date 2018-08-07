@@ -136,7 +136,7 @@ class PageWvw extends PolymerElement {
       },
       serverId: {
         type: Number,
-        value: 2011
+        value: 2010
       },
       currentMatch: {
         type: Object
@@ -155,7 +155,7 @@ class PageWvw extends PolymerElement {
       const that = this;
       this._getWorlds();
       this._getMatches();
-      setInterval(that._getMatches.bind(that), 5000);
+      setInterval(that._getMatches.bind(that), 10000);
     });
   }
 

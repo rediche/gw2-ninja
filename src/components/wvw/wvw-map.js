@@ -262,7 +262,7 @@ class WvwMap extends PolymerElement {
           const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
           const seconds = Math.floor((diff % (1000 * 60)) / 1000);
   
-          objective.tooltip.setTooltipContent(`${minutes}m ${seconds}s`);
+          objective.tooltip.setTooltipContent(`${minutes}m ${seconds < 10 ? "0" + seconds : seconds}s`);
         }, 1000);
       }
 
