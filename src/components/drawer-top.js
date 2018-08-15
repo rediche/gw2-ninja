@@ -72,7 +72,7 @@ class DrawerTop extends connect(store)(PolymerElement) {
           <paper-icon-button icon="my-icons:close" on-tap="_closeDrawer" aria-label="Close menu"></paper-icon-button>
         </div>
         <div class="bottom">
-          Welcome <span hidden$="[[ !accountName ]]">[[ accountName ]]</span>!
+          Welcome<span hidden$="[[ !accountName ]]">&nbsp;[[ accountName ]]</span>!
         </div>
       </div>
     `;
