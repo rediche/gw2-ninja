@@ -1,10 +1,8 @@
-import { 
-  CHANGE_ACCOUNT_NAME
-} from "../actions/account.js";
+import { CHANGE_ACCOUNT_NAME } from "../actions/account.js";
 
 const account = (
   state = {
-    name: null,
+    name: null
   },
   action
 ) => {
@@ -13,7 +11,7 @@ const account = (
       return {
         ...state,
         name: action.name
-      }
+      };
     default:
       return state;
   }

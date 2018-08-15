@@ -48,7 +48,7 @@ class GWNSettingApiKey extends connect(store)(PolymerElement) {
       showPermissions: {
         type: Boolean,
         value: false
-      },
+      }
     };
   }
 
@@ -108,7 +108,7 @@ class GWNSettingApiKey extends connect(store)(PolymerElement) {
     });
 
     const accountInfo = await this.fetchAccountInfo(apiKey);
-    
+
     if (!accountInfo) return;
 
     store.dispatch({

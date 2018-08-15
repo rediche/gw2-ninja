@@ -26,13 +26,13 @@ import "./drawer-top";
 import "./settings/gwn-settings.js";
 import "./collections/collection-modal.js";
 
-import { connect } from 'pwa-helpers/connect-mixin.js';
+import { connect } from "pwa-helpers/connect-mixin.js";
 
 // Load redux store
-import { store } from '../store.js';
+import { store } from "../store.js";
 
 // Lazy load reducers
-import settings from '../reducers/settings.js';
+import settings from "../reducers/settings.js";
 store.addReducers({
   settings
 });
@@ -179,13 +179,6 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
     <app-drawer id="drawer" swipe-open opened="{{drawer}}">
       <drawer-top theme$="[[theme]]" on-close-drawer="_closeDrawer"></drawer-top>
       <div class="drawer-scroll">
-        <!-- <app-toolbar>
-          <paper-icon-button icon="my-icons:close" on-tap="_closeDrawer" aria-label="Close menu"></paper-icon-button>
-          <div main-title>
-            <iron-icon icon="my-icons:logo"></iron-icon>
-            GW2 Ninja
-          </div>
-        </app-toolbar> -->
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a name="index" href="/" tabindex="-1">
             <paper-item>Home</paper-item>
@@ -381,7 +374,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
 
   _stateChanged(state) {
     if (!state || !state.settings) return;
-    this.set('theme', state.settings.theme);
+    this.set("theme", state.settings.theme);
   }
 }
 
