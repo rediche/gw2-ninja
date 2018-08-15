@@ -10,10 +10,14 @@ import {
   CHANGE_API_PERMISSIONS
 } from "../../actions/settings.js";
 
+import { CHANGE_ACCOUNT_NAME } from "../../actions/account.js";
+
 // Lazy load reducers
 import settings from "../../reducers/settings.js";
+import account from "../../reducers/account.js";
 store.addReducers({
-  settings
+  settings,
+  account
 });
 
 import "@polymer/paper-input/paper-input.js";
@@ -102,6 +106,15 @@ class GWNSettingApiKey extends connect(store)(PolymerElement) {
       type: CHANGE_API_PERMISSIONS,
       apiPermissions: tokenInfo.permissions
     });
+
+    const accountInfo = await this.fetchAccountInfo(apiKey);
+    
+    if (!accountInfo) return;
+
+    store.dispatch({
+      type: CHANGE_ACCOUNT_NAME,
+      name: accountInfo.name
+    });
   }
 
   _stateChanged(state) {
@@ -118,6 +131,17 @@ class GWNSettingApiKey extends connect(store)(PolymerElement) {
 
   async fetchTokenInfo(apiKey) {
     const url = `https://api.guildwars2.com/v2/tokeninfo?access_token=${apiKey}`;
+    const response = await fetch(url);
+
+    if (response.status !== 200) return false;
+
+    const json = await response.json();
+
+    return json;
+  }
+
+  async fetchAccountInfo(apiKey) {
+    const url = `https://api.guildwars2.com/v2/account?access_token=${apiKey}`;
     const response = await fetch(url);
 
     if (response.status !== 200) return false;
