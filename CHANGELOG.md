@@ -1,6 +1,10 @@
 # Next release
 
--
+# August 15, 2018
+
+- Welcome message in menu
+- Improve Service Worker caching
+- Various styling updates
 
 # June 28, 2018
 
