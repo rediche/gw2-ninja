@@ -20,6 +20,8 @@ class PageChatcodes extends PolymerElement {
 
       .flex-spacer {
         padding: var(--spacer-large);
+        margin: 0 auto;
+        max-width: 1100px;
       }
 
       p {
