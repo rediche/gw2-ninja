@@ -83,6 +83,7 @@ class WvWMatchup extends PolymerElement {
 
           .worlds .card {
             width: calc(100% / 3 - 1rem);
+            margin-bottom: 0;
           }
         }
       </style>
