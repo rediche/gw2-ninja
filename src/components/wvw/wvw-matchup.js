@@ -48,6 +48,7 @@ class WvWMatchup extends PolymerElement {
           padding: var(--spacer-medium) var(--spacer-medium) var(--spacer-small);
           color: var(--app-text-color-light);
           font-weight: 600;
+          box-shadow: var(--app-box-shadow);
         }
 
         .world-body {
