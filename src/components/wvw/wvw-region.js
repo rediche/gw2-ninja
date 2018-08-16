@@ -1,6 +1,8 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import "@polymer/polymer/lib/elements/dom-repeat.js";
 
+import "../utilities/gwn-progress";
+
 import { SharedStyles } from "../shared-styles.js";
 import { SharedTableStyles } from "../shared-table-styles.js";
 
@@ -31,6 +33,26 @@ class WvwRegion extends PolymerElement {
       .title {
         padding: var(--spacer-medium) var(--spacer-medium) 0;
       }
+
+      thead th {
+        padding-bottom: 0;
+      }
+
+      gwn-progress {
+        font-size: .75rem;
+      }
+
+      .green {
+        --gwn-progress-color: #4CAF50;
+      }
+
+      .blue {
+        --gwn-progress-color: #1E88E5;
+      }
+
+      .red {
+        --gwn-progress-color: #E53935;
+      }
     </style>
 
     <div class="card">
@@ -38,7 +60,6 @@ class WvwRegion extends PolymerElement {
       <div class="table-scroll">
         <table>
           <thead>
-            <th>#</th>
             <th>Server</th>
             <th>Victory Points</th>
             <th>Total Score</th>
@@ -46,21 +67,20 @@ class WvwRegion extends PolymerElement {
           <tbody>
             <template is="dom-repeat" items="{{euMatches}}">
               <tr>
-                <td></td>
                 <td>
                   <div>[[ _generateWorldLinkNames(item.all_worlds.green, item.worlds.green, worlds) ]]</div>
                   <div>[[ _generateWorldLinkNames(item.all_worlds.blue, item.worlds.blue, worlds) ]]</div>
                   <div>[[ _generateWorldLinkNames(item.all_worlds.red, item.worlds.red, worlds) ]]</div>
                 </td>
                 <td>
-                  <div>[[ item.victory_points.green ]]</div>
-                  <div>[[ item.victory_points.blue ]]</div>
-                  <div>[[ item.victory_points.red ]]</div>
+                  <gwn-progress class="green" progress="[[ item.victory_points.green ]]" max="[[ _highestVictoryPointsInMatchup(item) ]]">[[ item.victory_points.green ]]</gwn-progress>
+                  <gwn-progress class="blue" progress="[[ item.victory_points.blue ]]" max="[[ _highestVictoryPointsInMatchup(item) ]]">[[ item.victory_points.blue ]]</gwn-progress>
+                  <gwn-progress class="red" progress="[[ item.victory_points.red ]]" max="[[ _highestVictoryPointsInMatchup(item) ]]">[[ item.victory_points.red ]]</gwn-progress>
                 </td>
                 <td>
-                  <div>[[ item.scores.green ]]</div>
-                  <div>[[ item.scores.blue ]]</div>
-                  <div>[[ item.scores.red ]]</div>
+                  <gwn-progress class="green" progress="[[ item.scores.green ]]" max="[[ _highestScoreInMatchup(item) ]]">[[ item.scores.green ]]</gwn-progress>
+                  <gwn-progress class="blue" progress="[[ item.scores.blue ]]" max="[[ _highestScoreInMatchup(item) ]]">[[ item.scores.blue ]]</gwn-progress>
+                  <gwn-progress class="red" progress="[[ item.scores.red ]]" max="[[ _highestScoreInMatchup(item) ]]">[[ item.scores.red ]]</gwn-progress>
                 </td>
               </tr>
             </template>
@@ -74,7 +94,6 @@ class WvwRegion extends PolymerElement {
       <div class="table-scroll">
         <table>
           <thead>
-            <th>#</th>
             <th>Server</th>
             <th>Victory Points</th>
             <th>Total Score</th>
@@ -82,21 +101,20 @@ class WvwRegion extends PolymerElement {
           <tbody>
             <template is="dom-repeat" items="{{naMatches}}">
               <tr>
-                <td></td>
                 <td>
                   <div>[[ _generateWorldLinkNames(item.all_worlds.green, item.worlds.green, worlds) ]]</div>
                   <div>[[ _generateWorldLinkNames(item.all_worlds.blue, item.worlds.blue, worlds) ]]</div>
                   <div>[[ _generateWorldLinkNames(item.all_worlds.red, item.worlds.red, worlds) ]]</div>
                 </td>
                 <td>
-                  <div>[[ item.victory_points.green ]]</div>
-                  <div>[[ item.victory_points.blue ]]</div>
-                  <div>[[ item.victory_points.red ]]</div>
+                  <gwn-progress class="green" progress="[[ item.victory_points.green ]]" max="[[ _highestVictoryPointsInMatchup(item) ]]">[[ item.victory_points.green ]]</gwn-progress>
+                  <gwn-progress class="blue" progress="[[ item.victory_points.blue ]]" max="[[ _highestVictoryPointsInMatchup(item) ]]">[[ item.victory_points.blue ]]</gwn-progress>
+                  <gwn-progress class="red" progress="[[ item.victory_points.red ]]" max="[[ _highestVictoryPointsInMatchup(item) ]]">[[ item.victory_points.red ]]</gwn-progress>
                 </td>
                 <td>
-                  <div>[[ item.scores.green ]]</div>
-                  <div>[[ item.scores.blue ]]</div>
-                  <div>[[ item.scores.red ]]</div>
+                  <gwn-progress class="green" progress="[[ item.scores.green ]]" max="[[ _highestScoreInMatchup(item) ]]">[[ item.scores.green ]]</gwn-progress>
+                  <gwn-progress class="blue" progress="[[ item.scores.blue ]]" max="[[ _highestScoreInMatchup(item) ]]">[[ item.scores.blue ]]</gwn-progress>
+                  <gwn-progress class="red" progress="[[ item.scores.red ]]" max="[[ _highestScoreInMatchup(item) ]]">[[ item.scores.red ]]</gwn-progress>
                 </td>
               </tr>
             </template>
@@ -161,6 +179,14 @@ class WvwRegion extends PolymerElement {
     });
 
     return foundWorld.name;
+  }
+
+  _highestVictoryPointsInMatchup(matchup) {
+    return Math.max(matchup.victory_points.green, matchup.victory_points.red, matchup.victory_points.blue);
+  }
+
+  _highestScoreInMatchup(matchup) {
+    return Math.max(matchup.scores.green, matchup.scores.red, matchup.scores.blue);
   }
 }
 

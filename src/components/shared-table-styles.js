@@ -33,7 +33,7 @@ export const SharedTableStyles = html`
   }
 
   td {
-    padding: 4px;
+    padding: var(--spacer-small);
     text-overflow: ellipsis;
     overflow: hidden; 
     white-space: nowrap;
@@ -43,7 +43,7 @@ export const SharedTableStyles = html`
     text-align: left;
     font-size: .9rem;
     font-weight: 800;
-    padding: 1rem 4px;
+    padding: 1rem var(--spacer-small);
   }
 
   thead th {
