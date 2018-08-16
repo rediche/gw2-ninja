@@ -144,9 +144,9 @@ class WvWMatchup extends PolymerElement {
                 <tr>
                   <td class="skirmish-id">[[ skirmish.id ]]</td>
                   <td>
-                    <gwn-progress class="green" progress="[[ _accumulatedScore(skirmishesDesc, index, 'green') ]]" max="750000">[[ _accumulatedScore(skirmishesDesc, index, 'green') ]]</gwn-progress>
-                    <gwn-progress class="blue" progress="[[ _accumulatedScore(skirmishesDesc, index, 'blue') ]]" max="750000">[[ _accumulatedScore(skirmishesDesc, index, 'blue') ]]</gwn-progress>
-                    <gwn-progress class="red" progress="[[ _accumulatedScore(skirmishesDesc, index, 'red') ]]" max="750000">[[ _accumulatedScore(skirmishesDesc, index, 'red') ]]</gwn-progress>
+                    <gwn-progress class="green" progress="[[ _accumulatedScore(skirmishesDesc, index, 'green') ]]" max="[[ _highestScore(matchup.scores) ]]">[[ _accumulatedScore(skirmishesDesc, index, 'green') ]]</gwn-progress>
+                    <gwn-progress class="blue" progress="[[ _accumulatedScore(skirmishesDesc, index, 'blue') ]]" max="[[ _highestScore(matchup.scores) ]]">[[ _accumulatedScore(skirmishesDesc, index, 'blue') ]]</gwn-progress>
+                    <gwn-progress class="red" progress="[[ _accumulatedScore(skirmishesDesc, index, 'red') ]]" max="[[ _highestScore(matchup.scores) ]]">[[ _accumulatedScore(skirmishesDesc, index, 'red') ]]</gwn-progress>
                   </td>
                   <td>
                     <gwn-progress class="green" progress="[[ skirmish.scores.green ]]" max="[[ _highestScore(skirmish.scores) ]]">[[ skirmish.scores.green ]]</gwn-progress>
