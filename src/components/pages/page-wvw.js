@@ -15,6 +15,7 @@ import { SharedStyles } from "../shared-styles.js";
 import "../wvw/wvw-map";
 import "../wvw/wvw-map-stats";
 import "../wvw/wvw-region";
+import "../wvw/wvw-matchup";
 
 /**
  * `page-wvw`
@@ -104,7 +105,7 @@ class PageWvw extends PolymerElement {
         <wvw-region matches="[[matches]]" worlds="[[worlds]]"></wvw-region>
       </div>
       <div name="stats">
-        Matchup Stats, tables, graphs etc of your current matchup
+        <wvw-matchup matchup="[[currentMatchup]]" worlds="[[worlds]]"></wvw-matchup>
       </div>
       <div name="leaderboards">
         Leaderboards. Compare stats between all servers on all regions.

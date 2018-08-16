@@ -5,6 +5,7 @@ import "../utilities/gwn-progress";
 
 import { SharedStyles } from "../shared-styles.js";
 import { SharedTableStyles } from "../shared-table-styles.js";
+import { SharedWvwStyles } from "../shared-wvw-styles.js";
 
 /**
  * `wvw-region`
@@ -18,6 +19,7 @@ class WvwRegion extends PolymerElement {
     return html`
     ${SharedStyles}
     ${SharedTableStyles}
+    ${SharedWvwStyles}
     <style>
       :host {
         display: block;
@@ -43,15 +45,15 @@ class WvwRegion extends PolymerElement {
       }
 
       .green {
-        --gwn-progress-color: #4CAF50;
+        --gwn-progress-color: var(--team-green);
       }
 
       .blue {
-        --gwn-progress-color: #1E88E5;
+        --gwn-progress-color: var(--team-blue);
       }
 
       .red {
-        --gwn-progress-color: #E53935;
+        --gwn-progress-color: var(--team-red);
       }
     </style>
 
@@ -158,6 +160,8 @@ class WvwRegion extends PolymerElement {
   }
 
   _generateWorldLinkNames(allWorldsInLink, hostWorld, worlds) {
+    if (!allWorldsInLink || !hostWorld || !worlds) return;
+
     const linkedWorlds = allWorldsInLink.filter(world => {
       return world !== hostWorld;
     });
