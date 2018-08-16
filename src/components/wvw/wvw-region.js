@@ -43,18 +43,6 @@ class WvwRegion extends PolymerElement {
       gwn-progress {
         font-size: .75rem;
       }
-
-      .green {
-        --gwn-progress-color: var(--team-green);
-      }
-
-      .blue {
-        --gwn-progress-color: var(--team-blue);
-      }
-
-      .red {
-        --gwn-progress-color: var(--team-red);
-      }
     </style>
 
     <div class="card">

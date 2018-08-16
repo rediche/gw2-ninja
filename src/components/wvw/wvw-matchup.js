@@ -1,6 +1,8 @@
 import {PolymerElement, html} from "@polymer/polymer/polymer-element.js";
+import "@polymer/polymer/lib/elements/dom-repeat.js";
 
 import { SharedStyles } from "../shared-styles";
+import { SharedTableStyles } from "../shared-table-styles";
 import { SharedWvwStyles } from "../shared-wvw-styles";
 
 /**
@@ -15,6 +17,7 @@ class WvWMatchup extends PolymerElement {
   static get template() {
     return html`
       ${SharedStyles}
+      ${SharedTableStyles}
       ${SharedWvwStyles}
       <style>
         :host {
@@ -54,6 +57,22 @@ class WvWMatchup extends PolymerElement {
         .world-body {
           padding: var(--spacer-small) var(--spacer-medium);
         }
+
+        .table-scroll {
+          margin-bottom: var(--spacer-large);
+        }
+
+        thead {
+          box-shadow: var(--app-box-shadow);
+        }
+
+        gwn-progress {
+          font-size: .75rem;
+        }
+
+        .skirmish-id {
+          width: 4rem;
+        }
       </style>
 
       <h2 class="title">Worlds</h2>
@@ -89,13 +108,55 @@ class WvWMatchup extends PolymerElement {
 
       <h2 class="title">Skirmishes</h2>
       <p>Show a table with all skimishes with the newest on top</p>
+
+      <div class="table-scroll card">
+        <table>
+          <thead>
+            <th class="skirmish-id">#</th>
+            <th>Matchup Score</th>
+            <th>Skirmish Score</th>
+            <th>Eternal Battlegrounds</th>
+            <th>Red Borderlands</th>
+            <th>Blue Borderlands</th>
+            <th>Green Borderlands</th>
+          </thead>
+          <tbody>
+            <template is="dom-repeat" items="{{ skirmishesDesc }}" as="skirmish">
+              <tr>
+                <td class="skirmish-id">[[ skirmish.id ]]</td>
+                <td>
+                  <gwn-progress class="green" progress="[[ _accumulatedScore(skirmishesDesc, index, 'green') ]]" max="1000000">[[ _accumulatedScore(skirmishesDesc, index, 'green') ]]</gwn-progress>
+                  <gwn-progress class="blue" progress="[[ _accumulatedScore(skirmishesDesc, index, 'blue') ]]" max="1000000">[[ _accumulatedScore(skirmishesDesc, index, 'blue') ]]</gwn-progress>
+                  <gwn-progress class="red" progress="[[ _accumulatedScore(skirmishesDesc, index, 'red') ]]" max="1000000">[[ _accumulatedScore(skirmishesDesc, index, 'red') ]]</gwn-progress>
+                </td>
+                <td>
+                  <gwn-progress class="green" progress="[[ skirmish.scores.green ]]" max="[[ _highestScore(skirmish.scores) ]]">[[ skirmish.scores.green ]]</gwn-progress>
+                  <gwn-progress class="blue" progress="[[ skirmish.scores.blue ]]" max="[[ _highestScore(skirmish.scores) ]]">[[ skirmish.scores.blue ]]</gwn-progress>
+                  <gwn-progress class="red" progress="[[ skirmish.scores.red ]]" max="[[ _highestScore(skirmish.scores) ]]">[[ skirmish.scores.red ]]</gwn-progress>
+                </td>
+                <template is="dom-repeat" items="{{ skirmish.map_scores }}">
+                  <td>
+                    <gwn-progress class="green" progress="[[ item.scores.green ]]" max="[[ _highestScore(item.scores) ]]">[[ item.scores.green ]]</gwn-progress>
+                    <gwn-progress class="blue" progress="[[ item.scores.blue ]]" max="[[ _highestScore(item.scores) ]]">[[ item.scores.blue ]]</gwn-progress>
+                    <gwn-progress class="red" progress="[[ item.scores.red ]]" max="[[ _highestScore(item.scores) ]]">[[ item.scores.red ]]</gwn-progress>
+                  </td>
+                </template>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
     `;
   }
 
   static get properties() {
     return {
       matchup: Object,
-      worlds: Array
+      worlds: Array,
+      skirmishesDesc: {
+        type: Array,
+        computed: "_reverseSkirmishes(matchup.skirmishes)"
+      }
     }
   }
 
@@ -129,6 +190,27 @@ class WvWMatchup extends PolymerElement {
     if (!kills || !deaths) return;
 
     return parseFloat(Math.round(kills / deaths * 100) / 100).toFixed(2);
+  }
+
+  _highestScore(scores) {
+    if (!scores) return;
+    return Math.max(scores.green, scores.blue, scores.red);
+  }
+
+  _accumulatedScore(skirmishes, index, team) {
+    if (!skirmishes || index < 0 || !team) return;
+
+    let accumulatedScores = 0;
+
+    for (let i = index; i < skirmishes.length; i++) {
+      accumulatedScores += skirmishes[i].scores[team];
+    }
+
+    return accumulatedScores;
+  }
+
+  _reverseSkirmishes(skirmishes) {
+    return skirmishes.reverse();
   }
 
 }
