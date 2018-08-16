@@ -10,7 +10,8 @@
     "src/components/pages/page-tickets.js",
     "src/components/pages/page-timer.js",
     "src/components/pages/page-view404.js",
-    "src/components/pages/page-about.js"
+    "src/components/pages/page-about.js",
+    "src/components/pages/page-stream-tools.js"
   ],
   "sources": ["src/**/*", "images/**/*", ".htaccess"],
   "extraDependencies": [

@@ -2,14 +2,14 @@
 
 module.exports = {
   staticFileGlobs: [
-    '/index.html',
-    '/manifest.json',
-    '/bower_components/webcomponentsjs/*',
-    '/bower_components/gw2-coin-input/images/*',
-    '/bower_components/gw2-coin-output/images/*',
-    '/src/data/collections.json',
-    '/src/data/directory.json',
-    '/src/data/metas.json',
+    "/index.html",
+    "/manifest.json",
+    "/node_modules/@webcomponents/webcomponentsjs/*",
+    "/node_modules/web-animations-js/web-animations-next-lite.min.js",
+    "/node_modules/gw2-coin-input/images/*",
+    "/node_modules/gw2-coin-output/images/*",
+    "/src/data/*",
+    "/src/images/**/*"
   ],
-  navigateFallback: 'index.html',
+  navigateFallback: "index.html"
 };

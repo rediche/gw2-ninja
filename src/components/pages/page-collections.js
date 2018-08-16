@@ -30,8 +30,14 @@ class PageCollections extends PolymerElement {
           padding: 0;
         }
 
-        paper-tabs {
+        .sticky-tabs {
           background-color: var(--app-primary-color);
+        }
+
+        paper-tabs {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 0 var(--spacer-large);
           --paper-tabs-selection-bar-color: #ffffff;
         }
 
@@ -54,11 +60,13 @@ class PageCollections extends PolymerElement {
 
       <p class="description">With the collections tool, you can see the prices of items in various collections, which can be bought straight off the trading post.<br> It also calculates a total price of how much the collection is worth.</p>
 
-      <paper-tabs class="sticky-tabs" selected="{{subviewData.subview}}" attr-for-selected="name">
-        <paper-tab name="basic">Basic</paper-tab>
-        <paper-tab name="rare">Rare</paper-tab>
-        <paper-tab name="black-lion">Black Lion</paper-tab>
-      </paper-tabs>
+      <div class="sticky-tabs">
+        <paper-tabs selected="{{subviewData.subview}}" attr-for-selected="name">
+          <paper-tab name="basic">Basic</paper-tab>
+          <paper-tab name="rare">Rare</paper-tab>
+          <paper-tab name="black-lion">Black Lion</paper-tab>
+        </paper-tabs>
+      </div>
 
       <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="basic">
         <div name="basic">

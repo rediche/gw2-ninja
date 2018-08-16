@@ -39,6 +39,8 @@ class CollectionList extends connect(store)(
     <style>
       :host {
         display: block;
+        max-width: 1100px;
+        margin: 0 auto;
       }
 
       table {
@@ -81,7 +83,7 @@ class CollectionList extends connect(store)(
 
       .category-name {
         width: 100%;
-      } 
+      }
 
       gw2-coin-output {
         text-align: right;

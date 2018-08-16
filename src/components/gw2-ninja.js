@@ -22,16 +22,17 @@ import "@polymer/paper-toast/paper-toast.js";
 import "./page-metadata.js";
 import "./my-icons.js";
 import "./online-status.js";
+import "./drawer-top";
 import "./settings/gwn-settings.js";
 import "./collections/collection-modal.js";
 
-import { connect } from 'pwa-helpers/connect-mixin.js';
+import { connect } from "pwa-helpers/connect-mixin.js";
 
 // Load redux store
-import { store } from '../store.js';
+import { store } from "../store.js";
 
 // Lazy load reducers
-import settings from '../reducers/settings.js';
+import settings from "../reducers/settings.js";
 store.addReducers({
   settings
 });
@@ -115,32 +116,23 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
         };
       }
 
-      app-drawer app-toolbar {
-        padding-left: var(--spacer-xsmall);
-        position: fixed;
-        top: 7.5rem;
-        width: 100%;
-        z-index: 1;
-        background-color: var(--app-background-color);
-      }
-
-      app-drawer app-toolbar [main-title] {
-        margin-left: var(--spacer-small);
-      }
-
       .drawer-scroll {
-        height: 100%;
+        height: calc(100% - 256px * 0.5625);
         overflow-y: auto;
         position: relative;
-        padding-top: 5rem;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
+        padding-top: 1rem;
       }
 
       #onlineStatusToast {
         bottom: 0;
         top: auto !important;
+      }
+
+      .last-before-auto {
+        margin-bottom: 1rem;
       }
 
       @media screen and (min-width: 641px) {
@@ -186,14 +178,8 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
 
     <!-- Drawer content -->
     <app-drawer id="drawer" swipe-open opened="{{drawer}}">
+      <drawer-top theme$="[[theme]]" on-close-drawer="_closeDrawer"></drawer-top>
       <div class="drawer-scroll">
-        <app-toolbar>
-          <paper-icon-button icon="my-icons:close" on-tap="_closeDrawer" aria-label="Close menu"></paper-icon-button>
-          <div main-title>
-            <iron-icon icon="my-icons:logo"></iron-icon>
-            GW2 Ninja
-          </div>
-        </app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a name="index" href="/" tabindex="-1">
             <paper-item>Home</paper-item>
@@ -216,7 +202,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           <a name="timer" href="/timer/all" tabindex="-1">
             <paper-item>Meta Timer</paper-item>
           </a>
-          <a name="calc" href="/calc" tabindex="-1">
+          <a name="calc" href="/calc" tabindex="-1" class="last-before-auto">
             <paper-item>TP Calc</paper-item>
           </a>
           <hr style="margin-top:auto">
@@ -394,7 +380,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
 
   _stateChanged(state) {
     if (!state || !state.settings) return;
-    this.set('theme', state.settings.theme);
+    this.set("theme", state.settings.theme);
   }
 }
 

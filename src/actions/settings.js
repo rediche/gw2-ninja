@@ -23,4 +23,4 @@ export const changeTheme = theme => dispatch => {
       theme: theme
     });
   }
-}
+};

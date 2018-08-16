@@ -1,4 +1,4 @@
-import { 
+import {
   CHANGE_LANGUAGE,
   CHANGE_THEME,
   CHANGE_API_KEY,
@@ -19,22 +19,22 @@ const settings = (
       return {
         ...state,
         language: action.language
-      }
+      };
     case CHANGE_THEME:
       return {
         ...state,
         theme: action.theme
-      }
+      };
     case CHANGE_API_KEY:
       return {
         ...state,
         apiKey: action.apiKey
-      }
+      };
     case CHANGE_API_PERMISSIONS:
       return {
         ...state,
         apiPermissions: action.apiPermissions
-      }
+      };
     default:
       return state;
   }

@@ -25,17 +25,25 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
       :host {
         display: block;
       }
-      paper-tabs {
+
+      .sticky-tabs {
         background-color: var(--app-primary-color);
-        --paper-tabs-selection-bar-color: var(--app-text-color-light);
       }
+
+      paper-tabs {
+        --paper-tabs-selection-bar-color: var(--app-text-color-light);
+        padding: 0 var(--spacer-large);
+      }
+
       paper-tab {
         color: var(--app-text-color-light);
       }
+
       .search {
         margin: var(--spacer-large);
         position: relative;
       }
+
       .search-field {
         padding: .9375rem 3rem .9375rem var(--spacer-medium);
         font-size: 1rem;
@@ -46,12 +54,14 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
         border-radius: var(--app-border-radius);
         box-shadow: 0 1px 4px rgba(0,0,0,.12);
       }
+
       .search-clear {
         position: absolute;
         right: .25rem;
         top: .25rem;
         color: #BDBDBD;
       }
+
       .directory-list {
         display: flex;
         justify-content: space-between;
@@ -59,10 +69,17 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
         flex-wrap: wrap;
         margin: var(--spacer-large);
       }
+
       directory-entry {
         flex-basis: 100%;
         margin-bottom: var(--spacer-large);
       }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
       @media screen and (min-width: 768px) {
         directory-entry {
           flex-basis: calc(100% / 2 - var(--spacer-large) / 2);
@@ -73,34 +90,38 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
     <app-location route="{{route}}"></app-location>
     <app-route route="{{route}}" pattern="/directory/:subview" data="{{subviewData}}"></app-route>
 
-    <paper-tabs class="sticky-tabs" selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="websites">
-      <paper-tab name="websites">Websites</paper-tab>
-      <paper-tab name="streamers">Streamers</paper-tab>
-      <paper-tab name="youtubers">YouTubers</paper-tab>
-    </paper-tabs>
-
-    <div class="search">
-      <input class="search-field" type="text" value="{{searchValue::input}}" placeholder$="Search for [[searchForText]]">
-      <paper-icon-button class="search-clear" icon="icons:cancel" hidden$="[[ _hideClearSearch(searchValue) ]]" on-tap="_clearSearchValue"></paper-icon-button>
+    <div class="sticky-tabs">
+      <paper-tabs class="container" selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="websites">
+        <paper-tab name="websites">Websites</paper-tab>
+        <paper-tab name="streamers">Streamers</paper-tab>
+        <paper-tab name="youtubers">YouTubers</paper-tab>
+      </paper-tabs>
     </div>
 
-    <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="websites">
-      <div name="websites" class="directory-list">
-        <template is="dom-repeat" items="{{websites}}">
-          <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
-        </template>
+    <div class="container">
+      <div class="search">
+        <input class="search-field" type="text" value="{{searchValue::input}}" placeholder$="Search for [[searchForText]]">
+        <paper-icon-button class="search-clear" icon="icons:cancel" hidden$="[[ _hideClearSearch(searchValue) ]]" on-tap="_clearSearchValue"></paper-icon-button>
       </div>
-      <div name="streamers" class="directory-list">
-        <template is="dom-repeat" items="{{streamers}}">
-          <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
-        </template>
-      </div>
-      <div name="youtubers" class="directory-list">
-        <template is="dom-repeat" items="{{youtube}}">
-          <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
-        </template>
-      </div>
-    </iron-pages>
+
+      <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="websites">
+        <div name="websites" class="directory-list">
+          <template is="dom-repeat" items="{{websites}}">
+            <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
+          </template>
+        </div>
+        <div name="streamers" class="directory-list">
+          <template is="dom-repeat" items="{{streamers}}">
+            <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
+          </template>
+        </div>
+        <div name="youtubers" class="directory-list">
+          <template is="dom-repeat" items="{{youtube}}">
+            <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
+          </template>
+        </div>
+      </iron-pages>
+    </div>
 
     <paper-toast id="toast" duration="0" text="An error occured."></paper-toast>
     `;
