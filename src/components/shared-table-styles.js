@@ -46,10 +46,6 @@ export const SharedTableStyles = html`
     padding: 1rem var(--spacer-small);
   }
 
-  thead th {
-    padding-top: .5rem;
-  }
-
   tr td:first-child, tr th:first-child {
     padding-left: 1rem;
   }

@@ -43,6 +43,10 @@ class CollectionModal extends connect(store)(PolymerElement) {
           box-shadow: var(--app-box-shadow);
         }
 
+        thead th {
+          padding-top: .5rem;
+        }
+
         tbody {
           max-height: calc(100vh - 1.5rem * 2 - 56px - 45px - 53px);
         }

@@ -5,7 +5,7 @@ export const SharedWvwStyles = html`
   :host {
     /* Colors */
     --team-green: #4CAF50;
-    --team-blue: #1E88E5;
+    --team-blue: #1976D2;
     --team-red: #E53935;
   }
 
