@@ -1,4 +1,4 @@
-import {PolymerElement, html} from "@polymer/polymer/polymer-element.js";
+import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import "@polymer/polymer/lib/elements/dom-repeat.js";
 
 import { SharedStyles } from "../shared-styles";
@@ -11,7 +11,7 @@ import { SharedWvwStyles } from "../shared-wvw-styles";
  * @customElement
  * @polymer
  * @demo
- * 
+ *
  */
 class WvWMatchup extends PolymerElement {
   static get template() {
@@ -38,10 +38,21 @@ class WvWMatchup extends PolymerElement {
           margin-top: var(--spacer-large);
         }
 
+        .subtitle {
+          font-size: .75rem;
+          font-weight: 600;
+          margin-bottom: 0;
+        }
+
+        .subtitle:not(:first-child) {
+          margin-top: .5rem;
+        }
+
         .cards {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+          flex-wrap: wrap;
         }
 
         .card {
@@ -49,14 +60,17 @@ class WvWMatchup extends PolymerElement {
           margin-bottom: var(--spacer-medium);
         }
 
-        .world-header {
+        .card-header {
           padding: var(--spacer-medium) var(--spacer-medium) var(--spacer-small);
-          color: var(--app-text-color-light);
           font-weight: 600;
           box-shadow: var(--app-box-shadow);
         }
 
-        .world-body {
+        .card-header.world {
+          color: var(--app-text-color-light);
+        }
+
+        .card-body {
           padding: var(--spacer-small) var(--spacer-medium);
         }
 
@@ -85,6 +99,16 @@ class WvWMatchup extends PolymerElement {
             width: calc(100% / 3 - 1rem);
             margin-bottom: 0;
           }
+
+          .maps .card {
+            width: calc(100% / 2 - 1rem);
+          }
+        }
+
+        @media screen and (min-width: 1100px) {
+          .maps .card {
+            width: calc(100% / 4 - 1rem);
+          }
         }
       </style>
 
@@ -92,8 +116,8 @@ class WvWMatchup extends PolymerElement {
         <h2 class="title">Worlds</h2>
         <div class="worlds cards">
           <div class="card">
-            <div class="world-header team-green-bg">[[ _generateWorldLinkNames(matchup.all_worlds.green, matchup.worlds.green, worlds) ]]</div>
-            <div class="world-body">
+            <div class="world card-header team-green-bg">[[ _generateWorldLinkNames(matchup.all_worlds.green, matchup.worlds.green, worlds) ]]</div>
+            <div class="card-body">
               <div>Victory Points: [[ matchup.victory_points.green ]]</div>
               <div>Score: [[ matchup.scores.green ]]</div>
               <div>Kills: [[ matchup.kills.green ]]</div>
@@ -102,8 +126,8 @@ class WvWMatchup extends PolymerElement {
             </div>
           </div>
           <div class="card">
-            <div class="world-header team-blue-bg">[[ _generateWorldLinkNames(matchup.all_worlds.blue, matchup.worlds.blue, worlds) ]]</div>
-            <div class="world-body">
+            <div class="world card-header team-blue-bg">[[ _generateWorldLinkNames(matchup.all_worlds.blue, matchup.worlds.blue, worlds) ]]</div>
+            <div class="card-body">
               <div>Victory Points: [[ matchup.victory_points.blue ]]</div>
               <div>Score: [[ matchup.scores.blue ]]</div>
               <div>Kills: [[ matchup.kills.blue ]]</div>
@@ -112,8 +136,8 @@ class WvWMatchup extends PolymerElement {
             </div>
           </div>
           <div class="card">
-            <div class="world-header team-red-bg">[[ _generateWorldLinkNames(matchup.all_worlds.red, matchup.worlds.red, worlds) ]]</div>
-            <div class="world-body">
+            <div class="world card-header team-red-bg">[[ _generateWorldLinkNames(matchup.all_worlds.red, matchup.worlds.red, worlds) ]]</div>
+            <div class="card-body">
               <div>Victory Points: [[ matchup.victory_points.red ]]</div>
               <div>Score: [[ matchup.scores.red ]]</div>
               <div>Kills: [[ matchup.kills.red ]]</div>
@@ -124,11 +148,45 @@ class WvWMatchup extends PolymerElement {
         </div>
 
         <h2 class="title">Maps</h2>
-        <p>Show 4 cards with kills, deaths, KDR etc for each server.</p>
+        <div class="maps cards">
+          <template is="dom-repeat" items="{{ matchup.maps }}" as="map">
+            <div class="card">
+              <div class="card-header map">[[ _resolveBLName(map.type) ]]</div>
+              <div class="card-body">
+                <h3 class="subtitle">Scores</h3>
+                <gwn-progress class="green" progress="[[ map.scores.green ]]" max="[[ _highestScore(map.scores) ]]">[[ map.scores.green ]]</gwn-progress>
+                <gwn-progress class="blue" progress="[[ map.scores.blue ]]" max="[[ _highestScore(map.scores) ]]">[[ map.scores.blue ]]</gwn-progress>
+                <gwn-progress class="red" progress="[[ map.scores.red ]]" max="[[ _highestScore(map.scores) ]]">[[ map.scores.red ]]</gwn-progress>
+                
+                <h3 class="subtitle">Kills</h3>
+                <gwn-progress class="green" progress="[[ map.kills.green ]]" max="[[ _highestScore(map.kills) ]]">[[ map.kills.green ]]</gwn-progress>
+                <gwn-progress class="blue" progress="[[ map.kills.blue ]]" max="[[ _highestScore(map.kills) ]]">[[ map.kills.blue ]]</gwn-progress>
+                <gwn-progress class="red" progress="[[ map.kills.red ]]" max="[[ _highestScore(map.kills) ]]">[[ map.kills.red ]]</gwn-progress>
+
+                <h3 class="subtitle">Deaths</h3>
+                <gwn-progress class="green" progress="[[ map.deaths.green ]]" max="[[ _highestScore(map.deaths) ]]">[[ map.deaths.green ]]</gwn-progress>
+                <gwn-progress class="blue" progress="[[ map.deaths.blue ]]" max="[[ _highestScore(map.deaths) ]]">[[ map.deaths.blue ]]</gwn-progress>
+                <gwn-progress class="red" progress="[[ map.deaths.red ]]" max="[[ _highestScore(map.deaths) ]]">[[ map.deaths.red ]]</gwn-progress>
+
+                <h3 class="subtitle">KDR</h3>
+                <gwn-progress 
+                  class="green" 
+                  progress="[[ _calcKDR(map.kills.green, map.deaths.green) ]]" 
+                  max="[[ _highestKDR(map.kills, map.deaths) ]]">[[ _calcKDR(map.kills.green, map.deaths.green) ]]</gwn-progress>
+                <gwn-progress 
+                  class="blue" 
+                  progress="[[ _calcKDR(map.kills.blue, map.deaths.blue) ]]" 
+                  max="[[ _highestKDR(map.kills, map.deaths) ]]">[[ _calcKDR(map.kills.blue, map.deaths.blue) ]]</gwn-progress>
+                <gwn-progress 
+                  class="red" 
+                  progress="[[ _calcKDR(map.kills.red, map.deaths.red) ]]" 
+                  max="[[ _highestKDR(map.kills, map.deaths) ]]">[[ _calcKDR(map.kills.red, map.deaths.red) ]]</gwn-progress>
+              </div>
+            </div>
+          </template>
+        </div>
 
         <h2 class="title">Skirmishes</h2>
-        <p>Show a table with all skimishes with the newest on top</p>
-
         <div class="table-scroll card">
           <table>
             <thead>
@@ -136,9 +194,9 @@ class WvWMatchup extends PolymerElement {
               <th>Matchup Score</th>
               <th>Skirmish Score</th>
               <th>Eternal Battlegrounds</th>
-              <th>Red Borderlands</th>
-              <th>Blue Borderlands</th>
-              <th>Green Borderlands</th>
+              <th>Red Borderland</th>
+              <th>Blue Borderland</th>
+              <th>Green Borderland</th>
             </thead>
             <tbody>
               <template is="dom-repeat" items="{{ skirmishesDesc }}" as="skirmish">
@@ -178,7 +236,7 @@ class WvWMatchup extends PolymerElement {
         type: Array,
         computed: "_reverseSkirmishes(matchup.skirmishes)"
       }
-    }
+    };
   }
 
   _generateWorldLinkNames(allWorldsInLink, hostWorld, worlds) {
@@ -194,7 +252,9 @@ class WvWMatchup extends PolymerElement {
 
     const hostWorldName = this._resolveWorldName(hostWorld, worlds);
 
-    return linkedWorlds.length > 0 ? `${hostWorldName} (${linkedWorldsWithNames.join(', ')})` : hostWorldName;
+    return linkedWorlds.length > 0
+      ? `${hostWorldName} (${linkedWorldsWithNames.join(", ")})`
+      : hostWorldName;
   }
 
   _resolveWorldName(worldId, worlds) {
@@ -209,8 +269,12 @@ class WvWMatchup extends PolymerElement {
 
   _calcKDR(kills, deaths) {
     if (!kills || !deaths) return;
+    return parseFloat(Math.round((kills / deaths) * 100) / 100).toFixed(2);
+  }
 
-    return parseFloat(Math.round(kills / deaths * 100) / 100).toFixed(2);
+  _highestKDR(kills, deaths) {
+    if (!kills || !deaths) return;
+    return Math.max(this._calcKDR(kills.green, deaths.green), this._calcKDR(kills.blue, deaths.blue), this._calcKDR(kills.red, deaths.red));
   }
 
   _highestScore(scores) {
@@ -234,6 +298,18 @@ class WvWMatchup extends PolymerElement {
     return skirmishes.reverse();
   }
 
+  _resolveBLName(type) {
+    switch (type) {
+      case "Center":
+        return "Eternal Battlegrounds";
+      case "RedHome":
+        return "Red Borderland";
+      case "BlueHome":
+        return "Blue Borderland";
+      case "GreenHome":
+        return "Green Borderland";
+    }
+  }
 }
 
-customElements.define('wvw-matchup', WvWMatchup);
+customElements.define("wvw-matchup", WvWMatchup);
