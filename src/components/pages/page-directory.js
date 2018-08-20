@@ -40,7 +40,7 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
       }
 
       .search {
-        margin: var(--spacer-large);
+        margin: var(--spacer-medium) var(--spacer-small);
         position: relative;
       }
 
@@ -67,12 +67,12 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
         justify-content: space-between;
         align-items: stretch;
         flex-wrap: wrap;
-        margin: var(--spacer-large);
+        margin: var(--spacer-medium) var(--spacer-small);
       }
 
       directory-entry {
         flex-basis: 100%;
-        margin-bottom: var(--spacer-large);
+        margin-bottom: var(--spacer-medium);
       }
 
       .container {
@@ -81,8 +81,17 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
       }
 
       @media screen and (min-width: 768px) {
+        .search {
+          margin: var(--spacer-large);
+        }
+
+        .directory-list {
+          margin: var(--spacer-large);
+        }
+
         directory-entry {
           flex-basis: calc(100% / 2 - var(--spacer-large) / 2);
+          margin-bottom: var(--spacer-large);
         }
       }
     </style>
