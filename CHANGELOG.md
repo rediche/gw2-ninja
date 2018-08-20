@@ -1,5 +1,7 @@
 # Next release
 
+# August 20, 2018
+
 - Added "Add-ons" section on Directory
 - ArcDPS, GW2 Mounts, GW2 TACO and Gw2Hook added to Add-ons.
 - Removed GW2 Shinies from Websites.
