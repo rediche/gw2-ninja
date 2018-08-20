@@ -67,12 +67,6 @@
     "directory": "websites"
   },
   {
-    "name": "GW2 Shinies",
-    "description": "The allround collection of tools for the GW2 Trading Post and making Shinies online!",
-    "url": "http://www.gw2shinies.com/",
-    "directory": "websites"
-  },
-  {
     "name": "GW2 Spidy",
     "description": "The father of Guild Wars 2 Graphs for the Trading Post and with extra tools for Crafting.",
     "url": "http://www.gw2spidy.com/",
@@ -1087,5 +1081,32 @@
     "description": "Testifye's Istan Profit Model.",
     "url": "https://sites.google.com/view/gw2-tipm/home",
     "directory": "websites"
+  },
+  {
+    "name": "ArcDPS",
+    "description": "A Guild Wars 2 DPS Meter.",
+    "url": "https://www.deltaconnected.com/arcdps/",
+    "directory": "addons",
+    "approval": "https://www.reddit.com/r/Guildwars2/comments/704oem/build_templates_actual_release/dn0eys7/"
+  },
+  {
+    "name": "GW2 Mounts",
+    "description": "A plugin to show a convenient, customizable radial menu overlay to select a mount on the fly for Guild Wars 2: Path of Fire.",
+    "url": "https://github.com/Friendly0Fire/GW2Addons",
+    "directory": "addons",
+    "approval": "https://www.reddit.com/r/Guildwars2/comments/746mar/mount_radial_menu_addon_very_alpha_much_untested/dnwqj9x/"
+  },
+  {
+    "name": "GW2 Tactical Overlay",
+    "description": "The Guild Wars 2 Tactical Overlay is an overlay add-on for GW2, powered by content created by players just like you. ",
+    "url": "http://www.gw2taco.com/",
+    "directory": "addons",
+    "approval": "https://www.reddit.com/r/Guildwars2/comments/66m13h/anet_this_really_should_be_part_of_the_game/dgjyrji/"
+  },
+  {
+    "name": "Gw2Hook",
+    "description": "Gw2Hook allows you to finely control the graphical settings of Guild Wars 2 by changing shaders, colorgrading and more.",
+    "url": "https://04348.github.io/Gw2Hook/",
+    "directory": "addons"
   }
 ]
