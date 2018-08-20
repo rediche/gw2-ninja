@@ -27,6 +27,9 @@ class DirectoryEntry extends PolymerElement {
         text-decoration: none;
         margin-right: 1rem;
         font-size: .85rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       a:last-of-type {
