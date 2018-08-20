@@ -93,6 +93,7 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
     <div class="sticky-tabs">
       <paper-tabs class="container" selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="websites">
         <paper-tab name="websites">Websites</paper-tab>
+        <paper-tab name="addons">Add-ons</paper-tab>
         <paper-tab name="streamers">Streamers</paper-tab>
         <paper-tab name="youtubers">YouTubers</paper-tab>
       </paper-tabs>
@@ -108,6 +109,11 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
         <div name="websites" class="directory-list">
           <template is="dom-repeat" items="{{websites}}">
             <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
+          </template>
+        </div>
+        <div name="addons" class="directory-list">
+          <template is="dom-repeat" items="{{addons}}">
+            <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" approval="[[item.approval]]" inactive="[[item.inactive]]"></directory-entry>
           </template>
         </div>
         <div name="streamers" class="directory-list">
@@ -146,15 +152,10 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
         type: Array,
         computed: "_entriesFilteredObserver(entries, searchValue)"
       },
-      websites: {
-        type: Array
-      },
-      streamers: {
-        type: Array
-      },
-      youtube: {
-        type: Array
-      }
+      websites: Array,
+      streamers: Array,
+      youtube: Array,
+      addons: Array
     };
   }
 
@@ -197,6 +198,7 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
     this.set("websites", this._filterEntries(entriesFiltered, "websites"));
     this.set("streamers", this._filterEntries(entriesFiltered, "streamers"));
     this.set("youtube", this._filterEntries(entriesFiltered, "youtube"));
+    this.set("addons", this._filterEntries(entriesFiltered, "addons"));
   }
 
   _filterEntries(entries, directory) {
@@ -213,6 +215,9 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
         break;
       case "streamers":
         return "Streamers";
+        break;
+      case "addons":
+        return "Add-ons";
         break;
       case "websites":
       default:

@@ -1087,5 +1087,12 @@
     "description": "Testifye's Istan Profit Model.",
     "url": "https://sites.google.com/view/gw2-tipm/home",
     "directory": "websites"
+  },
+  {
+    "name": "ArcDPS",
+    "description": "A Guild Wars 2 DPS Meter",
+    "url": "https://www.deltaconnected.com/arcdps/",
+    "directory": "addons",
+    "approval": "https://www.reddit.com/r/Guildwars2/comments/704oem/build_templates_actual_release/dn0eys7/"
   }
 ]
