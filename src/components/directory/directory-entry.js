@@ -11,14 +11,35 @@ class DirectoryEntry extends PolymerElement {
         display: block;
         box-sizing: border-box;
       }
-      
+
+      .links {
+        display: flex;
+      }
+
       a {
-        display: block;
-        text-decoration: none;
-        color: var(--app-text-color);
-        height: 100%;
-        box-sizing: border-box;
         position: relative;
+        flex: 1;
+        padding: .5rem 1rem;
+        text-align: center;
+        border-radius: var(--app-border-radius);
+        background-color: var(--app-primary-color);
+        color: var(--app-text-color-light);
+        text-decoration: none;
+        margin-right: 1rem;
+        font-size: .85rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      a:last-of-type {
+        margin-right: 0;
+      }
+
+      a.secondary {
+        background-color: transparent;
+        color: var(--app-primary-color);
+        border: 1px solid var(--app-primary-color);
       }
 
       h6 {
@@ -39,16 +60,35 @@ class DirectoryEntry extends PolymerElement {
 
       .card {
         height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .title,
+      .links {
+        flex: none;
+      }
+
+      .entry-description {
+        flex: 1;
       }
     </style>
 
-    <a href="[[ url ]]" target="_blank" rel="nofollow">
       <div class="card">
-        <h6>[[ name ]] <span hidden\$="[[ !inactive ]]">- Inactive</span></h6>
-        <p>[[ description ]]</p>
+        <h6 class="title">[[ name ]] <span hidden$="[[ !inactive ]]">- Inactive</span></h6>
+        <p class="entry-description">[[ description ]]</p>
+
+        <div class="links">
+          <a class="secondary" hidden$="[[ !approval ]]" href="[[ approval ]]" target="_blank" rel="noopener noreferrer nofollow">
+            Official Approval
+            <paper-ripple></paper-ripple>
+          </a>
+          <a href="[[ url ]]" target="_blank" rel="noopener noreferrer nofollow">
+            Visit [[ name ]]
+            <paper-ripple></paper-ripple>
+          </a>
+        </div>
       </div>
-      <paper-ripple></paper-ripple>
-    </a>
 `;
   }
 
@@ -58,18 +98,17 @@ class DirectoryEntry extends PolymerElement {
 
   static get properties() {
     return {
-      name: {
-        type: String
-      },
-      url: {
-        type: String
-      },
-      description: {
-        type: String
-      },
+      theme: String,
+      name: String,
+      url: String,
+      description: String,
       inactive: {
         type: Boolean,
         value: false
+      },
+      approval: {
+        type: String,
+        value: null
       }
     };
   }

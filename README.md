@@ -6,8 +6,7 @@ Polymer 3 version of [GW2 Ninja](http://gw2.ninja).
 
 #### Prerequisites
 
-First, install [Polymer CLI](https://github.com/Polymer/polymer-cli) and Bower using
-[npm](https://www.npmjs.com) (we assume you have pre-installed [node.js](https://nodejs.org)).
+First, install [Polymer CLI](https://github.com/Polymer/polymer-cli) (we assume you have pre-installed [node.js](https://nodejs.org)).
 
     npm install -g polymer-cli bower
 
@@ -35,7 +34,7 @@ The minified files are output to the `build/default` folder.
 
 ## Preview the build
 
-This command serves the built version of the app at `http://localhost:8081`:
+This command serves the built version of the app at `http://localhost:8080`:
 
     polymer serve build/default
 

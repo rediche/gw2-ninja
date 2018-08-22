@@ -40,7 +40,7 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
       }
 
       .search {
-        margin: var(--spacer-large);
+        margin: var(--spacer-medium) var(--spacer-small);
         position: relative;
       }
 
@@ -67,12 +67,12 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
         justify-content: space-between;
         align-items: stretch;
         flex-wrap: wrap;
-        margin: var(--spacer-large);
+        margin: var(--spacer-medium) var(--spacer-small);
       }
 
       directory-entry {
         flex-basis: 100%;
-        margin-bottom: var(--spacer-large);
+        margin-bottom: var(--spacer-medium);
       }
 
       .container {
@@ -81,8 +81,17 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
       }
 
       @media screen and (min-width: 768px) {
+        .search {
+          margin: var(--spacer-large);
+        }
+
+        .directory-list {
+          margin: var(--spacer-large);
+        }
+
         directory-entry {
           flex-basis: calc(100% / 2 - var(--spacer-large) / 2);
+          margin-bottom: var(--spacer-large);
         }
       }
     </style>
@@ -93,6 +102,7 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
     <div class="sticky-tabs">
       <paper-tabs class="container" selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="websites">
         <paper-tab name="websites">Websites</paper-tab>
+        <paper-tab name="addons">Add-ons</paper-tab>
         <paper-tab name="streamers">Streamers</paper-tab>
         <paper-tab name="youtubers">YouTubers</paper-tab>
       </paper-tabs>
@@ -107,17 +117,22 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
       <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="websites">
         <div name="websites" class="directory-list">
           <template is="dom-repeat" items="{{websites}}">
-            <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
+            <directory-entry theme$="[[theme]]" name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
+          </template>
+        </div>
+        <div name="addons" class="directory-list">
+          <template is="dom-repeat" items="{{addons}}">
+            <directory-entry theme$="[[theme]]" name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" approval="[[item.approval]]" inactive="[[item.inactive]]"></directory-entry>
           </template>
         </div>
         <div name="streamers" class="directory-list">
           <template is="dom-repeat" items="{{streamers}}">
-            <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
+            <directory-entry theme$="[[theme]]" name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
           </template>
         </div>
         <div name="youtubers" class="directory-list">
           <template is="dom-repeat" items="{{youtube}}">
-            <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
+            <directory-entry theme$="[[theme]]" name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
           </template>
         </div>
       </iron-pages>
@@ -129,6 +144,7 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
 
   static get properties() {
     return {
+      theme: String,
       subviewData: {
         observer: "_selectedObserver"
       },
@@ -146,15 +162,10 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
         type: Array,
         computed: "_entriesFilteredObserver(entries, searchValue)"
       },
-      websites: {
-        type: Array
-      },
-      streamers: {
-        type: Array
-      },
-      youtube: {
-        type: Array
-      }
+      websites: Array,
+      streamers: Array,
+      youtube: Array,
+      addons: Array
     };
   }
 
@@ -197,6 +208,7 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
     this.set("websites", this._filterEntries(entriesFiltered, "websites"));
     this.set("streamers", this._filterEntries(entriesFiltered, "streamers"));
     this.set("youtube", this._filterEntries(entriesFiltered, "youtube"));
+    this.set("addons", this._filterEntries(entriesFiltered, "addons"));
   }
 
   _filterEntries(entries, directory) {
@@ -213,6 +225,9 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
         break;
       case "streamers":
         return "Streamers";
+        break;
+      case "addons":
+        return "Add-ons";
         break;
       case "websites":
       default:
