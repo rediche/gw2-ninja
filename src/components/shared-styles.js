@@ -7,7 +7,7 @@ export const SharedStyles = html`
     --color-guild-wars-2: #F44336;
     --color-guild-wars-2-dark: #C62828;
 
-    --color-heart-of-thorns: #4CAF50;
+    --color-heart-of-thorns: #388E3C;
     --color-heart-of-thorns-dark: #2E7D32;
 
     --color-path-of-fire: #9C27B0;

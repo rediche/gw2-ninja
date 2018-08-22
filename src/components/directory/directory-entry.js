@@ -36,6 +36,12 @@ class DirectoryEntry extends PolymerElement {
         margin-right: 0;
       }
 
+      a.secondary {
+        background-color: transparent;
+        color: var(--app-primary-color);
+        border: 1px solid var(--app-primary-color);
+      }
+
       h6 {
         margin: 0;
       }
@@ -73,7 +79,7 @@ class DirectoryEntry extends PolymerElement {
         <p class="entry-description">[[ description ]]</p>
 
         <div class="links">
-          <a hidden$="[[ !approval ]]" href="[[ approval ]]" target="_blank" rel="noopener noreferrer nofollow">
+          <a class="secondary" hidden$="[[ !approval ]]" href="[[ approval ]]" target="_blank" rel="noopener noreferrer nofollow">
             Official Approval
             <paper-ripple></paper-ripple>
           </a>
@@ -92,15 +98,10 @@ class DirectoryEntry extends PolymerElement {
 
   static get properties() {
     return {
-      name: {
-        type: String
-      },
-      url: {
-        type: String
-      },
-      description: {
-        type: String
-      },
+      theme: String,
+      name: String,
+      url: String,
+      description: String,
       inactive: {
         type: Boolean,
         value: false

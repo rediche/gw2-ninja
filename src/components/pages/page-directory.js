@@ -117,22 +117,22 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
       <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="websites">
         <div name="websites" class="directory-list">
           <template is="dom-repeat" items="{{websites}}">
-            <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
+            <directory-entry theme$="[[theme]]" name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
           </template>
         </div>
         <div name="addons" class="directory-list">
           <template is="dom-repeat" items="{{addons}}">
-            <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" approval="[[item.approval]]" inactive="[[item.inactive]]"></directory-entry>
+            <directory-entry theme$="[[theme]]" name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" approval="[[item.approval]]" inactive="[[item.inactive]]"></directory-entry>
           </template>
         </div>
         <div name="streamers" class="directory-list">
           <template is="dom-repeat" items="{{streamers}}">
-            <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
+            <directory-entry theme$="[[theme]]" name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
           </template>
         </div>
         <div name="youtubers" class="directory-list">
           <template is="dom-repeat" items="{{youtube}}">
-            <directory-entry name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
+            <directory-entry theme$="[[theme]]" name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
           </template>
         </div>
       </iron-pages>
@@ -144,6 +144,7 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
 
   static get properties() {
     return {
+      theme: String,
       subviewData: {
         observer: "_selectedObserver"
       },
