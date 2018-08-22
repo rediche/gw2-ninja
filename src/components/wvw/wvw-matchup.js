@@ -64,6 +64,7 @@ class WvWMatchup extends PolymerElement {
           padding: var(--spacer-medium) var(--spacer-medium) var(--spacer-small);
           font-weight: 600;
           box-shadow: var(--app-box-shadow);
+          min-height: 3rem;
         }
 
         .card-header.world {
