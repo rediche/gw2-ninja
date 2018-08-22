@@ -202,8 +202,11 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           <a name="timer" href="/timer/all" tabindex="-1">
             <paper-item>Meta Timer</paper-item>
           </a>
-          <a name="calc" href="/calc" tabindex="-1" class="last-before-auto">
+          <a name="calc" href="/calc" tabindex="-1">
             <paper-item>TP Calc</paper-item>
+          </a>
+          <a name="wvw" href="/wvw/overview" tabindex="-1" class="last-before-auto">
+            <paper-item>World vs World</paper-item>
           </a>
           <hr style="margin-top:auto">
           <a name="stream" href="/stream" tabindex="-1">
