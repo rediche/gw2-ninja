@@ -64,15 +64,25 @@ class PageWvw extends PolymerElement {
         color: white;
       }
 
-      wvw-map {
+      .map {
         height: calc(100vh - 8rem);
+        display: flex;
+        flex-direction: column-reverse;
+      }
+
+      wvw-map {
+        height: 100%;
+        width: 100%;
       }
 
       wvw-map-stats {
-        z-index: 1000;
-        position: absolute;
-        top: calc(3rem + var(--spacer-large));
-        left: var(--spacer-large);
+        flex: none;
+      }
+
+      @media screen and (min-width: 1024px) {
+        .map {
+          flex-direction: row;
+        }
       }
     </style>
 
@@ -96,16 +106,16 @@ class PageWvw extends PolymerElement {
       </paper-tabs>
     </div>
 
-    <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="map">
-      <div name="map">
-        <wvw-map map-data="[[currentMatchup.maps]]" active="[[mapActive]]"></wvw-map>
-        <!--<wvw-map-stats></wvw-map-stats>-->
+    <iron-pages selected="{{ subviewData.subview }}" attr-for-selected="name" fallback-selection="map">
+      <div name="map" class="map">
+        <wvw-map-stats selected-objective="[[ selectedObjective ]]"></wvw-map-stats>
+        <wvw-map map-data="[[ currentMatchup.maps ]]" active="[[ mapActive ]]" objectives="{{ objectives }}" on-objective-clicked="_objectiveClicked"></wvw-map>
       </div>
       <div name="overview">
-        <wvw-region matches="[[matches]]" worlds="[[worlds]]"></wvw-region>
+        <wvw-region matches="[[ matches ]]" worlds="[[ worlds ]]"></wvw-region>
       </div>
       <div name="stats">
-        <wvw-matchup matchup="[[currentMatchup]]" worlds="[[worlds]]"></wvw-matchup>
+        <wvw-matchup matchup="[[ currentMatchup ]]" worlds="[[ worlds ]]"></wvw-matchup>
       </div>
       <div name="leaderboards">
         Leaderboards. Compare stats between all servers on all regions.
@@ -119,29 +129,21 @@ class PageWvw extends PolymerElement {
    */
   static get properties() {
     return {
-      subviewData: {
-        type: Object
-      },
-      theme: {
-        type: String
-      },
+      subviewData: Object,
+      theme: String,
       mapActive: {
         type: Boolean,
         computed: "_checkActiveMap(subviewData)"
       },
-      matches: {
-        type: Array
-      },
-      worlds: {
-        type: Array
-      },
+      matches: Array,
+      worlds: Array,
       serverId: {
         type: Number,
         value: 2010
       },
-      currentMatch: {
-        type: Object
-      }
+      currentMatch: Object,
+      objectives: Array,
+      selectedObjective: Object
     };
   }
 
@@ -156,7 +158,7 @@ class PageWvw extends PolymerElement {
       const that = this;
       this._getWorlds();
       this._getMatches();
-      setInterval(that._getMatches.bind(that), 10000);
+      setInterval(that._getMatches.bind(that), 10000); 
     });
   }
 
@@ -196,6 +198,21 @@ class PageWvw extends PolymerElement {
 
   _checkActiveMap(route) {
     return route.subview == "map" ? true : false;
+  }
+
+  _objectiveClicked(e) {
+    const mapStatus = this.currentMatchup.maps;
+    const foundObjective = this._resolveObjectiveByName(e.detail.objectiveTitle);
+    const mapContainingObjective = mapStatus.find((map) => map.type == foundObjective.map_type);
+    const objectiveStatus = mapContainingObjective.objectives.find((objective) => objective.id == foundObjective.id);
+    const selectedObjective = Object.assign({}, foundObjective, objectiveStatus);
+    this.set('selectedObjective', selectedObjective);
+  }
+
+  _resolveObjectiveByName(objectiveName) {
+    if (!objectiveName) return;
+    const objectives = this.objectives || [];
+    return objectives.find((objective) => objective.name == objectiveName);
   }
 }
 

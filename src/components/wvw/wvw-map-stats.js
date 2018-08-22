@@ -1,51 +1,74 @@
-import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
+import { LitElement, html } from "@polymer/lit-element";
 
 import { SharedStyles } from "../shared-styles.js";
+import { SharedWvwStyles } from "../shared-wvw-styles";
 
 /**
  * `wvw-map-stats`
  *
  * @summary
  * @customElement
- * @extends {Polymer.Element}
+ * @extends {LitElement}
  */
-class WvwMapStats extends PolymerElement {
-  static get template() {
+class WvwMapStats extends LitElement {
+  _render({ selectedObjective }) {
+    console.log(selectedObjective);
     return html`
-    ${SharedStyles}
-    <style>
-      :host {
-        display: block;
-        max-width: 20rem;
-      }
+      ${ SharedStyles.content.firstElementChild }
+      ${ SharedWvwStyles.content.firstElementChild }
+      <style>
+        :host {
+          display: block;
+          box-shadow: var(--app-box-shadow-reverse);
+          z-index: 1000;
+          position: relative;
+          padding: var(--spacer-medium);
+        }
 
-      .card {
-        width: 100vw;
-        max-width: 20rem;
-      }
+        .card {
+          padding: 0;
+        }
 
-      .card:not(:last-child) {
-        margin-bottom: var(--spacer-medium);
-      }
+        .card-header {
+          padding: var(--spacer-small) var(--spacer-medium);
+          box-shadow: var(--app-box-shadow);
+          color: var(--app-text-color-light);
+          font-weight: 600;
+          display: flex;
+          justify-content: space-between;
+        }
 
-    </style>
+        .card-body {
+          padding: var(--spacer-medium);
+        }
 
-    <div class="card">
-      <h2 class="title">Eternal Battlegrounds</h2>
-    </div>
+        @media screen and (min-width: 1024px) {
+          :host {
+            width: 25rem;
+            box-shadow: var(--app-box-shadow-right);
+          }
+        }
 
-    <div class="card">
-      <h2 class="title">Red Borderland</h2>
-    </div>
+      </style>
 
-    <div class="card">
-      <h2 class="title">Green Borderland</h2>
-    </div>
+      ${ (selectedObjective) ? this._renderSelectedObjective(selectedObjective) : "" }
+      
+    `;
+  }
 
-    <div class="card">
-      <h2 class="title">Blue Borderland</h2>
-    </div>
-    
+  _renderSelectedObjective(selectedObjective) {
+    return html`
+      <div class="card">
+        <div class$="card-header team-${ selectedObjective.owner.toLowerCase() }-bg">
+          <span>${ selectedObjective.name }</span>
+          <span title="Points per tick">+${ selectedObjective.points_tick }</span>
+        </div>
+        <div class="card-body">
+          <div>Claimed by: ${ (selectedObjective.claimed_by) ? selectedObjective.claimed_by : "None" }</div>
+          <div>Claimed at: ${ (selectedObjective.claimed_at) ? selectedObjective.claimed_at : "Not claimed" }</div>
+          <div>Last flipped: ${ (selectedObjective.last_flipped) ? selectedObjective.last_flipped : "" }</div>
+        </div>
+      </div>
     `;
   }
 
@@ -53,7 +76,9 @@ class WvwMapStats extends PolymerElement {
    * Object describing property-related metadata used by Polymer features
    */
   static get properties() {
-    return {};
+    return {
+      selectedObjective: Object
+    };
   }
 
   /**

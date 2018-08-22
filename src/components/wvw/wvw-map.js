@@ -49,7 +49,8 @@ class WvwMap extends PolymerElement {
         type: Object
       },
       objectives: {
-        type: Array
+        type: Array,
+        notify: true
       },
       mapData: {
         type: Array
@@ -132,7 +133,7 @@ class WvwMap extends PolymerElement {
     const addedObjectives = objectivesFiltered.map(objective => {
       return this.addObjective(objective, map);
     });
-
+    
     this.set("objectives", addedObjectives);
   }
 
@@ -156,6 +157,8 @@ class WvwMap extends PolymerElement {
       }
     ).addTo(map);
 
+    newMarker.addEventListener('click', this._markerClicked.bind(this));
+
     const newTooltip = newMarker.bindTooltip("", {
       direction: "bottom",
       permanent: true,
@@ -168,6 +171,14 @@ class WvwMap extends PolymerElement {
     };
 
     return Object.assign({}, objective, marker);
+  }
+
+  _markerClicked(e) {
+    this.dispatchEvent(new CustomEvent('objective-clicked', {
+      detail: {
+        objectiveTitle: e.target.options.title
+      }
+    }));
   }
 
   _generateIcons() {
