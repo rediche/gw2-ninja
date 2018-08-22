@@ -1,7 +1,9 @@
 import { LitElement, html } from '@polymer/lit-element';
+import "@polymer/iron-icon";
 
 import "../utilities/gwn-progress";
 
+import "../my-icons.js";
 import { SharedTableStyles } from "../shared-table-styles";
 import { SharedWvwStyles } from "../shared-wvw-styles";
 
@@ -16,6 +18,7 @@ import { SharedWvwStyles } from "../shared-wvw-styles";
 class WvwRegionTier extends LitElement {
   _render({ match, worlds }) {
     const highestVictoryPointsInMatchup = this._highestVictoryPointsInMatchup(match);
+    const lowestVictoryPointsInMatchup = this._lowestVictoryPointsInMatchup(match);
     const highestScoreInMatchup = this._highestScoreInMatchup(match);
 
     return html`
@@ -53,8 +56,23 @@ class WvwRegionTier extends LitElement {
         td:last-of-type {
           padding-right: 1rem;
         }
+
+        .prediction {
+          width: 1.5rem;
+          padding-right: 0;
+        }
+
+        iron-icon {
+          --iron-icon-fill-color: var(--app-primary-color);
+          vertical-align: top;
+        }
       </style>
 
+      <td class="prediction">
+        <div><iron-icon icon="my-icons:${ this._isWinningOrLoosingMatchup(match.victory_points.green, highestVictoryPointsInMatchup, lowestVictoryPointsInMatchup) }"></iron-icon></div>
+        <div><iron-icon icon="my-icons:${ this._isWinningOrLoosingMatchup(match.victory_points.blue, highestVictoryPointsInMatchup, lowestVictoryPointsInMatchup) }"></iron-icon></div>
+        <div><iron-icon icon="my-icons:${ this._isWinningOrLoosingMatchup(match.victory_points.red, highestVictoryPointsInMatchup, lowestVictoryPointsInMatchup) }"></iron-icon></div>
+      </td>
       <td>
         <div class="no-text-overflow">${ this._generateWorldLinkNames(match.all_worlds.green, match.worlds.green, worlds) }</div>
         <div class="no-text-overflow">${ this._generateWorldLinkNames(match.all_worlds.blue, match.worlds.blue, worlds) }</div>
@@ -71,6 +89,12 @@ class WvwRegionTier extends LitElement {
         <gwn-progress class="red" progress="${ match.scores.red }" max="${ highestScoreInMatchup }">${ match.scores.red }</gwn-progress>
       </td>
     `;
+  }
+
+  _isWinningOrLoosingMatchup(victoryPoints, highestVictoryPointsInMatchup, lowestVictoryPointsInMatchup) {
+    if (victoryPoints == highestVictoryPointsInMatchup) return "chevron-up";
+    if (victoryPoints == lowestVictoryPointsInMatchup) return "chevron-down";
+    return "minus";
   }
 
   static get properties() {
@@ -113,6 +137,10 @@ class WvwRegionTier extends LitElement {
 
   _highestVictoryPointsInMatchup(matchup) {
     return Math.max(matchup.victory_points.green, matchup.victory_points.red, matchup.victory_points.blue);
+  }
+
+  _lowestVictoryPointsInMatchup(matchup) {
+    return Math.min(matchup.victory_points.green, matchup.victory_points.red, matchup.victory_points.blue);
   }
 
   _highestScoreInMatchup(matchup) {
