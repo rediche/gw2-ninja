@@ -1,6 +1,6 @@
 import { LitElement, html } from "@polymer/lit-element";
 
-import { SharedStyles } from "../shared-styles.js";
+import { SharedStyles } from "../shared-styles";
 import { SharedWvwStyles } from "../shared-wvw-styles";
 
 /**
@@ -64,12 +64,30 @@ class WvwMapStats extends LitElement {
           <span title="Points per tick">+${ selectedObjective.points_tick }</span>
         </div>
         <div class="card-body">
-          <div>Claimed by: ${ (selectedObjective.claimed_by) ? selectedObjective.claimed_by : "None" }</div>
+          <div>Claimed by: ${ (selectedObjective.claimed_by) ? this._getGuildName(selectedObjective.claimed_by) : "None" }</div>
           <div>Claimed at: ${ (selectedObjective.claimed_at) ? selectedObjective.claimed_at : "Not claimed" }</div>
           <div>Last flipped: ${ (selectedObjective.last_flipped) ? selectedObjective.last_flipped : "" }</div>
         </div>
       </div>
     `;
+  }
+
+  _getGuildName(guildId) {
+    if (!guildId) return;
+    return this._getGuild(guildId)
+      .then((guild) => {
+        return `${ guild.name } [${ guild.tag }]`;
+      });
+  }
+
+  async _getGuild(guildId) {
+    if (!guildId) return;
+
+    const response = await fetch(
+      `https://api.guildwars2.com/v2/guild/${ guildId }`
+    );
+    const guild = await response.json();
+    return guild;
   }
 
   /**
