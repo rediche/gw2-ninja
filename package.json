@@ -43,6 +43,7 @@
     "@polymer/polymer": "^3.0.0",
     "@webcomponents/webcomponentsjs": "^2.0.2",
     "cheerio": "^1.0.0-rc.2",
+    "date-fns": "^2.0.0-alpha.16",
     "gw2-coin-input": "^2.0.3",
     "gw2-coin-output": "^2.0.1",
     "gw2-tpcalc": "^2.1.0",

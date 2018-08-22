@@ -1,4 +1,5 @@
 import { LitElement, html } from "@polymer/lit-element";
+import { formatDistance } from "date-fns";
 
 import { SharedStyles } from "../shared-styles";
 import { SharedWvwStyles } from "../shared-wvw-styles";
@@ -65,11 +66,18 @@ class WvwMapStats extends LitElement {
         </div>
         <div class="card-body">
           <div>Claimed by: ${ (selectedObjective.claimed_by) ? this._getGuildName(selectedObjective.claimed_by) : "None" }</div>
-          <div>Claimed at: ${ (selectedObjective.claimed_at) ? selectedObjective.claimed_at : "Not claimed" }</div>
-          <div>Last flipped: ${ (selectedObjective.last_flipped) ? selectedObjective.last_flipped : "" }</div>
+          <div>Claimed ${ (selectedObjective.claimed_at) ? this._getFormatDistance(selectedObjective.claimed_at) : "Not claimed" } ago</div>
+          <div>Last flipped ${ (selectedObjective.last_flipped) ? this._getFormatDistance(selectedObjective.last_flipped) : "" } ago</div>
         </div>
       </div>
     `;
+  }
+
+  _getFormatDistance(date) {
+    return formatDistance(
+      new Date(date),
+      Date.now()
+    );
   }
 
   _getGuildName(guildId) {
