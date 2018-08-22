@@ -146,7 +146,6 @@ class WvwRegionTier extends LitElement {
   _highestScoreInMatchup(matchup) {
     return Math.max(matchup.scores.green, matchup.scores.red, matchup.scores.blue);
   }
-
 }
 
 customElements.define('wvw-region-tier', WvwRegionTier);
