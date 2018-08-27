@@ -129,7 +129,7 @@ class WvwMapStats extends LitElement {
         <div class="guild-upgrades card-body">
           <h3 class="tier-title">Guild upgrades</h3>
           <div class="upgrade-list">
-          ${ selectedObjective.guild_upgrades.map((upgradeId) => this._renderGuildUpgrade(upgradeId)) }
+          ${ (selectedObjective.guild_upgrades) ? selectedObjective.guild_upgrades.map((upgradeId) => this._renderGuildUpgrade(upgradeId)) : "" }
           </div>
         </div>
 
