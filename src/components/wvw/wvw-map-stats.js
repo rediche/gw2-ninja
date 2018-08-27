@@ -15,7 +15,6 @@ import { SharedWvwStyles } from "../shared-wvw-styles";
  */
 class WvwMapStats extends LitElement {
   _render({ selectedObjective }) {
-    console.log(selectedObjective);
     return html`
       ${SharedStyles.content.firstElementChild}
       ${SharedWvwStyles.content.firstElementChild}
@@ -134,7 +133,6 @@ class WvwMapStats extends LitElement {
   _renderSelectedObjective(selectedObjective) {
     const upgradeTiers =
       this._getUpgradeTiers(selectedObjective.upgrade_id) || [];
-    console.log(upgradeTiers);
 
     return html`
       <div class="card">

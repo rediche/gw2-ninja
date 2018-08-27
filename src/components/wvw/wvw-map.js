@@ -133,7 +133,7 @@ class WvwMap extends PolymerElement {
     const addedObjectives = objectivesFiltered.map(objective => {
       return this.addObjective(objective, map);
     });
-    
+
     this.set("objectives", addedObjectives);
   }
 
@@ -157,13 +157,15 @@ class WvwMap extends PolymerElement {
       }
     ).addTo(map);
 
-    newMarker.addEventListener('click', this._markerClicked.bind(this));
+    newMarker.addEventListener("click", this._markerClicked.bind(this));
 
-    const newTooltip = newMarker.bindTooltip("", {
-      direction: "bottom",
-      permanent: true,
-      offset: [0, 12]
-    }).closeTooltip();
+    const newTooltip = newMarker
+      .bindTooltip("", {
+        direction: "bottom",
+        permanent: true,
+        offset: [0, 12]
+      })
+      .closeTooltip();
 
     const marker = {
       mapMarker: newMarker,
@@ -174,11 +176,13 @@ class WvwMap extends PolymerElement {
   }
 
   _markerClicked(e) {
-    this.dispatchEvent(new CustomEvent('objective-clicked', {
-      detail: {
-        objectiveTitle: e.target.options.title
-      }
-    }));
+    this.dispatchEvent(
+      new CustomEvent("objective-clicked", {
+        detail: {
+          objectiveTitle: e.target.options.title
+        }
+      })
+    );
   }
 
   _generateIcons() {
@@ -238,14 +242,15 @@ class WvwMap extends PolymerElement {
             mapObjective.owner.toLowerCase()
           ];
         objectives[index].mapMarker.setIcon(icon);
-        if (objectives[index].type !== "Ruins") this.updateTooltip(mapObjective, objectives[index]);
+        if (objectives[index].type !== "Ruins")
+          this.updateTooltip(mapObjective, objectives[index]);
       }
     });
   }
 
   _invalidateMap(active, map) {
     if (!active || !map) return;
-    
+
     afterNextRender(this, function() {
       map.invalidateSize();
     });
@@ -256,24 +261,28 @@ class WvwMap extends PolymerElement {
     const currentTime = new Date();
     const maxDiff = 300000; // 5 minutes
     const timeDiff = currentTime - lastFlipped;
-    
+
     if (timeDiff < maxDiff) {
       if (!objective.interval) {
         objective.interval = setInterval(() => {
           const now = new Date().getTime();
-          const countdownDate = new Date(lastFlipped.getTime() + maxDiff).getTime();
+          const countdownDate = new Date(
+            lastFlipped.getTime() + maxDiff
+          ).getTime();
           const diff = countdownDate - now;
-    
+
           if (diff < 0) {
             clearInterval(objective.interval);
             objective.interval = null;
             objective.tooltip.closeTooltip();
           }
-    
+
           const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
           const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-  
-          objective.tooltip.setTooltipContent(`${minutes}m ${seconds < 10 ? "0" + seconds : seconds}s`);
+
+          objective.tooltip.setTooltipContent(
+            `${minutes}m ${seconds < 10 ? "0" + seconds : seconds}s`
+          );
         }, 1000);
       }
 

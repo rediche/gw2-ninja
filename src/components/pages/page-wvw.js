@@ -156,7 +156,7 @@ class PageWvw extends PolymerElement {
       const that = this;
       this._getWorlds();
       this._getMatches();
-      setInterval(that._getMatches.bind(that), 10000); 
+      setInterval(that._getMatches.bind(that), 10000);
     });
   }
 
@@ -200,10 +200,20 @@ class PageWvw extends PolymerElement {
 
   _objectiveClicked(e) {
     const mapStatus = this.currentMatchup.maps;
-    const foundObjective = this._resolveObjectiveByName(e.detail.objectiveTitle);
-    const mapContainingObjective = mapStatus.find((map) => map.type == foundObjective.map_type);
-    const objectiveStatus = mapContainingObjective.objectives.find((objective) => objective.id == foundObjective.id);
-    const selectedObjective = Object.assign({}, foundObjective, objectiveStatus);
+    const foundObjective = this._resolveObjectiveByName(
+      e.detail.objectiveTitle
+    );
+    const mapContainingObjective = mapStatus.find(
+      map => map.type == foundObjective.map_type
+    );
+    const objectiveStatus = mapContainingObjective.objectives.find(
+      objective => objective.id == foundObjective.id
+    );
+    const selectedObjective = Object.assign(
+      {},
+      foundObjective,
+      objectiveStatus
+    );
     this.set("selectedObjective", selectedObjective);
   }
 
@@ -214,7 +224,7 @@ class PageWvw extends PolymerElement {
   _resolveObjectiveByName(objectiveName) {
     if (!objectiveName) return;
     const objectives = this.objectives || [];
-    return objectives.find((objective) => objective.name == objectiveName);
+    return objectives.find(objective => objective.name == objectiveName);
   }
 }
 
