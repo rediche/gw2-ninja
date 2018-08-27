@@ -34,20 +34,22 @@ class WvwMapStats extends LitElement {
           padding: var(--spacer-small) var(--spacer-medium);
           box-shadow: var(--app-box-shadow);
           color: var(--app-text-color-light);
+        }
+
+        .card-header .space-between {
           font-weight: 600;
           display: flex;
           justify-content: space-between;
+          line-height: 1;
+          margin-bottom: .25rem;
         }
 
         .card-body {
           padding: 0 var(--spacer-medium);
         }
 
-        .card-body.top-bottom-padding {
-          padding: var(--spacer-small) var(--spacer-medium);
-        }
-
         .claimed-by {
+          padding-top: var(--spacer-small);
           display: grid;
           grid-column-gap: .5rem;
           grid-template-columns: 2.625rem 1fr;
@@ -62,7 +64,8 @@ class WvwMapStats extends LitElement {
           font-weight: 500;
         }
 
-        .claimed-at {
+        .claimed-at,
+        .last-flipped {
           font-size: .75rem;
         }
 
@@ -113,14 +116,14 @@ class WvwMapStats extends LitElement {
     return html`
       <div class="card">
         <div class$="card-header team-${ selectedObjective.owner.toLowerCase() }-bg">
-          <span>${ selectedObjective.name }</span>
-          <span title="Points per tick">+${ selectedObjective.points_tick }</span>
+          <div class="space-between">
+            <span>${ selectedObjective.name }</span>
+            <span title="Points per tick">+${ selectedObjective.points_tick }</span>
+          </div>
+          <div class="last-flipped">Last flipped ${ (selectedObjective.last_flipped) ? this._getFormatDistance(selectedObjective.last_flipped) : "" } ago</div>
         </div>
 
-        <div class="card-body top-bottom-padding">
-          ${ (selectedObjective.claimed_by && selectedObjective.claimed_at) ? this._renderClaimedBy(selectedObjective.claimed_by, selectedObjective.claimed_at) : "" }
-          <div>Last flipped ${ (selectedObjective.last_flipped) ? this._getFormatDistance(selectedObjective.last_flipped) : "" } ago</div>
-        </div>
+        ${ (selectedObjective.claimed_by && selectedObjective.claimed_at) ? this._renderClaimedBy(selectedObjective.claimed_by, selectedObjective.claimed_at) : "" }
 
         <hr>
         <div class="guild-upgrades card-body">
@@ -144,7 +147,7 @@ class WvwMapStats extends LitElement {
     if (!claimedBy || !claimedAt) return;
 
     return html`
-      <div class="claimed-by">
+      <div class="claimed-by card-body">
         <img class="guild-emblem" src="https://placehold.it/48x48" alt="Guild Name">
         <div class="guild-name">${ this._getGuildName(claimedBy) }</div>
         <div class="claimed-at">Claimed ${ this._getFormatDistance(claimedAt) } ago</div>
