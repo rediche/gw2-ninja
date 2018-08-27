@@ -66,8 +66,7 @@ class PageWvw extends PolymerElement {
 
       .map {
         height: calc(100vh - 8rem);
-        display: flex;
-        flex-direction: column-reverse;
+        position: relative;
       }
 
       wvw-map {
@@ -76,13 +75,12 @@ class PageWvw extends PolymerElement {
       }
 
       wvw-map-stats {
-        flex: none;
-      }
-
-      @media screen and (min-width: 1024px) {
-        .map {
-          flex-direction: row;
-        }
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        max-height: calc(100vh - 8rem);
+        overflow: auto;
       }
     </style>
 
@@ -108,7 +106,7 @@ class PageWvw extends PolymerElement {
 
     <iron-pages selected="{{ subviewData.subview }}" attr-for-selected="name" fallback-selection="map">
       <div name="map" class="map">
-        <wvw-map-stats selected-objective="[[ selectedObjective ]]"></wvw-map-stats>
+        <wvw-map-stats selected-objective="[[ selectedObjective ]]" on-objective-close="_objectiveClose"></wvw-map-stats>
         <wvw-map map-data="[[ currentMatchup.maps ]]" active="[[ mapActive ]]" objectives="{{ objectives }}" on-objective-clicked="_objectiveClicked"></wvw-map>
       </div>
       <div name="overview">
@@ -206,7 +204,11 @@ class PageWvw extends PolymerElement {
     const mapContainingObjective = mapStatus.find((map) => map.type == foundObjective.map_type);
     const objectiveStatus = mapContainingObjective.objectives.find((objective) => objective.id == foundObjective.id);
     const selectedObjective = Object.assign({}, foundObjective, objectiveStatus);
-    this.set('selectedObjective', selectedObjective);
+    this.set("selectedObjective", selectedObjective);
+  }
+
+  _objectiveClose(e) {
+    this.set("selectedObjective", null);
   }
 
   _resolveObjectiveByName(objectiveName) {
