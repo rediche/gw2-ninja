@@ -88,9 +88,9 @@ class WvwMap extends PolymerElement {
       maxZoom: 6,
       crs: CRS.Simple,
       maxBoundsViscosity: 1
-    }).setView([0, 163], 3);
+    }).setView([-193, 167], 3);
 
-    const southWest = this.unproject([0, 16384], map);
+    const southWest = this.unproject([5000, 16384], map);
     const northEast = this.unproject([16384, 8192], map);
 
     map.setMaxBounds(new LatLngBounds(southWest, northEast));
