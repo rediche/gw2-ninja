@@ -47,8 +47,23 @@ class WvwMapStats extends LitElement {
           padding: var(--spacer-small) var(--spacer-medium);
         }
 
-        .tiers {
-          margin-top: .5rem;
+        .claimed-by {
+          display: grid;
+          grid-column-gap: .5rem;
+          grid-template-columns: 2.625rem 1fr;
+        }
+
+        .claimed-by .guild-emblem {
+          grid-row: 1 / 3;
+          max-width: 100%;
+        }
+
+        .guild-name {
+          font-weight: 500;
+        }
+
+        .claimed-at {
+          font-size: .75rem;
         }
 
         .tier-title {
@@ -103,8 +118,7 @@ class WvwMapStats extends LitElement {
         </div>
 
         <div class="card-body top-bottom-padding">
-          <div>Claimed by: ${ (selectedObjective.claimed_by) ? this._getGuildName(selectedObjective.claimed_by) : "None" }</div>
-          <div>Claimed ${ (selectedObjective.claimed_at) ? this._getFormatDistance(selectedObjective.claimed_at) : "Not claimed" } ago</div>
+          ${ (selectedObjective.claimed_by && selectedObjective.claimed_at) ? this._renderClaimedBy(selectedObjective.claimed_by, selectedObjective.claimed_at) : "" }
           <div>Last flipped ${ (selectedObjective.last_flipped) ? this._getFormatDistance(selectedObjective.last_flipped) : "" } ago</div>
         </div>
 
@@ -117,6 +131,23 @@ class WvwMapStats extends LitElement {
         </div>
 
         ${ (upgradeTiers && selectedObjective.yaks_delivered) ? upgradeTiers.map((tier) => this._renderUpgradeTier(tier, selectedObjective.yaks_delivered)) : "" }
+      </div>
+    `;
+  }
+
+  /**
+   * Render a claimed by guild layout
+   * @param {String} claimedBy 
+   * @param {Time} claimedAt 
+   */
+  _renderClaimedBy(claimedBy, claimedAt) {
+    if (!claimedBy || !claimedAt) return;
+
+    return html`
+      <div class="claimed-by">
+        <img class="guild-emblem" src="https://placehold.it/48x48" alt="Guild Name">
+        <div class="guild-name">${ this._getGuildName(claimedBy) }</div>
+        <div class="claimed-at">Claimed ${ this._getFormatDistance(claimedAt) } ago</div>
       </div>
     `;
   }
