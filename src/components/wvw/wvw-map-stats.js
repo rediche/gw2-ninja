@@ -153,8 +153,7 @@ class WvwMapStats extends LitElement {
         ${
           selectedObjective.claimed_by && selectedObjective.claimed_at
             ? this._renderClaimedBy(
-                selectedObjective.claimed_by,
-                selectedObjective.claimed_at
+                selectedObjective
               )
             : ""
         }
@@ -193,18 +192,20 @@ class WvwMapStats extends LitElement {
 
   /**
    * Render a claimed by guild layout
-   * @param {String} claimedBy
-   * @param {Time} claimedAt
+   * 
+   * @param {Object} objective
+   * @param {String} objective.claimed_by
+   * @param {Time} objective.claimed_at
    */
-  _renderClaimedBy(claimedBy, claimedAt) {
-    if (!claimedBy || !claimedAt) return;
+  _renderClaimedBy({ claimed_by, claimed_at }) {
+    if (!claimed_by || !claimed_at) return;
 
     return html`
       <div class="claimed-by card-body">
         <img class="guild-emblem" src="https://placehold.it/48x48" alt="Guild Name">
-        <div class="guild-name">${this._getGuildName(claimedBy)}</div>
+        <div class="guild-name">${this._getGuildName(claimed_by)}</div>
         <div class="claimed-at">Claimed ${this._getFormatDistance(
-          claimedAt
+          claimed_at
         )} ago</div>
       </div>
     `;
