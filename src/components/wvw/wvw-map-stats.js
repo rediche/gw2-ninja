@@ -134,6 +134,8 @@ class WvwMapStats extends LitElement {
     const upgradeTiers =
       this._getUpgradeTiers(selectedObjective.upgrade_id) || [];
 
+      console.log(selectedObjective);
+
     return html`
       <div class="card">
         <div class$="card-header team-${selectedObjective.owner.toLowerCase()}-bg">
@@ -158,17 +160,19 @@ class WvwMapStats extends LitElement {
             : ""
         }
 
-        <hr hidden="${ selectedObjective.guild_upgrades ? true : false }">
-        <div class="guild-upgrades card-body" hidden="${ selectedObjective.guild_upgrades ? true : false }">
-          <h3 class="tier-title">Guild upgrades</h3>
-          <div class="upgrade-list">
-          ${
-            selectedObjective.guild_upgrades
-              ? selectedObjective.guild_upgrades.map(upgradeId =>
-                  this._renderGuildUpgrade(upgradeId)
-                )
-              : ""
-          }
+        <div hidden="${ !selectedObjective.guild_upgrades || selectedObjective.guild_upgrades.length < 1 ? true : false }">
+          <hr>
+          <div class="guild-upgrades card-body">
+            <h3 class="tier-title">Guild upgrades</h3>
+            <div class="upgrade-list">
+            ${
+              selectedObjective.guild_upgrades
+                ? selectedObjective.guild_upgrades.map(upgradeId =>
+                    this._renderGuildUpgrade(upgradeId)
+                  )
+                : ""
+            }
+            </div>
           </div>
         </div>
 
