@@ -92,7 +92,7 @@ class WvwMapStats extends LitElement {
         }
 
         .button {
-          margin-top: 1rem;
+          margin: 1rem 0 .5rem;
           background-color: transparent;
           color: var(--app-primary-color);
           border: 1px solid var(--app-primary-color);
@@ -159,8 +159,8 @@ class WvwMapStats extends LitElement {
             : ""
         }
 
-        <hr>
-        <div class="guild-upgrades card-body">
+        <hr hidden="${ selectedObjective.guild_upgrades ? true : false }">
+        <div class="guild-upgrades card-body" hidden="${ selectedObjective.guild_upgrades ? true : false }">
           <h3 class="tier-title">Guild upgrades</h3>
           <div class="upgrade-list">
           ${
