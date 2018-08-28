@@ -80,6 +80,10 @@ class WvwMapStats extends LitElement {
           display: flex;
         }
 
+        .not-upgraded {
+          opacity: .5;
+        }
+
         .upgrade-icon {
           width: 32px;
           height: 32px;
@@ -178,8 +182,8 @@ class WvwMapStats extends LitElement {
 
         ${
           upgradeTiers && selectedObjective.yaks_delivered
-            ? upgradeTiers.map(tier =>
-                this._renderUpgradeTier(tier, selectedObjective.yaks_delivered)
+            ? upgradeTiers.map((tier, index, tiers) =>
+                this._renderUpgradeTier(tier, index, tiers, selectedObjective.yaks_delivered)
               )
             : ""
         }
@@ -218,17 +222,21 @@ class WvwMapStats extends LitElement {
     });
   }
 
-  _renderUpgradeTier(tier, yaksDelivered) {
-    if (!tier || !yaksDelivered) return;
-    if (tier > yaksDelivered) return;
+  _renderUpgradeTier(tier, index, tiers, yaksDelivered) {
+    if (!tier || !tiers || !yaksDelivered) return;
+
+    let yaksRequiredForThisTier = 0;
+    for (let i = 0; i <= index; i++) {
+      yaksRequiredForThisTier += tiers[i].yaks_required;
+    }
 
     return html`
       <hr>
-      <div class="card-body">
-        <h3 class="tier-title">${tier.name}</h3>
-        <div class$="tier upgrade-list ${
-          tier.yaks_required > yaksDelivered ? "not-upgraded" : ""
-        }">
+      <div class$="card-body ${
+        yaksRequiredForThisTier > yaksDelivered ? "not-upgraded" : ""
+      }">
+        <h3 class="tier-title">${tier.name} ${yaksRequiredForThisTier > yaksDelivered ? `(${yaksRequiredForThisTier - yaksDelivered} Dolyaks remaining)` : ""}</h3>
+        <div class="tier upgrade-list">
           ${tier.upgrades.map(
             upgrade =>
               html`<img class="upgrade-icon" src="${upgrade.icon}" alt="${
