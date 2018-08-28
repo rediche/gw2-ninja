@@ -95,17 +95,49 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
         margin: 0;
         box-sizing: border-box;
         min-height: 100%;
+        padding: 0 var(--spacer-small);
       }
 
-      .drawer-list a {
+      .drawer-list > a {
         display: block;
-        color: var(--app-text-color);
         text-decoration: none;
         line-height: 40px;
+        margin-bottom: .5rem;
       }
 
-      .drawer-list a:last-child {
+      .drawer-list > a + hr {
+        margin-top: .5rem;
+      }
+
+      .drawer-list > a.last-before-auto {
         margin-bottom: 1rem;
+      }
+
+      .bottom-links {
+        margin-bottom: 1rem;
+        padding: 0 var(--spacer-small);
+      }
+
+      .bottom-links a {
+        font-weight: 500;
+        margin-right: .5rem;
+        text-decoration: none;
+        white-space: nowrap;
+        color: var(--app-primary-color);
+      }
+
+      .drawer-list paper-item {
+        min-height: 2.5rem;
+        border-radius: var(--app-border-radius);
+        color: var(--app-text-color);
+        font: var(--app-font-stack);
+        font-weight: 500;
+      }
+
+      .drawer-list paper-item:focus,
+      .drawer-list a.iron-selected paper-item:focus {
+        color: var(--app-text-color-light);
+        background-color: var(--app-primary-color);
       }
 
       .drawer-list a.iron-selected paper-item {
@@ -129,10 +161,6 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
       #onlineStatusToast {
         bottom: 0;
         top: auto !important;
-      }
-
-      .last-before-auto {
-        margin-bottom: 1rem;
       }
 
       @media screen and (min-width: 641px) {
@@ -184,9 +212,14 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           <a name="index" href="/" tabindex="-1">
             <paper-item>Home</paper-item>
           </a>
-          <hr>
           <a name="directory" href="/directory/websites" tabindex="-1">
             <paper-item>Directory</paper-item>
+          </a>
+          <a name="timer" href="/timer/all" tabindex="-1">
+            <paper-item>Meta Timer</paper-item>
+          </a>
+          <a name="wvw" href="/wvw/overview" tabindex="-1" class="last-before-auto">
+            <paper-item>World vs World</paper-item>
           </a>
           <hr>
           <a name="collections" href="/collections/basic" tabindex="-1">
@@ -195,27 +228,22 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           <a name="tickets" href="/tickets" tabindex="-1">
             <paper-item>Tickets</paper-item>
           </a>
+          <a name="calc" href="/calc" tabindex="-1">
+            <paper-item>TP Calc</paper-item>
+          </a>
           <hr>
           <a name="chatcodes" href="/chatcodes" tabindex="-1">
             <paper-item>Chatcodes</paper-item>
           </a>
-          <a name="timer" href="/timer/all" tabindex="-1">
-            <paper-item>Meta Timer</paper-item>
-          </a>
-          <a name="calc" href="/calc" tabindex="-1">
-            <paper-item>TP Calc</paper-item>
-          </a>
-          <a name="wvw" href="/wvw/overview" tabindex="-1" class="last-before-auto">
-            <paper-item>World vs World</paper-item>
-          </a>
-          <hr style="margin-top:auto">
-          <a name="stream" href="/stream" tabindex="-1">
+          <a name="stream" href="/stream" tabindex="-1" class="last-before-auto">
             <paper-item>Stream Tools</paper-item>
           </a>
-          <hr>
-          <a name="about" href="/about" tabindex="-1">
-            <paper-item>About</paper-item>
-          </a>
+          <hr style="margin-top:auto">
+          <div class="bottom-links">
+            <a name="about" href="/about">About</a>
+            <a href="https://github.com/rediche/gw2-ninja" target="_blank" rel="noopener noreferrer">Code on Github</a>
+            <a href="https://github.com/rediche/gw2-ninja/issues" target="_blank" rel="noopener noreferrer">Report an issue</a>
+          </div>
         </iron-selector>
       </div>
     </app-drawer>

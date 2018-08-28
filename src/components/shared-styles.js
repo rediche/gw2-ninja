@@ -19,6 +19,7 @@ export const SharedStyles = html`
     --app-text-color: #212121;
     --app-text-color-light: #ffffff;
     --app-background-color: #ffffff;
+    --app-font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
     /* Generic styles */
     --app-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
