@@ -138,8 +138,6 @@ class WvwMapStats extends LitElement {
     const upgradeTiers =
       this._getUpgradeTiers(selectedObjective.upgrade_id) || [];
 
-      console.log(selectedObjective);
-
     return html`
       <div class="card">
         <div class$="card-header team-${selectedObjective.owner.toLowerCase()}-bg">
