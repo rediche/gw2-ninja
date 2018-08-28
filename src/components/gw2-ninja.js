@@ -100,7 +100,6 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
 
       .drawer-list > a {
         display: block;
-        color: var(--app-text-color);
         text-decoration: none;
         line-height: 40px;
         margin-bottom: .5rem;
@@ -129,6 +128,15 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
       .drawer-list paper-item {
         min-height: 2.5rem;
         border-radius: var(--app-border-radius);
+        color: var(--app-text-color);
+        font: var(--app-font-stack);
+        font-weight: 500;
+      }
+
+      .drawer-list paper-item:focus,
+      .drawer-list a.iron-selected paper-item:focus {
+        color: var(--app-text-color-light);
+        background-color: var(--app-primary-color);
       }
 
       .drawer-list a.iron-selected paper-item {
