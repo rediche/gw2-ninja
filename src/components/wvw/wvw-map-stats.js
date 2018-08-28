@@ -200,15 +200,18 @@ class WvwMapStats extends LitElement {
   _renderClaimedBy({ claimed_by, claimed_at }) {
     if (!claimed_by || !claimed_at) return;
 
-    return html`
-      <div class="claimed-by card-body">
-        <img class="guild-emblem" src="https://placehold.it/48x48" alt="Guild Name">
-        <div class="guild-name">${this._getGuildName(claimed_by)}</div>
-        <div class="claimed-at">Claimed ${this._getFormatDistance(
-          claimed_at
-        )} ago</div>
-      </div>
-    `;
+    return this._getGuild(claimed_by).then(guild => {
+      const guildName = this._getGuildName(guild)
+      return html`
+        <div class="claimed-by card-body">
+          <img class="guild-emblem" src="${this._getGuildEmblemURL(guild)}" alt="${guildName}">
+          <div class="guild-name">${guildName}</div>
+          <div class="claimed-at">Claimed ${this._getFormatDistance(
+            claimed_at
+          )} ago</div>
+        </div>
+      `;
+    });
   }
 
   _renderUpgradeTier(tier, yaksDelivered) {
@@ -260,11 +263,14 @@ class WvwMapStats extends LitElement {
     return formatDistance(new Date(date), Date.now());
   }
 
-  _getGuildName(guildId) {
-    if (!guildId) return;
-    return this._getGuild(guildId).then(guild => {
-      return `${guild.name} [${guild.tag}]`;
-    });
+  _getGuildEmblemURL({ name }) {
+    if (!name) return;
+    return `https://guilds.gw2w2w.com/guilds/${name.replace(' ', '-').toLowerCase()}/256.svg`;
+  }
+
+  _getGuildName({ name, tag}) {
+    if (!name || !tag) return;
+    return `${name} [${tag}]`;
   }
 
   /**
