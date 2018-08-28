@@ -123,6 +123,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
         margin-right: .5rem;
         text-decoration: none;
         white-space: nowrap;
+        color: var(--app-primary-color);
       }
 
       .drawer-list paper-item {
