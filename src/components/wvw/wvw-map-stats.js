@@ -259,12 +259,6 @@ class WvwMapStats extends LitElement {
     return formatDistance(new Date(date), Date.now());
   }
 
-  /**
-   * TODO:
-   * Make a Guild Data handler that is global.
-   * If guild ID is not found in guild data already there,
-   * then load the guilds info and update array.
-   */
   _getGuildName(guildId) {
     if (!guildId) return;
     return this._getGuild(guildId).then(guild => {
@@ -272,13 +266,24 @@ class WvwMapStats extends LitElement {
     });
   }
 
+  /**
+   * TODO:
+   * Make a Guild Data handler that is global.
+   * If guild ID is not found in guild data already there,
+   * then load the guilds info and update array.
+   */
   async _getGuild(guildId) {
     if (!guildId) return;
+
+    const foundGuild = this.guilds.find((guild) => guild.id == guildId);
+    if (foundGuild) return foundGuild;
 
     const response = await fetch(
       `https://api.guildwars2.com/v2/guild/${guildId}`
     );
     const guild = await response.json();
+    this.guilds = this.guilds.concat(guild);
+
     return guild;
   }
 
@@ -311,12 +316,15 @@ class WvwMapStats extends LitElement {
     return {
       selectedObjective: Object,
       upgrades: Array,
-      guildUpgrades: Array
+      guildUpgrades: Array,
+      guilds: Array
     };
   }
 
   constructor() {
     super();
+
+    this.guilds = [];
 
     this._getUpgrades().then(upgrades => {
       this.upgrades = upgrades;
