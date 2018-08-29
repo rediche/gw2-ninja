@@ -113,7 +113,7 @@ class WvwRegion extends PolymerElement {
   }
 
   _getTierFromID(id) {
-    return id.split('-')[1];
+    return id.split("-")[1];
   }
 }
 

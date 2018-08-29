@@ -3,7 +3,6 @@ import { formatDistance } from "date-fns";
 
 import "@polymer/paper-ripple/paper-ripple.js";
 
-import { SharedStyles } from "../shared-styles";
 import { SharedWvwStyles } from "../shared-wvw-styles";
 
 /**
@@ -16,7 +15,6 @@ import { SharedWvwStyles } from "../shared-wvw-styles";
 class WvwMapStats extends LitElement {
   _render({ selectedObjective }) {
     return html`
-      ${SharedStyles.content.firstElementChild}
       ${SharedWvwStyles.content.firstElementChild}
       <style>
         :host {
@@ -28,6 +26,20 @@ class WvwMapStats extends LitElement {
 
         .card {
           padding: 0 0 var(--spacer-small) 0;
+          border-radius: var(--app-border-radius);
+          background-color: var(--app-background-color);
+          box-shadow: var(--app-box-shadow);
+          box-sizing: border-box;
+          overflow: hidden;
+        }
+
+        hr {
+          display: block;
+          height: 1px;
+          border: 0;
+          border-top: 1px solid var(--paper-grey-300);
+          margin: var(--spacer-medium) var(--spacer-none);
+          padding: var(--spacer-none);
         }
 
         .card-header {
