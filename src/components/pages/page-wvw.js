@@ -1,6 +1,16 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
+import { connect } from "pwa-helpers/connect-mixin.js";
 import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
 import "@polymer/polymer/lib/elements/dom-repeat.js";
+
+// Load redux store
+import { store } from "../../store.js";
+
+// Lazy load reducers
+import account from "../../reducers/account.js";
+store.addReducers({
+  account
+});
 
 import "@polymer/app-route/app-location.js";
 import "@polymer/app-route/app-route.js";
@@ -25,7 +35,7 @@ import "../wvw/wvw-leaderboards";
  * @customElement
  * @extends {Polymer.Element}
  */
-class PageWvw extends PolymerElement {
+class PageWvw extends connect(store)(PolymerElement) {
   static get template() {
     return html`
     ${SharedStyles}
@@ -85,6 +95,11 @@ class PageWvw extends PolymerElement {
         overflow: auto;
       }
 
+      .error-msg {
+        margin: var(--spacer-medium);
+        font-weight: 600;
+      }
+
       @media screen and (min-width: 768px) {
         .sticky-tabs {
           flex-direction: row;
@@ -108,7 +123,7 @@ class PageWvw extends PolymerElement {
     <app-route route="{{route}}" pattern="/wvw/:subview" data="{{subviewData}}"></app-route>
 
     <div class="sticky-tabs">
-      <paper-dropdown-menu label="World">
+      <paper-dropdown-menu label="Select World">
         <paper-listbox slot="dropdown-content" selected="{{serverId}}" class="dropdown-content" attr-for-selected="value">
           <template is="dom-repeat" items="[[worlds]]" as="world">
             <paper-item value="[[world.id]]">[[world.name]]</paper-item>
@@ -118,14 +133,15 @@ class PageWvw extends PolymerElement {
 
       <paper-tabs selected="{{subviewData.subview}}" attr-for-selected="name">
         <paper-tab name="overview">Region Overview</paper-tab>
-        <paper-tab name="map">Live Map</paper-tab>
-        <paper-tab name="stats">Matchup Stats</paper-tab>
+        <paper-tab name="map" disable="[[_serverSelected(serverId)]]">Live Map</paper-tab>
+        <paper-tab name="stats" disable="[[_serverSelected(serverId)]]">Matchup Stats</paper-tab>
         <paper-tab name="leaderboards">Leaderboards</paper-tab>
       </paper-tabs>
     </div>
 
     <iron-pages selected="{{ subviewData.subview }}" attr-for-selected="name" fallback-selection="map">
       <div name="map" class="map">
+        <div class="error-msg text-center" hidden$="[[serverId]]">Please select a server in the dropdown above.</div>
         <wvw-map-stats selected-objective="[[ selectedObjective ]]" on-objective-close="_objectiveClose"></wvw-map-stats>
         <wvw-map map-data="[[ currentMatchup.maps ]]" active="[[ mapActive ]]" objectives="{{ objectives }}" on-objective-clicked="_objectiveClicked"></wvw-map>
       </div>
@@ -133,7 +149,8 @@ class PageWvw extends PolymerElement {
         <wvw-region matches="[[ matches ]]" worlds="[[ worlds ]]"></wvw-region>
       </div>
       <div name="stats">
-        <wvw-matchup matchup="[[ currentMatchup ]]" worlds="[[ worlds ]]"></wvw-matchup>
+        <div class="error-msg text-center" hidden$="[[serverId]]">Please select a server in the dropdown above.</div>
+        <wvw-matchup matchup="[[ currentMatchup ]]" worlds="[[ worlds ]]" hidden$="[[!serverId]]"></wvw-matchup>
       </div>
       <div name="leaderboards">
         <wvw-leaderboards matches="[[ matches ]]" worlds="[[ worlds ]]"></wvw-leaderboards>
@@ -156,8 +173,7 @@ class PageWvw extends PolymerElement {
       matches: Array,
       worlds: Array,
       serverId: {
-        type: Number,
-        value: 2010
+        type: Number
       },
       currentMatch: Object,
       objectives: Array,
@@ -178,6 +194,10 @@ class PageWvw extends PolymerElement {
       this._getMatches();
       setInterval(that._getMatches.bind(that), 10000);
     });
+  }
+
+  _serverSelected(serverId) {
+    return !serverId ? false : true;
   }
 
   async _getMatches() {
@@ -245,6 +265,11 @@ class PageWvw extends PolymerElement {
     if (!objectiveName) return;
     const objectives = this.objectives || [];
     return objectives.find(objective => objective.name == objectiveName);
+  }
+
+  _stateChanged(state) {
+    if (!state || !state.account) return;
+    this.set("serverId", state.account.world);
   }
 }
 
