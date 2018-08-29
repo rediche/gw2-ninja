@@ -26,10 +26,6 @@ class WvwLeaderboards extends PolymerElement {
       links: {
         type: Array,
         value: []
-      },
-      sortBy: {
-        type: String,
-        value: "sortByVictoryPointsDesc"
       }
     };
   }
@@ -78,7 +74,7 @@ class WvwLeaderboards extends PolymerElement {
             <th>KDR</th>
           </thead>
           <tbody>
-            <template is="dom-repeat" items="[[links]]" as="link" sort="[[sortBy]]">
+            <template is="dom-repeat" items="[[links]]" as="link">
               <tr>
                 <td class="column-ranking">[[ _baseIndexOne(index) ]]</td>
                 <td class="no-text-overflow column-servername">[[ _generateWorldLinkNames(link.worlds, link.hosting_world, worlds) ]]</td>
@@ -100,14 +96,6 @@ class WvwLeaderboards extends PolymerElement {
 
   _baseIndexOne(index) {
     return index + 1;
-  }
-
-  sortByVictoryPointsAsc(a, b) {
-    return a.victory_points - b.victory_points;
-  }
-
-  sortByVictoryPointsDesc(a, b) {
-    return b.victory_points - a.victory_points;
   }
 
   _constructLinks(matches, worlds) {
