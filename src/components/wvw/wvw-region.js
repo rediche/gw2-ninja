@@ -68,6 +68,7 @@ class WvwRegion extends PolymerElement {
       <div class="table-scroll">
         <table>
           <thead>
+            <th class="prediction"></th>
             <th>Server</th>
             <th>Victory Points</th>
             <th>Total Score</th>
