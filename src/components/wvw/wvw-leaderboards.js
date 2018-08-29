@@ -55,16 +55,20 @@ class WvwLeaderboards extends PolymerElement {
         .column-ranking {
           width: 3rem;
         }
+
+        .column-servername {
+          width: 20rem;
+        }
       </style>
 
       <h1 class="title">Weekly Leaderboards</h1>
       <p>Compare stats between all links on all regions.</p>
-      
+
       <div class="table-scroll card">
         <table>
           <thead>
             <th class="column-ranking">#</th>
-            <th>Server</th>
+            <th class="column-servername">Server</th>
             <th>Region</th>
             <th>Tier</th>
             <th>Victory Points</th>
@@ -77,7 +81,7 @@ class WvwLeaderboards extends PolymerElement {
             <template is="dom-repeat" items="[[links]]" as="link" sort="[[sortBy]]">
               <tr>
                 <td class="column-ranking">[[ _baseIndexOne(index) ]]</td>
-                <td class="no-text-overflow">[[ _generateWorldLinkNames(link.worlds, link.hosting_world, worlds) ]]</td>
+                <td class="no-text-overflow column-servername">[[ _generateWorldLinkNames(link.worlds, link.hosting_world, worlds) ]]</td>
                 <td>[[ link.region ]]</td>
                 <td>[[ link.tier ]]</td>
                 <td>[[ link.victory_points ]]</td>
