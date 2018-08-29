@@ -27,11 +27,7 @@ class WvwRegion extends PolymerElement {
       .card {
         padding: 0;
         max-width: 1100px;
-        margin: 0 auto var(--spacer-medium);
-      }
-
-      .title {
-        padding: var(--spacer-medium) var(--spacer-medium) 0;
+        margin: 0 auto var(--spacer-large);
       }
 
       thead th {
@@ -43,8 +39,8 @@ class WvwRegion extends PolymerElement {
       }
     </style>
 
+    <h2 class="title">Europe</h2>
     <div class="card">
-      <h2 class="title">Europe</h2>
       <div class="table-scroll">
         <table>
           <thead>
@@ -62,8 +58,8 @@ class WvwRegion extends PolymerElement {
       </div>
     </div>
 
+    <h2 class="title">North America</h2>
     <div class="card">
-      <h2 class="title">North America</h2>
       <div class="table-scroll">
         <table>
           <thead>

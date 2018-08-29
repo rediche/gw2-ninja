@@ -56,8 +56,10 @@ class WvwLeaderboards extends PolymerElement {
           width: 3rem;
         }
       </style>
+
       <h1 class="title">Weekly Leaderboards</h1>
       <p>Compare stats between all links on all regions.</p>
+      
       <div class="table-scroll card">
         <table>
           <thead>
