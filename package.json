@@ -41,6 +41,7 @@
     "@polymer/paper-tabs": "^3.0.0-pre.21",
     "@polymer/paper-toast": "^3.0.0-pre.21",
     "@polymer/polymer": "^3.0.0",
+    "@vaadin/vaadin-grid": "^5.2.0-alpha1",
     "@webcomponents/webcomponentsjs": "^2.0.2",
     "cheerio": "^1.0.0-rc.2",
     "date-fns": "^2.0.0-alpha.16",

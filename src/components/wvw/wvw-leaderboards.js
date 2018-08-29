@@ -1,8 +1,10 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import "@polymer/polymer/lib/elements/dom-repeat.js";
 
+import "@vaadin/vaadin-grid/vaadin-grid";
+import "@vaadin/vaadin-grid/vaadin-grid-sorter";
+
 import { SharedStyles } from "../shared-styles";
-import { SharedTableStyles } from "../shared-table-styles";
 
 /**
  * `wvw-leaderboards` render a leaderboard table for WvW.
@@ -37,7 +39,6 @@ class WvwLeaderboards extends PolymerElement {
   static get template() {
     return html`
       ${SharedStyles}
-      ${SharedTableStyles}
       <style>
         :host {
           display: block;
@@ -55,42 +56,87 @@ class WvwLeaderboards extends PolymerElement {
         .column-servername {
           width: 20rem;
         }
+
+        vaadin-grid-cell-content {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
       </style>
 
       <h1 class="title">Weekly Leaderboards</h1>
       <p>Compare stats between all links on all regions.</p>
 
-      <div class="table-scroll card">
-        <table>
-          <thead>
-            <th class="column-ranking">#</th>
-            <th class="column-servername">Server</th>
-            <th>Region</th>
-            <th>Tier</th>
-            <th>Victory Points</th>
-            <th>Score</th>
-            <th>Kills</th>
-            <th>Deaths</th>
-            <th>KDR</th>
-          </thead>
-          <tbody>
-            <template is="dom-repeat" items="[[links]]" as="link">
-              <tr>
-                <td class="column-ranking">[[ _baseIndexOne(index) ]]</td>
-                <td class="no-text-overflow column-servername">[[ _generateWorldLinkNames(link.worlds, link.hosting_world, worlds) ]]</td>
-                <td>[[ link.region ]]</td>
-                <td>[[ link.tier ]]</td>
-                <td>[[ link.victory_points ]]</td>
-                <td>[[ link.score ]]</td>
-                <td>[[ link.kills ]]</td>
-                <td>[[ link.deaths ]]</td>
-                <td>[[ _calcKDR(link.kills, link.deaths) ]]</td>
-              <tr>
-            </template>
-          </tbody>
-        </table>
-      </div>
-      
+      <vaadin-grid class="card" theme="no-border" aria-label="World vs. World weekly server leaderboard" items="[[links]]" height-by-rows>
+        <vaadin-grid-column width="68px" flex-grow="0">
+          <template class="header">Rank</template>
+          <template>[[ _baseIndexOne(index) ]]</template>
+          <template class="footer">Rank</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column>
+          <template class="header">
+            <vaadin-grid-sorter path="link_name">Server</vaadin-grid-sorter>
+          </template>
+          <template>[[ item.link_name ]]</template>
+          <template class="footer">Server</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column width="96px" flex-grow="0">
+          <template class="header">
+            <vaadin-grid-sorter path="region">Region</vaadin-grid-sorter>
+          </template>
+          <template>[[ item.region ]]</template>
+          <template class="footer">Region</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column width="68px" flex-grow="0">
+          <template class="header">
+            <vaadin-grid-sorter path="tier">Tier</vaadin-grid-sorter>
+          </template>
+          <template>[[ item.tier ]]</template>
+          <template class="footer">Tier</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column width="140px" flex-grow="0">
+          <template class="header">
+            <vaadin-grid-sorter path="victory_points">Victory Points</vaadin-grid-sorter>
+          </template>
+          <template>[[ item.victory_points ]]</template>
+          <template class="footer">Victory Points</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column width="96px" flex-grow="0">
+          <template class="header">
+            <vaadin-grid-sorter path="score">Score</vaadin-grid-sorter>
+          </template>
+          <template>[[ item.score ]]</template>
+          <template class="footer">Score</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column width="96px" flex-grow="0">
+          <template class="header">
+            <vaadin-grid-sorter path="kills">Kills</vaadin-grid-sorter>
+          </template>
+          <template>[[ item.kills ]]</template>
+          <template class="footer">Kills</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column width="96px" flex-grow="0">
+          <template class="header">
+            <vaadin-grid-sorter path="deaths">Deaths</vaadin-grid-sorter>
+          </template>
+          <template>[[ item.deaths ]]</template>
+          <template class="footer">Deaths</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column width="80px" flex-grow="0">
+          <template class="header">
+            <vaadin-grid-sorter path="kdr">KDR</vaadin-grid-sorter>
+          </template>
+          <template>[[ item.kdr ]]</template>
+          <template class="footer">KDR</template>
+        </vaadin-grid-column>
+      </vaadin-grid>
     `;
   }
 
@@ -100,10 +146,11 @@ class WvwLeaderboards extends PolymerElement {
 
   _constructLinks(matches, worlds) {
     if (matches.length == 0 || worlds == 0) return;
-    this.set('links', matches.reduce(this._worldDataFromMatch, []))
+    this.set('links', matches.reduce(this._worldDataFromMatch.bind(this), []));
   }
 
   _worldDataFromMatch(accumulator, match) {
+    const that = this;
     const colors = ["red", "blue", "green"];
     const region = match.id.split('-')[0] == 1 ? "NA" : "EU";
     const tier = match.id.split('-')[1];
@@ -115,9 +162,11 @@ class WvwLeaderboards extends PolymerElement {
         score: match.scores[color],
         worlds: match.all_worlds[color],
         hosting_world: match.worlds[color],
+        link_name: that._generateWorldLinkNames(match.all_worlds[color], match.worlds[color], that.worlds),
         deaths: match.deaths[color],
         kills: match.kills[color],
-        victory_points: match.victory_points[color]
+        victory_points: match.victory_points[color],
+        kdr: that._calcKDR(match.kills[color], match.deaths[color])
       }
     });
 
