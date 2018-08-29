@@ -16,6 +16,7 @@ import "../wvw/wvw-map";
 import "../wvw/wvw-map-stats";
 import "../wvw/wvw-region";
 import "../wvw/wvw-matchup";
+import "../wvw/wvw-leaderboards";
 
 /**
  * `page-wvw`
@@ -116,7 +117,7 @@ class PageWvw extends PolymerElement {
         <wvw-matchup matchup="[[ currentMatchup ]]" worlds="[[ worlds ]]"></wvw-matchup>
       </div>
       <div name="leaderboards">
-        Leaderboards. Compare stats between all servers on all regions.
+        <wvw-leaderboards matches="[[ matches ]]" worlds="[[ worlds ]]"></wvw-leaderboards>
       </div>
     </iron-pages>
     `;
