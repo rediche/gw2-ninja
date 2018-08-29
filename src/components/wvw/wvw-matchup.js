@@ -1,8 +1,8 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
-import "@polymer/polymer/lib/elements/dom-repeat.js";
+
+import "@vaadin/vaadin-grid/vaadin-grid";
 
 import { SharedStyles } from "../shared-styles";
-import { SharedTableStyles } from "../shared-table-styles";
 import { SharedWvwStyles } from "../shared-wvw-styles";
 
 /**
@@ -17,7 +17,6 @@ class WvWMatchup extends PolymerElement {
   static get template() {
     return html`
       ${SharedStyles}
-      ${SharedTableStyles}
       ${SharedWvwStyles}
       <style>
         :host {
@@ -73,14 +72,6 @@ class WvWMatchup extends PolymerElement {
 
         .card-body {
           padding: var(--spacer-small) var(--spacer-medium);
-        }
-
-        .table-scroll {
-          margin-bottom: var(--spacer-large);
-        }
-
-        thead {
-          box-shadow: var(--app-box-shadow);
         }
 
         gwn-progress {
@@ -188,43 +179,82 @@ class WvWMatchup extends PolymerElement {
         </div>
 
         <h2 class="title">Skirmishes</h2>
-        <div class="table-scroll card">
-          <table>
-            <thead>
-              <th class="skirmish-id">#</th>
-              <th>Matchup Score</th>
-              <th>Skirmish Score</th>
-              <th>Eternal Battlegrounds</th>
-              <th>Red Borderland</th>
-              <th>Blue Borderland</th>
-              <th>Green Borderland</th>
-            </thead>
-            <tbody>
-              <template is="dom-repeat" items="{{ skirmishesDesc }}" as="skirmish">
-                <tr>
-                  <td class="skirmish-id">[[ skirmish.id ]]</td>
-                  <td>
-                    <gwn-progress class="green" progress="[[ _accumulatedScore(skirmishesDesc, index, 'green') ]]" max="[[ _highestScore(matchup.scores) ]]">[[ _accumulatedScore(skirmishesDesc, index, 'green') ]]</gwn-progress>
-                    <gwn-progress class="blue" progress="[[ _accumulatedScore(skirmishesDesc, index, 'blue') ]]" max="[[ _highestScore(matchup.scores) ]]">[[ _accumulatedScore(skirmishesDesc, index, 'blue') ]]</gwn-progress>
-                    <gwn-progress class="red" progress="[[ _accumulatedScore(skirmishesDesc, index, 'red') ]]" max="[[ _highestScore(matchup.scores) ]]">[[ _accumulatedScore(skirmishesDesc, index, 'red') ]]</gwn-progress>
-                  </td>
-                  <td>
-                    <gwn-progress class="green" progress="[[ skirmish.scores.green ]]" max="[[ _highestScore(skirmish.scores) ]]">[[ skirmish.scores.green ]]</gwn-progress>
-                    <gwn-progress class="blue" progress="[[ skirmish.scores.blue ]]" max="[[ _highestScore(skirmish.scores) ]]">[[ skirmish.scores.blue ]]</gwn-progress>
-                    <gwn-progress class="red" progress="[[ skirmish.scores.red ]]" max="[[ _highestScore(skirmish.scores) ]]">[[ skirmish.scores.red ]]</gwn-progress>
-                  </td>
-                  <template is="dom-repeat" items="{{ skirmish.map_scores }}">
-                    <td>
-                      <gwn-progress class="green" progress="[[ item.scores.green ]]" max="[[ _highestScore(item.scores) ]]">[[ item.scores.green ]]</gwn-progress>
-                      <gwn-progress class="blue" progress="[[ item.scores.blue ]]" max="[[ _highestScore(item.scores) ]]">[[ item.scores.blue ]]</gwn-progress>
-                      <gwn-progress class="red" progress="[[ item.scores.red ]]" max="[[ _highestScore(item.scores) ]]">[[ item.scores.red ]]</gwn-progress>
-                    </td>
-                  </template>
-                </tr>
-              </template>
-            </tbody>
-          </table>
-        </div>
+        <vaadin-grid class="card" theme="no-border" aria-label="Skirmish overview" items="[[skirmishesDesc]]">
+          <vaadin-grid-column width="54px" flex-grow="0">
+            <template class="header">#</template>
+            <template>[[ item.id ]]</template>
+            <template class="footer">#</template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column>
+            <template class="header">Matchup Score</template>
+            <template>
+              <gwn-progress 
+                class="green" 
+                progress="[[ _accumulatedScore(skirmishesDesc, index, 'green') ]]" 
+                max="[[ _highestScore(matchup.scores) ]]">[[ _accumulatedScore(skirmishesDesc, index, 'green') ]]</gwn-progress>
+              <gwn-progress 
+                class="blue" 
+                progress="[[ _accumulatedScore(skirmishesDesc, index, 'blue') ]]" 
+                max="[[ _highestScore(matchup.scores) ]]">[[ _accumulatedScore(skirmishesDesc, index, 'blue') ]]</gwn-progress>
+              <gwn-progress 
+                class="red" 
+                progress="[[ _accumulatedScore(skirmishesDesc, index, 'red') ]]" 
+                max="[[ _highestScore(matchup.scores) ]]">[[ _accumulatedScore(skirmishesDesc, index, 'red') ]]</gwn-progress>
+            </template>
+            <template class="footer">Matchup Score</template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column>
+            <template class="header">Skirmish Score</template>
+            <template>
+              <gwn-progress class="green" progress="[[ item.scores.green ]]" max="[[ _highestScore(item.scores) ]]">[[ item.scores.green ]]</gwn-progress>
+              <gwn-progress class="blue" progress="[[ item.scores.blue ]]" max="[[ _highestScore(item.scores) ]]">[[ item.scores.blue ]]</gwn-progress>
+              <gwn-progress class="red" progress="[[ item.scores.red ]]" max="[[ _highestScore(item.scores) ]]">[[ item.scores.red ]]</gwn-progress>
+            </template>
+            <template class="footer">Skirmish Score</template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column>
+            <template class="header">Eternal Battlegrounds</template>
+            <template>
+              <gwn-progress class="green" progress="[[ item.map_scores.0.scores.green ]]" max="[[ _highestScore(item.map_scores.0.scores) ]]">[[ item.map_scores.0.scores.green ]]</gwn-progress>
+              <gwn-progress class="blue" progress="[[ item.map_scores.0.scores.blue ]]" max="[[ _highestScore(item.map_scores.0.scores) ]]">[[ item.map_scores.0.scores.blue ]]</gwn-progress>
+              <gwn-progress class="red" progress="[[ item.map_scores.0.scores.red ]]" max="[[ _highestScore(item.map_scores.0.scores) ]]">[[ item.map_scores.0.scores.red ]]</gwn-progress>
+            </template>
+            <template class="footer">Eternal Battlegrounds</template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column>
+            <template class="header">Red Borderland</template>
+            <template>
+              <gwn-progress class="green" progress="[[ item.map_scores.1.scores.green ]]" max="[[ _highestScore(item.map_scores.1.scores) ]]">[[ item.map_scores.1.scores.green ]]</gwn-progress>
+              <gwn-progress class="blue" progress="[[ item.map_scores.1.scores.blue ]]" max="[[ _highestScore(item.map_scores.1.scores) ]]">[[ item.map_scores.1.scores.blue ]]</gwn-progress>
+              <gwn-progress class="red" progress="[[ item.map_scores.1.scores.red ]]" max="[[ _highestScore(item.map_scores.1.scores) ]]">[[ item.map_scores.1.scores.red ]]</gwn-progress>
+            </template>
+            <template class="footer">Red Borderland</template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column>
+            <template class="header">Blue Borderland</template>
+            <template>
+              <gwn-progress class="green" progress="[[ item.map_scores.2.scores.green ]]" max="[[ _highestScore(item.map_scores.2.scores) ]]">[[ item.map_scores.2.scores.green ]]</gwn-progress>
+              <gwn-progress class="blue" progress="[[ item.map_scores.2.scores.blue ]]" max="[[ _highestScore(item.map_scores.2.scores) ]]">[[ item.map_scores.2.scores.blue ]]</gwn-progress>
+              <gwn-progress class="red" progress="[[ item.map_scores.2.scores.red ]]" max="[[ _highestScore(item.map_scores.2.scores) ]]">[[ item.map_scores.2.scores.red ]]</gwn-progress>
+            </template>
+            <template class="footer">Blue Borderland</template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column>
+            <template class="header">Green Borderland</template>
+            <template>
+              <gwn-progress class="green" progress="[[ item.map_scores.3.scores.green ]]" max="[[ _highestScore(item.map_scores.3.scores) ]]">[[ item.map_scores.3.scores.green ]]</gwn-progress>
+              <gwn-progress class="blue" progress="[[ item.map_scores.3.scores.blue ]]" max="[[ _highestScore(item.map_scores.3.scores) ]]">[[ item.map_scores.3.scores.blue ]]</gwn-progress>
+              <gwn-progress class="red" progress="[[ item.map_scores.3.scores.red ]]" max="[[ _highestScore(item.map_scores.3.scores) ]]">[[ item.map_scores.3.scores.red ]]</gwn-progress>
+            </template>
+            <template class="footer">Green Borderland</template>
+          </vaadin-grid-column>
+        </vaadin-grid>
       </div>
     `;
   }
