@@ -5,7 +5,7 @@ import "../utilities/gwn-progress";
 
 import "../my-icons.js";
 import { SharedTableStyles } from "../shared-table-styles";
-import { SharedWvwStyles } from "../shared-wvw-styles";
+/* import { SharedWvwStyles } from "../shared-wvw-styles"; */ // TODO: Find a solution to import Polymer Shared Styles into a lit-element and use it in multiple lit-elements.
 
 /**
  * `wvw-region-tier` renders a table-row that displays the server names, victory points and scores of a matchup.
@@ -23,8 +23,28 @@ class WvwRegionTier extends LitElement {
 
     return html`
       ${ SharedTableStyles.content.firstElementChild }
-      ${ SharedWvwStyles.content.firstElementChild }
       <style>
+        /* START: Manual import from SharedWvwStyles */
+        :host {
+          /* Colors */
+          --team-green: #4CAF50;
+          --team-blue: #1976D2;
+          --team-red: #E53935;
+        }
+
+        gwn-progress.green {
+          --gwn-progress-color: var(--team-green);
+        }
+
+        gwn-progress.blue {
+          --gwn-progress-color: var(--team-blue);
+        }
+
+        gwn-progress.red {
+          --gwn-progress-color: var(--team-red);
+        }
+        /* END: Manual import from SharedWvwStyles */
+
         :host {
           display: table;
           width: 100%;
