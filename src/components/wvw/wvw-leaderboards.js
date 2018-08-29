@@ -44,16 +44,12 @@ class WvwLeaderboards extends PolymerElement {
           padding: var(--spacer-large);
         }
 
+        .title {
+          margin-bottom: 0;
+        }
+
         .card {
           padding: 0;
-        }
-
-        .column-ranking {
-          width: 3rem;
-        }
-
-        .column-servername {
-          width: 20rem;
         }
 
         vaadin-grid-cell-content {
