@@ -19,7 +19,7 @@ import { SharedStyles } from "../shared-styles.js";
 class WvwMap extends PolymerElement {
   static get template() {
     return html`
-    <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css">
+    <link rel="stylesheet" href="../../../node_modules/leaflet/dist/leaflet.css">
     ${SharedStyles}
     <style>
       :host {
