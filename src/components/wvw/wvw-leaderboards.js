@@ -61,7 +61,7 @@ class WvwLeaderboards extends PolymerElement {
       <h1 class="title">Weekly Leaderboards</h1>
       <p>Compare stats between all links on all regions.</p>
 
-      <vaadin-grid class="card" theme="no-border" aria-label="World vs. World weekly server leaderboard" items="[[links]]" height-by-rows>
+      <vaadin-grid class="card" theme="no-border row-stripes" aria-label="World vs. World weekly server leaderboard" items="[[links]]" height-by-rows>
         <vaadin-grid-column width="68px" flex-grow="0">
           <template class="header">Rank</template>
           <template>[[ _baseIndexOne(index) ]]</template>

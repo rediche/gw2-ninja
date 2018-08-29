@@ -86,7 +86,7 @@ class WvWMatchup extends PolymerElement {
           :host {
             padding: var(--spacer-large);
           }
-          
+
           .cards {
             flex-direction: row;
           }
@@ -183,7 +183,7 @@ class WvWMatchup extends PolymerElement {
         </div>
 
         <h2 class="title">Skirmishes</h2>
-        <vaadin-grid class="card" theme="no-border" aria-label="Skirmish overview" items="[[skirmishesDesc]]">
+        <vaadin-grid class="card" theme="no-border row-stripes" aria-label="Skirmish overview" items="[[skirmishesDesc]]">
           <vaadin-grid-column width="54px" flex-grow="0">
             <template class="header">#</template>
             <template>[[ item.id ]]</template>
