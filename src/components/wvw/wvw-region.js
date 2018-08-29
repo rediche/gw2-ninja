@@ -24,10 +24,15 @@ class WvwRegion extends PolymerElement {
         padding: var(--spacer-large);
       }
 
-      .card {
+      .card,
+      .title {
         padding: 0;
         max-width: 1100px;
         margin: 0 auto var(--spacer-large);
+      }
+
+      .title {
+        margin-bottom: var(--spacer-small);
       }
 
       thead th {
