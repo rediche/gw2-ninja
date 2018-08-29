@@ -21,7 +21,7 @@ class WvWMatchup extends PolymerElement {
       <style>
         :host {
           display: block;
-          padding: var(--spacer-large);
+          padding: var(--spacer-medium) var(--spacer-small) 0;
         }
 
         :host([hidden]) {
@@ -83,6 +83,10 @@ class WvWMatchup extends PolymerElement {
         }
 
         @media screen and (min-width: 768px) {
+          :host {
+            padding: var(--spacer-large);
+          }
+          
           .cards {
             flex-direction: row;
           }
