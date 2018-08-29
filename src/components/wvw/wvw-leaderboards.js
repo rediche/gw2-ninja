@@ -70,10 +70,10 @@ class WvwLeaderboards extends PolymerElement {
 
         <vaadin-grid-column>
           <template class="header">
-            <vaadin-grid-sorter path="link_name">Server</vaadin-grid-sorter>
+            <vaadin-grid-sorter path="link_name">Worlds</vaadin-grid-sorter>
           </template>
           <template>[[ item.link_name ]]</template>
-          <template class="footer">Server</template>
+          <template class="footer">Worlds</template>
         </vaadin-grid-column>
 
         <vaadin-grid-column width="96px" flex-grow="0">
