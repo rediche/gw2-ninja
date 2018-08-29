@@ -37,14 +37,14 @@ class PageWvw extends PolymerElement {
 
       .sticky-tabs {
         display: flex;
+        flex-direction: column;
         align-items: flex-end;
         background-color: var(--app-primary-color);
-        padding: 0 var(--spacer-large);
       }
 
       paper-dropdown-menu {
-        flex: none;
-        margin-right: var(--spacer-large);
+        width: 100%;
+        padding: 0 var(--spacer-large);
         --iron-icon-fill-color: var(--app-text-color-light);
         --paper-input-container-color: var(--app-text-color-light);
         --paper-input-container-focus-color: var(--app-text-color-light);;
@@ -57,6 +57,7 @@ class PageWvw extends PolymerElement {
       }
 
       paper-tabs {
+        width: 100%;
         flex: auto;
         --paper-tabs-selection-bar-color: #ffffff;
       }
@@ -82,6 +83,24 @@ class PageWvw extends PolymerElement {
         right: 0;
         max-height: calc(100vh - 8rem);
         overflow: auto;
+      }
+
+      @media screen and (min-width: 768px) {
+        .sticky-tabs {
+          flex-direction: row;
+          padding: 0 var(--spacer-large);
+        }
+
+        paper-dropdown-menu {
+          padding: 0;
+          width: auto;
+          flex: none;
+          margin-right: var(--spacer-large);
+        }
+
+        paper-tabs {
+          width: auto;
+        }
       }
     </style>
 
