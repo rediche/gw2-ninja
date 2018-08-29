@@ -26,6 +26,10 @@ class WvwLeaderboards extends PolymerElement {
       links: {
         type: Array,
         value: []
+      },
+      sortBy: {
+        type: String,
+        value: "sortByVictoryPointsDesc"
       }
     };
   }
@@ -47,13 +51,20 @@ class WvwLeaderboards extends PolymerElement {
         .card {
           padding: 0;
         }
+
+        .column-ranking {
+          width: 3rem;
+        }
       </style>
       <h1 class="title">Weekly Leaderboards</h1>
       <p>Compare stats between all links on all regions.</p>
       <div class="table-scroll card">
         <table>
           <thead>
+            <th class="column-ranking">#</th>
             <th>Server</th>
+            <th>Region</th>
+            <th>Tier</th>
             <th>Victory Points</th>
             <th>Score</th>
             <th>Kills</th>
@@ -61,9 +72,12 @@ class WvwLeaderboards extends PolymerElement {
             <th>KDR</th>
           </thead>
           <tbody>
-            <template is="dom-repeat" items="[[links]]" as="link">
+            <template is="dom-repeat" items="[[links]]" as="link" sort="[[sortBy]]">
               <tr>
+                <td class="column-ranking">[[ _baseIndexOne(index) ]]</td>
                 <td class="no-text-overflow">[[ _generateWorldLinkNames(link.worlds, link.hosting_world, worlds) ]]</td>
+                <td>[[ link.region ]]</td>
+                <td>[[ link.tier ]]</td>
                 <td>[[ link.victory_points ]]</td>
                 <td>[[ link.score ]]</td>
                 <td>[[ link.kills ]]</td>
@@ -76,6 +90,18 @@ class WvwLeaderboards extends PolymerElement {
       </div>
       
     `;
+  }
+
+  _baseIndexOne(index) {
+    return index + 1;
+  }
+
+  sortByVictoryPointsAsc(a, b) {
+    return a.victory_points - b.victory_points;
+  }
+
+  sortByVictoryPointsDesc(a, b) {
+    return b.victory_points - a.victory_points;
   }
 
   _constructLinks(matches, worlds) {
