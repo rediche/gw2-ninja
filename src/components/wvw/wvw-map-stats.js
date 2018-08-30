@@ -1,7 +1,25 @@
 import { LitElement, html } from "@polymer/lit-element";
+import { connect } from 'pwa-helpers/connect-mixin.js';
 import { formatDistance } from "date-fns";
 
 import "@polymer/paper-ripple/paper-ripple.js";
+
+// Load redux store
+import { store } from '../../store.js';
+
+// Lazy load reducers
+import settings from '../../reducers/settings.js';
+store.addReducers({
+  settings
+});
+
+import {
+  getGuild,
+  getGuildUpgrades,
+  getGuildEmblemURL,
+  getGuildNameWithTag
+} from "../utilities/gwn-guild-utils";
+import { getWvwUpgrades } from "../utilities/gwn-wvw-utils";
 
 import { SharedWvwStyles } from "../shared-wvw-styles";
 
@@ -12,7 +30,7 @@ import { SharedWvwStyles } from "../shared-wvw-styles";
  * @customElement
  * @extends {LitElement}
  */
-class WvwMapStats extends LitElement {
+class WvwMapStats extends connect(store)(LitElement) {
   _render({ selectedObjective }) {
     return html`
       ${SharedWvwStyles.content.firstElementChild}
@@ -168,13 +186,16 @@ class WvwMapStats extends LitElement {
 
         ${
           selectedObjective.claimed_by && selectedObjective.claimed_at
-            ? this._renderClaimedBy(
-                selectedObjective
-              )
+            ? this._renderClaimedBy(selectedObjective)
             : ""
         }
 
-        <div hidden="${ !selectedObjective.guild_upgrades || selectedObjective.guild_upgrades.length < 1 ? true : false }">
+        <div hidden="${
+          !selectedObjective.guild_upgrades ||
+          selectedObjective.guild_upgrades.length < 1
+            ? true
+            : false
+        }">
           <hr>
           <div class="guild-upgrades card-body">
             <h3 class="tier-title">Guild upgrades</h3>
@@ -193,7 +214,12 @@ class WvwMapStats extends LitElement {
         ${
           upgradeTiers && selectedObjective.yaks_delivered
             ? upgradeTiers.map((tier, index, tiers) =>
-                this._renderUpgradeTier(tier, index, tiers, selectedObjective.yaks_delivered)
+                this._renderUpgradeTier(
+                  tier,
+                  index,
+                  tiers,
+                  selectedObjective.yaks_delivered
+                )
               )
             : ""
         }
@@ -210,7 +236,7 @@ class WvwMapStats extends LitElement {
 
   /**
    * Render a claimed by guild layout
-   * 
+   *
    * @param {Object} objective
    * @param {String} objective.claimed_by
    * @param {Time} objective.claimed_at
@@ -219,10 +245,12 @@ class WvwMapStats extends LitElement {
     if (!claimed_by || !claimed_at) return;
 
     return this._getGuild(claimed_by).then(guild => {
-      const guildName = this._getGuildName(guild)
+      const guildName = getGuildNameWithTag(guild);
       return html`
         <div class="claimed-by card-body">
-          <img class="guild-emblem" src="${this._getGuildEmblemURL(guild)}" alt="${guildName}">
+          <img class="guild-emblem" src="${getGuildEmblemURL(
+            guild
+          )}" alt="${guildName}">
           <div class="guild-name">${guildName}</div>
           <div class="claimed-at">Claimed ${this._getFormatDistance(
             claimed_at
@@ -245,7 +273,11 @@ class WvwMapStats extends LitElement {
       <div class$="card-body ${
         yaksRequiredForThisTier > yaksDelivered ? "not-upgraded" : ""
       }">
-        <h3 class="tier-title">${tier.name} ${yaksRequiredForThisTier > yaksDelivered ? `(${yaksRequiredForThisTier - yaksDelivered} Dolyaks remaining)` : ""}</h3>
+        <h3 class="tier-title">${tier.name} ${
+      yaksRequiredForThisTier > yaksDelivered
+        ? `(${yaksRequiredForThisTier - yaksDelivered} Dolyaks remaining)`
+        : ""
+    }</h3>
         <div class="tier upgrade-list">
           ${tier.upgrades.map(
             upgrade =>
@@ -285,16 +317,6 @@ class WvwMapStats extends LitElement {
     return formatDistance(new Date(date), Date.now());
   }
 
-  _getGuildEmblemURL({ name }) {
-    if (!name) return;
-    return `https://guilds.gw2w2w.com/guilds/${name.replace(' ', '-').toLowerCase()}/256.svg`;
-  }
-
-  _getGuildName({ name, tag}) {
-    if (!name || !tag) return;
-    return `${name} [${tag}]`;
-  }
-
   /**
    * TODO:
    * Make a Guild Data handler that is global.
@@ -304,38 +326,13 @@ class WvwMapStats extends LitElement {
   async _getGuild(guildId) {
     if (!guildId) return;
 
-    const foundGuild = this.guilds.find((guild) => guild.id == guildId);
+    const foundGuild = this.guilds.find(guild => guild.id == guildId);
     if (foundGuild) return foundGuild;
 
-    const response = await fetch(
-      `https://api.guildwars2.com/v2/guild/${guildId}`
-    );
-    const guild = await response.json();
-    this.guilds = this.guilds.concat(guild);
-
-    return guild;
-  }
-
-  /**
-   * TODO: Should be put into redux setup.
-   */
-  async _getUpgrades() {
-    const response = await fetch(
-      "https://api.guildwars2.com/v2/wvw/upgrades?ids=all"
-    );
-    const upgrades = await response.json();
-    return upgrades;
-  }
-
-  /**
-   * TODO: Should be put into redux setup.
-   */
-  async _getGuildUpgrades() {
-    const response = await fetch(
-      "https://api.guildwars2.com/v2/guild/upgrades?ids=all"
-    );
-    const upgrades = await response.json();
-    return upgrades;
+    return getGuild(guildId).then(guild => {
+      this.guilds = this.guilds.concat(guild);
+      return guild;
+    });
   }
 
   /**
@@ -355,13 +352,17 @@ class WvwMapStats extends LitElement {
 
     this.guilds = [];
 
-    this._getUpgrades().then(upgrades => {
-      this.upgrades = upgrades;
-    });
+    this._loadUpgrades();
+  }
+  
+  _loadUpgrades(language = "en") {
+    getGuildUpgrades(language).then(upgrades => (this.guildUpgrades = upgrades));
+    getWvwUpgrades(language).then(upgrades => (this.upgrades = upgrades));
+  }
 
-    this._getGuildUpgrades().then(upgrades => {
-      this.guildUpgrades = upgrades;
-    });
+  _stateChanged({ settings }) {
+    if (!settings || !settings.language) return;
+    this._loadUpgrades(settings.language);
   }
 
   _onClose(e) {

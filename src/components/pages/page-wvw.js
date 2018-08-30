@@ -7,8 +7,10 @@ import "@polymer/polymer/lib/elements/dom-repeat.js";
 import { store } from "../../store.js";
 
 // Lazy load reducers
+import settings from "../../reducers/settings.js";
 import account from "../../reducers/account.js";
 store.addReducers({
+  settings,
   account
 });
 
@@ -21,6 +23,8 @@ import "@polymer/paper-listbox/paper-listbox.js";
 import "@polymer/paper-item/paper-item.js";
 
 import { SharedStyles } from "../shared-styles.js";
+
+import { getWorlds, getMatches } from "../utilities/gwn-wvw-utils";
 
 import "../wvw/wvw-map";
 import "../wvw/wvw-map-stats";
@@ -177,7 +181,8 @@ class PageWvw extends connect(store)(PolymerElement) {
       },
       currentMatch: Object,
       objectives: Array,
-      selectedObjective: Object
+      selectedObjective: Object,
+      matchesInterval: Object
     };
   }
 
@@ -190,22 +195,16 @@ class PageWvw extends connect(store)(PolymerElement) {
 
     afterNextRender(this, function() {
       const that = this;
-      this._getWorlds();
-      this._getMatches();
-      setInterval(that._getMatches.bind(that), 10000);
+
+      getMatches().then(matches => this.set("matches", matches));
+      setInterval(() => {
+        getMatches().then(matches => that.set("matches", matches));
+      }, 10000);
     });
   }
 
   _serverSelected(serverId) {
     return !serverId ? false : true;
-  }
-
-  async _getMatches() {
-    const response = await fetch(
-      "https://api.guildwars2.com/v2/wvw/matches?ids=all"
-    );
-    const matches = await response.json();
-    this.set("matches", matches);
   }
 
   _selectedServerChanged(serverId, matches) {
@@ -224,14 +223,6 @@ class PageWvw extends connect(store)(PolymerElement) {
       return console.log("No matchup was found for the server provided.");
 
     this.set("currentMatchup", foundMatchup);
-  }
-
-  async _getWorlds() {
-    const response = await fetch(
-      "https://api.guildwars2.com/v2/worlds?ids=all"
-    );
-    const worlds = await response.json();
-    this.set("worlds", worlds);
   }
 
   _checkActiveMap(route) {
@@ -267,9 +258,15 @@ class PageWvw extends connect(store)(PolymerElement) {
     return objectives.find(objective => objective.name == objectiveName);
   }
 
-  _stateChanged(state) {
-    if (!state || !state.account) return;
-    this.set("serverId", state.account.world);
+  _stateChanged({ settings, account }) {
+    if (!settings.language) {
+      getWorlds().then(worlds => this.set("worlds", worlds));
+    } else {
+      getWorlds(settings.language).then(worlds => this.set("worlds", worlds));
+    }
+
+    if (!account.world) return;
+    this.set("serverId", account.world);
   }
 }
 
