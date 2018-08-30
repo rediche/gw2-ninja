@@ -1,5 +1,10 @@
 # Next release
 
+- Add new section: World vs World.
+- WvW Region Overview: A quick overview of all the matches going on in EU and NA.
+- WvW Map: An interactive map to see info about map objectives while outside of the game.
+- WvW Matchup: A deepdive page to see all the stats of your worlds matchup.
+- WvW Leaderboards: Compare all worlds across region on stats such as: Kills, deaths, KDR, Score and Victory Points.
 - Add secondary style button on directory-entry, #41.
 - Pass theme to directory-entry for style changes, #41.
 - Change Heart of Thorns green from #4CAF50 to #388E3C.
