@@ -40,3 +40,17 @@ export async function getWvwUpgrades(language = "en") {
   const upgrades = await response.json();
   return upgrades;
 }
+
+/**
+ * Load all WvW Objectives from the Guild Wars 2 API.
+ * 
+ * @param {String} language 
+ * @returns {Promise}
+ */
+export async function getObjectives(language = "en") {
+  const response = await fetch(
+    `${API_BASE_V2}/wvw/objectives?ids=all&lang=${language}`
+  );
+  const objectives = await response.json();
+  return objectives;
+}

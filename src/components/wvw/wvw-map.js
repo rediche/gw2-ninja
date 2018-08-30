@@ -7,6 +7,8 @@ import { TileLayer } from "leaflet/src/layer/tile";
 import { Marker, Icon } from "leaflet/src/layer/marker";
 import { LatLngBounds, CRS } from "leaflet/src/geo";
 
+import { getObjectives } from "../utilities/gwn-wvw-utils";
+
 import { SharedStyles } from "../shared-styles.js";
 
 /**
@@ -42,19 +44,13 @@ class WvwMap extends PolymerElement {
    */
   static get properties() {
     return {
-      map: {
-        type: Object
-      },
-      icons: {
-        type: Object
-      },
+      map: Object,
+      icons: Object,
       objectives: {
         type: Array,
         notify: true
       },
-      mapData: {
-        type: Array
-      },
+      mapData: Array,
       active: {
         type: Boolean,
         value: false
@@ -117,7 +113,7 @@ class WvwMap extends PolymerElement {
   async _mapUpdated(map, icons) {
     if (!map || !icons) return;
 
-    const objectives = await this.getObjectives();
+    const objectives = await getObjectives();
 
     const objectivesFiltered = objectives.filter(objective => {
       if (
@@ -135,14 +131,6 @@ class WvwMap extends PolymerElement {
     });
 
     this.set("objectives", addedObjectives);
-  }
-
-  async getObjectives() {
-    const response = await fetch(
-      "https://api.guildwars2.com/v2/wvw/objectives?ids=all"
-    );
-    const objectives = await response.json();
-    return objectives;
   }
 
   addObjective(objective, map) {
@@ -236,11 +224,14 @@ class WvwMap extends PolymerElement {
         objective => mapObjective.id == objective.id
       );
 
+      console.log(objectives[index]);
+
       if (index !== -1) {
         const icon =
           icons[mapObjective.type.toLowerCase()][
             mapObjective.owner.toLowerCase()
           ];
+        //objectives[index].mapMarker.options.name = mapObjective.o
         objectives[index].mapMarker.setIcon(icon);
         if (objectives[index].type !== "Ruins")
           this.updateTooltip(mapObjective, objectives[index]);
