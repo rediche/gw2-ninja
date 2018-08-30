@@ -125,8 +125,6 @@ class WvwMap extends connect(store)(PolymerElement) {
   async _mapUpdated(map, icons, objectives) {
     if (!map || !icons || !objectives) return;
 
-    //const objectives = await getObjectives();
-
     const objectivesFiltered = objectives.filter(objective => {
       if (
         !objective.marker ||
