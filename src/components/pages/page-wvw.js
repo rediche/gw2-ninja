@@ -147,7 +147,7 @@ class PageWvw extends connect(store)(PolymerElement) {
       <div name="map" class="map">
         <div class="error-msg text-center" hidden$="[[serverId]]">Please select a server in the dropdown above.</div>
         <wvw-map-stats selected-objective="[[ selectedObjective ]]" on-objective-close="_objectiveClose"></wvw-map-stats>
-        <wvw-map map-data="[[ currentMatchup.maps ]]" active="[[ mapActive ]]" objectives="{{ objectives }}" on-objective-clicked="_objectiveClicked"></wvw-map>
+        <wvw-map map-data="[[ currentMatchup.maps ]]" active="[[ mapActive ]]" added-objectives="{{ objectives }}" on-objective-clicked="_objectiveClicked"></wvw-map>
       </div>
       <div name="overview">
         <wvw-region matches="[[ matches ]]" worlds="[[ worlds ]]"></wvw-region>

@@ -1,5 +1,15 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
+import { connect } from "pwa-helpers/connect-mixin";
 import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
+
+// Load redux store
+import { store } from "../../store.js";
+
+// Lazy load reducers
+import settings from "../../reducers/settings.js";
+store.addReducers({
+  settings
+});
 
 import { Map } from "leaflet/src/map";
 import { Tooltip } from "leaflet/src/layer";
@@ -18,7 +28,7 @@ import { SharedStyles } from "../shared-styles.js";
  * @customElement
  * @extends {Polymer.Element}
  */
-class WvwMap extends PolymerElement {
+class WvwMap extends connect(store)(PolymerElement) {
   static get template() {
     return html`
     <link rel="stylesheet" href="../../../node_modules/leaflet/dist/leaflet.css">
@@ -46,10 +56,12 @@ class WvwMap extends PolymerElement {
     return {
       map: Object,
       icons: Object,
-      objectives: {
+      addedObjectives: {
         type: Array,
-        notify: true
+        notify: true,
+        value: []
       },
+      objectives: Array,
       mapData: Array,
       active: {
         type: Boolean,
@@ -61,8 +73,8 @@ class WvwMap extends PolymerElement {
   static get observers() {
     return [
       "_invalidateMap(active, map)",
-      "_mapUpdated(map, icons)",
-      "_mapDataChanged(mapData, objectives, icons)"
+      "_mapUpdated(map, icons, objectives)",
+      "_mapDataChanged(mapData, addedObjectives, icons)"
     ];
   }
 
@@ -110,10 +122,10 @@ class WvwMap extends PolymerElement {
     });
   }
 
-  async _mapUpdated(map, icons) {
-    if (!map || !icons) return;
+  async _mapUpdated(map, icons, objectives) {
+    if (!map || !icons || !objectives) return;
 
-    const objectives = await getObjectives();
+    //const objectives = await getObjectives();
 
     const objectivesFiltered = objectives.filter(objective => {
       if (
@@ -126,11 +138,16 @@ class WvwMap extends PolymerElement {
       return true;
     });
 
+    // Remove old layers before adding new ones to map.
+    this.addedObjectives.map((layer) => {
+      map.removeLayer(layer.mapMarker);
+    });
+
     const addedObjectives = objectivesFiltered.map(objective => {
       return this.addObjective(objective, map);
     });
 
-    this.set("objectives", addedObjectives);
+    this.set("addedObjectives", addedObjectives);
   }
 
   addObjective(objective, map) {
@@ -212,19 +229,17 @@ class WvwMap extends PolymerElement {
     return map.unproject(coord, map.getMaxZoom());
   }
 
-  _mapDataChanged(mapData, objectives, icons) {
-    if (!mapData || !objectives || !icons) return;
+  _mapDataChanged(mapData, addedObjectives, icons) {
+    if (!mapData || !addedObjectives || !icons) return;
 
-    const currentMapObjectives = mapData.reduce((objectives, map) => {
-      return objectives.concat(map.objectives);
+    const currentMapObjectives = mapData.reduce((addedObjectives, map) => {
+      return addedObjectives.concat(map.objectives);
     }, []);
 
     currentMapObjectives.forEach(mapObjective => {
-      const index = objectives.findIndex(
+      const index = addedObjectives.findIndex(
         objective => mapObjective.id == objective.id
       );
-
-      console.log(objectives[index]);
 
       if (index !== -1) {
         const icon =
@@ -232,9 +247,9 @@ class WvwMap extends PolymerElement {
             mapObjective.owner.toLowerCase()
           ];
         //objectives[index].mapMarker.options.name = mapObjective.o
-        objectives[index].mapMarker.setIcon(icon);
-        if (objectives[index].type !== "Ruins")
-          this.updateTooltip(mapObjective, objectives[index]);
+        addedObjectives[index].mapMarker.setIcon(icon);
+        if (addedObjectives[index].type !== "Ruins")
+          this.updateTooltip(mapObjective, addedObjectives[index]);
       }
     });
   }
@@ -281,6 +296,17 @@ class WvwMap extends PolymerElement {
     } else {
       objective.tooltip.closeTooltip();
     }
+  }
+
+  _stateChanged({ settings }) {
+    if (!settings.language) {
+      getObjectives().then(objectives => this.set('objectives', objectives));
+      return;
+    } else if (this.language != settings.language) {
+      getObjectives(settings.language).then(objectives => this.set('objectives', objectives));
+    }
+
+    this.language = settings.language;
   }
 }
 
