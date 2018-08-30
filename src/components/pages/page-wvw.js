@@ -24,7 +24,8 @@ import "@polymer/paper-item/paper-item.js";
 
 import { SharedStyles } from "../shared-styles.js";
 
-import { getWorlds, getMatches } from "../utilities/gwn-wvw-utils";
+import { getMatches } from "../utilities/gwn-wvw-utils";
+import { getWorlds } from "../utilities/gwn-misc-utils";
 
 import "../wvw/wvw-map";
 import "../wvw/wvw-map-stats";
