@@ -69,6 +69,15 @@ class PageWvw extends connect(store)(PolymerElement) {
         --paper-input-container-label: {
           color: var(--app-text-color-light);
         };
+        --paper-font-caption: {
+          font-family: var(--app-font-stack);
+        }
+        --paper-input-container-shared-input-style: {
+          font-family: var(--app-font-stack);
+        }
+        --paper-font-subhead: {
+          font-family: var(--app-font-stack);
+        }
       }
 
       paper-tabs {
@@ -78,7 +87,13 @@ class PageWvw extends connect(store)(PolymerElement) {
       }
 
       paper-tab {
+        font-family: var(--app-font-stack);
         color: white;
+      }
+
+      paper-tab.iron-selected,
+      paper-tab[focused] {
+        font-weight: 600;
       }
 
       .map {
