@@ -70,6 +70,16 @@ class WvwRegion extends PolymerElement {
       </vaadin-grid-column>
 
       <vaadin-grid-column>
+        <template class="header">Skirmish Score</template>
+        <template>
+          <gwn-progress class="green" progress="[[_latestSkirmishScore(item, 'green')]]" max="[[_highestSkirmishScoreInMatchup(item)]]">[[_latestSkirmishScore(item, 'green')]]</gwn-progress>
+          <gwn-progress class="blue" progress="[[_latestSkirmishScore(item, 'blue')]]" max="[[_highestSkirmishScoreInMatchup(item)]]">[[_latestSkirmishScore(item, 'blue')]]</gwn-progress>
+          <gwn-progress class="red" progress="[[_latestSkirmishScore(item, 'red')]]" max="[[_highestSkirmishScoreInMatchup(item)]]">[[_latestSkirmishScore(item, 'red')]]</gwn-progress>
+        </template>
+        <template class="footer">Skirmish Score</template>
+      </vaadin-grid-column>
+
+      <vaadin-grid-column>
         <template class="header">Victory Points</template>
         <template>
           <gwn-progress class="green" progress="[[item.victory_points.green]]" max="[[_highestVictoryPointsInMatchup(item)]]">[[item.victory_points.green]]</gwn-progress>
@@ -110,6 +120,16 @@ class WvwRegion extends PolymerElement {
           <div class="no-text-overflow">[[ _generateWorldLinkNames(item.all_worlds.red, item.worlds.red, worlds) ]]</div>  
         </template>
         <template class="footer">World</template>
+      </vaadin-grid-column>
+
+      <vaadin-grid-column>
+        <template class="header">Skirmish Score</template>
+        <template>
+          <gwn-progress class="green" progress="[[_latestSkirmishScore(item, 'green')]]" max="[[_highestSkirmishScoreInMatchup(item)]]">[[_latestSkirmishScore(item, 'green')]]</gwn-progress>
+          <gwn-progress class="blue" progress="[[_latestSkirmishScore(item, 'blue')]]" max="[[_highestSkirmishScoreInMatchup(item)]]">[[_latestSkirmishScore(item, 'blue')]]</gwn-progress>
+          <gwn-progress class="red" progress="[[_latestSkirmishScore(item, 'red')]]" max="[[_highestSkirmishScoreInMatchup(item)]]">[[_latestSkirmishScore(item, 'red')]]</gwn-progress>
+        </template>
+        <template class="footer">Skirmish Score</template>
       </vaadin-grid-column>
 
       <vaadin-grid-column>
@@ -180,7 +200,9 @@ class WvwRegion extends PolymerElement {
 
     const hostWorldName = this._resolveWorldName(hostWorld, worlds);
 
-    return linkedWorlds.length > 0 ? `${hostWorldName} (${linkedWorldsWithNames.join(', ')})` : hostWorldName;
+    return linkedWorlds.length > 0
+      ? `${hostWorldName} (${linkedWorldsWithNames.join(", ")})`
+      : hostWorldName;
   }
 
   _resolveWorldName(worldId, worlds) {
@@ -190,21 +212,66 @@ class WvwRegion extends PolymerElement {
   }
 
   _isWinningOrLoosingMatchup(match, color) {
-    if (match.victory_points[color] == this._highestVictoryPointsInMatchup(match)) return "my-icons:chevron-up";
-    if (match.victory_points[color] == this._lowestVictoryPointsInMatchup(match)) return "my-icons:chevron-down";
+    if (
+      match.victory_points[color] == this._highestVictoryPointsInMatchup(match)
+    )
+      return "my-icons:chevron-up";
+    if (
+      match.victory_points[color] == this._lowestVictoryPointsInMatchup(match)
+    )
+      return "my-icons:chevron-down";
     return "my-icons:minus";
   }
 
   _highestVictoryPointsInMatchup(matchup) {
-    return Math.max(matchup.victory_points.green, matchup.victory_points.red, matchup.victory_points.blue);
+    return Math.max(
+      matchup.victory_points.green,
+      matchup.victory_points.red,
+      matchup.victory_points.blue
+    );
   }
 
   _lowestVictoryPointsInMatchup(matchup) {
-    return Math.min(matchup.victory_points.green, matchup.victory_points.red, matchup.victory_points.blue);
+    return Math.min(
+      matchup.victory_points.green,
+      matchup.victory_points.red,
+      matchup.victory_points.blue
+    );
   }
 
   _highestScoreInMatchup(matchup) {
-    return Math.max(matchup.scores.green, matchup.scores.red, matchup.scores.blue);
+    return Math.max(
+      matchup.scores.green,
+      matchup.scores.red,
+      matchup.scores.blue
+    );
+  }
+
+  /**
+   * Return the highest skirmish score in a matchup.
+   * 
+   * @param {Object} match
+   * @param {Array} match.skirmishes
+   * @returns {Number}
+   */
+  _highestSkirmishScoreInMatchup({ skirmishes }) {
+    if (!skirmishes) return;
+    const red = skirmishes[skirmishes.length - 1].scores.red;
+    const green = skirmishes[skirmishes.length - 1].scores.green;
+    const blue = skirmishes[skirmishes.length - 1].scores.blue;
+    return Math.max(red, blue, green);
+  }
+
+  /**
+   * Return the latest skirmish score for color in match.
+   * 
+   * @param {Object} match
+   * @param {Array} match.skirmishes 
+   * @param {String} color 
+   * @returns {Int}
+   */
+  _latestSkirmishScore({ skirmishes }, color) {
+    return skirmishes[skirmishes.length - 1].scores[color];
   }
 }
 
