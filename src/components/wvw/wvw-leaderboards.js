@@ -62,12 +62,6 @@ class WvwLeaderboards extends PolymerElement {
       <p>Compare stats between all links on all regions.</p>
 
       <vaadin-grid class="card" theme="no-border row-stripes" aria-label="World vs. World weekly server leaderboard" items="[[links]]" height-by-rows>
-        <vaadin-grid-column width="68px" flex-grow="0">
-          <template class="header">Rank</template>
-          <template>[[ _baseIndexOne(index) ]]</template>
-          <template class="footer">Rank</template>
-        </vaadin-grid-column>
-
         <vaadin-grid-column>
           <template class="header">
             <vaadin-grid-sorter path="link_name">Worlds</vaadin-grid-sorter>
@@ -133,10 +127,6 @@ class WvwLeaderboards extends PolymerElement {
         </vaadin-grid-column>
       </vaadin-grid>
     `;
-  }
-
-  _baseIndexOne(index) {
-    return index + 1;
   }
 
   _constructLinks(matches, worlds) {
