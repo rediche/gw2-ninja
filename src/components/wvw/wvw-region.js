@@ -268,7 +268,7 @@ class WvwRegion extends PolymerElement {
    * @param {Object} match
    * @param {Array} match.skirmishes 
    * @param {String} color 
-   * @returns {Int}
+   * @returns {Number}
    */
   _latestSkirmishScore({ skirmishes }, color) {
     return skirmishes[skirmishes.length - 1].scores[color];
