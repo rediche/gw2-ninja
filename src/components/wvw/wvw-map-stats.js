@@ -143,7 +143,7 @@ class WvwMapStats extends connect(store)(LitElement) {
           position: relative;
         }
 
-        @media screen and (min-width: 1024px) {
+        @media screen and (min-width: 768px) {
           :host {
             width: 25rem;
           }

@@ -97,7 +97,7 @@ class PageWvw extends connect(store)(PolymerElement) {
       }
 
       .map {
-        height: calc(100vh - 8rem);
+        height: calc(100vh - 11.25rem);
         position: relative;
       }
 
@@ -111,7 +111,7 @@ class PageWvw extends connect(store)(PolymerElement) {
         top: 0;
         left: 0;
         right: 0;
-        max-height: calc(100vh - 8rem);
+        max-height: calc(100vh - 11.25rem);
         overflow: auto;
       }
 
@@ -135,6 +135,14 @@ class PageWvw extends connect(store)(PolymerElement) {
 
         paper-tabs {
           width: auto;
+        }
+
+        .map {
+          height: calc(100vh - 8.25rem);
+        }
+
+        wvw-map-stats {
+          max-height: calc(100vh - 8.25rem);
         }
       }
     </style>
@@ -219,7 +227,7 @@ class PageWvw extends connect(store)(PolymerElement) {
       }, 10000);
     });
   }
-  
+
   _selectedServerChanged(serverId, matches) {
     if (!serverId || !matches) return;
 
