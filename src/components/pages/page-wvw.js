@@ -96,6 +96,10 @@ class PageWvw extends connect(store)(PolymerElement) {
         font-weight: 700;
       }
 
+      paper-tab span {
+        display: none;
+      }
+
       .map {
         height: calc(100vh - 11.25rem);
         position: relative;
@@ -137,6 +141,10 @@ class PageWvw extends connect(store)(PolymerElement) {
           width: auto;
         }
 
+        paper-tab span {
+          display: inline;
+        }
+
         .map {
           height: calc(100vh - 8.25rem);
         }
@@ -160,9 +168,9 @@ class PageWvw extends connect(store)(PolymerElement) {
       </paper-dropdown-menu>
 
       <paper-tabs selected="{{subviewData.subview}}" attr-for-selected="name">
-        <paper-tab name="overview">Region Overview</paper-tab>
-        <paper-tab name="map">Live Map</paper-tab>
-        <paper-tab name="stats">Matchup Stats</paper-tab>
+        <paper-tab name="overview">Region<span>&nbsp;Overview</span></paper-tab>
+        <paper-tab name="map"><span>Live&nbsp;</span>Map</paper-tab>
+        <paper-tab name="stats">Matchup<span>&nbsp;Stats</span></paper-tab>
         <paper-tab name="leaderboards">Leaderboards</paper-tab>
       </paper-tabs>
     </div>
