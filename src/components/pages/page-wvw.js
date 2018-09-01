@@ -93,7 +93,7 @@ class PageWvw extends connect(store)(PolymerElement) {
 
       paper-tab.iron-selected,
       paper-tab[focused] {
-        font-weight: 600;
+        font-weight: 700;
       }
 
       .map {
