@@ -118,7 +118,8 @@ class WvWMatchup extends PolymerElement {
               <div>Score: [[ matchup.scores.green ]]</div>
               <div>Kills: [[ matchup.kills.green ]]</div>
               <div>Deaths: [[ matchup.deaths.green ]]</div>
-              <div>KDR: [[ _calcKDR(matchup.kills.green, matchup.deaths.green) ]]</div>
+              <div><span title="Kill death ratio">KDR</span>: [[ _calcKDR(matchup.kills.green, matchup.deaths.green) ]]</div>
+              <div><span title="Points per tick">PPT</span>: [[ _getPPT(matchup.maps, "green") ]]</div>
             </div>
           </div>
           <div class="card">
@@ -128,7 +129,8 @@ class WvWMatchup extends PolymerElement {
               <div>Score: [[ matchup.scores.blue ]]</div>
               <div>Kills: [[ matchup.kills.blue ]]</div>
               <div>Deaths: [[ matchup.deaths.blue ]]</div>
-              <div>KDR: [[ _calcKDR(matchup.kills.blue, matchup.deaths.blue) ]]</div>
+              <div><span title="Kill death ratio">KDR</span>: [[ _calcKDR(matchup.kills.blue, matchup.deaths.blue) ]]</div>
+              <div><span title="Points per tick">PPT</span>: [[ _getPPT(matchup.maps, "blue") ]]</div>
             </div>
           </div>
           <div class="card">
@@ -138,7 +140,8 @@ class WvWMatchup extends PolymerElement {
               <div>Score: [[ matchup.scores.red ]]</div>
               <div>Kills: [[ matchup.kills.red ]]</div>
               <div>Deaths: [[ matchup.deaths.red ]]</div>
-              <div>KDR: [[ _calcKDR(matchup.kills.red, matchup.deaths.red) ]]</div>
+              <div><span title="Kill death ratio">KDR</span>: [[ _calcKDR(matchup.kills.red, matchup.deaths.red) ]]</div>
+              <div><span title="Points per tick">PPT</span>: [[ _getPPT(matchup.maps, "red") ]]</div>
             </div>
           </div>
         </div>
@@ -272,6 +275,16 @@ class WvWMatchup extends PolymerElement {
         computed: "_reverseSkirmishes(matchup.skirmishes)"
       }
     };
+  }
+
+  _getPPT(maps, color) {
+    if (!maps || !color) return;
+    return maps.reduce((totalPPT, map) => {
+      return totalPPT + map.objectives.reduce((mapPPT, objective) => {
+        if (objective.owner.toLowerCase() == color) return mapPPT + objective.points_tick;
+        return mapPPT;
+      }, 0);
+    }, 0);
   }
 
   _generateWorldLinkNames(allWorldsInLink, hostWorld, worlds) {
