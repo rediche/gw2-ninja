@@ -45,6 +45,14 @@ class WvwRegion extends PolymerElement {
         text-overflow: ellipsis;
         overflow: hidden;
       }
+
+      .own-world {
+        font-weight: 600;
+      }
+
+      vaadin-grid-cell-content {
+        line-height: 24px;
+      }
     </style>
 
     <h2 class="title">Europe</h2>
@@ -62,9 +70,9 @@ class WvwRegion extends PolymerElement {
       <vaadin-grid-column>
         <template class="header">World</template>
         <template>
-          <div class="no-text-overflow">[[ _generateWorldLinkNames(item.all_worlds.green, item.worlds.green, worlds) ]]</div>
-          <div class="no-text-overflow">[[ _generateWorldLinkNames(item.all_worlds.blue, item.worlds.blue, worlds) ]]</div>
-          <div class="no-text-overflow">[[ _generateWorldLinkNames(item.all_worlds.red, item.worlds.red, worlds) ]]</div>  
+          <div class$="no-text-overflow [[_addOwnWorldClass(ownWorld, item.all_worlds, 'green')]]">[[ _generateWorldLinkNames(item.all_worlds.green, item.worlds.green, worlds) ]]</div>
+          <div class$="no-text-overflow [[_addOwnWorldClass(ownWorld, item.all_worlds, 'blue')]]">[[ _generateWorldLinkNames(item.all_worlds.blue, item.worlds.blue, worlds) ]]</div>
+          <div class$="no-text-overflow [[_addOwnWorldClass(ownWorld, item.all_worlds, 'red')]]">[[ _generateWorldLinkNames(item.all_worlds.red, item.worlds.red, worlds) ]]</div>  
         </template>
         <template class="footer">World</template>
       </vaadin-grid-column>
@@ -115,9 +123,9 @@ class WvwRegion extends PolymerElement {
       <vaadin-grid-column>
         <template class="header">World</template>
         <template>
-          <div class="no-text-overflow">[[ _generateWorldLinkNames(item.all_worlds.green, item.worlds.green, worlds) ]]</div>
-          <div class="no-text-overflow">[[ _generateWorldLinkNames(item.all_worlds.blue, item.worlds.blue, worlds) ]]</div>
-          <div class="no-text-overflow">[[ _generateWorldLinkNames(item.all_worlds.red, item.worlds.red, worlds) ]]</div>  
+          <div class$="no-text-overflow [[_addOwnWorldClass(ownWorld, item.all_worlds, 'green')]]">[[ _generateWorldLinkNames(item.all_worlds.green, item.worlds.green, worlds) ]]</div>
+          <div class$="no-text-overflow [[_addOwnWorldClass(ownWorld, item.all_worlds, 'blue')]]">[[ _generateWorldLinkNames(item.all_worlds.blue, item.worlds.blue, worlds) ]]</div>
+          <div class$="no-text-overflow [[_addOwnWorldClass(ownWorld, item.all_worlds, 'red')]]">[[ _generateWorldLinkNames(item.all_worlds.red, item.worlds.red, worlds) ]]</div>  
         </template>
         <template class="footer">World</template>
       </vaadin-grid-column>
@@ -173,8 +181,15 @@ class WvwRegion extends PolymerElement {
       naMatches: {
         type: Array,
         computed: "_regionalMatches(matches, 1)"
-      }
+      },
+      ownWorld: Number
     };
+  }
+
+  _addOwnWorldClass(ownWorld, allWorlds, color) {
+    if (!ownWorld || !allWorlds || !color) return "";
+    if (allWorlds[color].includes(ownWorld)) return "own-world";
+    return "";
   }
 
   _regionalMatches(matches, regionalNumber) {
