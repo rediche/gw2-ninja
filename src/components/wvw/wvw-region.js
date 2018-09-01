@@ -38,6 +38,11 @@ class WvwRegion extends PolymerElement {
 
       gwn-progress {
         font-size: .75rem;
+        line-height: initial;
+      }
+
+      gwn-progress:nth-child(2n) {
+        margin: 6px 0;
       }
 
       .no-text-overflow {
