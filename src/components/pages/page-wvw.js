@@ -153,8 +153,8 @@ class PageWvw extends connect(store)(PolymerElement) {
 
       <paper-tabs selected="{{subviewData.subview}}" attr-for-selected="name">
         <paper-tab name="overview">Region Overview</paper-tab>
-        <paper-tab name="map" disable="[[_serverSelected(serverId)]]">Live Map</paper-tab>
-        <paper-tab name="stats" disable="[[_serverSelected(serverId)]]">Matchup Stats</paper-tab>
+        <paper-tab name="map">Live Map</paper-tab>
+        <paper-tab name="stats">Matchup Stats</paper-tab>
         <paper-tab name="leaderboards">Leaderboards</paper-tab>
       </paper-tabs>
     </div>
@@ -162,15 +162,15 @@ class PageWvw extends connect(store)(PolymerElement) {
     <iron-pages selected="{{ subviewData.subview }}" attr-for-selected="name" fallback-selection="map">
       <div name="map" class="map">
         <div class="error-msg text-center" hidden$="[[serverId]]">Please select a server in the dropdown above.</div>
-        <wvw-map-stats selected-objective="[[ selectedObjective ]]" on-objective-close="_objectiveClose"></wvw-map-stats>
-        <wvw-map map-data="[[ currentMatchup.maps ]]" active="[[ mapActive ]]" added-objectives="{{ objectives }}" on-objective-clicked="_objectiveClicked"></wvw-map>
+        <wvw-map-stats hidden$="[[!serverId]]" selected-objective="[[ selectedObjective ]]" on-objective-close="_objectiveClose"></wvw-map-stats>
+        <wvw-map hidden$="[[!serverId]]" map-data="[[ currentMatchup.maps ]]" active="[[ mapActive ]]" added-objectives="{{ objectives }}" on-objective-clicked="_objectiveClicked"></wvw-map>
       </div>
       <div name="overview">
         <wvw-region matches="[[ matches ]]" worlds="[[ worlds ]]" own-world="[[serverId]]"></wvw-region>
       </div>
       <div name="stats">
         <div class="error-msg text-center" hidden$="[[serverId]]">Please select a server in the dropdown above.</div>
-        <wvw-matchup matchup="[[ currentMatchup ]]" worlds="[[ worlds ]]" hidden$="[[!serverId]]"></wvw-matchup>
+        <wvw-matchup matchup="[[ currentMatchup ]]" worlds="[[ worlds ]]" hidden$=[[!serverId]]></wvw-matchup>
       </div>
       <div name="leaderboards">
         <wvw-leaderboards matches="[[ matches ]]" worlds="[[ worlds ]]" own-world="[[serverId]]"></wvw-leaderboards>
@@ -193,7 +193,8 @@ class PageWvw extends connect(store)(PolymerElement) {
       matches: Array,
       worlds: Array,
       serverId: {
-        type: Number
+        type: Number,
+        value: null
       },
       currentMatch: Object,
       objectives: Array,
@@ -218,11 +219,7 @@ class PageWvw extends connect(store)(PolymerElement) {
       }, 10000);
     });
   }
-
-  _serverSelected(serverId) {
-    return !serverId ? false : true;
-  }
-
+  
   _selectedServerChanged(serverId, matches) {
     if (!serverId || !matches) return;
 

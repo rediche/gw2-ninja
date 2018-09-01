@@ -66,13 +66,14 @@ class WvwMap extends connect(store)(PolymerElement) {
       active: {
         type: Boolean,
         value: false
-      }
+      },
+      hidden: Boolean
     };
   }
 
   static get observers() {
     return [
-      "_invalidateMap(active, map)",
+      "_invalidateMap(active, hidden, map)",
       "_mapUpdated(map, icons, objectives)",
       "_mapDataChanged(mapData, addedObjectives, icons)"
     ];
@@ -252,8 +253,8 @@ class WvwMap extends connect(store)(PolymerElement) {
     });
   }
 
-  _invalidateMap(active, map) {
-    if (!active || !map) return;
+  _invalidateMap(active, hidden, map) {
+    if (!map) return;
 
     afterNextRender(this, function() {
       map.invalidateSize();
