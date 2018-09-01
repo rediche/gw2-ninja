@@ -13,6 +13,10 @@ export const SharedStyles = html`
     --color-path-of-fire: #9C27B0;
     --color-path-of-fire-dark: #6A1B9A;
 
+    --team-green: #4CAF50;
+    --team-blue: #1976D2;
+    --team-red: #E53935;
+
     /* Main variables */
     --app-primary-color: var(--color-path-of-fire);
     --app-primary-color-dark: var(--color-path-of-fire-dark);
@@ -24,6 +28,8 @@ export const SharedStyles = html`
     /* Generic styles */
     --app-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
     --app-box-shadow-reverse: 0 -1px 4px rgba(0, 0, 0, 0.12);
+    --app-box-shadow-right: 1px 0 4px rgba(0, 0, 0, 0.12);
+    --app-box-shadow-left: -1px 0 4px rgba(0, 0, 0, 0.12);
     --app-border-radius: .125rem;
     --spacer-none: 0;
     --spacer-xsmall: .25rem;
@@ -175,6 +181,12 @@ export const SharedStyles = html`
 
   paper-item {
     cursor: pointer;
+  }
+
+  .no-text-overflow {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 </style>
 `;

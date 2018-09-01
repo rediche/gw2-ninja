@@ -8,24 +8,27 @@ class PageView404 extends PolymerElement {
 
   static get template() {
     return html`
-    ${SharedStyles}
-    <style>
-    :host {
-      display: block;
-      padding: var(--spacer-large);
-    }
+      ${SharedStyles}
+      <style>
+      :host {
+        display: block;
+        padding: var(--spacer-large);
+      }
 
-    span {
-      font-weight: 800;
-    }
-  </style>
+      span {
+        font-weight: 600;
+      }
 
-  <!-- 
-    If deploying in a folder replace href="/" with the full path to your site.
-    Such as: href=="http://polymerelements.github.io/polymer-starter-kit"
-  -->
-  <h1 class="display-1"><span>Error 404:</span> Page not found</h1>
-    `;
+      .link {
+        cursor: pointer;
+      }
+    </style>
+
+    <div class="text-center">
+      <h1 class="display-1">Page not found</h1>
+      <p>A new version of this page might have been downloaded in the background.<br><span class="link" onclick="location.reload();">Please try to refresh.</span></p>
+    </div>
+  `;
   }
 }
 

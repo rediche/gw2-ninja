@@ -10,7 +10,10 @@ import {
   CHANGE_API_PERMISSIONS
 } from "../../actions/settings.js";
 
-import { CHANGE_ACCOUNT_NAME } from "../../actions/account.js";
+import {
+  CHANGE_ACCOUNT_NAME,
+  CHANGE_ACCOUNT_WORLD
+} from "../../actions/account.js";
 
 // Lazy load reducers
 import settings from "../../reducers/settings.js";
@@ -115,6 +118,11 @@ class GWNSettingApiKey extends connect(store)(PolymerElement) {
       type: CHANGE_ACCOUNT_NAME,
       name: accountInfo.name
     });
+
+    store.dispatch({
+      type: CHANGE_ACCOUNT_WORLD,
+      world: accountInfo.world
+    })
   }
 
   _stateChanged(state) {

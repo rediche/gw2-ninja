@@ -196,6 +196,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
         <page-chatcodes name="chatcodes"></page-chatcodes>
         <page-timer theme$="[[theme]]" name="timer"></page-timer>
         <page-calc name="calc"></page-calc>
+        <page-wvw theme$="[[theme]]" name="wvw"></page-wvw>
         <page-about name="about"></page-about>
         <page-precursors name="precursors" page="[[page]]"></page-precursors>
         <page-stream-tools name="stream"></page-stream-tools>
@@ -216,6 +217,9 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           </a>
           <a name="timer" href="/timer/all" tabindex="-1">
             <paper-item>Meta Timer</paper-item>
+          </a>
+          <a name="wvw" href="/wvw/overview" tabindex="-1">
+            <paper-item>World vs World (Beta)</paper-item>
           </a>
           <hr>
           <a name="collections" href="/collections/basic" tabindex="-1">
@@ -309,6 +313,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
         "directory",
         "tickets",
         "timer",
+        "wvw",
         "precursors",
         "stream"
       ].indexOf(page) !== -1
@@ -354,6 +359,9 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
       case "timer":
         import("./pages/page-timer.js");
         break;
+      case "wvw":
+        import("./pages/page-wvw.js");
+        break;
       case "precursors":
         import("./pages/page-precursors.js");
         break;
@@ -380,6 +388,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
     if (activePage == "chatcodes") return "Chatcode Generator";
     if (activePage == "timer") return "Meta Timer";
     if (activePage == "calc") return "Trading Post Calculator";
+    if (activePage == "wvw") return "World vs World (Beta)";
     if (activePage == "about") return "About GW2 Ninja";
     if (activePage == "precursors") return "Precursor Rain. HALLELUJAH!";
     if (activePage == "stream") return "Stream Tools";
