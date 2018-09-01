@@ -2,13 +2,6 @@ import { html } from "@polymer/polymer/polymer-element.js";
 
 export const SharedWvwStyles = html`
 <style>
-  :host {
-    /* Colors */
-    --team-green: #4CAF50;
-    --team-blue: #1976D2;
-    --team-red: #E53935;
-  }
-
   .team-green-bg {
     background-color: var(--team-green);
   }

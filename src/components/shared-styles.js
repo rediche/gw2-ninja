@@ -13,6 +13,10 @@ export const SharedStyles = html`
     --color-path-of-fire: #9C27B0;
     --color-path-of-fire-dark: #6A1B9A;
 
+    --team-green: #4CAF50;
+    --team-blue: #1976D2;
+    --team-red: #E53935;
+
     /* Main variables */
     --app-primary-color: var(--color-path-of-fire);
     --app-primary-color-dark: var(--color-path-of-fire-dark);
