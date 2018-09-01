@@ -173,7 +173,7 @@ class PageWvw extends connect(store)(PolymerElement) {
         <wvw-matchup matchup="[[ currentMatchup ]]" worlds="[[ worlds ]]" hidden$="[[!serverId]]"></wvw-matchup>
       </div>
       <div name="leaderboards">
-        <wvw-leaderboards matches="[[ matches ]]" worlds="[[ worlds ]]"></wvw-leaderboards>
+        <wvw-leaderboards matches="[[ matches ]]" worlds="[[ worlds ]]" own-world="[[serverId]]"></wvw-leaderboards>
       </div>
     </iron-pages>
     `;

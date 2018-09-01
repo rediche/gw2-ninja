@@ -4,6 +4,8 @@ import "@vaadin/vaadin-grid/vaadin-grid";
 
 import "../utilities/gwn-progress";
 
+import { hasWorld } from "../utilities/gwn-misc-utils";
+
 import { SharedStyles } from "../shared-styles.js";
 import { SharedWvwStyles } from "../shared-wvw-styles.js";
 
@@ -193,7 +195,7 @@ class WvwRegion extends PolymerElement {
 
   _addOwnWorldClass(ownWorld, allWorlds, color) {
     if (!ownWorld || !allWorlds || !color) return "";
-    if (allWorlds[color].includes(ownWorld)) return "own-world";
+    if (hasWorld(ownWorld, allWorlds[color])) return "own-world";
     return "";
   }
 

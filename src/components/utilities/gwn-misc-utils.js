@@ -13,3 +13,14 @@ export async function getWorlds(language = "en") {
   const worlds = await response.json();
   return worlds;
 }
+
+/**
+ * Check if array has specific world ID.
+ * 
+ * @param {Number} ownWorld 
+ * @param {Array} worldsArray 
+ * @returns {Boolean}
+ */
+export function hasWorld(world, worldsArray) {
+  return worldsArray.includes(world);
+}

@@ -3,6 +3,8 @@ import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import "@vaadin/vaadin-grid/vaadin-grid";
 import "@vaadin/vaadin-grid/vaadin-grid-sorter";
 
+import { hasWorld } from "../utilities/gwn-misc-utils";
+
 import { SharedStyles } from "../shared-styles";
 
 /**
@@ -27,7 +29,8 @@ class WvwLeaderboards extends PolymerElement {
       links: {
         type: Array,
         value: []
-      }
+      },
+      ownWorld: Number
     };
   }
 
@@ -56,6 +59,10 @@ class WvwLeaderboards extends PolymerElement {
           white-space: nowrap;
           text-overflow: ellipsis;
         }
+
+        .own-world {
+          font-weight: 600;
+        }
       </style>
 
       <h1 class="title">Weekly Leaderboards</h1>
@@ -66,7 +73,7 @@ class WvwLeaderboards extends PolymerElement {
           <template class="header">
             <vaadin-grid-sorter path="link_name">Worlds</vaadin-grid-sorter>
           </template>
-          <template>[[ item.link_name ]]</template>
+          <template><div class$="[[_addOwnWorldClass(ownWorld, item.worlds)]]">[[ item.link_name ]]</div></template>
           <template class="footer">Worlds</template>
         </vaadin-grid-column>
 
@@ -74,7 +81,7 @@ class WvwLeaderboards extends PolymerElement {
           <template class="header">
             <vaadin-grid-sorter path="region">Region</vaadin-grid-sorter>
           </template>
-          <template>[[ item.region ]]</template>
+          <template><div class$="[[_addOwnWorldClass(ownWorld, item.worlds)]]">[[ item.region ]]</div></template>
           <template class="footer">Region</template>
         </vaadin-grid-column>
 
@@ -82,7 +89,7 @@ class WvwLeaderboards extends PolymerElement {
           <template class="header">
             <vaadin-grid-sorter path="tier">Tier</vaadin-grid-sorter>
           </template>
-          <template>[[ item.tier ]]</template>
+          <template><div class$="[[_addOwnWorldClass(ownWorld, item.worlds)]]">[[ item.tier ]]</div></template>
           <template class="footer">Tier</template>
         </vaadin-grid-column>
 
@@ -90,7 +97,7 @@ class WvwLeaderboards extends PolymerElement {
           <template class="header">
             <vaadin-grid-sorter path="victory_points">Victory Points</vaadin-grid-sorter>
           </template>
-          <template>[[ item.victory_points ]]</template>
+          <template><div class$="[[_addOwnWorldClass(ownWorld, item.worlds)]]">[[ item.victory_points ]]</div></template>
           <template class="footer">Victory Points</template>
         </vaadin-grid-column>
 
@@ -98,7 +105,7 @@ class WvwLeaderboards extends PolymerElement {
           <template class="header">
             <vaadin-grid-sorter path="score">Score</vaadin-grid-sorter>
           </template>
-          <template>[[ item.score ]]</template>
+          <template><div class$="[[_addOwnWorldClass(ownWorld, item.worlds)]]">[[ item.score ]]</div></template>
           <template class="footer">Score</template>
         </vaadin-grid-column>
 
@@ -106,7 +113,7 @@ class WvwLeaderboards extends PolymerElement {
           <template class="header">
             <vaadin-grid-sorter path="kills">Kills</vaadin-grid-sorter>
           </template>
-          <template>[[ item.kills ]]</template>
+          <template><div class$="[[_addOwnWorldClass(ownWorld, item.worlds)]]">[[ item.kills ]]</div></template>
           <template class="footer">Kills</template>
         </vaadin-grid-column>
 
@@ -114,7 +121,7 @@ class WvwLeaderboards extends PolymerElement {
           <template class="header">
             <vaadin-grid-sorter path="deaths">Deaths</vaadin-grid-sorter>
           </template>
-          <template>[[ item.deaths ]]</template>
+          <template><div class$="[[_addOwnWorldClass(ownWorld, item.worlds)]]">[[ item.deaths ]]</div></template>
           <template class="footer">Deaths</template>
         </vaadin-grid-column>
 
@@ -122,7 +129,7 @@ class WvwLeaderboards extends PolymerElement {
           <template class="header">
             <vaadin-grid-sorter path="kdr">KDR</vaadin-grid-sorter>
           </template>
-          <template>[[ item.kdr ]]</template>
+          <template><div class$="[[_addOwnWorldClass(ownWorld, item.worlds)]]">[[ item.kdr ]]</div></template>
           <template class="footer">KDR</template>
         </vaadin-grid-column>
       </vaadin-grid>
@@ -156,6 +163,12 @@ class WvwLeaderboards extends PolymerElement {
     });
 
     return accumulator.concat(worldData);
+  }
+
+  _addOwnWorldClass(ownWorld, allWorlds) {
+    if (!ownWorld || !allWorlds) return "";
+    if (hasWorld(ownWorld, allWorlds)) return "own-world";
+    return "";
   }
 
   /* TODO: Move to a utility file because it's used in multiple components */
