@@ -47,12 +47,6 @@ class WvwRegion extends PolymerElement {
         margin: 6px 0;
       }
 
-      .no-text-overflow {
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
-
       .own-world {
         font-weight: 600;
       }

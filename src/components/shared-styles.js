@@ -178,5 +178,11 @@ export const SharedStyles = html`
   paper-item {
     cursor: pointer;
   }
+
+  .no-text-overflow {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 </style>
 `;

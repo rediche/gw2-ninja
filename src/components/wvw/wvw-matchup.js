@@ -112,7 +112,7 @@ class WvWMatchup extends PolymerElement {
         <h2 class="title">Worlds</h2>
         <div class="worlds cards">
           <div class="card">
-            <div class="world card-header team-green-bg">[[ _generateWorldLinkNames(matchup.all_worlds.green, matchup.worlds.green, worlds) ]]</div>
+            <div class="world card-header team-green-bg no-text-overflow">[[ _generateWorldLinkNames(matchup.all_worlds.green, matchup.worlds.green, worlds) ]]</div>
             <div class="card-body">
               <div>Victory Points: [[ matchup.victory_points.green ]]</div>
               <div>Score: [[ matchup.scores.green ]]</div>
@@ -122,7 +122,7 @@ class WvWMatchup extends PolymerElement {
             </div>
           </div>
           <div class="card">
-            <div class="world card-header team-blue-bg">[[ _generateWorldLinkNames(matchup.all_worlds.blue, matchup.worlds.blue, worlds) ]]</div>
+            <div class="world card-header team-blue-bg no-text-overflow">[[ _generateWorldLinkNames(matchup.all_worlds.blue, matchup.worlds.blue, worlds) ]]</div>
             <div class="card-body">
               <div>Victory Points: [[ matchup.victory_points.blue ]]</div>
               <div>Score: [[ matchup.scores.blue ]]</div>
@@ -132,7 +132,7 @@ class WvWMatchup extends PolymerElement {
             </div>
           </div>
           <div class="card">
-            <div class="world card-header team-red-bg">[[ _generateWorldLinkNames(matchup.all_worlds.red, matchup.worlds.red, worlds) ]]</div>
+            <div class="world card-header team-red-bg no-text-overflow">[[ _generateWorldLinkNames(matchup.all_worlds.red, matchup.worlds.red, worlds) ]]</div>
             <div class="card-body">
               <div>Victory Points: [[ matchup.victory_points.red ]]</div>
               <div>Score: [[ matchup.scores.red ]]</div>
