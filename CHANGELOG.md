@@ -1,5 +1,9 @@
 # Next release
 
+- 
+
+# September 1, 2018 - v2.5.0
+
 - Add new section: World vs World.
 - WvW Region Overview: A quick overview of all the matches going on in EU and NA.
 - WvW Map: An interactive map to see info about map objectives while outside of the game.
