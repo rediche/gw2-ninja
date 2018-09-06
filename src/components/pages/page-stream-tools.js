@@ -52,7 +52,6 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
         }
 
         pre {
-          overflow-y: auto;
           margin: 0;
         }
 

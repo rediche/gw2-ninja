@@ -28,6 +28,10 @@ class GWNCopyClipboard extends LitElement {
           max-width: 100%;
         }
 
+        ::slotted(*) {
+          overflow-y: auto;
+        }
+
         paper-icon-button {
           flex: none;
         }

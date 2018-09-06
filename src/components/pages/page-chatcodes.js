@@ -1,8 +1,6 @@
-import {
-  PolymerElement,
-  html
-} from "@polymer/polymer/polymer-element.js";
+import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import "@polymer/paper-input/paper-input.js";
+import "../utilities/gwn-copy-clipboard";
 import { SharedStyles } from "../shared-styles.js";
 
 class PageChatcodes extends PolymerElement {
@@ -66,7 +64,10 @@ class PageChatcodes extends PolymerElement {
         </div>
     
         <div class="card result">
-          Code: <pre>{{result}}</pre>
+          Code:
+          <gwn-copy-clipboard text-to-copy="[[ result ]]">
+            <pre>[[ result ]]</pre>
+          </gwn-copy-clipboard>
         </div>
       </div>
 
