@@ -3,12 +3,11 @@ import { GestureEventListeners } from "@polymer/polymer/lib/mixins/gesture-event
 import "@polymer/paper-input/paper-input.js";
 import "@polymer/paper-radio-group/paper-radio-group.js";
 import "@polymer/paper-radio-button/paper-radio-button.js";
-import "@polymer/paper-icon-button/paper-icon-button.js";
 import { SharedStyles } from "../shared-styles.js";
-import "../my-icons.js";
 import "../stream-tools/type-selector.js";
 import "../stream-tools/command-selector.js";
 import "../settings/gwn-setting-api-key.js";
+import "../utilities/gwn-copy-clipboard";
 
 /**
  * `page-stream-tools`
@@ -113,14 +112,10 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
         </div>
 
         <div class="bottom inner">
-          <pre class="result" hidden$="[[!_hasResult(result)]]">[[ result ]]</pre>
+          <gwn-copy-clipboard hidden$="[[!_hasResult(result)]]" text-to-copy="[[ result ]]">
+            <pre class="result">[[ result ]]</pre>
+          </gwn-copy-clipboard>
           <pre class="placeholder-result" hidden$="[[_hasResult(result)]]">Fill out the form, to get your command.</pre>
-          <span hidden$="[[!_hasResult(result)]]">
-            <paper-icon-button 
-              icon="my-icons:content-copy" 
-              hidden$="[[!_supportsClipboardApi()]]"
-              on-tap="_attemptCopy"></paper-icon-button>
-          </span>
         </div>
       </div>
 
@@ -166,23 +161,6 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
   
   _hasResult(result) {
     return result !== "" ? true : false;
-  }
-
-  _supportsClipboardApi() {
-    return navigator.clipboard ? true : false;
-  }
-
-  _attemptCopy(e) {
-    if (!navigator.clipboard) return console.log("No clipboard support");
-    if (!this.result) return console.log("No result generated");
-
-    navigator.clipboard.writeText(this.result)
-      .then(() => {
-        console.log("Copied to clipboard!");
-      })
-      .catch(err => {
-        console.log("Could not copy to clipboard", err);
-      });
   }
 }
 
