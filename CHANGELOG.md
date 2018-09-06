@@ -1,6 +1,6 @@
 # Next release
 
-- 
+- Add Copy to Clipboard to Chatcodes page. 
 
 # September 1, 2018 - v2.5.0
 
