@@ -1,11 +1,6 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 
-import "@vaadin/vaadin-grid/vaadin-grid";
-
-import "../utilities/gwn-progress";
 import "./wvw-region-table";
-
-import { hasWorld } from "../utilities/gwn-misc-utils";
 
 import { SharedStyles } from "../shared-styles.js";
 

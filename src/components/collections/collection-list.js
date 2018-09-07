@@ -1,6 +1,8 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import { GestureEventListeners } from "@polymer/polymer/lib/mixins/gesture-event-listeners.js";
-import "@polymer/polymer/lib/elements/dom-repeat.js";
+
+import "@vaadin/vaadin-grid/vaadin-grid";
+import "@vaadin/vaadin-grid/vaadin-grid-sorter";
 
 import { connect } from "pwa-helpers/connect-mixin.js";
 
@@ -40,89 +42,59 @@ class CollectionList extends connect(store)(
       :host {
         display: block;
         max-width: 1100px;
-        margin: 0 auto;
-      }
-
-      table {
-        width: calc(100% - var(--spacer-large) * 2);
-        text-align: left;
-      }
-
-      th {
-        padding: .5rem 4px;
-      }
-
-      td {
-        padding: .5rem 4px;
-        cursor: pointer;
-      }
-
-      tbody tr:hover {
-        background-color: rgba(0, 0, 0, .1);
-      }
-
-      tr td:first-child, tr th:first-child {
-        padding-left: 1rem;
-      }
-
-      tr td:last-child, tr th:last-child {
-        padding-right: 1rem;
-      }
-
-      tr:nth-child(2n) {
-        background-color: rgba(0, 0, 0, .04);
+        margin: var(--spacer-large) auto;
       }
 
       .card {
-        padding: .5rem 0;
+        padding: 0;
+        margin: 0 var(--spacer-large);
       }
 
       .align-right {
         text-align: right;
       }
 
-      .category-name {
-        width: 100%;
-      }
-
       gw2-coin-output {
         text-align: right;
-        width: 50%;
-      }
-
-      @media screen and (min-width: 900px) {
-        .category-name {
-          width: 40%;
-        }
-
-        gw2-coin-output {
-          width: 30%;
-        }
+        display: block;
       }
     </style>
 
-    <table class="card row" cellspacing="0">
-      <thead>
-        <tr>
-          <th>Collection</th>
-          <th class="align-right">Buy Order</th>
-          <th class="align-right">Sell Listing</th>
-        </tr>
-      </thead>
-      <tbody>
-        <template is="dom-repeat" items="[[collectionData]]" as="collection" initial-count="5" target-framerate="60">
-          <tr on-tap="openModal">
-            <td>[[ collection.name ]]</td>
-            <td class="align-right">
-              <gw2-coin-output prepend-zeroes coin-string="[[_calcTotalPrices(collection.items, 'buys')]]"></gw2-coin-output>
-            </td>
-            <td class="align-right">
-              <gw2-coin-output prepend-zeroes="" coin-string="[[_calcTotalPrices(collection.items, 'sells')]]"></gw2-coin-output>
-            </td>
-          </tr>
+    <vaadin-grid class="card" theme="no-border row-stripes" height-by-rows items="[[collectionData]]">
+      <vaadin-grid-column>
+        <template class="header">
+          <vaadin-grid-sorter path="name">Collection</vaadin-grid-sorter>
         </template>
-      </tbody>
-    </table>
+        <template>
+          <div>[[ item.name ]]</div>
+        </template>
+        <template class="footer">Collection</template>
+      </vaadin-grid-column>
+
+      <vaadin-grid-column>
+        <template class="header">
+          <div class="align-right">Buy Order</div>
+        </template>
+        <template>
+          <gw2-coin-output prepend-zeroes coin-string="[[_calcTotalPrices(item.items, 'buys')]]"></gw2-coin-output>
+        </template>
+        <template class="footer">
+          <div class="align-right">Buy Order</div>
+        </template>
+      </vaadin-grid-column>
+
+      <vaadin-grid-column>
+        <template class="header">
+          <div class="align-right">Sell Listing</div>
+        </template>
+        <template>
+          <gw2-coin-output prepend-zeroes coin-string="[[_calcTotalPrices(item.items, 'sells')]]"></gw2-coin-output>
+        </template>
+        <template class="footer">
+          <div class="align-right">Sell Listing</div>
+        </template>
+      </vaadin-grid-column>
+    </vaadin-grid>
     `;
   }
 
