@@ -1,5 +1,8 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
-import "@polymer/polymer/lib/elements/dom-repeat.js";
+//import "@polymer/polymer/lib/elements/dom-repeat.js";
+import "@vaadin/vaadin-grid/vaadin-grid";
+import "@vaadin/vaadin-grid/vaadin-grid-sorter";
+
 import { connect } from 'pwa-helpers/connect-mixin.js';
 
 // Load redux store
@@ -17,13 +20,11 @@ store.addReducers({
 import "../utilities/gwn-modal.js";
 import "../utilities/gwn-item-icon.js";
 import { SharedStyles } from "../shared-styles.js";
-import { SharedTableStyles } from "../shared-table-styles.js";
 
 class CollectionModal extends connect(store)(PolymerElement) {
   static get template() {
     return html`
       ${SharedStyles}
-      ${SharedTableStyles}
       <style>
         :host {
           display: block;
@@ -39,22 +40,6 @@ class CollectionModal extends connect(store)(PolymerElement) {
           font-size: 20px;
         }
 
-        thead {
-          box-shadow: var(--app-box-shadow);
-        }
-
-        thead th {
-          padding-top: .5rem;
-        }
-
-        tbody {
-          max-height: calc(100vh - 1.5rem * 2 - 56px - 45px - 53px);
-        }
-
-        tfoot {
-          box-shadow: var(--app-box-shadow-reverse);
-        }
-
         gwn-modal {
           --gwn-modal-width: 800px;
           --gwn-modal-content-padding: 0;
@@ -63,6 +48,19 @@ class CollectionModal extends connect(store)(PolymerElement) {
 
         .align-right {
           text-align: right;
+        }
+
+        .text-bold {
+          font-weight: 600;
+        }
+
+        gw2-coin-output {
+          display: block;
+          text-align: right;
+        }
+
+        vaadin-cell-grid-content {
+          height: 2.5rem;
         }
         
         .icon {
@@ -82,7 +80,49 @@ class CollectionModal extends connect(store)(PolymerElement) {
       <gwn-modal hidden="[[!open]]" on-hidden-changed="_hiddenChanged">
         <h3 class="headline" slot="title">[[collectionName]]</h3>
         <div slot="content">
-          <div class="table-scroll">
+          <vaadin-grid theme="no-border row-stripes" items="[[collectionItems]]">
+            <vaadin-grid-column>
+              <template class="header">
+                <vaadin-grid-sorter path="name">Item</vaadin-grid-sorter>
+              </template>
+              <template>
+                <gwn-item-icon 
+                  class="icon" 
+                  name="[[item.name]]" 
+                  icon="[[item.icon]]" 
+                  rarity="[[item.rarity]]"></gwn-item-icon>
+                <span>[[ item.name ]]</span>
+              </template>
+              <template class="footer">
+                <div class="text-bold">Total</div>
+              </template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column>
+              <template class="header">
+                <div class="align-right">Buy Order</div>
+              </template>
+              <template>
+                <gw2-coin-output prepend-zeroes coin-string="[[item.buys.unit_price]]"></gw2-coin-output>
+              </template>
+              <template class="footer">
+                <gw2-coin-output class="text-bold" prepend-zeroes coin-string="[[totalBuy]]"></gw2-coin-output>
+              </template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column>
+              <template class="header">
+                <div class="align-right">Sell Listing</div>
+              </template>
+              <template>
+                <gw2-coin-output prepend-zeroes coin-string="[[item.sells.unit_price]]"></gw2-coin-output>
+              </template>
+              <template class="footer">
+                <gw2-coin-output class="text-bold" prepend-zeroes coin-string="[[totalSell]]"></gw2-coin-output>
+              </template>
+            </vaadin-grid-column>
+          </vaadin-grid>
+          <!-- <div class="table-scroll">
             <table cellspacing="0">
               <thead>
                 <tr>
@@ -125,7 +165,7 @@ class CollectionModal extends connect(store)(PolymerElement) {
                 </tr>
               </tfoot>
             </table>
-          </div>
+          </div> -->
         </div>
       </gwn-modal>
     `;
