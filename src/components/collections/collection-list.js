@@ -66,7 +66,7 @@ class CollectionList extends connect(store)(
           <vaadin-grid-sorter path="name">Collection</vaadin-grid-sorter>
         </template>
         <template>
-          <div>[[ item.name ]]</div>
+          <div on-tap="openModal">[[ item.name ]]</div>
         </template>
         <template class="footer">Collection</template>
       </vaadin-grid-column>
@@ -76,7 +76,7 @@ class CollectionList extends connect(store)(
           <div class="align-right">Buy Order</div>
         </template>
         <template>
-          <gw2-coin-output prepend-zeroes coin-string="[[_calcTotalPrices(item.items, 'buys')]]"></gw2-coin-output>
+          <gw2-coin-output on-tap="openModal" prepend-zeroes coin-string="[[_calcTotalPrices(item.items, 'buys')]]"></gw2-coin-output>
         </template>
         <template class="footer">
           <div class="align-right">Buy Order</div>
@@ -88,7 +88,7 @@ class CollectionList extends connect(store)(
           <div class="align-right">Sell Listing</div>
         </template>
         <template>
-          <gw2-coin-output prepend-zeroes coin-string="[[_calcTotalPrices(item.items, 'sells')]]"></gw2-coin-output>
+          <gw2-coin-output on-tap="openModal" prepend-zeroes coin-string="[[_calcTotalPrices(item.items, 'sells')]]"></gw2-coin-output>
         </template>
         <template class="footer">
           <div class="align-right">Sell Listing</div>
@@ -128,15 +128,15 @@ class CollectionList extends connect(store)(
   }
 
   openModal(e) {
-    if (!e.model.collection) return;
+    if (!e.model.item) return;
 
     store.dispatch({
       type: SELECT_COLLECTION,
       selectedCollection: {
-        name: e.model.collection.name,
-        items: e.model.collection.items,
-        totalBuy: this._calcTotalPrices(e.model.collection.items, "buys"),
-        totalSell: this._calcTotalPrices(e.model.collection.items, "sells")
+        name: e.model.item.name,
+        items: e.model.item.items,
+        totalBuy: this._calcTotalPrices(e.model.item.items, "buys"),
+        totalSell: this._calcTotalPrices(e.model.item.items, "sells")
       }
     });
     store.dispatch({ type: OPEN_COLLECTION_MODAL });
