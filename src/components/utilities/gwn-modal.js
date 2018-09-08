@@ -14,6 +14,10 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
     };
   }
 
+  static get observers() {
+    return ['_hiddenChanged(hidden)'];
+  }
+
   static get template() {
     return html`
       <style>
@@ -26,7 +30,7 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           top: 0;
           left: 0;
           width: 100%;
-          height: 100vh;
+          height: 100%;
           z-index: 9999;
           display: flex;
           justify-content: center;
@@ -42,7 +46,7 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
         .backdrop {
           top: 0;
           left: 0;
-          position: absolute;
+          position: fixed;
           height: 100%;
           width: 100%;
           background-color: rgba(0, 0, 0, .5);
@@ -54,7 +58,7 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           flex-direction: column;
           width: var(--gwn-modal-width, 500px);
           max-width: var(--gwn-modal-max-width, 100%);
-          max-height: calc(100vh - var(--gwn-modal-margin) * 2);
+          max-height: var(--gwn-modal-max-height, calc(100vh - var(--gwn-modal-margin) * 2));
           background-color: white; 
           border-radius: var(--app-border-radius);
           box-shadow: 0 2px 4px rgba(0,0,0,.12);
@@ -95,6 +99,14 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
 
   close() {
     this.set('hidden', true);
+  }
+
+  _hiddenChanged(hidden) {
+    if (hidden) {
+      document.body.style.overflow = "auto";
+    } else {
+      document.body.style.overflow = "hidden";
+    }
   }
 }
 
