@@ -61,6 +61,7 @@ class CollectionModal extends connect(store)(PolymerElement) {
 
         gwn-modal {
           --gwn-modal-max-height: none;
+          --gwn-modal-content-overflow-y: hidden;
           overflow-y: auto;
         }
 

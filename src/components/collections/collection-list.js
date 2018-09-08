@@ -58,6 +58,10 @@ class CollectionList extends connect(store)(
         text-align: right;
         display: block;
       }
+      
+      .pointer {
+        cursor: pointer;
+      }
     </style>
 
     <vaadin-grid class="card" theme="no-border row-stripes" height-by-rows items="[[collectionData]]">
@@ -66,7 +70,7 @@ class CollectionList extends connect(store)(
           <vaadin-grid-sorter path="name">Collection</vaadin-grid-sorter>
         </template>
         <template>
-          <div on-tap="openModal">[[ item.name ]]</div>
+          <div on-tap="openModal" class="pointer">[[ item.name ]]</div>
         </template>
         <template class="footer">Collection</template>
       </vaadin-grid-column>
@@ -76,7 +80,7 @@ class CollectionList extends connect(store)(
           <div class="align-right">Buy Order</div>
         </template>
         <template>
-          <gw2-coin-output on-tap="openModal" prepend-zeroes coin-string="[[_calcTotalPrices(item.items, 'buys')]]"></gw2-coin-output>
+          <gw2-coin-output class="pointer" on-tap="openModal" prepend-zeroes coin-string="[[_calcTotalPrices(item.items, 'buys')]]"></gw2-coin-output>
         </template>
         <template class="footer">
           <div class="align-right">Buy Order</div>
@@ -88,7 +92,7 @@ class CollectionList extends connect(store)(
           <div class="align-right">Sell Listing</div>
         </template>
         <template>
-          <gw2-coin-output on-tap="openModal" prepend-zeroes coin-string="[[_calcTotalPrices(item.items, 'sells')]]"></gw2-coin-output>
+          <gw2-coin-output class="pointer" on-tap="openModal" prepend-zeroes coin-string="[[_calcTotalPrices(item.items, 'sells')]]"></gw2-coin-output>
         </template>
         <template class="footer">
           <div class="align-right">Sell Listing</div>
