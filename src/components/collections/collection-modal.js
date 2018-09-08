@@ -59,6 +59,11 @@ class CollectionModal extends connect(store)(PolymerElement) {
           text-align: right;
         }
 
+        gwn-modal {
+          --gwn-modal-max-height: none;
+          overflow-y: auto;
+        }
+
         vaadin-cell-grid-content {
           height: 2.5rem;
         }
@@ -80,7 +85,7 @@ class CollectionModal extends connect(store)(PolymerElement) {
       <gwn-modal hidden="[[!open]]" on-hidden-changed="_hiddenChanged">
         <h3 class="headline" slot="title">[[collectionName]]</h3>
         <div slot="content">
-          <vaadin-grid theme="no-border row-stripes" items="[[collectionItems]]">
+          <vaadin-grid theme="no-border row-stripes" height-by-rows items="[[collectionItems]]">
             <vaadin-grid-column>
               <template class="header">
                 <vaadin-grid-sorter path="name">Item</vaadin-grid-sorter>
