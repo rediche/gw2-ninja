@@ -77,10 +77,12 @@ class CollectionList extends connect(store)(
 
       <vaadin-grid-column>
         <template class="header">
-          <div class="align-right">Buy Order</div>
+          <div class="align-right">
+            <vaadin-grid-sorter path="total_buy">Buy Order</vaadin-grid-sorter>
+          </div>
         </template>
         <template>
-          <gw2-coin-output class="pointer" on-tap="openModal" prepend-zeroes coin-string="[[_calcTotalPrices(item.items, 'buys')]]"></gw2-coin-output>
+          <gw2-coin-output class="pointer" on-tap="openModal" prepend-zeroes coin-string="[[item.total_buy]]"></gw2-coin-output>
         </template>
         <template class="footer">
           <div class="align-right">Buy Order</div>
@@ -89,10 +91,12 @@ class CollectionList extends connect(store)(
 
       <vaadin-grid-column>
         <template class="header">
-          <div class="align-right">Sell Listing</div>
+          <div class="align-right">
+            <vaadin-grid-sorter path="total_sell">Sell Listing</vaadin-grid-sorter>
+          </div>
         </template>
         <template>
-          <gw2-coin-output class="pointer" on-tap="openModal" prepend-zeroes coin-string="[[_calcTotalPrices(item.items, 'sells')]]"></gw2-coin-output>
+          <gw2-coin-output class="pointer" on-tap="openModal" prepend-zeroes coin-string="[[item.total_sell]]"></gw2-coin-output>
         </template>
         <template class="footer">
           <div class="align-right">Sell Listing</div>
@@ -111,26 +115,6 @@ class CollectionList extends connect(store)(
     };
   }
 
-  _calcTotalPrices(items, buysOrSells) {
-    let totalPrices = 0;
-
-    switch (buysOrSells) {
-      case "sells":
-        items.forEach(item => {
-          totalPrices += item.sells.unit_price;
-        });
-        break;
-      case "buys":
-      default:
-        items.forEach(item => {
-          totalPrices += item.buys.unit_price;
-        });
-        break;
-    }
-
-    return totalPrices;
-  }
-
   openModal(e) {
     if (!e.model.item) return;
 
@@ -139,8 +123,8 @@ class CollectionList extends connect(store)(
       selectedCollection: {
         name: e.model.item.name,
         items: e.model.item.items,
-        totalBuy: this._calcTotalPrices(e.model.item.items, "buys"),
-        totalSell: this._calcTotalPrices(e.model.item.items, "sells")
+        totalBuy: e.model.item.total_buy,
+        totalSell: e.model.item.total_sell
       }
     });
     store.dispatch({ type: OPEN_COLLECTION_MODAL });

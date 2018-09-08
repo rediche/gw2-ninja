@@ -172,8 +172,18 @@ class PageCollections extends PolymerElement {
 
     const categoryWithPrices = await Promise.all(
       category.map(async collection => {
+        const items = await this._loadItemData(collection.ids);
+        const totalSell = items.reduce((accumulator, item) => {
+          return accumulator += item.sells.unit_price;
+        }, 0);
+        const totalBuy = items.reduce((accumulator, item) => {
+          return accumulator += item.buys.unit_price;
+        }, 0);
+
         return Object.assign({}, collection, {
-          items: await this._loadItemData(collection.ids)
+          items: items,
+          total_sell: totalSell,
+          total_buy: totalBuy
         });
       }, this)
     );
