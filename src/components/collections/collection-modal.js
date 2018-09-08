@@ -71,7 +71,7 @@ class CollectionModal extends connect(store)(PolymerElement) {
         
         .icon {
           width: 32px;
-          height: auto;
+          height: 32px;
           margin-right: .5rem;
           vertical-align: middle;
         }
@@ -106,7 +106,9 @@ class CollectionModal extends connect(store)(PolymerElement) {
 
             <vaadin-grid-column>
               <template class="header">
-                <div class="align-right">Buy Order</div>
+                <div class="align-right">
+                  <vaadin-grid-sorter path="buys.unit_price">Buy Order</vaadin-grid-sorter>
+                </div>
               </template>
               <template>
                 <gw2-coin-output prepend-zeroes coin-string="[[item.buys.unit_price]]"></gw2-coin-output>
@@ -118,7 +120,9 @@ class CollectionModal extends connect(store)(PolymerElement) {
 
             <vaadin-grid-column>
               <template class="header">
-                <div class="align-right">Sell Listing</div>
+                <div class="align-right">
+                  <vaadin-grid-sorter path="sells.unit_price">Sell Listing</vaadin-grid-sorter>
+                </div>
               </template>
               <template>
                 <gw2-coin-output prepend-zeroes coin-string="[[item.sells.unit_price]]"></gw2-coin-output>
@@ -128,50 +132,6 @@ class CollectionModal extends connect(store)(PolymerElement) {
               </template>
             </vaadin-grid-column>
           </vaadin-grid>
-          <!-- <div class="table-scroll">
-            <table cellspacing="0">
-              <thead>
-                <tr>
-                  <th>Item</th>
-                  <th class="align-right">Buy Order</th>
-                  <th class="align-right">Sell Listing</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <template is="dom-repeat" items="[[collectionItems]]" initial-count="5" target-framerate="60">
-                  <tr>
-                    <td>
-                      <gwn-item-icon 
-                        class="icon" 
-                        name="[[item.name]]" 
-                        icon="[[item.icon]]" 
-                        rarity="[[item.rarity]]"></gwn-item-icon>
-                      <span title="[[item.name]]">[[item.name]]</span>
-                    </td>
-                    <td class="align-right">
-                      <gw2-coin-output prepend-zeroes coin-string="[[item.buys.unit_price]]"></gw2-coin-output>
-                    </td>
-                    <td class="align-right">
-                      <gw2-coin-output prepend-zeroes coin-string="[[item.sells.unit_price]]"></gw2-coin-output>
-                    </td>
-                  </tr>
-                </template>
-              </tbody>
-
-              <tfoot>
-                <tr>
-                  <th>Total</th>
-                  <th class="align-right">
-                    <gw2-coin-output prepend-zeroes coin-string="[[totalBuy]]"></gw2-coin-output>
-                  </th>
-                  <th class="align-right">
-                    <gw2-coin-output prepend-zeroes coin-string="[[totalSell]]"></gw2-coin-output>
-                  </th>
-                </tr>
-              </tfoot>
-            </table>
-          </div> -->
         </div>
       </gwn-modal>
     `;
