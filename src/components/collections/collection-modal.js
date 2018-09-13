@@ -1,5 +1,8 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
-import "@polymer/polymer/lib/elements/dom-repeat.js";
+//import "@polymer/polymer/lib/elements/dom-repeat.js";
+import "@vaadin/vaadin-grid/vaadin-grid";
+import "@vaadin/vaadin-grid/vaadin-grid-sorter";
+
 import { connect } from 'pwa-helpers/connect-mixin.js';
 
 // Load redux store
@@ -17,13 +20,11 @@ store.addReducers({
 import "../utilities/gwn-modal.js";
 import "../utilities/gwn-item-icon.js";
 import { SharedStyles } from "../shared-styles.js";
-import { SharedTableStyles } from "../shared-table-styles.js";
 
 class CollectionModal extends connect(store)(PolymerElement) {
   static get template() {
     return html`
       ${SharedStyles}
-      ${SharedTableStyles}
       <style>
         :host {
           display: block;
@@ -39,22 +40,6 @@ class CollectionModal extends connect(store)(PolymerElement) {
           font-size: 20px;
         }
 
-        thead {
-          box-shadow: var(--app-box-shadow);
-        }
-
-        thead th {
-          padding-top: .5rem;
-        }
-
-        tbody {
-          max-height: calc(100vh - 1.5rem * 2 - 56px - 45px - 53px);
-        }
-
-        tfoot {
-          box-shadow: var(--app-box-shadow-reverse);
-        }
-
         gwn-modal {
           --gwn-modal-width: 800px;
           --gwn-modal-content-padding: 0;
@@ -64,10 +49,29 @@ class CollectionModal extends connect(store)(PolymerElement) {
         .align-right {
           text-align: right;
         }
+
+        .text-bold {
+          font-weight: 600;
+        }
+
+        gw2-coin-output {
+          display: block;
+          text-align: right;
+        }
+
+        gwn-modal {
+          --gwn-modal-max-height: none;
+          --gwn-modal-content-overflow-y: hidden;
+          overflow-y: auto;
+        }
+
+        vaadin-cell-grid-content {
+          height: 2.5rem;
+        }
         
         .icon {
           width: 32px;
-          height: auto;
+          height: 32px;
           margin-right: .5rem;
           vertical-align: middle;
         }
@@ -82,50 +86,52 @@ class CollectionModal extends connect(store)(PolymerElement) {
       <gwn-modal hidden="[[!open]]" on-hidden-changed="_hiddenChanged">
         <h3 class="headline" slot="title">[[collectionName]]</h3>
         <div slot="content">
-          <div class="table-scroll">
-            <table cellspacing="0">
-              <thead>
-                <tr>
-                  <th>Item</th>
-                  <th class="align-right">Buy Order</th>
-                  <th class="align-right">Sell Listing</th>
-                </tr>
-              </thead>
+          <vaadin-grid theme="no-border row-stripes" height-by-rows items="[[collectionItems]]">
+            <vaadin-grid-column>
+              <template class="header">
+                <vaadin-grid-sorter path="name">Item</vaadin-grid-sorter>
+              </template>
+              <template>
+                <gwn-item-icon 
+                  class="icon" 
+                  name="[[item.name]]" 
+                  icon="[[item.icon]]" 
+                  rarity="[[item.rarity]]"></gwn-item-icon>
+                <span>[[ item.name ]]</span>
+              </template>
+              <template class="footer">
+                <div class="text-bold">Total</div>
+              </template>
+            </vaadin-grid-column>
 
-              <tbody>
-                <template is="dom-repeat" items="[[collectionItems]]" initial-count="5" target-framerate="60">
-                  <tr>
-                    <td>
-                      <gwn-item-icon 
-                        class="icon" 
-                        name="[[item.name]]" 
-                        icon="[[item.icon]]" 
-                        rarity="[[item.rarity]]"></gwn-item-icon>
-                      <span title="[[item.name]]">[[item.name]]</span>
-                    </td>
-                    <td class="align-right">
-                      <gw2-coin-output prepend-zeroes coin-string="[[item.buys.unit_price]]"></gw2-coin-output>
-                    </td>
-                    <td class="align-right">
-                      <gw2-coin-output prepend-zeroes coin-string="[[item.sells.unit_price]]"></gw2-coin-output>
-                    </td>
-                  </tr>
-                </template>
-              </tbody>
+            <vaadin-grid-column>
+              <template class="header">
+                <div class="align-right">
+                  <vaadin-grid-sorter path="buys.unit_price">Buy Order</vaadin-grid-sorter>
+                </div>
+              </template>
+              <template>
+                <gw2-coin-output prepend-zeroes coin-string="[[item.buys.unit_price]]"></gw2-coin-output>
+              </template>
+              <template class="footer">
+                <gw2-coin-output class="text-bold" prepend-zeroes coin-string="[[totalBuy]]"></gw2-coin-output>
+              </template>
+            </vaadin-grid-column>
 
-              <tfoot>
-                <tr>
-                  <th>Total</th>
-                  <th class="align-right">
-                    <gw2-coin-output prepend-zeroes coin-string="[[totalBuy]]"></gw2-coin-output>
-                  </th>
-                  <th class="align-right">
-                    <gw2-coin-output prepend-zeroes coin-string="[[totalSell]]"></gw2-coin-output>
-                  </th>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
+            <vaadin-grid-column>
+              <template class="header">
+                <div class="align-right">
+                  <vaadin-grid-sorter path="sells.unit_price">Sell Listing</vaadin-grid-sorter>
+                </div>
+              </template>
+              <template>
+                <gw2-coin-output prepend-zeroes coin-string="[[item.sells.unit_price]]"></gw2-coin-output>
+              </template>
+              <template class="footer">
+                <gw2-coin-output class="text-bold" prepend-zeroes coin-string="[[totalSell]]"></gw2-coin-output>
+              </template>
+            </vaadin-grid-column>
+          </vaadin-grid>
         </div>
       </gwn-modal>
     `;

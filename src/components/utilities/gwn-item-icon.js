@@ -56,8 +56,6 @@ class GWNItemIcon extends PolymerElement {
         }
 
         img {
-          width: inherit;
-          height: inherit;
           max-width: 100%;
           vertical-align: middle;
         }

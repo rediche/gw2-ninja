@@ -1,6 +1,8 @@
 # Next release
 
-- Add Copy to Clipboard to Chatcodes page. 
+- Add Copy to Clipboard to Chatcodes page.
+- Sort Collection tables by name and price.
+- Change tables to use Vaadin-grid for more flexibility. 
 
 # September 1, 2018 - v2.5.0
 
