@@ -25,6 +25,7 @@ class DirectoryStreamers extends LitElement {
    * to render into the element.
    */
   _render({ theme, streamers }) {
+    console.log(config.clientId);
     return html`
       <style>
         :host {
@@ -53,9 +54,20 @@ class DirectoryStreamers extends LitElement {
   _renderStreamerList(streamers, theme) {
     return html`
       ${streamers && streamers.map(streamer => {
-          return html`<directory-entry theme$="${theme}" name="${streamer.name}" url="${streamer.url}" description="${streamer.description}" inactive="${streamer.inactive}"></directory-entry>`;
+          return html`<directory-entry theme$="${theme}" name="${streamer.name}" url="${this._resolvePlatformSpecificUrl(streamer)}" description="${streamer.description}" inactive="${streamer.inactive}"></directory-entry>`;
       })}
     `;
+  }
+
+  _resolvePlatformSpecificUrl({ url, platform }) {
+    if (!url) return;
+
+    switch (platform) {
+      case "twitch":
+        return `https://www.twitch.tv/${url}`;
+      default:
+        return url;
+    }
   }
 
   /**

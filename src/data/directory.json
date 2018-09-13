@@ -2,20 +2,23 @@
   {
     "name": "Rediche",
     "description": "WvW player. Necro main. Loves huuuuuge fights.",
-    "url": "https://www.twitch.tv/rediche",
-    "directory": "streamers"
+    "url": "rediche",
+    "directory": "streamers",
+    "platform": "twitch"
   },
   {
     "name": "MightyTeapot",
     "description": "",
-    "url": "https://www.twitch.tv/MightyTeapot",
-    "directory": "streamers"
+    "url": "MightyTeapot",
+    "directory": "streamers",
+    "platform": "twitch"
   },
   {
     "name": "Frostball",
     "description": "PvP Player",
-    "url": "https://www.twitch.tv/frostball99",
-    "directory": "streamers"
+    "url": "frostball99",
+    "directory": "streamers",
+    "platform": "twitch"
   },
   {
     "name": "Black Lion Ticket Value",
@@ -46,13 +49,6 @@
     "description": "An Offical Guild Wars 2 Shoutcaster.",
     "url": "https://www.youtube.com/user/UnityJebro",
     "directory": "youtube"
-  },
-  {
-    "name": "Chemsorly",
-    "description": "A popular World vs World streamer. Usually streaming guild raids and Guild vs Guild. NOTE: No longer active.",
-    "url": "https://twitch.tv/chemsorly",
-    "directory": "streamers",
-    "inactive": true
   },
   {
     "name": "Permanent Harvesting Nodes Route",
@@ -935,38 +931,44 @@
   {
     "name": "WilsonStorm",
     "description": "",
-    "url": "http://www.twitch.tv/wilsonstorm",
-    "directory": "streamers"
+    "url": "wilsonstorm",
+    "directory": "streamers",
+    "platform": "twitch"
   },
   {
     "name": "Leeto",
     "description": "",
-    "url": "http://www.twitch.tv/leet0",
-    "directory": "streamers"
+    "url": "leet0",
+    "directory": "streamers",
+    "platform": "twitch"
   },
   {
     "name": "Bodydoc",
     "description": "",
-    "url": "http://www.twitch.tv/bodydoc/",
-    "directory": "streamers"
+    "url": "bodydoc/",
+    "directory": "streamers",
+    "platform": "twitch"
   },
   {
     "name": "The Lord Helseth",
     "description": "High ranked PvP player.",
-    "url": "http://www.twitch.tv/thelordhelseth/",
-    "directory": "streamers"
+    "url": "thelordhelseth/",
+    "directory": "streamers",
+    "platform": "twitch"
   },
   {
     "name": "MMOINKS",
     "description": "",
-    "url": "http://www.twitch.tv/mmoinks",
-    "directory": "streamers"
+    "url": "mmoinks",
+    "directory": "streamers",
+    "platform": "twitch"
   },
   {
     "name": "Unity Jebro",
     "description": "An Official Guild Wars 2 Shoutcaster.",
-    "url": "http://www.twitch.tv/jebrounity",
-    "directory": "streamers"
+    "url": "jebrounity",
+    "directory": "streamers",
+    "platform": "twitch"
   },
   {
     "name": "Silveress's Public Tradepost Sheet",
