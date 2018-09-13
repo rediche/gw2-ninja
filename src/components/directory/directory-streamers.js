@@ -1,5 +1,6 @@
 import { LitElement, html } from "@polymer/lit-element";
 
+import config from "../../../config";
 import "./directory-entry";
 
 /**
