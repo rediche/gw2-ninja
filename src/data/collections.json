@@ -646,29 +646,6 @@
     "tickets": 3
   },
   {
-    "name": "Dwaynas Weapon Collection",
-    "ids": [
-      70130,
-      70146,
-      70149,
-      70152,
-      70158,
-      70167,
-      70175,
-      70176,
-      70180,
-      70183,
-      70184,
-      70195,
-      70197,
-      70208,
-      70219,
-      70221
-    ],
-    "category": "blacklion",
-    "tickets": 3
-  },
-  {
     "name": "Improvised Weapon Collection",
     "ids": [
       70589,
