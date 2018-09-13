@@ -15,7 +15,9 @@ class DirectoryStreamers extends LitElement {
   static get properties() {
     return {
       theme: String,
-      streamers: Array
+      streamers: Array,
+      loadedStreamerData: Array,
+      loadedStreamersLive: Array
     };
   }
 
@@ -24,8 +26,10 @@ class DirectoryStreamers extends LitElement {
    * Use the element current props to return a lit-html template result
    * to render into the element.
    */
-  _render({ theme, streamers }) {
-    console.log(config.clientId);
+  _render({ theme, streamers, loadedStreamers }) {
+    const twitchStreamers = this._filterTwitchStreamers(streamers);
+    this._loadStreamersAndLiveChannelsFromTwitch(config.clientId, twitchStreamers);
+    
     return html`
       <style>
         :host {
@@ -54,7 +58,9 @@ class DirectoryStreamers extends LitElement {
   _renderStreamerList(streamers, theme) {
     return html`
       ${streamers && streamers.map(streamer => {
-          return html`<directory-entry theme$="${theme}" name="${streamer.name}" url="${this._resolvePlatformSpecificUrl(streamer)}" description="${streamer.description}" inactive="${streamer.inactive}"></directory-entry>`;
+          return html`
+            <directory-entry theme$="${theme}" name="${streamer.name}" url="${this._resolvePlatformSpecificUrl(streamer)}" description="${streamer.description}" inactive="${streamer.inactive}"></directory-entry>
+          `;
       })}
     `;
   }
@@ -70,6 +76,59 @@ class DirectoryStreamers extends LitElement {
     }
   }
 
+  _loadStreamersAndLiveChannelsFromTwitch(clientId, streamers) {
+    const loadedStreamers = this._loadStreamersFromTwitch(clientId, streamers);
+    const liveStreamers = this._loadLiveStreamersFromTwitch(clientId, streamers);
+
+    Promise.all([loadedStreamers, liveStreamers])
+      .then(values => {
+        console.log("Streamers and live channels loaded");
+        console.log(values);
+      });
+  }
+
+  _loadStreamersFromTwitch(clientId, streamers) {
+    if (!clientId || !streamers) return;
+
+    const streamerNameList = streamers.map(streamer => {
+      return `user_login=${streamer.url}`;
+    }).join("&");
+
+    return fetch(`https://api.twitch.tv/helix/users?login=deroir`, {
+      method: "GET",
+      headers: {
+        "Client-ID": clientId
+      }
+    }).then(resp => {
+      return resp.json();
+    }).then(json => {
+      return json.data;
+    }).catch(error => {
+      console.log(error);
+    });
+  }
+
+  _loadLiveStreamersFromTwitch(clientId, streamers) {
+    if (!clientId || !streamers) return;
+
+    return fetch(`https://api.twitch.tv/helix/streams?game_id=19357`, {
+      method: "GET",
+      headers: {
+        "Client-ID": clientId
+      }
+    }).then(resp => {
+      return resp.json();
+    }).then(json => {
+      return json.data;
+    }).catch(error => {
+      console.log(error);
+    });
+  }
+
+  _filterTwitchStreamers(streamers) {
+    return streamers.filter(streamer => streamer.platform == "twitch");
+  }
+
   /**
    * Instance of the element is created/upgraded. Use: initializing state,
    * set up event listeners, create shadow dom.
@@ -80,6 +139,7 @@ class DirectoryStreamers extends LitElement {
 
     this.theme = "";
     this.streamers = [];
+    this.loadedStreamers = [];
   }
 }
 

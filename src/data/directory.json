@@ -945,14 +945,14 @@
   {
     "name": "Bodydoc",
     "description": "",
-    "url": "bodydoc/",
+    "url": "bodydoc",
     "directory": "streamers",
     "platform": "twitch"
   },
   {
     "name": "The Lord Helseth",
     "description": "High ranked PvP player.",
-    "url": "thelordhelseth/",
+    "url": "thelordhelseth",
     "directory": "streamers",
     "platform": "twitch"
   },
