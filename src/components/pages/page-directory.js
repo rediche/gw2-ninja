@@ -11,7 +11,8 @@ import "@polymer/paper-toast/paper-toast.js";
 import "@polymer/iron-pages/iron-pages.js";
 import "@polymer/iron-icons/iron-icons.js";
 import { SharedStyles } from "../shared-styles.js";
-import "../directory/directory-entry.js";
+import "../directory/directory-entry";
+import "../directory/directory-streamers";
 
 class PageDirectory extends GestureEventListeners(PolymerElement) {
   static get is() {
@@ -126,9 +127,10 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
           </template>
         </div>
         <div name="streamers" class="directory-list">
-          <template is="dom-repeat" items="{{streamers}}">
+          <directory-streamers streamers="[[ streamers ]]" theme$="[[theme]]"></directory-streamers>
+          <!-- <template is="dom-repeat" items="{{streamers}}">
             <directory-entry theme$="[[theme]]" name="[[item.name]]" url="[[item.url]]" description="[[item.description]]" inactive="[[item.inactive]]"></directory-entry>
-          </template>
+          </template> -->
         </div>
         <div name="youtubers" class="directory-list">
           <template is="dom-repeat" items="{{youtube}}">
