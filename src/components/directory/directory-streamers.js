@@ -25,7 +25,7 @@ class DirectoryStreamers extends LitElement {
    * to render into the element.
    */
   _render({ theme, streamers }) {
-    console.log(config.clientId);
+    //console.log(config.clientId);
     return html`
       <style>
         :host {
