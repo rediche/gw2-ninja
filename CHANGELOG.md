@@ -1,8 +1,13 @@
 # Next release
 
+- 
+
+# September 26, 2018 - v2.6.0
+
 - Add Copy to Clipboard to Chatcodes page.
 - Sort Collection tables by name and price.
 - Change tables to use Vaadin-grid for more flexibility. 
+- Add Jahai Bluffs timer for Death-Branded Shatterer.
 
 # September 1, 2018 - v2.5.0
 
