@@ -260,8 +260,8 @@ class PageWvw extends connect(store)(PolymerElement) {
 
   _objectiveClicked(e) {
     const mapStatus = this.currentMatchup.maps;
-    const foundObjective = this._resolveObjectiveByName(
-      e.detail.objectiveTitle
+    const foundObjective = this._resolveObjectiveById(
+      e.detail.objectiveId
     );
     const mapContainingObjective = mapStatus.find(
       map => map.type == foundObjective.map_type
@@ -281,10 +281,10 @@ class PageWvw extends connect(store)(PolymerElement) {
     this.set("selectedObjective", null);
   }
 
-  _resolveObjectiveByName(objectiveName) {
-    if (!objectiveName) return;
+  _resolveObjectiveById(id) {
+    if (!id) return;
     const objectives = this.objectives || [];
-    return objectives.find(objective => objective.name == objectiveName);
+    return objectives.find(objective => objective.id === id);
   }
 
   _stateChanged({ settings, account }) {
