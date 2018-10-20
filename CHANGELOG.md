@@ -1,6 +1,10 @@
 # Next release
 
-- 
+-
+
+# October 20, 2018 - v2.6.1
+
+- Add "none" option to Stream Stools generator.
 
 # September 26, 2018 - v2.6.0
 
