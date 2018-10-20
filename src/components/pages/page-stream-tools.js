@@ -107,6 +107,7 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
           <paper-radio-group aria-labelledby="chatbot-label" selected="{{ selectedChatbot }}">
             <paper-radio-button name="streamlabs-chatbot">Streamlabs Chatbot</paper-radio-button>
             <paper-radio-button name="nightbot">Nightbot</paper-radio-button>
+            <paper-radio-button name="none">None</paper-radio-button>
           </paper-radio-group>
         </div>
 
@@ -153,6 +154,8 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
         return `$(urlfetch ${url})`;
       case "streamlabs-chatbot":
         return `$readapi(${url})`;
+      case "none":
+        return url;
     }
 
     return "";
