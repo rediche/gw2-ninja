@@ -5,13 +5,10 @@ import moment from "moment/src/moment.js";
 import "@polymer/app-route/app-location.js";
 import "@polymer/app-route/app-route.js";
 import "@polymer/paper-tabs/paper-tabs.js";
+import '@polymer/paper-button/paper-button.js';
 import { SharedStyles } from "../shared-styles.js";
 
 class PageTimer extends PolymerElement {
-  static get is() {
-    return "page-timer";
-  }
-
   static get template() {
     return html`
       ${SharedStyles}
@@ -101,6 +98,11 @@ class PageTimer extends PolymerElement {
           font-weight: 800;
         }
 
+        :host([compact]).phase-time,
+        :host([compact]).phase-name {
+          display: inline;
+        }
+
         @media screen and (min-width: 640px) {
           :host {
             padding-bottom: var(--spacer-large);
@@ -176,6 +178,10 @@ class PageTimer extends PolymerElement {
       },
       pointerPosition: {
         type: Number
+      },
+      compact: {
+        type: Boolean,
+        reflectToAttribute: true
       }
     };
   }
@@ -257,4 +263,4 @@ class PageTimer extends PolymerElement {
   }
 }
 
-window.customElements.define(PageTimer.is, PageTimer);
+window.customElements.define("page-timer", PageTimer);

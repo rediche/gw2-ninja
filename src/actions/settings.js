@@ -1,5 +1,6 @@
 export const CHANGE_LANGUAGE = "CHANGE_LANGUAGE";
 export const CHANGE_THEME = "CHANGE_THEME";
+export const CHANGE_TIMER = "CHANGE_TIMER";
 export const CHANGE_API_KEY = "CHANGE_API_KEY";
 export const CHANGE_API_PERMISSIONS = "CHANGE_API_PERMISSIONS";
 
@@ -24,3 +25,14 @@ export const changeTheme = theme => dispatch => {
     });
   }
 };
+
+export const changeTimer = timer => dispatch => {
+  const acceptedTimers = ["normal", "compact"];
+
+  if (acceptedTimers.includes(timer)) {
+    dispatch({
+      type: CHANGE_TIMER,
+      timer: timer
+    });
+  }
+}
