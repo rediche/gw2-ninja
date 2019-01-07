@@ -8,7 +8,18 @@ import "@polymer/paper-tabs/paper-tabs.js";
 import '@polymer/paper-button/paper-button.js';
 import { SharedStyles } from "../shared-styles.js";
 
-class PageTimer extends PolymerElement {
+import { connect } from 'pwa-helpers/connect-mixin.js';
+
+// Load redux store
+import { store } from '../../store.js';
+
+// Lazy load reducers
+import settings from '../../reducers/settings.js';
+store.addReducers({
+  settings
+});
+
+class PageTimer extends connect(store)(PolymerElement) {
   static get template() {
     return html`
       ${SharedStyles}
@@ -98,9 +109,12 @@ class PageTimer extends PolymerElement {
           font-weight: 800;
         }
 
-        :host([compact]).phase-time,
-        :host([compact]).phase-name {
+        :host([size="compact"]) .phase-name {
           display: inline;
+        }
+
+        :host([size="compact"]) .bar {
+          margin-bottom: .75rem;
         }
 
         @media screen and (min-width: 640px) {
@@ -142,6 +156,7 @@ class PageTimer extends PolymerElement {
 
         <template is="dom-repeat" items="[[ metas ]]" as="meta">
           <div
+            class="meta"
             hidden$="[[ _metaCategoryMatchesSelected(meta.category, subviewData.subview) ]]"
           >
             <p class="meta-name">[[ meta.name ]]</p>
@@ -151,7 +166,7 @@ class PageTimer extends PolymerElement {
                   class="phase"
                   style$="background: [[ phase.color ]]; width:[[ _calcPhaseWidth(phase.duration) ]]%;"
                 >
-                  <div class="phase-time">
+                  <div class="phase-time" hidden$="[[ _isCompact(size) ]]">
                     [[ phase.hour ]]:[[ phase.minute ]]
                   </div>
                   <div class="phase-name">[[ phase.name ]]</div>
@@ -179,8 +194,8 @@ class PageTimer extends PolymerElement {
       pointerPosition: {
         type: Number
       },
-      compact: {
-        type: Boolean,
+      size: {
+        type: String,
         reflectToAttribute: true
       }
     };
@@ -193,6 +208,10 @@ class PageTimer extends PolymerElement {
       this._loadMetas();
       this._movePointer();
     });
+  }
+
+  _isCompact(size) {
+    return size === "compact";
   }
 
   _metaCategoryMatchesSelected(category, selectedMeta) {
@@ -260,6 +279,11 @@ class PageTimer extends PolymerElement {
     this.set("pointerTime", hour + ":" + minute);
     this.set("pointerLocalTime", localHour + ":" + localMinute);
     this.set("pointerPosition", percentOfTwoHours);
+  }
+
+  _stateChanged(state) {
+    if (!state || !state.settings) return;
+    this.set('size', state.settings.timer);
   }
 }
 
