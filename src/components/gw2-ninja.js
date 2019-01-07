@@ -200,6 +200,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
         <page-about name="about"></page-about>
         <page-precursors name="precursors" page="[[page]]"></page-precursors>
         <page-stream-tools name="stream"></page-stream-tools>
+        <page-links name="links"></page-links>
         <page-view404 name="view404"></page-view404>
       </iron-pages>
     </app-header-layout>
@@ -315,7 +316,8 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
         "timer",
         "wvw",
         "precursors",
-        "stream"
+        "stream",
+        "links"
       ].indexOf(page) !== -1
     ) {
       this.page = page;
@@ -368,6 +370,9 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
       case "stream":
         import("./pages/page-stream-tools.js");
         break;
+      case "links":
+        import("./pages/page-links.js");
+        break;
       case "view404":
         import("./pages/page-view404.js");
         break;
@@ -392,6 +397,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
     if (activePage == "about") return "About GW2 Ninja";
     if (activePage == "precursors") return "Precursor Rain. HALLELUJAH!";
     if (activePage == "stream") return "Stream Tools";
+    if (activePage == "stream") return "Shortlinks";
     if (activePage == "view404") return "Page not found";
 
     return activePage;

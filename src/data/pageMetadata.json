@@ -53,5 +53,9 @@
     "page": "stream",
     "title": "Stream Tools for Streamlabs Chatbot and Nightbot",
     "description": "Generate Guild Wars 2 API commands for you to use in your chat. Commands such as: WvW kills, WvW matchup, server, PvP rank and more."
+  },{
+    "page": "links",
+    "title": "Guild Wars 2 Shortlinks",
+    "description": "Generate shortlinks."
   }
 ]

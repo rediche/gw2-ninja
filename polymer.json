@@ -12,7 +12,8 @@
     "src/components/pages/page-view404.js",
     "src/components/pages/page-about.js",
     "src/components/pages/page-stream-tools.js",
-    "src/components/pages/page-wvw.js"
+    "src/components/pages/page-wvw.js",
+    "src/components/pages/page-links.js"
   ],
   "sources": ["src/**/*", "images/**/*", ".htaccess"],
   "extraDependencies": [
