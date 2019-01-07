@@ -1,6 +1,6 @@
 {
   "name": "gw2-ninja",
-  "version": "2.6.1",
+  "version": "2.7.0",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^3.12.0",

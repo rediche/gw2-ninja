@@ -1,5 +1,9 @@
 # Next release
 
+- 
+
+# January 7, 2019 - v2.7.0
+
 - Add compact view to timer
 - Bugfix: Show proper Garrison info (#52)
 
