@@ -5,142 +5,177 @@ import moment from "moment/src/moment.js";
 import "@polymer/app-route/app-location.js";
 import "@polymer/app-route/app-route.js";
 import "@polymer/paper-tabs/paper-tabs.js";
+import '@polymer/paper-button/paper-button.js';
 import { SharedStyles } from "../shared-styles.js";
 
-class PageTimer extends PolymerElement {
-  static get is() {
-    return "page-timer";
-  }
+import { connect } from 'pwa-helpers/connect-mixin.js';
 
+// Load redux store
+import { store } from '../../store.js';
+
+// Lazy load reducers
+import settings from '../../reducers/settings.js';
+store.addReducers({
+  settings
+});
+
+class PageTimer extends connect(store)(PolymerElement) {
   static get template() {
     return html`
-    ${SharedStyles}
-    <style>
-    :host {
-      display: block;
-    }
+      ${SharedStyles}
+      <style>
+        :host {
+          display: block;
+        }
 
-    paper-tabs {
-      margin-bottom: var(--spacer-large);
-      background-color: var(--app-primary-color);
-      --paper-tabs-selection-bar-color: #ffffff;
-    }
+        paper-tabs {
+          margin-bottom: var(--spacer-large);
+          background-color: var(--app-primary-color);
+          --paper-tabs-selection-bar-color: #ffffff;
+        }
 
-    paper-tab {
-      color: white;
-    }
+        paper-tab {
+          color: white;
+        }
 
-    .meta-container {
-      overflow: hidden;
-      position: relative;
-      font-size: .75rem;
-      padding: 3.75rem 0 .25rem;
-    }
+        .meta-container {
+          overflow: hidden;
+          position: relative;
+          font-size: 0.75rem;
+          padding: 3.75rem 0 0.25rem;
+        }
 
-    .pointer {
-      position: absolute;
-      height: 100%;
-      border-left: 2px solid #F44336;
-      z-index: 400;
-      top: 0;
-      transition: left 1s ease-in-out;
-      color: white;
-    }
+        .pointer {
+          position: absolute;
+          height: 100%;
+          border-left: 2px solid #f44336;
+          z-index: 400;
+          top: 0;
+          transition: left 1s ease-in-out;
+          color: white;
+        }
 
-    .pointer > span {
-      position: absolute;
-      padding: .25rem .375rem;
-    }
-    
-    .pointer > span strong {
-      position: absolute;
-      top: 1.75rem;
-      font-weight: 800;
-      color: #B9B9B9;
-      width: 10rem;
-    }
+        .pointer > span {
+          position: absolute;
+          padding: 0.25rem 0.375rem;
+        }
 
-    .pointer > span.server {
-      left: 0;
-      background: #F44336;
-    }
+        .pointer > span strong {
+          position: absolute;
+          top: 1.75rem;
+          font-weight: 800;
+          color: #b9b9b9;
+          width: 10rem;
+        }
 
-    .pointer > span.server strong {
-      left: .375rem;
-    }
+        .pointer > span.server {
+          left: 0;
+          background: #f44336;
+        }
 
-    .pointer > span.local {
-      right: .125rem;
-      background: #B6B6B6;
-    }
+        .pointer > span.server strong {
+          left: 0.375rem;
+        }
 
-    .pointer > span.local strong {
-      right: .375rem;
-      text-align: right;
-    }
+        .pointer > span.local {
+          right: 0.125rem;
+          background: #b6b6b6;
+        }
 
-    .bar {
-      display: flex;
-      flex-wrap: nowrap;
-      margin-bottom: 1rem;
-      overflow: hidden;
-    }
+        .pointer > span.local strong {
+          right: 0.375rem;
+          text-align: right;
+        }
 
-    .meta-name {
-      font-weight: 800;
-      margin: 0 0 .25rem;
-      margin-left: var(--spacer-medium);
-    }
+        .bar {
+          display: flex;
+          flex-wrap: nowrap;
+          margin-bottom: 1rem;
+          overflow: hidden;
+        }
 
-    .phase {
-      padding: .5rem;
-      box-sizing: border-box;
-    }
+        .meta-name {
+          font-weight: 800;
+          margin: 0 0 0.25rem;
+          margin-left: var(--spacer-medium);
+        }
 
-    .phase-name {
-      font-weight: 800;
-    }
+        .phase {
+          padding: 0.5rem;
+          box-sizing: border-box;
+        }
 
-    @media screen and (min-width: 640px) {
-      :host {
-        padding-bottom: var(--spacer-large);
-      }
-    }
-  </style>
+        .phase-name {
+          font-weight: 800;
+        }
 
-  <app-location route="{{route}}"></app-location>
-  <app-route route="{{route}}" pattern="/timer/:subview" data="{{subviewData}}"></app-route>
+        :host([size="compact"]) .phase-name {
+          display: inline;
+        }
 
-  <paper-tabs class="sticky-tabs" selected="{{ subviewData.subview }}" attr-for-selected="name" fallback-selection="all">
-    <paper-tab name="all">All</paper-tab>
-    <paper-tab name="core">Core</paper-tab>
-    <paper-tab name="heart-of-thorns">Heart of Thorns</paper-tab>
-    <paper-tab name="path-of-fire">Path of Fire</paper-tab>
-    <paper-tab name="other">Other</paper-tab>
-  </paper-tabs>
+        :host([size="compact"]) .bar {
+          margin-bottom: .75rem;
+        }
 
-  <div class="meta-container">
-    <div class="pointer" style$="left: [[ pointerPosition ]]%;">
-      <span class="server"><strong>Server time</strong><span>[[ pointerTime ]]</span></span>
-      <span class="local"><strong>Your time</strong><span>[[ pointerLocalTime ]]</span></span>
-    </div>
+        @media screen and (min-width: 640px) {
+          :host {
+            padding-bottom: var(--spacer-large);
+          }
+        }
+      </style>
 
-    <template is="dom-repeat" items="[[ metas ]]" as="meta">
-      <div hidden$="[[ _metaCategoryMatchesSelected(meta.category, subviewData.subview) ]]">
-        <p class="meta-name">[[ meta.name ]]</p>
-        <div class="bar">
+      <app-location route="{{route}}"></app-location>
+      <app-route
+        route="{{route}}"
+        pattern="/timer/:subview"
+        data="{{subviewData}}"
+      ></app-route>
 
-          <template is="dom-repeat" items="[[ meta.phases ]]" as="phase">
-            <div class="phase" style$="background: [[ phase.color ]]; width:[[ _calcPhaseWidth(phase.duration) ]]%;">  
-              <div class="phase-time">[[ phase.hour ]]:[[ phase.minute ]]</div>
-              <div class="phase-name">[[ phase.name ]]</div>
-            </div>
-          </template>
+      <paper-tabs
+        class="sticky-tabs"
+        selected="{{ subviewData.subview }}"
+        attr-for-selected="name"
+        fallback-selection="all"
+      >
+        <paper-tab name="all">All</paper-tab>
+        <paper-tab name="core">Core</paper-tab>
+        <paper-tab name="heart-of-thorns">Heart of Thorns</paper-tab>
+        <paper-tab name="path-of-fire">Path of Fire</paper-tab>
+        <paper-tab name="other">Other</paper-tab>
+      </paper-tabs>
 
+      <div class="meta-container">
+        <div class="pointer" style$="left: [[ pointerPosition ]]%;">
+          <span class="server"
+            ><strong>Server time</strong><span>[[ pointerTime ]]</span></span
+          >
+          <span class="local"
+            ><strong>Your time</strong><span>[[ pointerLocalTime ]]</span></span
+          >
         </div>
+
+        <template is="dom-repeat" items="[[ metas ]]" as="meta">
+          <div
+            class="meta"
+            hidden$="[[ _metaCategoryMatchesSelected(meta.category, subviewData.subview) ]]"
+          >
+            <p class="meta-name">[[ meta.name ]]</p>
+            <div class="bar">
+              <template is="dom-repeat" items="[[ meta.phases ]]" as="phase">
+                <div
+                  class="phase"
+                  style$="background: [[ phase.color ]]; width:[[ _calcPhaseWidth(phase.duration) ]]%;"
+                >
+                  <div class="phase-time" hidden$="[[ _isCompact(size) ]]">
+                    [[ phase.hour ]]:[[ phase.minute ]]
+                  </div>
+                  <div class="phase-name">[[ phase.name ]]</div>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
       </div>
-    </template>
-  </div>
     `;
   }
 
@@ -158,6 +193,10 @@ class PageTimer extends PolymerElement {
       },
       pointerPosition: {
         type: Number
+      },
+      size: {
+        type: String,
+        reflectToAttribute: true
       }
     };
   }
@@ -169,6 +208,10 @@ class PageTimer extends PolymerElement {
       this._loadMetas();
       this._movePointer();
     });
+  }
+
+  _isCompact(size) {
+    return size === "compact";
   }
 
   _metaCategoryMatchesSelected(category, selectedMeta) {
@@ -192,7 +235,7 @@ class PageTimer extends PolymerElement {
   }
 
   _calcPhaseWidth(duration) {
-    return 100 * duration / 120;
+    return (100 * duration) / 120;
   }
 
   _updateTimes(latestMetas) {
@@ -209,7 +252,7 @@ class PageTimer extends PolymerElement {
       meta.phases.forEach(function(phase, phaseIndex) {
         let correctedTime = "" + (startHour + (offset > 59 ? 1 : 0));
         phase.hour = ("00" + correctedTime).slice(-2);
-        phase.minute = ("00" + offset % 60).slice(-2);
+        phase.minute = ("00" + (offset % 60)).slice(-2);
         offset += phase.duration;
       });
 
@@ -230,13 +273,18 @@ class PageTimer extends PolymerElement {
     let localMinute = ("00" + localTime.minute()).slice(-2);
 
     // How far along are we (in  % ) of the current 2 hour event cycles?
-    let percentOfTwoHours = (hour % 2 + minute / 60) * 50;
+    let percentOfTwoHours = ((hour % 2) + minute / 60) * 50;
 
     // Set the text and move the pointer to that %
     this.set("pointerTime", hour + ":" + minute);
     this.set("pointerLocalTime", localHour + ":" + localMinute);
     this.set("pointerPosition", percentOfTwoHours);
   }
+
+  _stateChanged(state) {
+    if (!state || !state.settings) return;
+    this.set('size', state.settings.timer);
+  }
 }
 
-window.customElements.define(PageTimer.is, PageTimer);
+window.customElements.define("page-timer", PageTimer);

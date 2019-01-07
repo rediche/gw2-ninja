@@ -1,5 +1,6 @@
 # Next release
 
+- Add compact view to timer
 - Bugfix: Show proper Garrison info (#52)
 
 # October 20, 2018 - v2.6.1
