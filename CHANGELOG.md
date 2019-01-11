@@ -2,6 +2,11 @@
 
 - 
 
+# January 11, 2019 - v2.7.2
+
+- Add more addons, websites and streamers.
+- Fix visual bug on streamers directory.
+
 # January 7, 2019 - v2.7.0
 
 - Add compact view to timer
