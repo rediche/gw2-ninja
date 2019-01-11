@@ -971,6 +971,13 @@
     "platform": "twitch"
   },
   {
+    "name": "Deroir",
+    "description": "Give us more Deroira, please.",
+    "url": "deroir",
+    "directory": "streamers",
+    "platform": "twitch"
+  },
+  {
     "name": "Silveress's Public Tradepost Sheet",
     "description": "Data spreadsheet with various research that can come in handy for even the most experienced Trading Post player.",
     "url": "https://docs.google.com/spreadsheets/d/1wLhXy3u0rWMasneeBsU3gvLmEGJS31hrFfcvIadRtDY/",
@@ -1085,6 +1092,24 @@
     "directory": "websites"
   },
   {
+    "name": "GW2AP",
+    "description": "Quick and easy filtering and sorting of your Guild Wars 2 achievements.",
+    "url": "https://gw2ap.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Kulinda's GuildWars 2 dye browser",
+    "description": "Easy to use dye browser.",
+    "url": "https://kulinda.github.io/dyes/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2Profits",
+    "description": "Lots of Trading Post tools.",
+    "url": "http://gw2profits.com/",
+    "directory": "websites"
+  },
+  {
     "name": "ArcDPS",
     "description": "A Guild Wars 2 DPS Meter.",
     "url": "https://www.deltaconnected.com/arcdps/",
@@ -1109,6 +1134,25 @@
     "name": "Gw2Hook",
     "description": "Gw2Hook allows you to finely control the graphical settings of Guild Wars 2 by changing shaders, colorgrading and more.",
     "url": "https://04348.github.io/Gw2Hook/",
+    "directory": "addons"
+  },
+  {
+    "name": "Scrolling Combat Text",
+    "description": "A scrolling combat text addon for GW2 using ArcDPS API.",
+    "url": "https://github.com/Artenuvielle/GW2-SCT",
+    "directory": "addons",
+    "approval": "https://www.reddit.com/r/Guildwars2/comments/9laevv/gw2_sct_updated_for_new_arcdps_api/e766yys"
+  },
+  {
+    "name": "Augmented Tyria",
+    "description": "The ultimate Guild Wars 2 map completion tool.",
+    "url": "https://github.com/ideka/AugTyr",
+    "directory": "addons"
+  },
+  {
+    "name": "GW2 Launch Buddy",
+    "description": "Custom launcher generator for Guild Wars 2.",
+    "url": "https://github.com/TheCheatsrichter/Gw2_Launchbuddy",
     "directory": "addons"
   }
 ]
