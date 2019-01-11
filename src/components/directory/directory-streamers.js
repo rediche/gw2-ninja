@@ -32,6 +32,7 @@ class DirectoryStreamers extends LitElement {
           display: flex;
           flex-wrap: wrap;
           justify-content: space-between;
+          width: 100%;
         }
 
         directory-entry {
