@@ -978,6 +978,13 @@
     "platform": "twitch"
   },
   {
+    "name": "Seven",
+    "description": "",
+    "url": "chill_seven",
+    "directory": "streamers",
+    "platform": "twitch"
+  },
+  {
     "name": "Silveress's Public Tradepost Sheet",
     "description": "Data spreadsheet with various research that can come in handy for even the most experienced Trading Post player.",
     "url": "https://docs.google.com/spreadsheets/d/1wLhXy3u0rWMasneeBsU3gvLmEGJS31hrFfcvIadRtDY/",
