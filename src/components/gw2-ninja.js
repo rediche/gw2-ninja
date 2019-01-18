@@ -124,9 +124,9 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           --gwn-box-shadow-right: 1px 0 4px rgba(0, 0, 0, 0.12);
           --gwn-box-shadow-left: -1px 0 4px rgba(0, 0, 0, 0.12);
 
-          --gwn-border-radius: .125rem;
+          --gwn-border-radius: 0.125rem;
           --gwn-divider: rgba(0, 0, 0, 0.2);
-          
+
           --spacer-none: 0;
           --spacer-xsmall: 0.25rem;
           --spacer-small: 0.5rem;
@@ -150,7 +150,10 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           --gwn-on-background: var(--gwn-text-light);
           --gwn-surface: #333333;
           --gwn-on-surface: var(--gwn-text-light);
-          --gwn-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+          --gwn-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+            0 1px 2px rgba(0, 0, 0, 0.24);
+          --gwn-box-shadow-right: 1px 0 3px rgba(0, 0, 0, 0.12),
+            1px 0 2px rgba(0, 0, 0, 0.24);
         }
 
         app-toolbar {
@@ -159,7 +162,6 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
 
         app-drawer {
           z-index: 99999;
-          box-shadow: 1px 0 4px rgba(0, 0, 0, 0.12);
         }
 
         app-header {
