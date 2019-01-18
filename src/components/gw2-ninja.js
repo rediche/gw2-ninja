@@ -210,6 +210,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           display: block;
           line-height: 40px;
           margin-bottom: 0.5rem;
+          font-weight: 500;
           padding: 0 var(--spacer-medium);
           border-radius: var(--gwn-border-radius);
         }
