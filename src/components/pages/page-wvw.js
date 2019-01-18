@@ -79,23 +79,23 @@ class PageWvw extends connect(store)(PolymerElement) {
         paper-dropdown-menu {
           width: 100%;
           padding: 0 var(--spacer-large);
-          --iron-icon-fill-color: var(--app-text-color-light);
-          --paper-input-container-color: var(--app-text-color-light);
-          --paper-input-container-focus-color: var(--app-text-color-light);
+          --iron-icon-fill-color: var(--gwn-text-light);
+          --paper-input-container-color: var(--gwn-text-light);
+          --paper-input-container-focus-color: var(--gwn-text-light);
           --paper-input-container-input: {
-            color: var(--app-text-color-light);
+            color: var(--gwn-text-light);
           }
           --paper-input-container-label: {
-            color: var(--app-text-color-light);
+            color: var(--gwn-text-light);
           }
           --paper-font-caption: {
-            font-family: var(--app-font-stack);
+            font-family: var(--gwn-font-stack);
           }
           --paper-input-container-shared-input-style: {
-            font-family: var(--app-font-stack);
+            font-family: var(--gwn-font-stack);
           }
           --paper-font-subhead: {
-            font-family: var(--app-font-stack);
+            font-family: var(--gwn-font-stack);
           }
         }
 
@@ -106,7 +106,7 @@ class PageWvw extends connect(store)(PolymerElement) {
         }
 
         paper-tab {
-          font-family: var(--app-font-stack);
+          font-family: var(--gwn-font-stack);
           color: white;
         }
 

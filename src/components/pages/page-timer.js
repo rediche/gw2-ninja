@@ -80,7 +80,7 @@ class PageTimer extends connect(store)(PolymerElement) {
         .pointer > span.local {
           right: 0.125rem;
           background-color: #efefef;
-          color: var(--app-text-color);
+          color: var(--gwn-text-dark);
         }
 
         .pointer > span.local strong {

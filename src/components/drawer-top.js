@@ -33,7 +33,7 @@ class DrawerTop extends connect(store)(PolymerElement) {
           position: relative;
           background-color: var(--gwn-primary);
           color: var(--gwn-on-primary);
-          box-shadow: var(--app-box-shadow);
+          box-shadow: var(--gwn-box-shadow);
         }
 
         .inner {

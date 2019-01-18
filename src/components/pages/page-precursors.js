@@ -42,7 +42,7 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
         animation-duration: 2s;
         animation-timing-function: cubic-bezier(0.600, 0.040, 0.980, 0.335);
         animation-timing-function: ease-in;
-        box-shadow: var(--app-box-shadow);
+        box-shadow: var(--gwn-box-shadow);
       }
 
       @keyframes rain {

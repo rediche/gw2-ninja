@@ -44,9 +44,10 @@ class WvwMapStats extends connect(store)(LitElement) {
 
         .card {
           padding: 0 0 var(--spacer-small) 0;
-          border-radius: var(--app-border-radius);
-          background-color: var(--app-surface-color);
-          box-shadow: var(--app-box-shadow);
+          border-radius: var(--gwn-border-radius);
+          background-color: var(--gwn-surface);
+          color: var(--gwn-on-surface);
+          box-shadow: var(--gwn-box-shadow);
           box-sizing: border-box;
           overflow: hidden;
         }
@@ -62,8 +63,7 @@ class WvwMapStats extends connect(store)(LitElement) {
 
         .card-header {
           padding: var(--spacer-small) var(--spacer-medium);
-          box-shadow: var(--app-box-shadow);
-          color: var(--app-text-color-light);
+          box-shadow: var(--gwn-box-shadow);
         }
 
         .card-header .space-between {
@@ -128,11 +128,11 @@ class WvwMapStats extends connect(store)(LitElement) {
         .button {
           margin: 1rem 0 .5rem;
           background-color: transparent;
-          color: var(--app-primary-color);
-          border: 1px solid var(--app-primary-color);
+          color: var(--gwn-on-surface);
+          border: 1px solid var(--gwn-on-surface);
           padding: .5rem 1rem;
           text-align: center;
-          border-radius: var(--app-border-radius);
+          border-radius: var(--gwn-border-radius);
           text-decoration: none;
           margin-right: 1rem;
           font-size: .85rem;

@@ -19,7 +19,7 @@ export const SharedStyles = html`
     }
 
     body {
-      color: var(--app-text-color);
+      color: var(--gwn-text-dark);
     }
 
     h1,
@@ -59,10 +59,10 @@ export const SharedStyles = html`
 
     .card {
       padding: var(--spacer-medium);
-      border-radius: var(--app-border-radius);
+      border-radius: var(--gwn-border-radius);
       background-color: var(--gwn-surface);
       color: var(--gwn-on-surface);
-      box-shadow: var(--app-box-shadow);
+      box-shadow: var(--gwn-box-shadow);
       box-sizing: border-box;
       overflow: hidden;
     }

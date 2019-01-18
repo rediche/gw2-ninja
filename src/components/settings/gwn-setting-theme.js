@@ -37,7 +37,7 @@ class GWNSettingTheme extends connect(store)(PolymerElement) {
       <style>
         [value="core"] {
           background-color: var(--color-guild-wars-2);
-          color: var(--app-text-color-light);
+          color: var(--gwn-text-light);
         }
 
         [value="core"]:hover {
@@ -46,7 +46,7 @@ class GWNSettingTheme extends connect(store)(PolymerElement) {
 
         [value="hot"] {
           background-color: var(--color-heart-of-thorns);
-          color: var(--app-text-color-light);
+          color: var(--gwn-text-light);
         }
 
         [value="hot"]:hover {
@@ -55,7 +55,7 @@ class GWNSettingTheme extends connect(store)(PolymerElement) {
 
         [value="pof"] {
           background-color: var(--color-path-of-fire);
-          color: var(--app-text-color-light);
+          color: var(--gwn-text-light);
         }
 
         [value="pof"]:hover {
@@ -64,7 +64,7 @@ class GWNSettingTheme extends connect(store)(PolymerElement) {
 
         [value="dark"] {
           background-color: #333333;
-          color: var(--app-text-color-light);
+          color: var(--gwn-text-light);
         }
 
         [value="dark"]:hover {

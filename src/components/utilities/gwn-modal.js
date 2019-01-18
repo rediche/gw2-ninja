@@ -64,7 +64,7 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           );
           background-color: var(--gwn-surface);
           color: var(--gwn-on-surface);
-          border-radius: var(--app-border-radius);
+          border-radius: var(--gwn-border-radius);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
           box-sizing: border-box;
           overflow: hidden;

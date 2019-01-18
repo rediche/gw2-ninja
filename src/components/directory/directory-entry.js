@@ -21,7 +21,7 @@ class DirectoryEntry extends PolymerElement {
           flex: 1;
           padding: 0.5rem 1rem;
           text-align: center;
-          border-radius: var(--app-border-radius);
+          border-radius: var(--gwn-border-radius);
           background-color: var(--gwn-primary);
           color: var(--gwn-on-primary);
           text-decoration: none;

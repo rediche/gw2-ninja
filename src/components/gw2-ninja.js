@@ -97,42 +97,40 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           --team-red: #e53935;
 
           /* Main variables */
-          /* --app-primary-color: var(--color-path-of-fire);
-          --app-primary-color-dark: var(--color-path-of-fire-dark); */
-          --app-text-color: #212121;
-          --app-text-color-light: #ffffff;
-          --app-background-color: #e0f2f1;
+          --gwn-text-light: #ffffff;
+
+          --gwn-text-light: #ffffff;
+          --gwn-text-dark: #333333;
 
           --gwn-primary: var(--color-path-of-fire);
-          --gwn-on-primary: var(--app-text-color-light);
+          --gwn-on-primary: var(--gwn-text-light);
 
           --gwn-primary-variant: var(--color-path-of-fire-dark);
-          --gwn-on-primary-variant: var(--app-text-color-light);
+          --gwn-on-primary-variant: var(--gwn-text-light);
 
           --gwn-background: #e0f2f1;
-          --gwn-on-background: var(--app-text-color);
+          --gwn-on-background: var(--gwn-text-dark);
 
           --gwn-surface: #ffffff;
-          --gwn-on-surface: var(--app-text-color);
+          --gwn-on-surface: var(--gwn-text-dark);
 
-          --app-font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI",
+          --gwn-font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI",
             Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
             sans-serif;
 
           /* Generic styles */
-          --app-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
-          --app-box-shadow-reverse: 0 -1px 4px rgba(0, 0, 0, 0.12);
-          --app-box-shadow-right: 1px 0 4px rgba(0, 0, 0, 0.12);
-          --app-box-shadow-left: -1px 0 4px rgba(0, 0, 0, 0.12);
-          --app-border-radius: 0.125rem;
+          --gwn-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+          --gwn-box-shadow-reverse: 0 -1px 4px rgba(0, 0, 0, 0.12);
+          --gwn-box-shadow-right: 1px 0 4px rgba(0, 0, 0, 0.12);
+          --gwn-box-shadow-left: -1px 0 4px rgba(0, 0, 0, 0.12);
+
+          --gwn-border-radius: .125rem;
+          
           --spacer-none: 0;
           --spacer-xsmall: 0.25rem;
           --spacer-small: 0.5rem;
           --spacer-medium: 1rem;
           --spacer-large: 1.5rem;
-
-          --app-text-color: #333333;
-          --app-text-color-inverted: #ffffff;
         }
 
         :host([theme="core"]) {
@@ -148,10 +146,10 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
         :host([theme="dark"]) {
           --gwn-primary: #181818;
           --gwn-background: #222222;
-          --gwn-on-background: var(--app-text-color-light);
+          --gwn-on-background: var(--gwn-text-light);
           --gwn-surface: #333333;
-          --gwn-on-surface: var(--app-text-color-light);
-          --app-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+          --gwn-on-surface: var(--gwn-text-light);
+          --gwn-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
         }
 
         app-toolbar {
@@ -212,7 +210,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           line-height: 40px;
           margin-bottom: 0.5rem;
           padding: 0 var(--spacer-medium);
-          border-radius: var(--app-border-radius);
+          border-radius: var(--gwn-border-radius);
         }
 
         .drawer-list > :first-child {
