@@ -71,6 +71,8 @@ class PageTimer extends connect(store)(PolymerElement) {
         .pointer > span.server {
           left: 0;
           background-color: var(--color-guild-wars-2);
+          border-top-right-radius: var(--gwn-border-radius);
+          border-bottom-right-radius: var(--gwn-border-radius);
         }
 
         .pointer > span.server strong {
@@ -81,6 +83,8 @@ class PageTimer extends connect(store)(PolymerElement) {
           right: 0.125rem;
           background-color: #efefef;
           color: var(--gwn-text-dark);
+          border-top-left-radius: var(--gwn-border-radius);
+          border-bottom-left-radius: var(--gwn-border-radius);
         }
 
         .pointer > span.local strong {
@@ -91,8 +95,7 @@ class PageTimer extends connect(store)(PolymerElement) {
         .bar {
           display: flex;
           flex-wrap: nowrap;
-          margin-bottom: 1rem;
-          overflow: hidden;
+          margin-bottom: var(--spacer-medium);
         }
 
         .meta-name {
@@ -106,6 +109,8 @@ class PageTimer extends connect(store)(PolymerElement) {
           padding: 0.5rem;
           margin: 0 .125rem;
           border-radius: var(--gwn-border-radius);
+          box-shadow: var(--gwn-box-shadow);
+          overflow: hidden;
         }
 
         .phase-name {
