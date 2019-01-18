@@ -119,12 +119,6 @@ class PageTimer extends connect(store)(PolymerElement) {
         :host([size="compact"]) .bar {
           margin-bottom: .75rem;
         }
-
-        @media screen and (min-width: 640px) {
-          :host {
-            padding-bottom: var(--spacer-large);
-          }
-        }
       </style>
 
       <app-location route="{{route}}"></app-location>
