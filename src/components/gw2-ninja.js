@@ -136,29 +136,22 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
         }
 
         :host([theme="core"]) {
-          /* --app-primary-color: var(--color-guild-wars-2);
-          --app-primary-color-dark: var(--color-guild-wars-2-dark); */
-
           --gwn-primary: var(--color-guild-wars-2);
           --gwn-primary-variant: var(--color-guild-wars-2-dark);
         }
 
         :host([theme="hot"]) {
-          /* --app-primary-color: var(--color-heart-of-thorns);
-          --app-primary-color-dark: var(--color-heart-of-thorns-dark); */
-
           --gwn-primary: var(--color-heart-of-thorns);
           --gwn-primary-variant: var(--color-heart-of-thorns-dark);
         }
 
         :host([theme="dark"]) {
-          /* --app-primary-color: #222222;
-          --app-primary-color-dark: #111111; */
           --gwn-primary: #181818;
           --gwn-background: #222222;
           --gwn-on-background: var(--app-text-color-light);
           --gwn-surface: #333333;
           --gwn-on-surface: var(--app-text-color-light);
+          --app-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
         }
 
         app-toolbar {
@@ -197,7 +190,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           box-sizing: border-box;
           display: flex;
           flex-direction: column;
-          background-color: var(--gwn-surface);
+          background-color: var(--gwn-background);
         }
 
         .drawer-list {
@@ -210,7 +203,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
         }
 
         .drawer-list a {
-          color: var(--gwn-on-surface);
+          color: var(--gwn-on-background);
           text-decoration: none;
         }
 

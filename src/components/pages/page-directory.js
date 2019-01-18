@@ -77,7 +77,7 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
           border-radius: var(--app-border-radius);
           background-color: var(--gwn-surface);
           color: var(--gwn-on-surface);
-          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+          box-shadow: var(--app-box-shadow);
         }
 
         .search-clear {
