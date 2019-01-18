@@ -30,8 +30,8 @@ class PageTimer extends connect(store)(PolymerElement) {
 
         paper-tabs {
           margin-bottom: var(--spacer-large);
-          background-color: var(--app-primary-color);
-          --paper-tabs-selection-bar-color: #ffffff;
+          background-color: var(--gwn-primary);
+          --paper-tabs-selection-bar-color: var(--gwn-on-primary);
         }
 
         paper-tab {
