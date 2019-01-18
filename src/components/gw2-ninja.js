@@ -48,6 +48,31 @@ setPassiveTouchGestures(true);
 setRootPath(MyAppGlobals.rootPath);
 
 class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
+  static get properties() {
+    return {
+      page: {
+        type: String,
+        reflectToAttribute: true,
+        observer: "_pageChanged"
+      },
+      drawer: {
+        type: Boolean,
+        value: false
+      },
+      onlineStatus: {
+        type: Boolean
+      },
+      settingsOpen: {
+        type: Boolean,
+        value: false
+      },
+      theme: {
+        type: String,
+        reflectToAttribute: true
+      }
+    };
+  }
+
   static get template() {
     return html`
       ${SharedStyles}
@@ -276,9 +301,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
 
       <!-- Drawer content -->
       <app-drawer id="drawer" swipe-open opened="{{drawer}}">
-        <drawer-top
-          on-close-drawer="_closeDrawer"
-        ></drawer-top>
+        <drawer-top on-close-drawer="_closeDrawer"></drawer-top>
         <div class="drawer-scroll">
           <iron-selector
             selected="[[page]]"
@@ -350,31 +373,6 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
 
       <collection-modal></collection-modal>
     `;
-  }
-
-  static get properties() {
-    return {
-      page: {
-        type: String,
-        reflectToAttribute: true,
-        observer: "_pageChanged"
-      },
-      drawer: {
-        type: Boolean,
-        value: false
-      },
-      onlineStatus: {
-        type: Boolean
-      },
-      settingsOpen: {
-        type: Boolean,
-        value: false
-      },
-      theme: {
-        type: String,
-        reflectToAttribute: true
-      }
-    };
   }
 
   static get observers() {

@@ -18,11 +18,6 @@ class DirectoryStreamers extends LitElement {
     };
   }
 
-  /**
-   * Implement to describe the element's DOM using lit-html.
-   * Use the element current props to return a lit-html template result
-   * to render into the element.
-   */
   _render({ theme, streamers }) {
     //console.log(config.clientId);
     return html`
@@ -47,15 +42,31 @@ class DirectoryStreamers extends LitElement {
         }
       </style>
 
-      ${ this._renderStreamerList(streamers, theme) }
+      ${this._renderStreamerList(streamers, theme)}
     `;
+  }
+
+  constructor() {
+    super();
+
+    this.streamers = [];
   }
 
   _renderStreamerList(streamers, theme) {
     return html`
-      ${streamers && streamers.map(streamer => {
-          return html`<directory-entry name="${streamer.name}" url="${this._resolvePlatformSpecificUrl(streamer)}" description="${streamer.description}" inactive="${streamer.inactive}"></directory-entry>`;
-      })}
+      ${
+        streamers &&
+          streamers.map(streamer => {
+            return html`
+              <directory-entry
+                name="${streamer.name}"
+                url="${this._resolvePlatformSpecificUrl(streamer)}"
+                description="${streamer.description}"
+                inactive="${streamer.inactive}"
+              ></directory-entry>
+            `;
+          })
+      }
     `;
   }
 
@@ -68,17 +79,6 @@ class DirectoryStreamers extends LitElement {
       default:
         return url;
     }
-  }
-
-  /**
-   * Instance of the element is created/upgraded. Use: initializing state,
-   * set up event listeners, create shadow dom.
-   * @constructor
-   */
-  constructor() {
-    super();
-
-    this.streamers = [];
   }
 }
 
