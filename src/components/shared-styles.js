@@ -2,52 +2,6 @@ import { html } from "@polymer/polymer/polymer-element.js";
 
 export const SharedStyles = html`
 <style>
-  :host {
-    /* Colors */
-    --color-guild-wars-2: #F44336;
-    --color-guild-wars-2-dark: #C62828;
-
-    --color-heart-of-thorns: #388E3C;
-    --color-heart-of-thorns-dark: #2E7D32;
-
-    --color-path-of-fire: #9C27B0;
-    --color-path-of-fire-dark: #6A1B9A;
-
-    --team-green: #4CAF50;
-    --team-blue: #1976D2;
-    --team-red: #E53935;
-
-    /* Main variables */
-    --app-primary-color: var(--color-path-of-fire);
-    --app-primary-color-dark: var(--color-path-of-fire-dark);
-    --app-text-color: #212121;
-    --app-text-color-light: #ffffff;
-    --app-background-color: #ffffff;
-    --app-font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-
-    /* Generic styles */
-    --app-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
-    --app-box-shadow-reverse: 0 -1px 4px rgba(0, 0, 0, 0.12);
-    --app-box-shadow-right: 1px 0 4px rgba(0, 0, 0, 0.12);
-    --app-box-shadow-left: -1px 0 4px rgba(0, 0, 0, 0.12);
-    --app-border-radius: .125rem;
-    --spacer-none: 0;
-    --spacer-xsmall: .25rem;
-    --spacer-small: .5rem;
-    --spacer-medium: 1rem;
-    --spacer-large: 1.5rem;
-  }
-
-  :host([theme="core"]) {
-    --app-primary-color: var(--color-guild-wars-2);
-    --app-primary-color-dark: var(--color-guild-wars-2-dark);
-  }
-
-  :host([theme="hot"]) {
-    --app-primary-color: var(--color-heart-of-thorns);
-    --app-primary-color-dark: var(--color-heart-of-thorns-dark);
-  }
-
   *,
   *::before,
   *::after {

@@ -50,212 +50,309 @@ setRootPath(MyAppGlobals.rootPath);
 class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
   static get template() {
     return html`
-    ${SharedStyles}
-    <style>
-      :host {
-        display: block;
-        min-height: 100vh;
+      ${SharedStyles}
+      <style>
+        :host {
+          display: block;
+          min-height: 100vh;
 
-        --app-text-color: #333333;
-        --app-text-color-inverted: #ffffff;
-      }
+          /* Colors */
+          --color-guild-wars-2: #f44336;
+          --color-guild-wars-2-dark: #c62828;
 
-      app-toolbar {
-        font-weight: 800;
-      }
+          --color-heart-of-thorns: #388e3c;
+          --color-heart-of-thorns-dark: #2e7d32;
 
-      app-drawer {
-        z-index: 99999;
-        box-shadow: 1px 0 4px rgba(0,0,0,.12);
-      }
+          --color-path-of-fire: #9c27b0;
+          --color-path-of-fire-dark: #6a1b9a;
 
-      app-header {
-        color: var(--app-text-color-light);
-        background-color: var(--app-primary-color);
-      }
+          --team-green: #4caf50;
+          --team-blue: #1976d2;
+          --team-red: #e53935;
 
-      app-header paper-icon-button {
-        --paper-icon-button-ink-color: white;
-      }
+          /* Main variables */
+          --app-primary-color: var(--color-path-of-fire);
+          --app-primary-color-dark: var(--color-path-of-fire-dark);
+          --app-text-color: #212121;
+          --app-text-color-light: #ffffff;
+          --app-background-color: #ffffff;
+          --app-font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI",
+            Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+            sans-serif;
 
-      app-toolbar [main-title] {
-        text-transform: capitalize;
-        display: flex;
-        align-items: center;
-        padding: 0 var(--spacer-medium);
-      }
+          /* Generic styles */
+          --app-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+          --app-box-shadow-reverse: 0 -1px 4px rgba(0, 0, 0, 0.12);
+          --app-box-shadow-right: 1px 0 4px rgba(0, 0, 0, 0.12);
+          --app-box-shadow-left: -1px 0 4px rgba(0, 0, 0, 0.12);
+          --app-border-radius: 0.125rem;
+          --spacer-none: 0;
+          --spacer-xsmall: 0.25rem;
+          --spacer-small: 0.5rem;
+          --spacer-medium: 1rem;
+          --spacer-large: 1.5rem;
 
-      app-toolbar [main-title] iron-icon {
-        margin-right: var(--spacer-small);
-      }
-
-      .drawer-list {
-        display: flex;
-        flex-direction: column;
-        margin: 0;
-        box-sizing: border-box;
-        min-height: 100%;
-        padding: 0 var(--spacer-small);
-      }
-
-      .drawer-list > a {
-        display: block;
-        text-decoration: none;
-        line-height: 40px;
-        margin-bottom: .5rem;
-      }
-
-      .drawer-list > a + hr {
-        margin-top: .5rem;
-      }
-
-      .drawer-list > a.last-before-auto {
-        margin-bottom: 1rem;
-      }
-
-      .bottom-links {
-        margin-bottom: 1rem;
-        padding: 0 var(--spacer-small);
-      }
-
-      .bottom-links a {
-        font-weight: 500;
-        margin-right: .5rem;
-        text-decoration: none;
-        white-space: nowrap;
-        color: var(--app-primary-color);
-      }
-
-      .drawer-list paper-item {
-        min-height: 2.5rem;
-        border-radius: var(--app-border-radius);
-        color: var(--app-text-color);
-        font: var(--app-font-stack);
-        font-weight: 500;
-      }
-
-      .drawer-list paper-item:focus,
-      .drawer-list a.iron-selected paper-item:focus {
-        color: var(--app-text-color-light);
-        background-color: var(--app-primary-color);
-      }
-
-      .drawer-list a.iron-selected paper-item {
-        font-weight: 800;
-        background-color: rgba(0,0,0,.08);
-        --paper-item-focused-before: {
-          background: rgba(0,0,0,.08);
-        };
-      }
-
-      .drawer-scroll {
-        height: calc(100% - 256px * 0.5625);
-        overflow-y: auto;
-        position: relative;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        padding-top: 1rem;
-      }
-
-      #onlineStatusToast {
-        bottom: 0;
-        top: auto !important;
-      }
-
-      @media screen and (min-width: 641px) {
-        #onlineStatusToast {
-          left: 256px !important;
-          width: calc(100% - 256px);
+          --app-text-color: #333333;
+          --app-text-color-inverted: #ffffff;
         }
-      }
-    </style>
 
-    <app-location route="{{route}}"></app-location>
-    <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+        :host([theme="core"]) {
+          --app-primary-color: var(--color-guild-wars-2);
+          --app-primary-color-dark: var(--color-guild-wars-2-dark);
+        }
 
-    <!-- Main content -->
+        :host([theme="hot"]) {
+          --app-primary-color: var(--color-heart-of-thorns);
+          --app-primary-color-dark: var(--color-heart-of-thorns-dark);
+        }
 
-    <online-status online-status="{{ onlineStatus }}"></online-status>
-    <paper-toast id="onlineStatusToast" class="fit-bottom" opened="[[ !onlineStatus ]]" duration="0" text="You appear to be offline. Some tools might not work correctly."></paper-toast>
+        app-toolbar {
+          font-weight: 800;
+        }
 
-    <app-header-layout>
-      <app-header slot="header" fixed>
-        <app-toolbar>
-          <paper-icon-button icon="my-icons:menu" on-tap="_openDrawer" aria-label="Open Menu"></paper-icon-button>
-          <div main-title>[[ _pageTitle(page) ]]</div>
-          <paper-icon-button icon="my-icons:settings" aria-label="Open Settings" on-tap="_toggleSettings"></paper-icon-button>
-        </app-toolbar>
-      </app-header>
+        app-drawer {
+          z-index: 99999;
+          box-shadow: 1px 0 4px rgba(0, 0, 0, 0.12);
+        }
 
-      <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
-        <page-index name="index"></page-index>
-        <page-directory theme$="[[theme]]" name="directory"></page-directory>
-        <page-collections theme$="[[theme]]" name="collections"></page-collections>
-        <page-tickets theme$="[[theme]]" name="tickets"></page-tickets>
-        <page-chatcodes name="chatcodes"></page-chatcodes>
-        <page-timer theme$="[[theme]]" name="timer"></page-timer>
-        <page-calc name="calc"></page-calc>
-        <page-wvw theme$="[[theme]]" name="wvw"></page-wvw>
-        <page-about name="about"></page-about>
-        <page-precursors name="precursors" page="[[page]]"></page-precursors>
-        <page-stream-tools name="stream"></page-stream-tools>
-        <page-view404 name="view404"></page-view404>
-      </iron-pages>
-    </app-header-layout>
+        app-header {
+          color: var(--app-text-color-light);
+          background-color: var(--app-primary-color);
+        }
 
-    <!-- Drawer content -->
-    <app-drawer id="drawer" swipe-open opened="{{drawer}}">
-      <drawer-top theme$="[[theme]]" on-close-drawer="_closeDrawer"></drawer-top>
-      <div class="drawer-scroll">
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="index" href="/" tabindex="-1">
-            <paper-item>Home</paper-item>
-          </a>
-          <a name="directory" href="/directory/websites" tabindex="-1">
-            <paper-item>Directory</paper-item>
-          </a>
-          <a name="timer" href="/timer/all" tabindex="-1">
-            <paper-item>Meta Timer</paper-item>
-          </a>
-          <a name="wvw" href="/wvw/overview" tabindex="-1">
-            <paper-item>World vs World (Beta)</paper-item>
-          </a>
-          <hr>
-          <a name="collections" href="/collections/basic" tabindex="-1">
-            <paper-item>Collections</paper-item>
-          </a>
-          <a name="tickets" href="/tickets" tabindex="-1">
-            <paper-item>Tickets</paper-item>
-          </a>
-          <a name="calc" href="/calc" tabindex="-1">
-            <paper-item>TP Calc</paper-item>
-          </a>
-          <hr>
-          <a name="chatcodes" href="/chatcodes" tabindex="-1">
-            <paper-item>Chatcodes</paper-item>
-          </a>
-          <a name="stream" href="/stream" tabindex="-1" class="last-before-auto">
-            <paper-item>Stream Tools</paper-item>
-          </a>
-          <hr style="margin-top:auto">
-          <div class="bottom-links">
-            <a name="about" href="/about">About</a>
-            <a href="https://github.com/rediche/gw2-ninja" target="_blank" rel="noopener noreferrer">Code on Github</a>
-            <a href="https://github.com/rediche/gw2-ninja/issues" target="_blank" rel="noopener noreferrer">Report an issue</a>
-          </div>
-        </iron-selector>
-      </div>
-    </app-drawer>
+        app-header paper-icon-button {
+          --paper-icon-button-ink-color: white;
+        }
 
-    <page-metadata 
-      base-title="GW2 Ninja" 
-      fallback-description="A collection of Guild Wars 2 Tools."
-      direction="reversed" 
-      page="[[ page ]]"></page-metadata>
-    <gwn-settings open="{{settingsOpen}}"></gwn-settings>
+        app-toolbar [main-title] {
+          text-transform: capitalize;
+          display: flex;
+          align-items: center;
+          padding: 0 var(--spacer-medium);
+        }
 
-    <collection-modal></collection-modal>
+        app-toolbar [main-title] iron-icon {
+          margin-right: var(--spacer-small);
+        }
+
+        .drawer-list {
+          display: flex;
+          flex-direction: column;
+          margin: 0;
+          box-sizing: border-box;
+          min-height: 100%;
+          padding: 0 var(--spacer-small);
+        }
+
+        .drawer-list > a {
+          display: block;
+          text-decoration: none;
+          line-height: 40px;
+          margin-bottom: 0.5rem;
+        }
+
+        .drawer-list > a + hr {
+          margin-top: 0.5rem;
+        }
+
+        .drawer-list > a.last-before-auto {
+          margin-bottom: 1rem;
+        }
+
+        .bottom-links {
+          margin-bottom: 1rem;
+          padding: 0 var(--spacer-small);
+        }
+
+        .bottom-links a {
+          font-weight: 500;
+          margin-right: 0.5rem;
+          text-decoration: none;
+          white-space: nowrap;
+          color: var(--app-primary-color);
+        }
+
+        .drawer-list paper-item {
+          min-height: 2.5rem;
+          border-radius: var(--app-border-radius);
+          color: var(--app-text-color);
+          font: var(--app-font-stack);
+          font-weight: 500;
+        }
+
+        .drawer-list paper-item:focus,
+        .drawer-list a.iron-selected paper-item:focus {
+          color: var(--app-text-color-light);
+          background-color: var(--app-primary-color);
+        }
+
+        .drawer-list a.iron-selected paper-item {
+          font-weight: 800;
+          background-color: rgba(0, 0, 0, 0.08);
+          --paper-item-focused-before: {
+            background: rgba(0, 0, 0, 0.08);
+          }
+        }
+
+        .drawer-scroll {
+          height: calc(100% - 256px * 0.5625);
+          overflow-y: auto;
+          position: relative;
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          padding-top: 1rem;
+        }
+
+        #onlineStatusToast {
+          bottom: 0;
+          top: auto !important;
+        }
+
+        @media screen and (min-width: 641px) {
+          #onlineStatusToast {
+            left: 256px !important;
+            width: calc(100% - 256px);
+          }
+        }
+      </style>
+
+      <app-location route="{{route}}"></app-location>
+      <app-route
+        route="{{route}}"
+        pattern="/:page"
+        data="{{routeData}}"
+        tail="{{subroute}}"
+      ></app-route>
+
+      <!-- Main content -->
+
+      <online-status online-status="{{ onlineStatus }}"></online-status>
+      <paper-toast
+        id="onlineStatusToast"
+        class="fit-bottom"
+        opened="[[ !onlineStatus ]]"
+        duration="0"
+        text="You appear to be offline. Some tools might not work correctly."
+      ></paper-toast>
+
+      <app-header-layout>
+        <app-header slot="header" fixed>
+          <app-toolbar>
+            <paper-icon-button
+              icon="my-icons:menu"
+              on-tap="_openDrawer"
+              aria-label="Open Menu"
+            ></paper-icon-button>
+            <div main-title>[[ _pageTitle(page) ]]</div>
+            <paper-icon-button
+              icon="my-icons:settings"
+              aria-label="Open Settings"
+              on-tap="_toggleSettings"
+            ></paper-icon-button>
+          </app-toolbar>
+        </app-header>
+
+        <iron-pages
+          selected="[[page]]"
+          attr-for-selected="name"
+          fallback-selection="view404"
+          role="main"
+        >
+          <page-index name="index"></page-index>
+          <page-directory theme$="[[theme]]" name="directory"></page-directory>
+          <page-collections
+            theme$="[[theme]]"
+            name="collections"
+          ></page-collections>
+          <page-tickets theme$="[[theme]]" name="tickets"></page-tickets>
+          <page-chatcodes name="chatcodes"></page-chatcodes>
+          <page-timer theme$="[[theme]]" name="timer"></page-timer>
+          <page-calc name="calc"></page-calc>
+          <page-wvw theme$="[[theme]]" name="wvw"></page-wvw>
+          <page-about name="about"></page-about>
+          <page-precursors name="precursors" page="[[page]]"></page-precursors>
+          <page-stream-tools name="stream"></page-stream-tools>
+          <page-view404 name="view404"></page-view404>
+        </iron-pages>
+      </app-header-layout>
+
+      <!-- Drawer content -->
+      <app-drawer id="drawer" swipe-open opened="{{drawer}}">
+        <drawer-top
+          theme$="[[theme]]"
+          on-close-drawer="_closeDrawer"
+        ></drawer-top>
+        <div class="drawer-scroll">
+          <iron-selector
+            selected="[[page]]"
+            attr-for-selected="name"
+            class="drawer-list"
+            role="navigation"
+          >
+            <a name="index" href="/" tabindex="-1">
+              <paper-item>Home</paper-item>
+            </a>
+            <a name="directory" href="/directory/websites" tabindex="-1">
+              <paper-item>Directory</paper-item>
+            </a>
+            <a name="timer" href="/timer/all" tabindex="-1">
+              <paper-item>Meta Timer</paper-item>
+            </a>
+            <a name="wvw" href="/wvw/overview" tabindex="-1">
+              <paper-item>World vs World (Beta)</paper-item>
+            </a>
+            <hr />
+            <a name="collections" href="/collections/basic" tabindex="-1">
+              <paper-item>Collections</paper-item>
+            </a>
+            <a name="tickets" href="/tickets" tabindex="-1">
+              <paper-item>Tickets</paper-item>
+            </a>
+            <a name="calc" href="/calc" tabindex="-1">
+              <paper-item>TP Calc</paper-item>
+            </a>
+            <hr />
+            <a name="chatcodes" href="/chatcodes" tabindex="-1">
+              <paper-item>Chatcodes</paper-item>
+            </a>
+            <a
+              name="stream"
+              href="/stream"
+              tabindex="-1"
+              class="last-before-auto"
+            >
+              <paper-item>Stream Tools</paper-item>
+            </a>
+            <hr style="margin-top:auto" />
+            <div class="bottom-links">
+              <a name="about" href="/about">About</a>
+              <a
+                href="https://github.com/rediche/gw2-ninja"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Code on Github</a
+              >
+              <a
+                href="https://github.com/rediche/gw2-ninja/issues"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Report an issue</a
+              >
+            </div>
+          </iron-selector>
+        </div>
+      </app-drawer>
+
+      <page-metadata
+        base-title="GW2 Ninja"
+        fallback-description="A collection of Guild Wars 2 Tools."
+        direction="reversed"
+        page="[[ page ]]"
+      ></page-metadata>
+      <gwn-settings open="{{settingsOpen}}"></gwn-settings>
+
+      <collection-modal></collection-modal>
     `;
   }
 
