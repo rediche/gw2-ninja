@@ -66,7 +66,6 @@ class PageWvw extends connect(store)(PolymerElement) {
       ${SharedStyles}
       <style>
         :host {
-          display: block;
           position: relative;
         }
 
@@ -74,7 +73,7 @@ class PageWvw extends connect(store)(PolymerElement) {
           display: flex;
           flex-direction: column;
           align-items: flex-end;
-          background-color: var(--app-primary-color);
+          background-color: var(--gwn-primary);
         }
 
         paper-dropdown-menu {
@@ -103,7 +102,7 @@ class PageWvw extends connect(store)(PolymerElement) {
         paper-tabs {
           width: 100%;
           flex: auto;
-          --paper-tabs-selection-bar-color: #ffffff;
+          --paper-tabs-selection-bar-color: var(--gwn-on-primary);
         }
 
         paper-tab {

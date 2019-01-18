@@ -27,6 +27,7 @@ class GWNSettings extends PolymerElement {
         .headline {
           margin-bottom: 0;
           font-weight: bold;
+          color: var(--gwn-on-surface);
         }
       </style>
       <gwn-modal hidden="{{!open}}">

@@ -60,7 +60,8 @@ export const SharedStyles = html`
     .card {
       padding: var(--spacer-medium);
       border-radius: var(--app-border-radius);
-      background-color: var(--app-background-color);
+      background-color: var(--gwn-surface);
+      color: var(--gwn-on-surface);
       box-shadow: var(--app-box-shadow);
       box-sizing: border-box;
       overflow: hidden;
@@ -93,49 +94,49 @@ export const SharedStyles = html`
     .display-4 {
       font-size: 112px;
       font-weight: 300;
-      color: var(--app-text-color);
+      color: var(--gwn-on-surface);
     }
 
     h2,
     .display-3 {
       font-size: 56px;
       font-weight: 400;
-      color: var(--app-text-color);
+      color: var(--gwn-on-surface);
     }
 
     h3,
     .display-2 {
       font-size: 45px;
       font-weight: 400;
-      color: var(--app-text-color);
+      color: var(--gwn-on-surface);
     }
 
     h4,
     .display-1 {
       font-size: 34px;
       font-weight: 400;
-      color: var(--app-text-color);
+      color: var(--gwn-on-surface);
     }
 
     h5,
     .headline {
       font-size: 24px;
       font-weight: 400;
-      color: var(--app-text-color);
+      color: var(--gwn-on-surface);
     }
 
     h6,
     .title {
       font-size: 20px;
       font-weight: 800;
-      color: var(--app-text-color);
+      color: var(--gwn-on-surface);
     }
 
     .description {
       padding: 0 var(--spacer-large) var(--spacer-large);
       margin: 0;
-      color: #ffffff;
-      background-color: var(--app-primary-color);
+      color: var(--gwn-on-primary);
+      background-color: var(--gwn-primary);
     }
 
     .sticky-tabs {

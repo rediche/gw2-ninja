@@ -61,6 +61,15 @@ class GWNSettingTheme extends connect(store)(PolymerElement) {
         [value="pof"]:hover {
           background-color: var(--color-path-of-fire-dark);
         }
+
+        [value="dark"] {
+          background-color: #333333;
+          color: var(--app-text-color-light);
+        }
+
+        [value="dark"]:hover {
+          background-color: #222222;
+        }
       </style>
 
       <paper-dropdown-menu class="theme-selector" label="Theme Color">
@@ -73,6 +82,7 @@ class GWNSettingTheme extends connect(store)(PolymerElement) {
           <paper-item value="core">Guild Wars 2 (Red)</paper-item>
           <paper-item value="hot">Heart of Thorns (Green)</paper-item>
           <paper-item value="pof">Path of Fire (Purple)</paper-item>
+          <paper-item value="dark">Darkmode</paper-item>
         </paper-listbox>
       </paper-dropdown-menu>
     `;

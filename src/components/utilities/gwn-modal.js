@@ -62,7 +62,8 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
             --gwn-modal-max-height,
             calc(100vh - var(--gwn-modal-margin) * 2)
           );
-          background-color: white;
+          background-color: var(--gwn-surface);
+          color: var(--gwn-on-surface);
           border-radius: var(--app-border-radius);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
           box-sizing: border-box;

@@ -79,14 +79,15 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
       <style>
         :host {
           display: block;
+          background-color: var(--gwn-background);
           min-height: 100vh;
 
           /* Colors */
-          --color-guild-wars-2: #f44336;
-          --color-guild-wars-2-dark: #c62828;
+          --color-guild-wars-2: #c62828;
+          --color-guild-wars-2-dark: #b71c1c;
 
-          --color-heart-of-thorns: #388e3c;
-          --color-heart-of-thorns-dark: #2e7d32;
+          --color-heart-of-thorns: #2e7d32;
+          --color-heart-of-thorns-dark: #1b5e20;
 
           --color-path-of-fire: #9c27b0;
           --color-path-of-fire-dark: #6a1b9a;
@@ -96,11 +97,24 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           --team-red: #e53935;
 
           /* Main variables */
-          --app-primary-color: var(--color-path-of-fire);
-          --app-primary-color-dark: var(--color-path-of-fire-dark);
+          /* --app-primary-color: var(--color-path-of-fire);
+          --app-primary-color-dark: var(--color-path-of-fire-dark); */
           --app-text-color: #212121;
           --app-text-color-light: #ffffff;
-          --app-background-color: #ffffff;
+          --app-background-color: #e0f2f1;
+
+          --gwn-primary: var(--color-path-of-fire);
+          --gwn-on-primary: var(--app-text-color-light);
+
+          --gwn-primary-variant: var(--color-path-of-fire-dark);
+          --gwn-on-primary-variant: var(--app-text-color-light);
+
+          --gwn-background: #e0f2f1;
+          --gwn-on-background: var(--app-text-color);
+
+          --gwn-surface: #ffffff;
+          --gwn-on-surface: var(--app-text-color);
+
           --app-font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI",
             Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
             sans-serif;
@@ -122,13 +136,29 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
         }
 
         :host([theme="core"]) {
-          --app-primary-color: var(--color-guild-wars-2);
-          --app-primary-color-dark: var(--color-guild-wars-2-dark);
+          /* --app-primary-color: var(--color-guild-wars-2);
+          --app-primary-color-dark: var(--color-guild-wars-2-dark); */
+
+          --gwn-primary: var(--color-guild-wars-2);
+          --gwn-primary-variant: var(--color-guild-wars-2-dark);
         }
 
         :host([theme="hot"]) {
-          --app-primary-color: var(--color-heart-of-thorns);
-          --app-primary-color-dark: var(--color-heart-of-thorns-dark);
+          /* --app-primary-color: var(--color-heart-of-thorns);
+          --app-primary-color-dark: var(--color-heart-of-thorns-dark); */
+
+          --gwn-primary: var(--color-heart-of-thorns);
+          --gwn-primary-variant: var(--color-heart-of-thorns-dark);
+        }
+
+        :host([theme="dark"]) {
+          /* --app-primary-color: #222222;
+          --app-primary-color-dark: #111111; */
+          --gwn-primary: #222222;
+          --gwn-background: #333333;
+          --gwn-on-background: var(--app-text-color-light);
+          --gwn-surface: #444444;
+          --gwn-on-surface: var(--app-text-color-light);
         }
 
         app-toolbar {
@@ -141,12 +171,12 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
         }
 
         app-header {
-          color: var(--app-text-color-light);
-          background-color: var(--app-primary-color);
+          color: var(--gwn-on-primary);
+          background-color: var(--gwn-primary);
         }
 
         app-header paper-icon-button {
-          --paper-icon-button-ink-color: white;
+          --paper-icon-button-ink-color: var(--gwn-on-primary);
         }
 
         app-toolbar [main-title] {
@@ -207,8 +237,8 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
 
         .drawer-list paper-item:focus,
         .drawer-list a.iron-selected paper-item:focus {
-          color: var(--app-text-color-light);
-          background-color: var(--app-primary-color);
+          color: var(--gwn-on-primary);
+          background-color: var(--gwn-primary);
         }
 
         .drawer-list a.iron-selected paper-item {

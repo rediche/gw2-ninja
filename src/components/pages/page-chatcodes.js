@@ -35,6 +35,7 @@ class PageChatcodes extends PolymerElement {
       .credits {
         display: block;
         margin: var(--spacer-large);
+        color: var(--gwn-on-background);
       }
 
       @media screen and (min-width: 1100px) {

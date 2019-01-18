@@ -31,8 +31,8 @@ class DrawerTop extends connect(store)(PolymerElement) {
         :host {
           padding-top: 56.25%;
           position: relative;
-          background-color: var(--app-primary-color);
-          color: var(--app-text-color-light);
+          background-color: var(--gwn-primary);
+          color: var(--gwn-on-primary);
           box-shadow: var(--app-box-shadow);
         }
 

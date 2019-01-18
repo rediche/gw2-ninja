@@ -31,14 +31,14 @@ class PageCollections extends PolymerElement {
         }
 
         .sticky-tabs {
-          background-color: var(--app-primary-color);
+          background-color: var(--gwn-primary);
         }
 
         paper-tabs {
           max-width: 1100px;
           margin: 0 auto;
           padding: 0 var(--spacer-large);
-          --paper-tabs-selection-bar-color: #ffffff;
+          --paper-tabs-selection-bar-color: var(--gwn-on-primary);
         }
 
         paper-tab {
@@ -56,9 +56,17 @@ class PageCollections extends PolymerElement {
       </style>
 
       <app-location route="{{route}}"></app-location>
-      <app-route route="{{route}}" pattern="/collections/:subview" data="{{subviewData}}"></app-route>
+      <app-route
+        route="{{route}}"
+        pattern="/collections/:subview"
+        data="{{subviewData}}"
+      ></app-route>
 
-      <p class="description">With the collections tool, you can see the prices of items in various collections, which can be bought straight off the trading post.<br> It also calculates a total price of how much the collection is worth.</p>
+      <p class="description">
+        With the collections tool, you can see the prices of items in various
+        collections, which can be bought straight off the trading post.<br />
+        It also calculates a total price of how much the collection is worth.
+      </p>
 
       <div class="sticky-tabs">
         <paper-tabs selected="{{subviewData.subview}}" attr-for-selected="name">
@@ -68,22 +76,49 @@ class PageCollections extends PolymerElement {
         </paper-tabs>
       </div>
 
-      <iron-pages selected="{{subviewData.subview}}" attr-for-selected="name" fallback-selection="basic">
+      <iron-pages
+        selected="{{subviewData.subview}}"
+        attr-for-selected="name"
+        fallback-selection="basic"
+      >
         <div name="basic">
-          <paper-spinner alt="Loading basic collections..." active="[[basicLoading]]"></paper-spinner>
-            <collection-list collection-data="{{basic}}" category-items="[[category.items]]" hidden$="[[basicLoading]]"></collection-list>
+          <paper-spinner
+            alt="Loading basic collections..."
+            active="[[basicLoading]]"
+          ></paper-spinner>
+          <collection-list
+            collection-data="{{basic}}"
+            category-items="[[category.items]]"
+            hidden$="[[basicLoading]]"
+          ></collection-list>
         </div>
         <div name="rare">
-          <paper-spinner alt="Loading basic collections..." active$="[[rareLoading]]"></paper-spinner>
-          <collection-list collection-data="{{rare}}" hidden$=[[rareLoading]]></collection-list>
+          <paper-spinner
+            alt="Loading basic collections..."
+            active$="[[rareLoading]]"
+          ></paper-spinner>
+          <collection-list
+            collection-data="{{rare}}"
+            hidden$="[[rareLoading]]"
+          ></collection-list>
         </div>
         <div name="black-lion">
-          <paper-spinner alt="Loading basic collections..." active$="[[blacklionLoading]]"></paper-spinner>
-            <collection-list collection-data="{{blacklion}}" hidden$="[[blacklionLoading]]"></collection-list>
+          <paper-spinner
+            alt="Loading basic collections..."
+            active$="[[blacklionLoading]]"
+          ></paper-spinner>
+          <collection-list
+            collection-data="{{blacklion}}"
+            hidden$="[[blacklionLoading]]"
+          ></collection-list>
         </div>
       </iron-pages>
 
-      <paper-toast id="toast" duration="0" text="An error occured."></paper-toast>
+      <paper-toast
+        id="toast"
+        duration="0"
+        text="An error occured."
+      ></paper-toast>
     `;
   }
 
@@ -174,10 +209,10 @@ class PageCollections extends PolymerElement {
       category.map(async collection => {
         const items = await this._loadItemData(collection.ids);
         const totalSell = items.reduce((accumulator, item) => {
-          return accumulator += item.sells.unit_price;
+          return (accumulator += item.sells.unit_price);
         }, 0);
         const totalBuy = items.reduce((accumulator, item) => {
-          return accumulator += item.buys.unit_price;
+          return (accumulator += item.buys.unit_price);
         }, 0);
 
         return Object.assign({}, collection, {

@@ -50,16 +50,16 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
         }
 
         .sticky-tabs {
-          background-color: var(--app-primary-color);
+          background-color: var(--gwn-primary);
         }
 
         paper-tabs {
-          --paper-tabs-selection-bar-color: var(--app-text-color-light);
+          --paper-tabs-selection-bar-color: var(--gwn-on-primary);
           padding: 0 var(--spacer-large);
         }
 
         paper-tab {
-          color: var(--app-text-color-light);
+          color: var(--gwn-on-primary);
         }
 
         .search {

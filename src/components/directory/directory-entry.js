@@ -22,8 +22,8 @@ class DirectoryEntry extends PolymerElement {
           padding: 0.5rem 1rem;
           text-align: center;
           border-radius: var(--app-border-radius);
-          background-color: var(--app-primary-color);
-          color: var(--app-text-color-light);
+          background-color: var(--gwn-primary);
+          color: var(--gwn-on-primary);
           text-decoration: none;
           margin-right: 1rem;
           font-size: 0.85rem;
@@ -38,8 +38,8 @@ class DirectoryEntry extends PolymerElement {
 
         a.secondary {
           background-color: transparent;
-          color: var(--app-primary-color);
-          border: 1px solid var(--app-primary-color);
+          color: var(--gwn-on-surface);
+          border: 1px solid var(--gwn-on-surface);
         }
 
         h6 {

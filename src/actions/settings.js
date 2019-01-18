@@ -16,7 +16,7 @@ export const changeLanguage = language => dispatch => {
 };
 
 export const changeTheme = theme => dispatch => {
-  const acceptedThemes = ["core", "hot", "pof"];
+  const acceptedThemes = ["core", "hot", "pof", "dark"];
 
   if (acceptedThemes.includes(theme)) {
     dispatch({

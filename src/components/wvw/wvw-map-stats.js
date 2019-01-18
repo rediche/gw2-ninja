@@ -45,7 +45,7 @@ class WvwMapStats extends connect(store)(LitElement) {
         .card {
           padding: 0 0 var(--spacer-small) 0;
           border-radius: var(--app-border-radius);
-          background-color: var(--app-background-color);
+          background-color: var(--app-surface-color);
           box-shadow: var(--app-box-shadow);
           box-sizing: border-box;
           overflow: hidden;
