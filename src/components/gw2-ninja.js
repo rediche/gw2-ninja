@@ -154,10 +154,10 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
         :host([theme="dark"]) {
           /* --app-primary-color: #222222;
           --app-primary-color-dark: #111111; */
-          --gwn-primary: #222222;
-          --gwn-background: #333333;
+          --gwn-primary: #181818;
+          --gwn-background: #222222;
           --gwn-on-background: var(--app-text-color-light);
-          --gwn-surface: #444444;
+          --gwn-surface: #333333;
           --gwn-on-surface: var(--app-text-color-light);
         }
 
@@ -190,6 +190,16 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           margin-right: var(--spacer-small);
         }
 
+        .drawer-scroll {
+          height: calc(100% - 256px * 0.5625);
+          overflow-y: auto;
+          position: relative;
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          background-color: var(--gwn-surface);
+        }
+
         .drawer-list {
           display: flex;
           flex-direction: column;
@@ -199,64 +209,50 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           padding: 0 var(--spacer-small);
         }
 
+        .drawer-list a {
+          color: var(--gwn-on-surface);
+          text-decoration: none;
+        }
+
         .drawer-list > a {
           display: block;
-          text-decoration: none;
           line-height: 40px;
           margin-bottom: 0.5rem;
+          padding: 0 var(--spacer-medium);
+          border-radius: var(--app-border-radius);
+        }
+
+        .drawer-list > :first-child {
+          margin-top: var(--spacer-small);
+        }
+
+        .drawer-list > a.iron-selected {
+          background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .drawer-list > a:hover,
+        .drawer-list > a:focus {
+          background-color: var(--gwn-primary);
+          color: var(--gwn-on-primary);
         }
 
         .drawer-list > a + hr {
-          margin-top: 0.5rem;
+          margin-top: var(--spacer-small);
         }
 
         .drawer-list > a.last-before-auto {
-          margin-bottom: 1rem;
+          margin-bottom: var(--spacer-medium);
         }
 
         .bottom-links {
-          margin-bottom: 1rem;
+          margin-bottom: var(--spacer-medium);
           padding: 0 var(--spacer-small);
         }
 
         .bottom-links a {
           font-weight: 500;
-          margin-right: 0.5rem;
-          text-decoration: none;
+          margin-right: var(--spacer-small);
           white-space: nowrap;
-          color: var(--app-primary-color);
-        }
-
-        .drawer-list paper-item {
-          min-height: 2.5rem;
-          border-radius: var(--app-border-radius);
-          color: var(--app-text-color);
-          font: var(--app-font-stack);
-          font-weight: 500;
-        }
-
-        .drawer-list paper-item:focus,
-        .drawer-list a.iron-selected paper-item:focus {
-          color: var(--gwn-on-primary);
-          background-color: var(--gwn-primary);
-        }
-
-        .drawer-list a.iron-selected paper-item {
-          font-weight: 800;
-          background-color: rgba(0, 0, 0, 0.08);
-          --paper-item-focused-before: {
-            background: rgba(0, 0, 0, 0.08);
-          }
-        }
-
-        .drawer-scroll {
-          height: calc(100% - 256px * 0.5625);
-          overflow-y: auto;
-          position: relative;
-          box-sizing: border-box;
-          display: flex;
-          flex-direction: column;
-          padding-top: 1rem;
         }
 
         #onlineStatusToast {
@@ -339,39 +335,18 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
             class="drawer-list"
             role="navigation"
           >
-            <a name="index" href="/" tabindex="-1">
-              <paper-item>Home</paper-item>
-            </a>
-            <a name="directory" href="/directory/websites" tabindex="-1">
-              <paper-item>Directory</paper-item>
-            </a>
-            <a name="timer" href="/timer/all" tabindex="-1">
-              <paper-item>Meta Timer</paper-item>
-            </a>
-            <a name="wvw" href="/wvw/overview" tabindex="-1">
-              <paper-item>World vs World (Beta)</paper-item>
-            </a>
+            <a name="index" href="/">Home</a>
+            <a name="directory" href="/directory/websites">Directory</a>
+            <a name="timer" href="/timer/all">Meta Timer</a>
+            <a name="wvw" href="/wvw/overview">World vs World (Beta)</a>
             <hr />
-            <a name="collections" href="/collections/basic" tabindex="-1">
-              <paper-item>Collections</paper-item>
-            </a>
-            <a name="tickets" href="/tickets" tabindex="-1">
-              <paper-item>Tickets</paper-item>
-            </a>
-            <a name="calc" href="/calc" tabindex="-1">
-              <paper-item>TP Calc</paper-item>
-            </a>
+            <a name="collections" href="/collections/basic">Collections</a>
+            <a name="tickets" href="/tickets">Tickets</a>
+            <a name="calc" href="/calc">TP Calc</a>
             <hr />
-            <a name="chatcodes" href="/chatcodes" tabindex="-1">
-              <paper-item>Chatcodes</paper-item>
-            </a>
-            <a
-              name="stream"
-              href="/stream"
-              tabindex="-1"
-              class="last-before-auto"
-            >
-              <paper-item>Stream Tools</paper-item>
+            <a name="chatcodes" href="/chatcodes">Chatcodes</a>
+            <a name="stream" href="/stream" class="last-before-auto">
+              Stream Tools
             </a>
             <hr style="margin-top:auto" />
             <div class="bottom-links">

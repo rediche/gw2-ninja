@@ -1,6 +1,6 @@
 # Next release
 
-- 
+- Add darkmode theme.
 
 # January 11, 2019 - v2.7.2
 
