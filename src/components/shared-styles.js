@@ -71,7 +71,7 @@ export const SharedStyles = html`
       display: block;
       height: 1px;
       border: 0;
-      border-top: 1px solid var(--gwn-primary);
+      border-top: 1px solid var(--gwn-divider);
       margin: var(--spacer-medium) var(--spacer-none);
       padding: var(--spacer-none);
     }

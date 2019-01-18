@@ -125,6 +125,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           --gwn-box-shadow-left: -1px 0 4px rgba(0, 0, 0, 0.12);
 
           --gwn-border-radius: .125rem;
+          --gwn-divider: rgba(0, 0, 0, 0.2);
           
           --spacer-none: 0;
           --spacer-xsmall: 0.25rem;
@@ -188,7 +189,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           box-sizing: border-box;
           display: flex;
           flex-direction: column;
-          background-color: var(--gwn-background);
+          background-color: var(--gwn-surface);
         }
 
         .drawer-list {
@@ -201,7 +202,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
         }
 
         .drawer-list a {
-          color: var(--gwn-on-background);
+          color: var(--gwn-on-surface);
           text-decoration: none;
         }
 

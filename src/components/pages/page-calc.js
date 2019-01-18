@@ -17,6 +17,10 @@ class PageCalc extends PolymerElement {
         /* gw2-tpcalc */
         --gw2-tpcalc-card-background-color: var(--gwn-surface);
         --gw2-tpcalc-card-color: var(--gwn-on-surface);
+        --paper-input-container-input-color: var(--gwn-on-surface);
+        --paper-font-subhead: {
+          font-family: var(--gwn-font-family);
+        }
       }
 
       gw2-tpcalc {

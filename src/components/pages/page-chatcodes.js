@@ -10,77 +10,115 @@ class PageChatcodes extends PolymerElement {
 
   static get template() {
     return html`
-    ${SharedStyles}
-    <style>
-      :host {
-        display: block;
-      }
+      ${SharedStyles}
+      <style>
+        :host {
+          display: block;
+          --paper-input-container-input-color: var(--gwn-on-surface);
+          --paper-font-subhead: {
+            font-family: var(--gwn-font-family);
+          }
+        }
 
-      .flex-spacer {
-        padding: var(--spacer-large);
-        margin: 0 auto;
-        max-width: 1100px;
-      }
-
-      p {
-        margin-bottom: 0;
-      }
-
-      .card,
-      .credits {
-        margin-bottom: var(--spacer-large);
-        max-width: 500px;
-      }
-
-      .credits {
-        display: block;
-        margin: var(--spacer-large);
-        color: var(--gwn-on-background);
-      }
-
-      @media screen and (min-width: 1100px) {
         .flex-spacer {
-          display: flex;
-          align-items: flex-start;
+          padding: var(--spacer-large);
+          margin: 0 auto;
+          max-width: 1100px;
         }
 
-        .flex-spacer > div {
-          flex-basis: 500px;
+        p {
+          margin-bottom: 0;
         }
 
-        .flex-spacer > div:first-child {
-          margin-right: var(--spacer-large);
+        .card,
+        .credits {
+          margin-bottom: var(--spacer-large);
+          max-width: 500px;
         }
-      }
-    </style>
 
-    <div class="flex-spacer">
-      <div>
-        <div class="card">
-          <paper-input label="Item (ID or item code)" value="{{itemId}}"></paper-input>
-          <paper-input label="Quantity (1–255)" min="1" max="255" type="number" value="{{quantity}}"></paper-input>
-          <paper-input label="Upgrade 1 (ID or code)" value="{{upgrade1Id}}"></paper-input>
-          <paper-input label="Upgrade 2 (ID or code)" value="{{upgrade2Id}}"></paper-input>
-          <paper-input label="Skin (Wardrobe ID)" value="{{skinId}}"></paper-input>
+        .credits {
+          display: block;
+          margin: var(--spacer-large);
+          color: var(--gwn-on-background);
+        }
+
+        @media screen and (min-width: 1100px) {
+          .flex-spacer {
+            display: flex;
+            align-items: flex-start;
+          }
+
+          .flex-spacer > div {
+            flex-basis: 500px;
+          }
+
+          .flex-spacer > div:first-child {
+            margin-right: var(--spacer-large);
+          }
+        }
+      </style>
+
+      <div class="flex-spacer">
+        <div>
+          <div class="card">
+            <paper-input
+              label="Item (ID or item code)"
+              value="{{itemId}}"
+            ></paper-input>
+            <paper-input
+              label="Quantity (1–255)"
+              min="1"
+              max="255"
+              type="number"
+              value="{{quantity}}"
+            ></paper-input>
+            <paper-input
+              label="Upgrade 1 (ID or code)"
+              value="{{upgrade1Id}}"
+            ></paper-input>
+            <paper-input
+              label="Upgrade 2 (ID or code)"
+              value="{{upgrade2Id}}"
+            ></paper-input>
+            <paper-input
+              label="Skin (Wardrobe ID)"
+              value="{{skinId}}"
+            ></paper-input>
+          </div>
+
+          <div class="card result">
+            Code:
+            <gwn-copy-clipboard text-to-copy="[[ result ]]">
+              <pre>[[ result ]]</pre>
+            </gwn-copy-clipboard>
+          </div>
         </div>
-    
-        <div class="card result">
-          Code:
-          <gwn-copy-clipboard text-to-copy="[[ result ]]">
-            <pre>[[ result ]]</pre>
-          </gwn-copy-clipboard>
+
+        <div>
+          <div class="card">
+            <h2 class="title">How to use</h2>
+            <p>
+              To get wardrobe code go to your account wardrobe in-game, find the
+              skin you want, type /wiki in chat, shift-click the icon in the
+              wardrobe, hit enter and copy the skin # from the wiki page that
+              appears.
+            </p>
+          </div>
+
+          <small class="credits text-center"
+            >The original code was made in a
+            <a href="https://jsfiddle.net/fffam/cg3njdu6/" target="_blank"
+              >JSFiddle</a
+            >
+            by the
+            <a
+              href="https://wiki.guildwars2.com/wiki/Talk:Chat_link_format#Quick_app_for_generating_item_codes"
+              target="_blank"
+              >GW2 Wikiuser Fam</a
+            >.</small
+          >
         </div>
       </div>
-
-      <div>
-        <div class="card">
-          <h2 class="title">How to use</h2>
-          <p>To get wardrobe code go to your account wardrobe in-game, find the skin you want, type /wiki in chat, shift-click the icon in the wardrobe, hit enter and copy the skin # from the wiki page that appears.</p>
-        </div>
-
-        <small class="credits text-center">The original code was made in a <a href="https://jsfiddle.net/fffam/cg3njdu6/" target="_blank">JSFiddle</a> by the <a href="https://wiki.guildwars2.com/wiki/Talk:Chat_link_format#Quick_app_for_generating_item_codes" target="_blank">GW2 Wikiuser Fam</a>.</small>
-      </div>
-    </div>
     `;
   }
 

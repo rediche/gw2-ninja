@@ -26,6 +26,10 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
           --paper-radio-button-label-color: var(--gwn-on-surface);
           --paper-radio-button-checked-color: var(--gwn-on-surface);
           --paper-radio-button-unchecked-color: var(--gwn-on-surface);
+          --paper-input-container-input-color: var(--gwn-on-surface);
+          --paper-font-subhead: {
+            font-family: var(--gwn-font-family);
+          }
         }
 
         .title {
@@ -75,7 +79,7 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
         }
 
         .bottom {
-          border-top: 1px solid var(--gwn-primary);
+          border-top: 1px solid var(--gwn-divider);
           display: flex;
           min-height: 49px;
           align-items: center;
