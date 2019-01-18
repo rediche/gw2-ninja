@@ -48,11 +48,11 @@ class PageTimer extends connect(store)(PolymerElement) {
         .pointer {
           position: absolute;
           height: 100%;
-          border-left: 2px solid #f44336;
+          border-left: 2px solid var(--color-guild-wars-2);
           z-index: 400;
           top: 0;
           transition: left 1s ease-in-out;
-          color: white;
+          color: #ffffff;
         }
 
         .pointer > span {
@@ -64,13 +64,13 @@ class PageTimer extends connect(store)(PolymerElement) {
           position: absolute;
           top: 1.75rem;
           font-weight: 800;
-          color: #b9b9b9;
+          color: var(--gwn-on-background);
           width: 10rem;
         }
 
         .pointer > span.server {
           left: 0;
-          background: #f44336;
+          background-color: var(--color-guild-wars-2);
         }
 
         .pointer > span.server strong {
@@ -79,7 +79,8 @@ class PageTimer extends connect(store)(PolymerElement) {
 
         .pointer > span.local {
           right: 0.125rem;
-          background: #b6b6b6;
+          background-color: #efefef;
+          color: var(--app-text-color);
         }
 
         .pointer > span.local strong {
@@ -98,6 +99,7 @@ class PageTimer extends connect(store)(PolymerElement) {
           font-weight: 800;
           margin: 0 0 0.25rem;
           margin-left: var(--spacer-medium);
+          color: var(--gwn-on-background);
         }
 
         .phase {
