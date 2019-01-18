@@ -104,7 +104,8 @@ class PageTimer extends connect(store)(PolymerElement) {
 
         .phase {
           padding: 0.5rem;
-          box-sizing: border-box;
+          margin: 0 .125rem;
+          border-radius: var(--gwn-border-radius);
         }
 
         .phase-name {
@@ -166,7 +167,7 @@ class PageTimer extends connect(store)(PolymerElement) {
               <template is="dom-repeat" items="[[ meta.phases ]]" as="phase">
                 <div
                   class="phase"
-                  style$="background: [[ phase.color ]]; width:[[ _calcPhaseWidth(phase.duration) ]]%;"
+                  style$="background: [[ phase.color ]]; width:calc([[ _calcPhaseWidth(phase.duration) ]]% - .25rem);"
                 >
                   <div class="phase-time" hidden$="[[ _isCompact(size) ]]">
                     [[ phase.hour ]]:[[ phase.minute ]]
