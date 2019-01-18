@@ -23,6 +23,9 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
       <style>
         :host {
           padding: var(--spacer-large);
+          --paper-radio-button-label-color: var(--gwn-on-surface);
+          --paper-radio-button-checked-color: var(--gwn-on-surface);
+          --paper-radio-button-unchecked-color: var(--gwn-on-surface);
         }
 
         .title {
@@ -43,7 +46,7 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
         }
 
         label {
-          font-size: .85rem;
+          font-size: 0.85rem;
         }
 
         pre {
@@ -51,9 +54,10 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
         }
 
         .apikey-helper-text {
-          margin-top: 1rem;
+          margin-top: var(--spacer-medium);
           text-align: center;
-          font-size: .85rem;
+          font-size: 0.85rem;
+          color: var(--gwn-on-background);
         }
 
         .horisontal-spacer {
@@ -63,20 +67,21 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
 
         .horisontal-spacer type-selector,
         .horisontal-spacer command-selector {
-          flex-basis: calc(50% - .5rem);
+          flex-basis: calc(50% - 0.5rem);
         }
 
         gwn-setting-api-key {
-          margin-bottom: 1rem;
+          margin-bottom: var(--spacer-medium);
         }
 
         .bottom {
-          border-top: 1px solid #eeeeee;
+          border-top: 1px solid var(--gwn-primary);
           display: flex;
           min-height: 49px;
           align-items: center;
           justify-content: space-between;
-          padding: var(--spacer-xsmall) var(--spacer-xsmall) var(--spacer-xsmall) var(--spacer-medium);
+          padding: var(--spacer-xsmall) var(--spacer-xsmall)
+            var(--spacer-xsmall) var(--spacer-medium);
         }
 
         paper-icon-button {
@@ -91,31 +96,50 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
 
           <div class="horisontal-spacer">
             <type-selector selected="{{ selectedType }}"></type-selector>
-            <command-selector 
+            <command-selector
               selected-command="{{ selectedCommand }}"
-              selected-type="[[ selectedType ]]"></command-selector>
+              selected-type="[[ selectedType ]]"
+            ></command-selector>
           </div>
 
-          <gwn-setting-api-key no-save api-key="{{ apiKey }}"></gwn-setting-api-key>
+          <gwn-setting-api-key
+            no-save
+            api-key="{{ apiKey }}"
+          ></gwn-setting-api-key>
 
           <label id="chatbot-label">Chatbot:</label>
-          <paper-radio-group aria-labelledby="chatbot-label" selected="{{ selectedChatbot }}">
-            <paper-radio-button name="streamlabs-chatbot">Streamlabs Chatbot</paper-radio-button>
+          <paper-radio-group
+            aria-labelledby="chatbot-label"
+            selected="{{ selectedChatbot }}"
+          >
+            <paper-radio-button name="streamlabs-chatbot"
+              >Streamlabs Chatbot</paper-radio-button
+            >
             <paper-radio-button name="nightbot">Nightbot</paper-radio-button>
             <paper-radio-button name="none">None</paper-radio-button>
           </paper-radio-group>
         </div>
 
         <div class="bottom inner">
-          <gwn-copy-clipboard hidden$="[[!_hasResult(result)]]" text-to-copy="[[ result ]]">
+          <gwn-copy-clipboard
+            hidden$="[[!_hasResult(result)]]"
+            text-to-copy="[[ result ]]"
+          >
             <pre class="result">[[ result ]]</pre>
           </gwn-copy-clipboard>
-          <pre class="placeholder-result" hidden$="[[_hasResult(result)]]">Fill out the form, to get your command.</pre>
+          <pre class="placeholder-result" hidden$="[[_hasResult(result)]]">
+Fill out the form, to get your command.</pre
+          >
         </div>
       </div>
 
       <div class="max-width">
-        <p class="apikey-helper-text">Don't have an API Key? <a href="https://account.arena.net/applications" target="_blank">Make an API Key here</a>.
+        <p class="apikey-helper-text">
+          Don't have an API Key?
+          <a href="https://account.arena.net/applications" target="_blank"
+            >Make an API Key here</a
+          >.
+        </p>
       </div>
     `;
   }
@@ -134,13 +158,15 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
       apiKey: String,
       result: {
         type: String,
-        computed: "_computeResult(selectedChatbot, selectedType, selectedCommand, apiKey)"
+        computed:
+          "_computeResult(selectedChatbot, selectedType, selectedCommand, apiKey)"
       }
     };
   }
 
   _computeResult(selectedChatbot, selectedType, selectedCommand, apiKey) {
-    if (!selectedChatbot || !selectedType || !selectedCommand || !apiKey) return "";
+    if (!selectedChatbot || !selectedType || !selectedCommand || !apiKey)
+      return "";
 
     const url = `https://nightbot.gw2.ninja/command/${selectedType}-${selectedCommand}/${apiKey}`;
 
@@ -155,7 +181,7 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
 
     return "";
   }
-  
+
   _hasResult(result) {
     return result !== "" ? true : false;
   }
