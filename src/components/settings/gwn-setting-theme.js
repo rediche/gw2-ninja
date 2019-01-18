@@ -3,16 +3,16 @@ import "@polymer/paper-dropdown-menu/paper-dropdown-menu.js";
 import "@polymer/paper-listbox/paper-listbox.js";
 import "@polymer/paper-item/paper-item.js";
 
-import { connect } from 'pwa-helpers/connect-mixin.js';
+import { connect } from "pwa-helpers/connect-mixin.js";
 
 // Load redux store
-import { store } from '../../store.js';
+import { store } from "../../store.js";
 
 // These are the actions needed by this element.
-import { changeTheme } from '../../actions/settings.js';
+import { changeTheme } from "../../actions/settings.js";
 
 // Lazy load reducers
-import settings from '../../reducers/settings.js';
+import settings from "../../reducers/settings.js";
 store.addReducers({
   settings
 });
@@ -33,17 +33,8 @@ class GWNSettingTheme extends connect(store)(PolymerElement) {
 
   static get template() {
     return html`
-      ${SharedStyles}
-      ${SettingsStyles}
+      ${SharedStyles} ${SettingsStyles}
       <style>
-        :host {
-          display: block;
-        }
-
-        :host([hidden]) {
-          display: none;
-        }
-
         [value="core"] {
           background-color: var(--color-guild-wars-2);
           color: var(--app-text-color-light);
@@ -73,7 +64,12 @@ class GWNSettingTheme extends connect(store)(PolymerElement) {
       </style>
 
       <paper-dropdown-menu class="theme-selector" label="Theme Color">
-        <paper-listbox slot="dropdown-content" class="dropdown-content" selected="{{theme}}" attr-for-selected="value">
+        <paper-listbox
+          slot="dropdown-content"
+          class="dropdown-content"
+          selected="{{theme}}"
+          attr-for-selected="value"
+        >
           <paper-item value="core">Guild Wars 2 (Red)</paper-item>
           <paper-item value="hot">Heart of Thorns (Green)</paper-item>
           <paper-item value="pof">Path of Fire (Purple)</paper-item>
@@ -89,7 +85,7 @@ class GWNSettingTheme extends connect(store)(PolymerElement) {
 
   _stateChanged(state) {
     if (!state || !state.settings) return;
-    this.set('theme', state.settings.theme);
+    this.set("theme", state.settings.theme);
   }
 }
 

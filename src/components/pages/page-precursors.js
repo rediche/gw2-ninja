@@ -10,7 +10,6 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
     ${SharedStyles}
     <style>
       :host {
-        display: block;
         height: calc(100vh - 4rem);
         background-image: url("/src/images/precursors/precursors_bg.png");
         background-size: cover;
@@ -18,10 +17,6 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
         overflow: hidden;
         max-width: 100%;
         position: relative;
-      }
-      
-      :host([hidden]) {
-        display: none;
       }
 
       .prepare {

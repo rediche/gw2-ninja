@@ -22,12 +22,7 @@ class PageStreamTools extends GestureEventListeners(PolymerElement) {
       ${SharedStyles}
       <style>
         :host {
-          display: block;
           padding: var(--spacer-large);
-        }
-
-        :host([hidden]) {
-          display: none;
         }
 
         .title {

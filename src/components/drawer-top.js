@@ -29,16 +29,11 @@ class DrawerTop extends connect(store)(PolymerElement) {
       ${SharedStyles}
       <style>
         :host {
-          display: block;
           padding-top: 56.25%;
           position: relative;
           background-color: var(--app-primary-color);
           color: var(--app-text-color-light);
           box-shadow: var(--app-box-shadow);
-        }
-
-        :host([hidden]) {
-          display: none;
         }
 
         .inner {

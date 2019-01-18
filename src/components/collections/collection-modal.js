@@ -26,14 +26,6 @@ class CollectionModal extends connect(store)(PolymerElement) {
     return html`
       ${SharedStyles}
       <style>
-        :host {
-          display: block;
-        }
-
-        :host([hidden]) {
-          display: none;
-        }
-
         .headline {
           margin-bottom: 0;
           font-weight: bold;

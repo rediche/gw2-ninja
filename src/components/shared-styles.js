@@ -8,7 +8,13 @@ export const SharedStyles = html`
       box-sizing: border-box;
     }
 
-    *[hidden] {
+    :host {
+      display: block;
+      box-sizing: border-box;
+    }
+
+    [hidden],
+    :host([hidden]) {
       display: none;
     }
 

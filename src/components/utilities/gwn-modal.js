@@ -15,7 +15,7 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
   }
 
   static get observers() {
-    return ['_hiddenChanged(hidden)'];
+    return ["_hiddenChanged(hidden)"];
   }
 
   static get template() {
@@ -23,7 +23,7 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
       <style>
         :host {
           --gwn-modal-margin: 1.5rem;
-          --gwn-modal-padding: .5rem;
+          --gwn-modal-padding: 0.5rem;
 
           display: block;
           position: fixed;
@@ -38,7 +38,7 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           box-sizing: border-box;
           padding: var(--gwn-modal-margin);
         }
-        
+
         :host([hidden]) {
           display: none !important;
         }
@@ -49,7 +49,7 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           position: fixed;
           height: 100%;
           width: 100%;
-          background-color: rgba(0, 0, 0, .5);
+          background-color: rgba(0, 0, 0, 0.5);
         }
 
         .modal {
@@ -58,10 +58,13 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           flex-direction: column;
           width: var(--gwn-modal-width, 500px);
           max-width: var(--gwn-modal-max-width, 100%);
-          max-height: var(--gwn-modal-max-height, calc(100vh - var(--gwn-modal-margin) * 2));
-          background-color: white; 
+          max-height: var(
+            --gwn-modal-max-height,
+            calc(100vh - var(--gwn-modal-margin) * 2)
+          );
+          background-color: white;
           border-radius: var(--app-border-radius);
-          box-shadow: 0 2px 4px rgba(0,0,0,.12);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
           box-sizing: border-box;
           overflow: hidden;
         }
@@ -70,9 +73,10 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: .5rem;
+          margin-bottom: 0.5rem;
           flex: 1 0 auto;
-          padding: var(--gwn-modal-padding) var(--gwn-modal-padding) 0 calc(var(--gwn-modal-padding) * 2);
+          padding: var(--gwn-modal-padding) var(--gwn-modal-padding) 0
+            calc(var(--gwn-modal-padding) * 2);
         }
 
         paper-icon-button {
@@ -80,7 +84,11 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
         }
 
         ::slotted([slot="content"]) {
-          padding: var(--gwn-modal-content-padding, 0 calc(var(--gwn-modal-padding) * 2) calc(var(--gwn-modal-padding) * 2));
+          padding: var(
+            --gwn-modal-content-padding,
+            0 calc(var(--gwn-modal-padding) * 2)
+              calc(var(--gwn-modal-padding) * 2)
+          );
           overflow-y: var(--gwn-modal-content-overflow-y, auto);
         }
       </style>
@@ -90,7 +98,9 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
       <div class="modal">
         <header>
           <slot name="title"></slot>
-          <paper-icon-button icon="my-icons:close" on-tap="close">Close</paper-icon-button>
+          <paper-icon-button icon="my-icons:close" on-tap="close"
+            >Close</paper-icon-button
+          >
         </header>
         <slot name="content"></slot>
       </div>
@@ -98,7 +108,7 @@ class GWNModal extends GestureEventListeners(PolymerElement) {
   }
 
   close() {
-    this.set('hidden', true);
+    this.set("hidden", true);
   }
 
   _hiddenChanged(hidden) {
