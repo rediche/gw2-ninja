@@ -201,7 +201,6 @@ class PageWvw extends connect(store)(PolymerElement) {
   static get properties() {
     return {
       subviewData: Object,
-      theme: String,
       mapActive: {
         type: Boolean,
         computed: "_checkActiveMap(subviewData)"

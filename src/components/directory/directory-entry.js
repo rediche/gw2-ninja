@@ -98,7 +98,6 @@ class DirectoryEntry extends PolymerElement {
 
   static get properties() {
     return {
-      theme: String,
       name: String,
       url: String,
       description: String,

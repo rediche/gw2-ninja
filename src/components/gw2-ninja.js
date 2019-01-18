@@ -260,16 +260,13 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           role="main"
         >
           <page-index name="index"></page-index>
-          <page-directory theme$="[[theme]]" name="directory"></page-directory>
-          <page-collections
-            theme$="[[theme]]"
-            name="collections"
-          ></page-collections>
-          <page-tickets theme$="[[theme]]" name="tickets"></page-tickets>
+          <page-directory name="directory"></page-directory>
+          <page-collections name="collections"></page-collections>
+          <page-tickets name="tickets"></page-tickets>
           <page-chatcodes name="chatcodes"></page-chatcodes>
-          <page-timer theme$="[[theme]]" name="timer"></page-timer>
+          <page-timer name="timer"></page-timer>
           <page-calc name="calc"></page-calc>
-          <page-wvw theme$="[[theme]]" name="wvw"></page-wvw>
+          <page-wvw name="wvw"></page-wvw>
           <page-about name="about"></page-about>
           <page-precursors name="precursors" page="[[page]]"></page-precursors>
           <page-stream-tools name="stream"></page-stream-tools>
@@ -280,7 +277,6 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
       <!-- Drawer content -->
       <app-drawer id="drawer" swipe-open opened="{{drawer}}">
         <drawer-top
-          theme$="[[theme]]"
           on-close-drawer="_closeDrawer"
         ></drawer-top>
         <div class="drawer-scroll">

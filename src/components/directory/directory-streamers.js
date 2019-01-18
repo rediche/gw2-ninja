@@ -14,7 +14,6 @@ import "./directory-entry";
 class DirectoryStreamers extends LitElement {
   static get properties() {
     return {
-      theme: String,
       streamers: Array
     };
   }
@@ -55,7 +54,7 @@ class DirectoryStreamers extends LitElement {
   _renderStreamerList(streamers, theme) {
     return html`
       ${streamers && streamers.map(streamer => {
-          return html`<directory-entry theme$="${theme}" name="${streamer.name}" url="${this._resolvePlatformSpecificUrl(streamer)}" description="${streamer.description}" inactive="${streamer.inactive}"></directory-entry>`;
+          return html`<directory-entry name="${streamer.name}" url="${this._resolvePlatformSpecificUrl(streamer)}" description="${streamer.description}" inactive="${streamer.inactive}"></directory-entry>`;
       })}
     `;
   }
@@ -79,7 +78,6 @@ class DirectoryStreamers extends LitElement {
   constructor() {
     super();
 
-    this.theme = "";
     this.streamers = [];
   }
 }
