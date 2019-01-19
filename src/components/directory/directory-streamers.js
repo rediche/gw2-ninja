@@ -21,21 +21,23 @@ class DirectoryStreamers extends LitElement {
     };
   }
 
-  /**
-   * Implement to describe the element's DOM using lit-html.
-   * Use the element current props to return a lit-html template result
-   * to render into the element.
-   */
-  _render({ theme, streamers, loadedStreamers }) {
+/*   _render({ theme, streamers, loadedStreamers }) {
     const twitchStreamers = this._filterTwitchStreamers(streamers);
     this._loadStreamersAndLiveChannelsFromTwitch(config.clientId, twitchStreamers);
     
+      streamers: Array
+    };
+  }
+ */
+  _render({ theme, streamers }) {
+    //console.log(config.clientId);
     return html`
       <style>
         :host {
           display: flex;
           flex-wrap: wrap;
           justify-content: space-between;
+          width: 100%;
         }
 
         directory-entry {
@@ -51,17 +53,31 @@ class DirectoryStreamers extends LitElement {
         }
       </style>
 
-      ${ this._renderStreamerList(streamers, theme) }
+      ${this._renderStreamerList(streamers, theme)}
     `;
+  }
+
+  constructor() {
+    super();
+
+    this.streamers = [];
   }
 
   _renderStreamerList(streamers, theme) {
     return html`
-      ${streamers && streamers.map(streamer => {
-          return html`
-            <directory-entry theme$="${theme}" name="${streamer.name}" url="${this._resolvePlatformSpecificUrl(streamer)}" description="${streamer.description}" inactive="${streamer.inactive}"></directory-entry>
-          `;
-      })}
+      ${
+        streamers &&
+          streamers.map(streamer => {
+            return html`
+              <directory-entry
+                name="${streamer.name}"
+                url="${this._resolvePlatformSpecificUrl(streamer)}"
+                description="${streamer.description}"
+                inactive="${streamer.inactive}"
+              ></directory-entry>
+            `;
+          })
+      }
     `;
   }
 
@@ -127,19 +143,6 @@ class DirectoryStreamers extends LitElement {
 
   _filterTwitchStreamers(streamers) {
     return streamers.filter(streamer => streamer.platform == "twitch");
-  }
-
-  /**
-   * Instance of the element is created/upgraded. Use: initializing state,
-   * set up event listeners, create shadow dom.
-   * @constructor
-   */
-  constructor() {
-    super();
-
-    this.theme = "";
-    this.streamers = [];
-    this.loadedStreamers = [];
   }
 }
 

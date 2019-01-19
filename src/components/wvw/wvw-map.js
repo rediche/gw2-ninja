@@ -138,7 +138,7 @@ class WvwMap extends connect(store)(PolymerElement) {
     });
 
     // Remove old layers before adding new ones to map.
-    this.addedObjectives.map((layer) => {
+    this.addedObjectives.map(layer => {
       map.removeLayer(layer.mapMarker);
     });
 
@@ -161,6 +161,7 @@ class WvwMap extends connect(store)(PolymerElement) {
       }
     ).addTo(map);
 
+    newMarker.objectiveId = objective.id;
     newMarker.addEventListener("click", this._markerClicked.bind(this));
 
     const newTooltip = newMarker
@@ -183,7 +184,7 @@ class WvwMap extends connect(store)(PolymerElement) {
     this.dispatchEvent(
       new CustomEvent("objective-clicked", {
         detail: {
-          objectiveTitle: e.target.options.title
+          objectiveId: e.target.objectiveId
         }
       })
     );
@@ -299,10 +300,12 @@ class WvwMap extends connect(store)(PolymerElement) {
 
   _stateChanged({ settings }) {
     if (!settings.language) {
-      getObjectives().then(objectives => this.set('objectives', objectives));
+      getObjectives().then(objectives => this.set("objectives", objectives));
       return;
     } else if (this.language != settings.language) {
-      getObjectives(settings.language).then(objectives => this.set('objectives', objectives));
+      getObjectives(settings.language).then(objectives =>
+        this.set("objectives", objectives)
+      );
     }
 
     this.language = settings.language;

@@ -41,167 +41,9 @@ import "../wvw/wvw-leaderboards";
  * @extends {Polymer.Element}
  */
 class PageWvw extends connect(store)(PolymerElement) {
-  static get template() {
-    return html`
-    ${SharedStyles}
-    <style>
-      :host {
-        display: block;
-        position: relative;
-      }
-
-      .sticky-tabs {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        background-color: var(--app-primary-color);
-      }
-
-      paper-dropdown-menu {
-        width: 100%;
-        padding: 0 var(--spacer-large);
-        --iron-icon-fill-color: var(--app-text-color-light);
-        --paper-input-container-color: var(--app-text-color-light);
-        --paper-input-container-focus-color: var(--app-text-color-light);;
-        --paper-input-container-input: {
-          color: var(--app-text-color-light);
-        };
-        --paper-input-container-label: {
-          color: var(--app-text-color-light);
-        };
-        --paper-font-caption: {
-          font-family: var(--app-font-stack);
-        }
-        --paper-input-container-shared-input-style: {
-          font-family: var(--app-font-stack);
-        }
-        --paper-font-subhead: {
-          font-family: var(--app-font-stack);
-        }
-      }
-
-      paper-tabs {
-        width: 100%;
-        flex: auto;
-        --paper-tabs-selection-bar-color: #ffffff;
-      }
-
-      paper-tab {
-        font-family: var(--app-font-stack);
-        color: white;
-      }
-
-      paper-tab.iron-selected,
-      paper-tab[focused] {
-        font-weight: 700;
-      }
-
-      paper-tab span {
-        display: none;
-      }
-
-      .map {
-        height: calc(100vh - 11.25rem);
-        position: relative;
-      }
-
-      wvw-map {
-        height: 100%;
-        width: 100%;
-      }
-
-      wvw-map-stats {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        max-height: calc(100vh - 11.25rem);
-        overflow: auto;
-      }
-
-      .error-msg {
-        margin: var(--spacer-medium);
-        font-weight: 600;
-      }
-
-      @media screen and (min-width: 768px) {
-        .sticky-tabs {
-          flex-direction: row;
-          padding: 0 var(--spacer-large);
-        }
-
-        paper-dropdown-menu {
-          padding: 0;
-          width: auto;
-          flex: none;
-          margin-right: var(--spacer-large);
-        }
-
-        paper-tabs {
-          width: auto;
-        }
-
-        paper-tab span {
-          display: inline;
-        }
-
-        .map {
-          height: calc(100vh - 8.25rem);
-        }
-
-        wvw-map-stats {
-          max-height: calc(100vh - 8.25rem);
-        }
-      }
-    </style>
-
-    <app-location route="{{route}}"></app-location>
-    <app-route route="{{route}}" pattern="/wvw/:subview" data="{{subviewData}}"></app-route>
-
-    <div class="sticky-tabs">
-      <paper-dropdown-menu label="Select World">
-        <paper-listbox slot="dropdown-content" selected="{{serverId}}" class="dropdown-content" attr-for-selected="value">
-          <template is="dom-repeat" items="[[worlds]]" as="world">
-            <paper-item value="[[world.id]]">[[world.name]]</paper-item>
-          </template>
-        </paper-listbox>
-      </paper-dropdown-menu>
-
-      <paper-tabs selected="{{subviewData.subview}}" attr-for-selected="name">
-        <paper-tab name="overview">Region<span>&nbsp;Overview</span></paper-tab>
-        <paper-tab name="map"><span>Live&nbsp;</span>Map</paper-tab>
-        <paper-tab name="stats">Matchup<span>&nbsp;Stats</span></paper-tab>
-        <paper-tab name="leaderboards">Leaderboards</paper-tab>
-      </paper-tabs>
-    </div>
-
-    <iron-pages selected="{{ subviewData.subview }}" attr-for-selected="name" fallback-selection="map">
-      <div name="map" class="map">
-        <div class="error-msg text-center" hidden$="[[serverId]]">Please select a server in the dropdown above.</div>
-        <wvw-map-stats hidden$="[[!serverId]]" selected-objective="[[ selectedObjective ]]" on-objective-close="_objectiveClose"></wvw-map-stats>
-        <wvw-map hidden$="[[!serverId]]" map-data="[[ currentMatchup.maps ]]" active="[[ mapActive ]]" added-objectives="{{ objectives }}" on-objective-clicked="_objectiveClicked"></wvw-map>
-      </div>
-      <div name="overview">
-        <wvw-region matches="[[ matches ]]" worlds="[[ worlds ]]" own-world="[[serverId]]"></wvw-region>
-      </div>
-      <div name="stats">
-        <div class="error-msg text-center" hidden$="[[serverId]]">Please select a server in the dropdown above.</div>
-        <wvw-matchup matchup="[[ currentMatchup ]]" worlds="[[ worlds ]]" hidden$=[[!serverId]]></wvw-matchup>
-      </div>
-      <div name="leaderboards">
-        <wvw-leaderboards matches="[[ matches ]]" worlds="[[ worlds ]]" own-world="[[serverId]]"></wvw-leaderboards>
-      </div>
-    </iron-pages>
-    `;
-  }
-
-  /**
-   * Object describing property-related metadata used by Polymer features
-   */
   static get properties() {
     return {
       subviewData: Object,
-      theme: String,
       mapActive: {
         type: Boolean,
         computed: "_checkActiveMap(subviewData)"
@@ -217,6 +59,200 @@ class PageWvw extends connect(store)(PolymerElement) {
       selectedObjective: Object,
       matchesInterval: Object
     };
+  }
+
+  static get template() {
+    return html`
+      ${SharedStyles}
+      <style>
+        :host {
+          position: relative;
+        }
+
+        .sticky-tabs {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          background-color: var(--gwn-primary);
+        }
+
+        paper-dropdown-menu {
+          width: 100%;
+          padding: 0 var(--spacer-large);
+          --iron-icon-fill-color: var(--gwn-text-light);
+          --paper-input-container-color: var(--gwn-text-light);
+          --paper-input-container-focus-color: var(--gwn-text-light);
+          --paper-input-container-input: {
+            color: var(--gwn-text-light);
+          }
+          --paper-input-container-label: {
+            color: var(--gwn-text-light);
+          }
+          --paper-font-caption: {
+            font-family: var(--gwn-font-stack);
+          }
+          --paper-input-container-shared-input-style: {
+            font-family: var(--gwn-font-stack);
+          }
+          --paper-font-subhead: {
+            font-family: var(--gwn-font-stack);
+          }
+        }
+
+        paper-tabs {
+          width: 100%;
+          flex: auto;
+          --paper-tabs-selection-bar-color: var(--gwn-on-primary);
+        }
+
+        paper-tab {
+          font-family: var(--gwn-font-stack);
+          color: white;
+        }
+
+        paper-tab.iron-selected,
+        paper-tab[focused] {
+          font-weight: 700;
+        }
+
+        paper-tab span {
+          display: none;
+        }
+
+        .map {
+          height: calc(100vh - 11.25rem);
+          position: relative;
+        }
+
+        wvw-map {
+          height: 100%;
+          width: 100%;
+        }
+
+        wvw-map-stats {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          max-height: calc(100vh - 11.25rem);
+          overflow: auto;
+        }
+
+        .error-msg {
+          margin: var(--spacer-medium);
+          font-weight: 600;
+        }
+
+        @media screen and (min-width: 768px) {
+          .sticky-tabs {
+            flex-direction: row;
+            padding: 0 var(--spacer-large);
+          }
+
+          paper-dropdown-menu {
+            padding: 0;
+            width: auto;
+            flex: none;
+            margin-right: var(--spacer-large);
+          }
+
+          paper-tabs {
+            width: auto;
+          }
+
+          paper-tab span {
+            display: inline;
+          }
+
+          .map {
+            height: calc(100vh - 8.25rem);
+          }
+
+          wvw-map-stats {
+            max-height: calc(100vh - 8.25rem);
+          }
+        }
+      </style>
+
+      <app-location route="{{route}}"></app-location>
+      <app-route
+        route="{{route}}"
+        pattern="/wvw/:subview"
+        data="{{subviewData}}"
+      ></app-route>
+
+      <div class="sticky-tabs">
+        <paper-dropdown-menu label="Select World">
+          <paper-listbox
+            slot="dropdown-content"
+            selected="{{serverId}}"
+            class="dropdown-content"
+            attr-for-selected="value"
+          >
+            <template is="dom-repeat" items="[[worlds]]" as="world">
+              <paper-item value="[[world.id]]">[[world.name]]</paper-item>
+            </template>
+          </paper-listbox>
+        </paper-dropdown-menu>
+
+        <paper-tabs selected="{{subviewData.subview}}" attr-for-selected="name">
+          <paper-tab name="overview"
+            >Region<span>&nbsp;Overview</span></paper-tab
+          >
+          <paper-tab name="map"><span>Live&nbsp;</span>Map</paper-tab>
+          <paper-tab name="stats">Matchup<span>&nbsp;Stats</span></paper-tab>
+          <paper-tab name="leaderboards">Leaderboards</paper-tab>
+        </paper-tabs>
+      </div>
+
+      <iron-pages
+        selected="{{ subviewData.subview }}"
+        attr-for-selected="name"
+        fallback-selection="map"
+      >
+        <div name="map" class="map">
+          <div class="error-msg text-center" hidden$="[[serverId]]">
+            Please select a server in the dropdown above.
+          </div>
+          <wvw-map-stats
+            hidden$="[[!serverId]]"
+            selected-objective="[[ selectedObjective ]]"
+            on-objective-close="_objectiveClose"
+          ></wvw-map-stats>
+          <wvw-map
+            hidden$="[[!serverId]]"
+            map-data="[[ currentMatchup.maps ]]"
+            active="[[ mapActive ]]"
+            added-objectives="{{ objectives }}"
+            on-objective-clicked="_objectiveClicked"
+          ></wvw-map>
+        </div>
+        <div name="overview">
+          <wvw-region
+            matches="[[ matches ]]"
+            worlds="[[ worlds ]]"
+            own-world="[[serverId]]"
+          ></wvw-region>
+        </div>
+        <div name="stats">
+          <div class="error-msg text-center" hidden$="[[serverId]]">
+            Please select a server in the dropdown above.
+          </div>
+          <wvw-matchup
+            matchup="[[ currentMatchup ]]"
+            worlds="[[ worlds ]]"
+            hidden$="[[!serverId]]"
+          ></wvw-matchup>
+        </div>
+        <div name="leaderboards">
+          <wvw-leaderboards
+            matches="[[ matches ]]"
+            worlds="[[ worlds ]]"
+            own-world="[[serverId]]"
+          ></wvw-leaderboards>
+        </div>
+      </iron-pages>
+    `;
   }
 
   static get observers() {
@@ -239,13 +275,12 @@ class PageWvw extends connect(store)(PolymerElement) {
   _selectedServerChanged(serverId, matches) {
     if (!serverId || !matches) return;
 
-    const foundMatchup = matches.filter(
-      match =>
-        match.all_worlds.blue.includes(serverId) ||
-        match.all_worlds.red.includes(serverId) ||
-        match.all_worlds.green.includes(serverId)
-          ? true
-          : false
+    const foundMatchup = matches.filter(match =>
+      match.all_worlds.blue.includes(serverId) ||
+      match.all_worlds.red.includes(serverId) ||
+      match.all_worlds.green.includes(serverId)
+        ? true
+        : false
     )[0];
 
     if (!foundMatchup)
@@ -260,9 +295,7 @@ class PageWvw extends connect(store)(PolymerElement) {
 
   _objectiveClicked(e) {
     const mapStatus = this.currentMatchup.maps;
-    const foundObjective = this._resolveObjectiveByName(
-      e.detail.objectiveTitle
-    );
+    const foundObjective = this._resolveObjectiveById(e.detail.objectiveId);
     const mapContainingObjective = mapStatus.find(
       map => map.type == foundObjective.map_type
     );
@@ -281,10 +314,10 @@ class PageWvw extends connect(store)(PolymerElement) {
     this.set("selectedObjective", null);
   }
 
-  _resolveObjectiveByName(objectiveName) {
-    if (!objectiveName) return;
+  _resolveObjectiveById(id) {
+    if (!id) return;
     const objectives = this.objectives || [];
-    return objectives.find(objective => objective.name == objectiveName);
+    return objectives.find(objective => objective.id === id);
   }
 
   _stateChanged({ settings, account }) {

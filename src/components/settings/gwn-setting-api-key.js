@@ -60,14 +60,6 @@ class GWNSettingApiKey extends connect(store)(PolymerElement) {
       ${SharedStyles}
       ${SettingsStyles}
       <style>
-        :host {
-          display: block;
-        }
-
-        :host([hidden]) {
-          display: none;
-        }
-
         paper-input {
           width: 100%;
         }

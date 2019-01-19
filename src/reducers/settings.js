@@ -1,6 +1,7 @@
 import {
   CHANGE_LANGUAGE,
   CHANGE_THEME,
+  CHANGE_TIMER,
   CHANGE_API_KEY,
   CHANGE_API_PERMISSIONS
 } from "../actions/settings.js";
@@ -8,6 +9,7 @@ import {
 const settings = (
   state = {
     language: "en",
+    timer: "normal",
     theme: "pof",
     apiKey: null,
     apiPermissions: []
@@ -24,6 +26,11 @@ const settings = (
       return {
         ...state,
         theme: action.theme
+      };
+    case CHANGE_TIMER:
+      return {
+        ...state,
+        timer: action.timer
       };
     case CHANGE_API_KEY:
       return {
