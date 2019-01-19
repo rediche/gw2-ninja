@@ -2,6 +2,7 @@ import { LitElement, html } from "@polymer/lit-element";
 
 import config from "../../../config";
 import "./directory-entry";
+import "./directory-streamer-entry";
 
 /**
  * `directory-streamers` handles special logic that needs to be injected into `directory-entry` per streamer.
@@ -14,23 +15,14 @@ import "./directory-entry";
 class DirectoryStreamers extends LitElement {
   static get properties() {
     return {
-      theme: String,
       streamers: Array,
-      loadedStreamerData: Array,
-      loadedStreamersLive: Array
+      streamersLive: Array
     };
   }
 
-/*   _render({ theme, streamers, loadedStreamers }) {
-    const twitchStreamers = this._filterTwitchStreamers(streamers);
-    this._loadStreamersAndLiveChannelsFromTwitch(config.clientId, twitchStreamers);
-    
-      streamers: Array
-    };
-  }
- */
-  _render({ theme, streamers }) {
-    //console.log(config.clientId);
+  _render({ streamers, streamersLive }) {
+    const hasStreamersLive = streamersLive.length > 0;
+
     return html`
       <style>
         :host {
@@ -40,20 +32,30 @@ class DirectoryStreamers extends LitElement {
           width: 100%;
         }
 
-        directory-entry {
+        h2 {
+          width: 100%;
+          color: var(--gwn-on-background)
+        }
+
+        directory-entry,
+        directory-streamer-entry {
           flex-basis: 100%;
           margin-bottom: var(--spacer-medium);
         }
 
         @media screen and (min-width: 768px) {
-          directory-entry {
+          directory-entry,
+          directory-streamer-entry {
             flex-basis: calc(100% / 2 - var(--spacer-large) / 2);
             margin-bottom: var(--spacer-large);
           }
         }
       </style>
 
-      ${this._renderStreamerList(streamers, theme)}
+      ${ hasStreamersLive ? html`<h2>Live</h2>` : ""}
+      ${ hasStreamersLive ? this._renderStreamerLiveList(streamersLive, streamers) : ""}
+      ${ hasStreamersLive ? html`<h2>Directory</h2>` : ""}
+      ${this._renderStreamerList(streamers)}
     `;
   }
 
@@ -61,9 +63,53 @@ class DirectoryStreamers extends LitElement {
     super();
 
     this.streamers = [];
+    this.streamersLive = [];
   }
 
-  _renderStreamerList(streamers, theme) {
+  _propertiesChanged(props, changedProps, prevProps) {
+    super._propertiesChanged(props, changedProps, prevProps);
+
+    if (
+      props.streamers &&
+      props.streamers.length > 0 &&
+      prevProps.streamers &&
+      props.streamers.length != prevProps.streamers.length
+    ) {
+      const twitchStreamers = this._filterTwitchStreamers(this.streamers);
+
+      this._loadStreamersFromTwitch(twitchStreamers)
+        .then(data => {
+          this.streamersLive = data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+    
+  }
+
+  _renderStreamerLiveList(streamersLive, streamers) {
+    return html`
+    ${
+      streamersLive &&
+        streamersLive.map(streamer => {
+          const streamerInfo = streamers.find(streamerInfo => {
+            return streamer.user_name.toLowerCase() == streamerInfo.url.toLowerCase();
+          });
+
+          return html`
+            <directory-streamer-entry
+              name="${streamer.user_name}"
+              url="${this._resolvePlatformSpecificUrl(streamer)}"
+              description="${streamerInfo ? streamerInfo.description : ""}"
+            ></directory-streamer-entry>
+          `;
+        })
+    }
+  `;
+  }
+
+  _renderStreamerList(streamers) {
     return html`
       ${
         streamers &&
@@ -92,53 +138,36 @@ class DirectoryStreamers extends LitElement {
     }
   }
 
-  _loadStreamersAndLiveChannelsFromTwitch(clientId, streamers) {
-    const loadedStreamers = this._loadStreamersFromTwitch(clientId, streamers);
-    const liveStreamers = this._loadLiveStreamersFromTwitch(clientId, streamers);
+  _loadStreamersFromTwitch(streamers) {
+    if (!streamers) return;
 
-    Promise.all([loadedStreamers, liveStreamers])
-      .then(values => {
-        console.log("Streamers and live channels loaded");
-        console.log(values);
+    const streamerUsernameList = streamers.reduce(
+      (serialized, streamer, index) => {
+        return serialized + "&user_login=" + streamer.url;
+      },
+      ""
+    );
+
+    const options = {
+      method: "GET",
+      headers: {
+        "Client-ID": config.clientId
+      }
+    };
+
+    return fetch(
+      `https://api.twitch.tv/helix/streams?game_id=19357${streamerUsernameList}`,
+      options
+    )
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        return json.data;
+      })
+      .catch(error => {
+        console.log(error);
       });
-  }
-
-  _loadStreamersFromTwitch(clientId, streamers) {
-    if (!clientId || !streamers) return;
-
-    const streamerNameList = streamers.map(streamer => {
-      return `user_login=${streamer.url}`;
-    }).join("&");
-
-    return fetch(`https://api.twitch.tv/helix/users?login=deroir`, {
-      method: "GET",
-      headers: {
-        "Client-ID": clientId
-      }
-    }).then(resp => {
-      return resp.json();
-    }).then(json => {
-      return json.data;
-    }).catch(error => {
-      console.log(error);
-    });
-  }
-
-  _loadLiveStreamersFromTwitch(clientId, streamers) {
-    if (!clientId || !streamers) return;
-
-    return fetch(`https://api.twitch.tv/helix/streams?game_id=19357`, {
-      method: "GET",
-      headers: {
-        "Client-ID": clientId
-      }
-    }).then(resp => {
-      return resp.json();
-    }).then(json => {
-      return json.data;
-    }).catch(error => {
-      console.log(error);
-    });
   }
 
   _filterTwitchStreamers(streamers) {
