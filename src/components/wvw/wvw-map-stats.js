@@ -1,14 +1,14 @@
-import { LitElement, html } from "@polymer/lit-element";
-import { connect } from 'pwa-helpers/connect-mixin.js';
+import { LitElement, html } from "lit-element";
+import { connect } from "pwa-helpers/connect-mixin.js";
 import { formatDistance } from "date-fns";
 
 import "@polymer/paper-ripple/paper-ripple.js";
 
 // Load redux store
-import { store } from '../../store.js';
+import { store } from "../../store.js";
 
 // Lazy load reducers
-import settings from '../../reducers/settings.js';
+import settings from "../../reducers/settings.js";
 store.addReducers({
   settings
 });
@@ -31,7 +31,31 @@ import { SharedWvwStyles } from "../shared-wvw-styles";
  * @extends {LitElement}
  */
 class WvwMapStats extends connect(store)(LitElement) {
-  _render({ selectedObjective }) {
+  static get properties() {
+    return {
+      selectedObjective: { type: Object },
+      upgrades: { type: Array },
+      guildUpgrades: { type: Array },
+      guilds: { type: Array },
+      guildName: { type: String },
+      emblemUrl: { type: String }
+    };
+  }
+
+  constructor() {
+    super();
+    this.guilds = [];
+    this.upgrades = [];
+    this.guildUpgrades = [];
+    this.guilds = [];
+    this.guildName = "";
+    this.emblemUrl = "";
+    this._loadUpgrades();
+  }
+
+  render() {
+    const { selectedObjective } = this;
+
     return html`
       ${SharedWvwStyles.content.firstElementChild}
       <style>
@@ -71,7 +95,7 @@ class WvwMapStats extends connect(store)(LitElement) {
           display: flex;
           justify-content: space-between;
           line-height: 1;
-          margin-bottom: .25rem;
+          margin-bottom: 0.25rem;
         }
 
         .card-body {
@@ -81,7 +105,7 @@ class WvwMapStats extends connect(store)(LitElement) {
         .claimed-by {
           padding-top: var(--spacer-small);
           display: grid;
-          grid-column-gap: .5rem;
+          grid-column-gap: 0.5rem;
           grid-template-columns: 2.625rem 1fr;
         }
 
@@ -96,13 +120,13 @@ class WvwMapStats extends connect(store)(LitElement) {
 
         .claimed-at,
         .last-flipped {
-          font-size: .75rem;
+          font-size: 0.75rem;
         }
 
         .tier-title {
-          font-size: .75rem;
+          font-size: 0.75rem;
           font-weight: 800;
-          margin-bottom: .5rem;
+          margin-bottom: 0.5rem;
           line-height: 1;
         }
 
@@ -111,31 +135,31 @@ class WvwMapStats extends connect(store)(LitElement) {
         }
 
         .not-upgraded {
-          opacity: .5;
+          opacity: 0.5;
         }
 
         .upgrade-icon {
           width: 32px;
           height: 32px;
           flex: none;
-          margin-right: .5rem;
+          margin-right: 0.5rem;
         }
 
         hr {
-          margin: .5rem 0;
+          margin: 0.5rem 0;
         }
 
         .button {
-          margin: 1rem 0 .5rem;
+          margin: 1rem 0 0.5rem;
           background-color: transparent;
           color: var(--gwn-on-surface);
           border: 1px solid var(--gwn-on-surface);
-          padding: .5rem 1rem;
+          padding: 0.5rem 1rem;
           text-align: center;
           border-radius: var(--gwn-border-radius);
           text-decoration: none;
           margin-right: 1rem;
-          font-size: .85rem;
+          font-size: 0.85rem;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -148,7 +172,6 @@ class WvwMapStats extends connect(store)(LitElement) {
             width: 25rem;
           }
         }
-
       </style>
 
       ${
@@ -156,8 +179,17 @@ class WvwMapStats extends connect(store)(LitElement) {
           ? this._renderSelectedObjective(selectedObjective)
           : ""
       }
-      
     `;
+  }
+
+  updated(changedProps) {
+    if (this.selectedObjective) {
+      const { claimed_by } = this.selectedObjective;
+      this._getGuild(claimed_by).then(guild => {
+        this.guildName = getGuildNameWithTag(guild);
+        this.emblemUrl = getGuildEmblemURL(guild);
+      });
+    }
   }
 
   /**
@@ -170,18 +202,24 @@ class WvwMapStats extends connect(store)(LitElement) {
 
     return html`
       <div class="card">
-        <div class$="card-header team-${selectedObjective.owner.toLowerCase()}-bg">
+        <div
+          class="card-header team-${selectedObjective.owner.toLowerCase()}-bg"
+        >
           <div class="space-between">
             <span>${selectedObjective.name}</span>
-            <span title="Points per tick">+${
-              selectedObjective.points_tick
-            }</span>
+            <span title="Points per tick"
+              >+${selectedObjective.points_tick}</span
+            >
           </div>
-          <div class="last-flipped">Last flipped ${
-            selectedObjective.last_flipped
-              ? this._getFormatDistance(selectedObjective.last_flipped)
-              : ""
-          } ago</div>
+          <div class="last-flipped">
+            Last flipped
+            ${
+              selectedObjective.last_flipped
+                ? this._getFormatDistance(selectedObjective.last_flipped)
+                : ""
+            }
+            ago
+          </div>
         </div>
 
         ${
@@ -190,23 +228,25 @@ class WvwMapStats extends connect(store)(LitElement) {
             : ""
         }
 
-        <div hidden="${
-          !selectedObjective.guild_upgrades ||
-          selectedObjective.guild_upgrades.length < 1
-            ? true
-            : false
-        }">
-          <hr>
+        <div
+          ?hidden="${
+            !selectedObjective.guild_upgrades ||
+            selectedObjective.guild_upgrades.length < 1
+              ? true
+              : false
+          }"
+        >
+          <hr />
           <div class="guild-upgrades card-body">
             <h3 class="tier-title">Guild upgrades</h3>
             <div class="upgrade-list">
-            ${
-              selectedObjective.guild_upgrades
-                ? selectedObjective.guild_upgrades.map(upgradeId =>
-                    this._renderGuildUpgrade(upgradeId)
-                  )
-                : ""
-            }
+              ${
+                selectedObjective.guild_upgrades
+                  ? selectedObjective.guild_upgrades.map(upgradeId =>
+                      this._renderGuildUpgrade(upgradeId)
+                    )
+                  : ""
+              }
             </div>
           </div>
         </div>
@@ -225,9 +265,9 @@ class WvwMapStats extends connect(store)(LitElement) {
         }
 
         <div class="card-body">
-          <button class="button" on-click="${() => this._onClose()}">
+          <button class="button" @click="${() => this._onClose()}">
             Close
-            <paper-ripple></paper-ripple>  
+            <paper-ripple></paper-ripple>
           </button>
         </div>
       </div>
@@ -235,7 +275,7 @@ class WvwMapStats extends connect(store)(LitElement) {
   }
 
   /**
-   * Render a claimed by guild layout
+   * Render a claimed by guild layout.
    *
    * @param {Object} objective
    * @param {String} objective.claimed_by
@@ -244,19 +284,26 @@ class WvwMapStats extends connect(store)(LitElement) {
   _renderClaimedBy({ claimed_by, claimed_at }) {
     if (!claimed_by || !claimed_at) return;
 
+    const { emblemUrl, guildName } = this;
+    return html`
+      <div class="claimed-by card-body">
+        <img
+          class="guild-emblem"
+          src="${emblemUrl}"
+          alt="${guildName}"
+        />
+        <div class="guild-name">${guildName}</div>
+        <div class="claimed-at">
+          Claimed ${this._getFormatDistance(claimed_at)} ago
+        </div>
+      </div>
+    `;
+
+    return html`<p>test</p>`;
+
     return this._getGuild(claimed_by).then(guild => {
       const guildName = getGuildNameWithTag(guild);
-      return html`
-        <div class="claimed-by card-body">
-          <img class="guild-emblem" src="${getGuildEmblemURL(
-            guild
-          )}" alt="${guildName}">
-          <div class="guild-name">${guildName}</div>
-          <div class="claimed-at">Claimed ${this._getFormatDistance(
-            claimed_at
-          )} ago</div>
-        </div>
-      `;
+      
     });
   }
 
@@ -269,22 +316,34 @@ class WvwMapStats extends connect(store)(LitElement) {
     }
 
     return html`
-      <hr>
-      <div class$="card-body ${
-        yaksRequiredForThisTier > yaksDelivered ? "not-upgraded" : ""
-      }">
-        <h3 class="tier-title">${tier.name} ${
-      yaksRequiredForThisTier > yaksDelivered
-        ? `(${yaksRequiredForThisTier - yaksDelivered} Dolyaks remaining)`
-        : ""
-    }</h3>
+      <hr />
+      <div
+        class="card-body ${
+          yaksRequiredForThisTier > yaksDelivered ? "not-upgraded" : ""
+        }"
+      >
+        <h3 class="tier-title">
+          ${tier.name}
+          ${
+            yaksRequiredForThisTier > yaksDelivered
+              ? `(${yaksRequiredForThisTier - yaksDelivered} Dolyaks remaining)`
+              : ""
+          }
+        </h3>
         <div class="tier upgrade-list">
-          ${tier.upgrades.map(
-            upgrade =>
-              html`<img class="upgrade-icon" src="${upgrade.icon}" alt="${
-                upgrade.name
-              }" title="${upgrade.name}">`
-          )}
+          ${
+            tier.upgrades.map(
+              upgrade =>
+                html`
+                  <img
+                    class="upgrade-icon"
+                    src="${upgrade.icon}"
+                    alt="${upgrade.name}"
+                    title="${upgrade.name}"
+                  />
+                `
+            )
+          }
         </div>
       </div>
     `;
@@ -301,9 +360,12 @@ class WvwMapStats extends connect(store)(LitElement) {
     const upgrade = this._getGuildUpgrade(upgradeId);
 
     return html`
-      <img class="upgrade-icon" src="${upgrade.icon}" alt="${
-      upgrade.name
-    }" title="${upgrade.name}">
+      <img
+        class="upgrade-icon"
+        src="${upgrade.icon}"
+        alt="${upgrade.name}"
+        title="${upgrade.name}"
+      />
     `;
   }
 
@@ -335,28 +397,10 @@ class WvwMapStats extends connect(store)(LitElement) {
     });
   }
 
-  /**
-   * Object describing property-related metadata used by Polymer features
-   */
-  static get properties() {
-    return {
-      selectedObjective: Object,
-      upgrades: Array,
-      guildUpgrades: Array,
-      guilds: Array
-    };
-  }
-
-  constructor() {
-    super();
-
-    this.guilds = [];
-
-    this._loadUpgrades();
-  }
-  
   _loadUpgrades(language = "en") {
-    getGuildUpgrades(language).then(upgrades => (this.guildUpgrades = upgrades));
+    getGuildUpgrades(language).then(
+      upgrades => (this.guildUpgrades = upgrades)
+    );
     getWvwUpgrades(language).then(upgrades => (this.upgrades = upgrades));
   }
 
