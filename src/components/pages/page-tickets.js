@@ -6,54 +6,6 @@ import "gw2-coin-output/gw2-coin-output.js";
 import { SharedStyles } from "../shared-styles.js";
 
 class PageTickets extends PolymerElement {
-  static get is() {
-    return "page-tickets";
-  }
-
-  static get template() {
-    return html`
-    ${SharedStyles}
-    <style>
-      :host {
-        display: block;
-      }
-
-      .title {
-        margin-bottom: 0;
-      }
-
-      .card {
-        margin: var(--spacer-large);
-        max-width: 30rem;
-      }
-
-      gw2-coin-output {
-        display: block;
-      }
-
-      paper-spinner {
-        margin: 1.75rem 0;
-        display: block;
-      }
-    </style>
-
-    <p class="description">Ever wondered what it would cost to buy a Black Lion Claim Ticket with gold?<br> This tool does the math for you, so you don't have to.</p>
-
-    <div class="card">
-      <p class="title">Average Listing Price</p>
-      <paper-spinner active="[[averageSellLoading]]" hidden$="[[!averageSellLoading]]"></paper-spinner>
-      <gw2-coin-output class="display-3" coin-string="[[averageSell]]" hidden$="[[averageSellLoading]]"></gw2-coin-output>
-    </div>
-    <div class="card">
-      <p class="title">Average Order Price</p>
-      <paper-spinner active="[[averageBuyLoading]]" hidden$="[[!averageBuyLoading]]"></paper-spinner>
-      <gw2-coin-output class="display-3" coin-string="[[averageBuy]]" hidden$="[[averageBuyLoading]]"></gw2-coin-output>
-    </div>
-
-    <paper-toast id="toast" duration="0" text="An error occured."></paper-toast>
-    `;
-  }
-
   static get properties() {
     return {
       collectionData: {
@@ -75,6 +27,72 @@ class PageTickets extends PolymerElement {
         value: true
       }
     };
+  }
+
+  static get template() {
+    return html`
+      ${SharedStyles}
+      <style>
+        :host {
+          display: block;
+        }
+
+        .title {
+          margin-bottom: 0;
+        }
+
+        .card {
+          margin: var(--spacer-large);
+          max-width: 30rem;
+        }
+
+        gw2-coin-output {
+          display: block;
+        }
+
+        paper-spinner {
+          margin: 1.75rem 0;
+          display: block;
+        }
+      </style>
+
+      <p class="description">
+        Ever wondered what it would cost to buy a Black Lion Claim Ticket with
+        gold?<br />
+        This tool does the math for you, so you don't have to.
+      </p>
+
+      <div class="card">
+        <p class="title">Average Listing Price</p>
+        <paper-spinner
+          active="[[averageSellLoading]]"
+          hidden$="[[!averageSellLoading]]"
+        ></paper-spinner>
+        <gw2-coin-output
+          class="display-3"
+          coin-string="[[averageSell]]"
+          hidden$="[[averageSellLoading]]"
+        ></gw2-coin-output>
+      </div>
+      <div class="card">
+        <p class="title">Average Order Price</p>
+        <paper-spinner
+          active="[[averageBuyLoading]]"
+          hidden$="[[!averageBuyLoading]]"
+        ></paper-spinner>
+        <gw2-coin-output
+          class="display-3"
+          coin-string="[[averageBuy]]"
+          hidden$="[[averageBuyLoading]]"
+        ></gw2-coin-output>
+      </div>
+
+      <paper-toast
+        id="toast"
+        duration="0"
+        text="An error occured."
+      ></paper-toast>
+    `;
   }
 
   ready() {
@@ -160,4 +178,4 @@ class PageTickets extends PolymerElement {
   }
 }
 
-window.customElements.define(PageTickets.is, PageTickets);
+window.customElements.define("page-tickets", PageTickets);

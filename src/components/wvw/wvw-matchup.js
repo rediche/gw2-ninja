@@ -14,18 +14,23 @@ import { SharedWvwStyles } from "../shared-wvw-styles";
  *
  */
 class WvWMatchup extends PolymerElement {
+  static get properties() {
+    return {
+      matchup: Object,
+      worlds: Array,
+      skirmishesDesc: {
+        type: Array,
+        computed: "_reverseSkirmishes(matchup.skirmishes)"
+      }
+    };
+  }
+
   static get template() {
     return html`
-      ${SharedStyles}
-      ${SharedWvwStyles}
+      ${SharedStyles} ${SharedWvwStyles}
       <style>
         :host {
-          display: block;
           padding: var(--spacer-medium) var(--spacer-small) 0;
-        }
-
-        :host([hidden]) {
-          display: none;
         }
 
         .container {
@@ -38,13 +43,13 @@ class WvWMatchup extends PolymerElement {
         }
 
         .subtitle {
-          font-size: .75rem;
+          font-size: 0.75rem;
           font-weight: 600;
           margin-bottom: 0;
         }
 
         .subtitle:not(:first-child) {
-          margin-top: .5rem;
+          margin-top: 0.5rem;
         }
 
         .cards {
@@ -62,12 +67,12 @@ class WvWMatchup extends PolymerElement {
         .card-header {
           padding: var(--spacer-medium) var(--spacer-medium) var(--spacer-small);
           font-weight: 600;
-          box-shadow: var(--app-box-shadow);
+          box-shadow: var(--gwn-box-shadow);
           min-height: 3rem;
         }
 
         .card-header.world {
-          color: var(--app-text-color-light);
+          color: var(--gwn-text-light);
         }
 
         .card-body {
@@ -75,7 +80,7 @@ class WvWMatchup extends PolymerElement {
         }
 
         gwn-progress {
-          font-size: .75rem;
+          font-size: 0.75rem;
         }
 
         .skirmish-id {
@@ -112,36 +117,63 @@ class WvWMatchup extends PolymerElement {
         <h2 class="title">Worlds</h2>
         <div class="worlds cards">
           <div class="card">
-            <div class="world card-header team-green-bg no-text-overflow">[[ _generateWorldLinkNames(matchup.all_worlds.green, matchup.worlds.green, worlds) ]]</div>
+            <div class="world card-header team-green-bg no-text-overflow">
+              [[ _generateWorldLinkNames(matchup.all_worlds.green,
+              matchup.worlds.green, worlds) ]]
+            </div>
             <div class="card-body">
               <div>Victory Points: [[ matchup.victory_points.green ]]</div>
               <div>Score: [[ matchup.scores.green ]]</div>
               <div>Kills: [[ matchup.kills.green ]]</div>
               <div>Deaths: [[ matchup.deaths.green ]]</div>
-              <div><span title="Kill death ratio">KDR</span>: [[ _calcKDR(matchup.kills.green, matchup.deaths.green) ]]</div>
-              <div><span title="Points per tick">PPT</span>: [[ _getPPT(matchup.maps, "green") ]]</div>
+              <div>
+                <span title="Kill death ratio">KDR</span>: [[
+                _calcKDR(matchup.kills.green, matchup.deaths.green) ]]
+              </div>
+              <div>
+                <span title="Points per tick">PPT</span>: [[
+                _getPPT(matchup.maps, "green") ]]
+              </div>
             </div>
           </div>
           <div class="card">
-            <div class="world card-header team-blue-bg no-text-overflow">[[ _generateWorldLinkNames(matchup.all_worlds.blue, matchup.worlds.blue, worlds) ]]</div>
+            <div class="world card-header team-blue-bg no-text-overflow">
+              [[ _generateWorldLinkNames(matchup.all_worlds.blue,
+              matchup.worlds.blue, worlds) ]]
+            </div>
             <div class="card-body">
               <div>Victory Points: [[ matchup.victory_points.blue ]]</div>
               <div>Score: [[ matchup.scores.blue ]]</div>
               <div>Kills: [[ matchup.kills.blue ]]</div>
               <div>Deaths: [[ matchup.deaths.blue ]]</div>
-              <div><span title="Kill death ratio">KDR</span>: [[ _calcKDR(matchup.kills.blue, matchup.deaths.blue) ]]</div>
-              <div><span title="Points per tick">PPT</span>: [[ _getPPT(matchup.maps, "blue") ]]</div>
+              <div>
+                <span title="Kill death ratio">KDR</span>: [[
+                _calcKDR(matchup.kills.blue, matchup.deaths.blue) ]]
+              </div>
+              <div>
+                <span title="Points per tick">PPT</span>: [[
+                _getPPT(matchup.maps, "blue") ]]
+              </div>
             </div>
           </div>
           <div class="card">
-            <div class="world card-header team-red-bg no-text-overflow">[[ _generateWorldLinkNames(matchup.all_worlds.red, matchup.worlds.red, worlds) ]]</div>
+            <div class="world card-header team-red-bg no-text-overflow">
+              [[ _generateWorldLinkNames(matchup.all_worlds.red,
+              matchup.worlds.red, worlds) ]]
+            </div>
             <div class="card-body">
               <div>Victory Points: [[ matchup.victory_points.red ]]</div>
               <div>Score: [[ matchup.scores.red ]]</div>
               <div>Kills: [[ matchup.kills.red ]]</div>
               <div>Deaths: [[ matchup.deaths.red ]]</div>
-              <div><span title="Kill death ratio">KDR</span>: [[ _calcKDR(matchup.kills.red, matchup.deaths.red) ]]</div>
-              <div><span title="Points per tick">PPT</span>: [[ _getPPT(matchup.maps, "red") ]]</div>
+              <div>
+                <span title="Kill death ratio">KDR</span>: [[
+                _calcKDR(matchup.kills.red, matchup.deaths.red) ]]
+              </div>
+              <div>
+                <span title="Points per tick">PPT</span>: [[
+                _getPPT(matchup.maps, "red") ]]
+              </div>
             </div>
           </div>
         </div>
@@ -153,137 +185,302 @@ class WvWMatchup extends PolymerElement {
               <div class="card-header map">[[ _resolveBLName(map.type) ]]</div>
               <div class="card-body">
                 <h3 class="subtitle">Scores</h3>
-                <gwn-progress class="green" progress="[[ map.scores.green ]]" max="[[ _highestScore(map.scores) ]]">[[ map.scores.green ]]</gwn-progress>
-                <gwn-progress class="blue" progress="[[ map.scores.blue ]]" max="[[ _highestScore(map.scores) ]]">[[ map.scores.blue ]]</gwn-progress>
-                <gwn-progress class="red" progress="[[ map.scores.red ]]" max="[[ _highestScore(map.scores) ]]">[[ map.scores.red ]]</gwn-progress>
-                
+                <gwn-progress
+                  class="green"
+                  progress="[[ map.scores.green ]]"
+                  max="[[ _highestScore(map.scores) ]]"
+                  >[[ map.scores.green ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="blue"
+                  progress="[[ map.scores.blue ]]"
+                  max="[[ _highestScore(map.scores) ]]"
+                  >[[ map.scores.blue ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="red"
+                  progress="[[ map.scores.red ]]"
+                  max="[[ _highestScore(map.scores) ]]"
+                  >[[ map.scores.red ]]</gwn-progress
+                >
+
                 <h3 class="subtitle">Kills</h3>
-                <gwn-progress class="green" progress="[[ map.kills.green ]]" max="[[ _highestScore(map.kills) ]]">[[ map.kills.green ]]</gwn-progress>
-                <gwn-progress class="blue" progress="[[ map.kills.blue ]]" max="[[ _highestScore(map.kills) ]]">[[ map.kills.blue ]]</gwn-progress>
-                <gwn-progress class="red" progress="[[ map.kills.red ]]" max="[[ _highestScore(map.kills) ]]">[[ map.kills.red ]]</gwn-progress>
+                <gwn-progress
+                  class="green"
+                  progress="[[ map.kills.green ]]"
+                  max="[[ _highestScore(map.kills) ]]"
+                  >[[ map.kills.green ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="blue"
+                  progress="[[ map.kills.blue ]]"
+                  max="[[ _highestScore(map.kills) ]]"
+                  >[[ map.kills.blue ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="red"
+                  progress="[[ map.kills.red ]]"
+                  max="[[ _highestScore(map.kills) ]]"
+                  >[[ map.kills.red ]]</gwn-progress
+                >
 
                 <h3 class="subtitle">Deaths</h3>
-                <gwn-progress class="green" progress="[[ map.deaths.green ]]" max="[[ _highestScore(map.deaths) ]]">[[ map.deaths.green ]]</gwn-progress>
-                <gwn-progress class="blue" progress="[[ map.deaths.blue ]]" max="[[ _highestScore(map.deaths) ]]">[[ map.deaths.blue ]]</gwn-progress>
-                <gwn-progress class="red" progress="[[ map.deaths.red ]]" max="[[ _highestScore(map.deaths) ]]">[[ map.deaths.red ]]</gwn-progress>
+                <gwn-progress
+                  class="green"
+                  progress="[[ map.deaths.green ]]"
+                  max="[[ _highestScore(map.deaths) ]]"
+                  >[[ map.deaths.green ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="blue"
+                  progress="[[ map.deaths.blue ]]"
+                  max="[[ _highestScore(map.deaths) ]]"
+                  >[[ map.deaths.blue ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="red"
+                  progress="[[ map.deaths.red ]]"
+                  max="[[ _highestScore(map.deaths) ]]"
+                  >[[ map.deaths.red ]]</gwn-progress
+                >
 
                 <h3 class="subtitle">KDR</h3>
-                <gwn-progress 
-                  class="green" 
-                  progress="[[ _calcKDR(map.kills.green, map.deaths.green) ]]" 
-                  max="[[ _highestKDR(map.kills, map.deaths) ]]">[[ _calcKDR(map.kills.green, map.deaths.green) ]]</gwn-progress>
-                <gwn-progress 
-                  class="blue" 
-                  progress="[[ _calcKDR(map.kills.blue, map.deaths.blue) ]]" 
-                  max="[[ _highestKDR(map.kills, map.deaths) ]]">[[ _calcKDR(map.kills.blue, map.deaths.blue) ]]</gwn-progress>
-                <gwn-progress 
-                  class="red" 
-                  progress="[[ _calcKDR(map.kills.red, map.deaths.red) ]]" 
-                  max="[[ _highestKDR(map.kills, map.deaths) ]]">[[ _calcKDR(map.kills.red, map.deaths.red) ]]</gwn-progress>
+                <gwn-progress
+                  class="green"
+                  progress="[[ _calcKDR(map.kills.green, map.deaths.green) ]]"
+                  max="[[ _highestKDR(map.kills, map.deaths) ]]"
+                  >[[ _calcKDR(map.kills.green, map.deaths.green)
+                  ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="blue"
+                  progress="[[ _calcKDR(map.kills.blue, map.deaths.blue) ]]"
+                  max="[[ _highestKDR(map.kills, map.deaths) ]]"
+                  >[[ _calcKDR(map.kills.blue, map.deaths.blue) ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="red"
+                  progress="[[ _calcKDR(map.kills.red, map.deaths.red) ]]"
+                  max="[[ _highestKDR(map.kills, map.deaths) ]]"
+                  >[[ _calcKDR(map.kills.red, map.deaths.red) ]]</gwn-progress
+                >
               </div>
             </div>
           </template>
         </div>
 
         <h2 class="title">Skirmishes</h2>
-        <vaadin-grid class="card" theme="no-border row-stripes" aria-label="Skirmish overview" items="[[skirmishesDesc]]">
-          <vaadin-grid-column width="54px" flex-grow="0">
-            <template class="header">#</template>
-            <template>[[ item.id ]]</template>
-            <template class="footer">#</template>
-          </vaadin-grid-column>
+        <div class="card">
+          <vaadin-grid
+            theme="no-border row-stripes"
+            aria-label="Skirmish overview"
+            items="[[skirmishesDesc]]"
+          >
+            <vaadin-grid-column width="54px" flex-grow="0">
+              <template class="header"
+                >#</template
+              >
+              <template
+                >[[ item.id ]]</template
+              >
+              <template class="footer"
+                >#</template
+              >
+            </vaadin-grid-column>
 
-          <vaadin-grid-column>
-            <template class="header">Matchup Score</template>
-            <template>
-              <gwn-progress 
-                class="green" 
-                progress="[[ _accumulatedScore(skirmishesDesc, index, 'green') ]]" 
-                max="[[ _highestScore(matchup.scores) ]]">[[ _accumulatedScore(skirmishesDesc, index, 'green') ]]</gwn-progress>
-              <gwn-progress 
-                class="blue" 
-                progress="[[ _accumulatedScore(skirmishesDesc, index, 'blue') ]]" 
-                max="[[ _highestScore(matchup.scores) ]]">[[ _accumulatedScore(skirmishesDesc, index, 'blue') ]]</gwn-progress>
-              <gwn-progress 
-                class="red" 
-                progress="[[ _accumulatedScore(skirmishesDesc, index, 'red') ]]" 
-                max="[[ _highestScore(matchup.scores) ]]">[[ _accumulatedScore(skirmishesDesc, index, 'red') ]]</gwn-progress>
-            </template>
-            <template class="footer">Matchup Score</template>
-          </vaadin-grid-column>
+            <vaadin-grid-column>
+              <template class="header"
+                >Matchup Score</template
+              >
+              <template>
+                <gwn-progress
+                  class="green"
+                  progress="[[ _accumulatedScore(skirmishesDesc, index, 'green') ]]"
+                  max="[[ _highestScore(matchup.scores) ]]"
+                  >[[ _accumulatedScore(skirmishesDesc, index, 'green')
+                  ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="blue"
+                  progress="[[ _accumulatedScore(skirmishesDesc, index, 'blue') ]]"
+                  max="[[ _highestScore(matchup.scores) ]]"
+                  >[[ _accumulatedScore(skirmishesDesc, index, 'blue')
+                  ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="red"
+                  progress="[[ _accumulatedScore(skirmishesDesc, index, 'red') ]]"
+                  max="[[ _highestScore(matchup.scores) ]]"
+                  >[[ _accumulatedScore(skirmishesDesc, index, 'red')
+                  ]]</gwn-progress
+                >
+              </template>
+              <template class="footer"
+                >Matchup Score</template
+              >
+            </vaadin-grid-column>
 
-          <vaadin-grid-column>
-            <template class="header">Skirmish Score</template>
-            <template>
-              <gwn-progress class="green" progress="[[ item.scores.green ]]" max="[[ _highestScore(item.scores) ]]">[[ item.scores.green ]]</gwn-progress>
-              <gwn-progress class="blue" progress="[[ item.scores.blue ]]" max="[[ _highestScore(item.scores) ]]">[[ item.scores.blue ]]</gwn-progress>
-              <gwn-progress class="red" progress="[[ item.scores.red ]]" max="[[ _highestScore(item.scores) ]]">[[ item.scores.red ]]</gwn-progress>
-            </template>
-            <template class="footer">Skirmish Score</template>
-          </vaadin-grid-column>
+            <vaadin-grid-column>
+              <template class="header"
+                >Skirmish Score</template
+              >
+              <template>
+                <gwn-progress
+                  class="green"
+                  progress="[[ item.scores.green ]]"
+                  max="[[ _highestScore(item.scores) ]]"
+                  >[[ item.scores.green ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="blue"
+                  progress="[[ item.scores.blue ]]"
+                  max="[[ _highestScore(item.scores) ]]"
+                  >[[ item.scores.blue ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="red"
+                  progress="[[ item.scores.red ]]"
+                  max="[[ _highestScore(item.scores) ]]"
+                  >[[ item.scores.red ]]</gwn-progress
+                >
+              </template>
+              <template class="footer"
+                >Skirmish Score</template
+              >
+            </vaadin-grid-column>
 
-          <vaadin-grid-column>
-            <template class="header">Eternal Battlegrounds</template>
-            <template>
-              <gwn-progress class="green" progress="[[ item.map_scores.0.scores.green ]]" max="[[ _highestScore(item.map_scores.0.scores) ]]">[[ item.map_scores.0.scores.green ]]</gwn-progress>
-              <gwn-progress class="blue" progress="[[ item.map_scores.0.scores.blue ]]" max="[[ _highestScore(item.map_scores.0.scores) ]]">[[ item.map_scores.0.scores.blue ]]</gwn-progress>
-              <gwn-progress class="red" progress="[[ item.map_scores.0.scores.red ]]" max="[[ _highestScore(item.map_scores.0.scores) ]]">[[ item.map_scores.0.scores.red ]]</gwn-progress>
-            </template>
-            <template class="footer">Eternal Battlegrounds</template>
-          </vaadin-grid-column>
+            <vaadin-grid-column>
+              <template class="header"
+                >Eternal Battlegrounds</template
+              >
+              <template>
+                <gwn-progress
+                  class="green"
+                  progress="[[ item.map_scores.0.scores.green ]]"
+                  max="[[ _highestScore(item.map_scores.0.scores) ]]"
+                  >[[ item.map_scores.0.scores.green ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="blue"
+                  progress="[[ item.map_scores.0.scores.blue ]]"
+                  max="[[ _highestScore(item.map_scores.0.scores) ]]"
+                  >[[ item.map_scores.0.scores.blue ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="red"
+                  progress="[[ item.map_scores.0.scores.red ]]"
+                  max="[[ _highestScore(item.map_scores.0.scores) ]]"
+                  >[[ item.map_scores.0.scores.red ]]</gwn-progress
+                >
+              </template>
+              <template class="footer"
+                >Eternal Battlegrounds</template
+              >
+            </vaadin-grid-column>
 
-          <vaadin-grid-column>
-            <template class="header">Red Borderland</template>
-            <template>
-              <gwn-progress class="green" progress="[[ item.map_scores.1.scores.green ]]" max="[[ _highestScore(item.map_scores.1.scores) ]]">[[ item.map_scores.1.scores.green ]]</gwn-progress>
-              <gwn-progress class="blue" progress="[[ item.map_scores.1.scores.blue ]]" max="[[ _highestScore(item.map_scores.1.scores) ]]">[[ item.map_scores.1.scores.blue ]]</gwn-progress>
-              <gwn-progress class="red" progress="[[ item.map_scores.1.scores.red ]]" max="[[ _highestScore(item.map_scores.1.scores) ]]">[[ item.map_scores.1.scores.red ]]</gwn-progress>
-            </template>
-            <template class="footer">Red Borderland</template>
-          </vaadin-grid-column>
+            <vaadin-grid-column>
+              <template class="header"
+                >Red Borderland</template
+              >
+              <template>
+                <gwn-progress
+                  class="green"
+                  progress="[[ item.map_scores.1.scores.green ]]"
+                  max="[[ _highestScore(item.map_scores.1.scores) ]]"
+                  >[[ item.map_scores.1.scores.green ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="blue"
+                  progress="[[ item.map_scores.1.scores.blue ]]"
+                  max="[[ _highestScore(item.map_scores.1.scores) ]]"
+                  >[[ item.map_scores.1.scores.blue ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="red"
+                  progress="[[ item.map_scores.1.scores.red ]]"
+                  max="[[ _highestScore(item.map_scores.1.scores) ]]"
+                  >[[ item.map_scores.1.scores.red ]]</gwn-progress
+                >
+              </template>
+              <template class="footer"
+                >Red Borderland</template
+              >
+            </vaadin-grid-column>
 
-          <vaadin-grid-column>
-            <template class="header">Blue Borderland</template>
-            <template>
-              <gwn-progress class="green" progress="[[ item.map_scores.2.scores.green ]]" max="[[ _highestScore(item.map_scores.2.scores) ]]">[[ item.map_scores.2.scores.green ]]</gwn-progress>
-              <gwn-progress class="blue" progress="[[ item.map_scores.2.scores.blue ]]" max="[[ _highestScore(item.map_scores.2.scores) ]]">[[ item.map_scores.2.scores.blue ]]</gwn-progress>
-              <gwn-progress class="red" progress="[[ item.map_scores.2.scores.red ]]" max="[[ _highestScore(item.map_scores.2.scores) ]]">[[ item.map_scores.2.scores.red ]]</gwn-progress>
-            </template>
-            <template class="footer">Blue Borderland</template>
-          </vaadin-grid-column>
+            <vaadin-grid-column>
+              <template class="header"
+                >Blue Borderland</template
+              >
+              <template>
+                <gwn-progress
+                  class="green"
+                  progress="[[ item.map_scores.2.scores.green ]]"
+                  max="[[ _highestScore(item.map_scores.2.scores) ]]"
+                  >[[ item.map_scores.2.scores.green ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="blue"
+                  progress="[[ item.map_scores.2.scores.blue ]]"
+                  max="[[ _highestScore(item.map_scores.2.scores) ]]"
+                  >[[ item.map_scores.2.scores.blue ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="red"
+                  progress="[[ item.map_scores.2.scores.red ]]"
+                  max="[[ _highestScore(item.map_scores.2.scores) ]]"
+                  >[[ item.map_scores.2.scores.red ]]</gwn-progress
+                >
+              </template>
+              <template class="footer"
+                >Blue Borderland</template
+              >
+            </vaadin-grid-column>
 
-          <vaadin-grid-column>
-            <template class="header">Green Borderland</template>
-            <template>
-              <gwn-progress class="green" progress="[[ item.map_scores.3.scores.green ]]" max="[[ _highestScore(item.map_scores.3.scores) ]]">[[ item.map_scores.3.scores.green ]]</gwn-progress>
-              <gwn-progress class="blue" progress="[[ item.map_scores.3.scores.blue ]]" max="[[ _highestScore(item.map_scores.3.scores) ]]">[[ item.map_scores.3.scores.blue ]]</gwn-progress>
-              <gwn-progress class="red" progress="[[ item.map_scores.3.scores.red ]]" max="[[ _highestScore(item.map_scores.3.scores) ]]">[[ item.map_scores.3.scores.red ]]</gwn-progress>
-            </template>
-            <template class="footer">Green Borderland</template>
-          </vaadin-grid-column>
-        </vaadin-grid>
+            <vaadin-grid-column>
+              <template class="header"
+                >Green Borderland</template
+              >
+              <template>
+                <gwn-progress
+                  class="green"
+                  progress="[[ item.map_scores.3.scores.green ]]"
+                  max="[[ _highestScore(item.map_scores.3.scores) ]]"
+                  >[[ item.map_scores.3.scores.green ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="blue"
+                  progress="[[ item.map_scores.3.scores.blue ]]"
+                  max="[[ _highestScore(item.map_scores.3.scores) ]]"
+                  >[[ item.map_scores.3.scores.blue ]]</gwn-progress
+                >
+                <gwn-progress
+                  class="red"
+                  progress="[[ item.map_scores.3.scores.red ]]"
+                  max="[[ _highestScore(item.map_scores.3.scores) ]]"
+                  >[[ item.map_scores.3.scores.red ]]</gwn-progress
+                >
+              </template>
+              <template class="footer"
+                >Green Borderland</template
+              >
+            </vaadin-grid-column>
+          </vaadin-grid>
+        </div>
       </div>
     `;
-  }
-
-  static get properties() {
-    return {
-      matchup: Object,
-      worlds: Array,
-      skirmishesDesc: {
-        type: Array,
-        computed: "_reverseSkirmishes(matchup.skirmishes)"
-      }
-    };
   }
 
   _getPPT(maps, color) {
     if (!maps || !color) return;
     return maps.reduce((totalPPT, map) => {
-      return totalPPT + map.objectives.reduce((mapPPT, objective) => {
-        if (objective.owner.toLowerCase() == color) return mapPPT + objective.points_tick;
-        return mapPPT;
-      }, 0);
+      return (
+        totalPPT +
+        map.objectives.reduce((mapPPT, objective) => {
+          if (objective.owner.toLowerCase() == color)
+            return mapPPT + objective.points_tick;
+          return mapPPT;
+        }, 0)
+      );
     }, 0);
   }
 
@@ -322,7 +519,11 @@ class WvWMatchup extends PolymerElement {
 
   _highestKDR(kills, deaths) {
     if (!kills || !deaths) return;
-    return Math.max(this._calcKDR(kills.green, deaths.green), this._calcKDR(kills.blue, deaths.blue), this._calcKDR(kills.red, deaths.red));
+    return Math.max(
+      this._calcKDR(kills.green, deaths.green),
+      this._calcKDR(kills.blue, deaths.blue),
+      this._calcKDR(kills.red, deaths.red)
+    );
   }
 
   _highestScore(scores) {

@@ -30,8 +30,8 @@ class PageTimer extends connect(store)(PolymerElement) {
 
         paper-tabs {
           margin-bottom: var(--spacer-large);
-          background-color: var(--app-primary-color);
-          --paper-tabs-selection-bar-color: #ffffff;
+          background-color: var(--gwn-primary);
+          --paper-tabs-selection-bar-color: var(--gwn-on-primary);
         }
 
         paper-tab {
@@ -48,11 +48,11 @@ class PageTimer extends connect(store)(PolymerElement) {
         .pointer {
           position: absolute;
           height: 100%;
-          border-left: 2px solid #f44336;
+          border-left: 2px solid var(--color-guild-wars-2);
           z-index: 400;
           top: 0;
           transition: left 1s ease-in-out;
-          color: white;
+          color: #ffffff;
         }
 
         .pointer > span {
@@ -64,13 +64,15 @@ class PageTimer extends connect(store)(PolymerElement) {
           position: absolute;
           top: 1.75rem;
           font-weight: 800;
-          color: #b9b9b9;
+          color: var(--gwn-on-background);
           width: 10rem;
         }
 
         .pointer > span.server {
           left: 0;
-          background: #f44336;
+          background-color: var(--color-guild-wars-2);
+          border-top-right-radius: var(--gwn-border-radius);
+          border-bottom-right-radius: var(--gwn-border-radius);
         }
 
         .pointer > span.server strong {
@@ -79,7 +81,10 @@ class PageTimer extends connect(store)(PolymerElement) {
 
         .pointer > span.local {
           right: 0.125rem;
-          background: #b6b6b6;
+          background-color: #efefef;
+          color: var(--gwn-text-dark);
+          border-top-left-radius: var(--gwn-border-radius);
+          border-bottom-left-radius: var(--gwn-border-radius);
         }
 
         .pointer > span.local strong {
@@ -90,19 +95,22 @@ class PageTimer extends connect(store)(PolymerElement) {
         .bar {
           display: flex;
           flex-wrap: nowrap;
-          margin-bottom: 1rem;
-          overflow: hidden;
+          margin-bottom: var(--spacer-medium);
         }
 
         .meta-name {
           font-weight: 800;
           margin: 0 0 0.25rem;
           margin-left: var(--spacer-medium);
+          color: var(--gwn-on-background);
         }
 
         .phase {
           padding: 0.5rem;
-          box-sizing: border-box;
+          margin: 0 .125rem;
+          border-radius: var(--gwn-border-radius);
+          box-shadow: var(--gwn-box-shadow);
+          overflow: hidden;
         }
 
         .phase-name {
@@ -115,12 +123,6 @@ class PageTimer extends connect(store)(PolymerElement) {
 
         :host([size="compact"]) .bar {
           margin-bottom: .75rem;
-        }
-
-        @media screen and (min-width: 640px) {
-          :host {
-            padding-bottom: var(--spacer-large);
-          }
         }
       </style>
 
@@ -164,7 +166,7 @@ class PageTimer extends connect(store)(PolymerElement) {
               <template is="dom-repeat" items="[[ meta.phases ]]" as="phase">
                 <div
                   class="phase"
-                  style$="background: [[ phase.color ]]; width:[[ _calcPhaseWidth(phase.duration) ]]%;"
+                  style$="background: [[ phase.color ]]; width:calc([[ _calcPhaseWidth(phase.duration) ]]% - .25rem);"
                 >
                   <div class="phase-time" hidden$="[[ _isCompact(size) ]]">
                     [[ phase.hour ]]:[[ phase.minute ]]

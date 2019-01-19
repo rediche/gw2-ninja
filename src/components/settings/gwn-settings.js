@@ -22,20 +22,12 @@ class GWNSettings extends PolymerElement {
 
   static get template() {
     return html`
-      ${SharedStyles}
-      ${SettingsStyles}
+      ${SharedStyles} ${SettingsStyles}
       <style>
-        :host {
-          display: block;
-        }
-
-        :host([hidden]) {
-          display: none;
-        }
-
         .headline {
           margin-bottom: 0;
           font-weight: bold;
+          color: var(--gwn-on-surface);
         }
       </style>
       <gwn-modal hidden="{{!open}}">

@@ -12,13 +12,15 @@ class PageCalc extends PolymerElement {
     ${SharedStyles}
     <style>
       :host {
-        display: block;
-
         padding: var(--spacer-large);
 
         /* gw2-tpcalc */
-        --gw2-tpcalc-card-background-color: #fff;
-        --gw2-tpcalc-card-color: #000;
+        --gw2-tpcalc-card-background-color: var(--gwn-surface);
+        --gw2-tpcalc-card-color: var(--gwn-on-surface);
+        --paper-input-container-input-color: var(--gwn-on-surface);
+        --paper-font-subhead: {
+          font-family: var(--gwn-font-family);
+        }
       }
 
       gw2-tpcalc {

@@ -3,16 +3,16 @@ import "@polymer/paper-dropdown-menu/paper-dropdown-menu.js";
 import "@polymer/paper-listbox/paper-listbox.js";
 import "@polymer/paper-item/paper-item.js";
 
-import { connect } from 'pwa-helpers/connect-mixin.js';
+import { connect } from "pwa-helpers/connect-mixin.js";
 
 // Load redux store
-import { store } from '../../store.js';
+import { store } from "../../store.js";
 
 // These are the actions needed by this element.
-import { changeTimer } from '../../actions/settings.js';
+import { changeTimer } from "../../actions/settings.js";
 
 // Lazy load reducers
-import settings from '../../reducers/settings.js';
+import settings from "../../reducers/settings.js";
 store.addReducers({
   settings
 });
@@ -33,20 +33,15 @@ class GWNSettingTimer extends connect(store)(PolymerElement) {
 
   static get template() {
     return html`
-      ${SharedStyles}
-      ${SettingsStyles}
-      <style>
-        :host {
-          display: block;
-        }
-
-        :host([hidden]) {
-          display: none;
-        }
-      </style>
+      ${SharedStyles} ${SettingsStyles}
 
       <paper-dropdown-menu label="Timer size">
-        <paper-listbox slot="dropdown-content" class="dropdown-content" selected="{{timer}}" attr-for-selected="value">
+        <paper-listbox
+          slot="dropdown-content"
+          class="dropdown-content"
+          selected="{{timer}}"
+          attr-for-selected="value"
+        >
           <paper-item value="normal">Normal</paper-item>
           <paper-item value="compact">Compact</paper-item>
         </paper-listbox>
@@ -61,7 +56,7 @@ class GWNSettingTimer extends connect(store)(PolymerElement) {
 
   _stateChanged(state) {
     if (!state || !state.settings) return;
-    this.set('timer', state.settings.timer);
+    this.set("timer", state.settings.timer);
   }
 }
 

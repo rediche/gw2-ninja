@@ -17,14 +17,6 @@ class TypeSelector extends PolymerElement {
     return html`
       ${SharedStyles}
       <style>
-        :host {
-          display: block;
-        }
-
-        :host([hidden]) {
-          display: none;
-        }
-
         paper-dropdown-menu {
           width: 100%;
         }
@@ -36,7 +28,11 @@ class TypeSelector extends PolymerElement {
       </style>
 
       <paper-dropdown-menu label="Type">
-        <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selected }}">
+        <paper-listbox
+          slot="dropdown-content"
+          attr-for-selected="name"
+          selected="{{ selected }}"
+        >
           <paper-item name="account">Account</paper-item>
           <paper-item name="pve">PvE</paper-item>
           <paper-item name="pvp">PvP</paper-item>
