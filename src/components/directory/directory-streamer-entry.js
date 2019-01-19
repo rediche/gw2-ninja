@@ -7,15 +7,8 @@ class DirectoryEntry extends PolymerElement {
     return {
       name: String,
       url: String,
-      description: String,
-      inactive: {
-        type: Boolean,
-        value: false
-      },
-      approval: {
-        type: String,
-        value: null
-      }
+      live: String,
+      description: String
     };
   }
 
@@ -77,47 +70,58 @@ class DirectoryEntry extends PolymerElement {
           height: 100%;
           display: flex;
           flex-direction: column;
+          padding: 0;
         }
 
-        .title,
-        .links {
+        .inner {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          padding: var(--spacer-medium);
+        }
+
+        .title {
           flex: none;
         }
 
         .entry-description {
           flex: 1;
         }
+
+        .embed-container {
+          position: relative;
+          padding-bottom: 56.25%;
+          height: 0;
+          overflow: hidden;
+          max-width: 100%;
+        }
+
+        .embed-container iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
       </style>
 
       <div class="card">
-        <h6 class="title">
-          [[ name ]] <span hidden$="[[ !inactive ]]">- Inactive</span>
-        </h6>
-        <p class="entry-description">[[ description ]]</p>
-
-        <div class="links">
-          <a
-            class="secondary"
-            hidden$="[[ !approval ]]"
-            href="[[ approval ]]"
-            target="_blank"
-            rel="noopener noreferrer nofollow"
+        <div class="embed-container">
+          <iframe
+            src="https://player.twitch.tv/?channel=[[ name ]]&autoplay=false"
+            frameborder=0"
+            scrolling="no"
+            allowfullscreen="false"
           >
-            Official Approval
-            <paper-ripple></paper-ripple>
-          </a>
-          <a
-            href="[[ url ]]"
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            Visit [[ name ]]
-            <paper-ripple></paper-ripple>
-          </a>
+          </iframe>
+        </div>
+        <div class="inner">
+          <h6 class="title">[[ name ]]</h6>
+          <p class="entry-description">[[ description ]]</p>
         </div>
       </div>
     `;
   }
 }
 
-window.customElements.define("directory-entry", DirectoryEntry);
+window.customElements.define("directory-streamer-entry", DirectoryEntry);

@@ -945,14 +945,14 @@
   {
     "name": "Bodydoc",
     "description": "",
-    "url": "bodydoc/",
+    "url": "bodydoc",
     "directory": "streamers",
     "platform": "twitch"
   },
   {
     "name": "The Lord Helseth",
     "description": "High ranked PvP player.",
-    "url": "thelordhelseth/",
+    "url": "thelordhelseth",
     "directory": "streamers",
     "platform": "twitch"
   },
@@ -981,6 +981,20 @@
     "name": "Seven",
     "description": "",
     "url": "chill_seven",
+    "directory": "streamers",
+    "platform": "twitch"
+  },
+  {
+    "name": "Vallun",
+    "description": "",
+    "url": "vallun",
+    "directory": "streamers",
+    "platform": "twitch"
+  },
+  {
+    "name": "irAjaxx",
+    "description": "",
+    "url": "irAjaxx",
     "directory": "streamers",
     "platform": "twitch"
   },
