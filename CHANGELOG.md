@@ -1,6 +1,6 @@
 # Next release
 
-- 
+- Update dependency lit-element.
 
 # January 19, 2019 - v2.8.0
 

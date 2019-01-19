@@ -1,4 +1,4 @@
-import { LitElement, html } from "@polymer/lit-element";
+import { LitElement, html } from "lit-element";
 
 /**
  * `gwn-progress`
@@ -11,12 +11,19 @@ import { LitElement, html } from "@polymer/lit-element";
 class GWNProgress extends LitElement {
   static get properties() {
     return {
-      progress: Number,
-      max: Number
+      progress: { type: Number },
+      max: { type: Number }
     };
   }
 
-  _render({ progress, max }) {
+  constructor() {
+    super();
+    this.progress = 50;
+    this.max = 100;
+  }
+
+  render() {
+    const { progress, max } = this;
     return html`
       <style>
         :host {
@@ -39,17 +46,10 @@ class GWNProgress extends LitElement {
         }
       </style>
 
-      <div class="progress" style$="width: ${(progress / max) * 100}%;">
+      <div class="progress" style="width: ${(progress / max) * 100}%;">
         <slot></slot>
       </div>
     `;
-  }
-
-  constructor() {
-    super();
-
-    this.progress = 50;
-    this.max = 100;
   }
 }
 

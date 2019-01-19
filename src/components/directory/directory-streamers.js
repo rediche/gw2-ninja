@@ -1,4 +1,4 @@
-import { LitElement, html } from "@polymer/lit-element";
+import { LitElement, html } from "lit-element";
 
 import config from "../../../config";
 import "./directory-entry";
@@ -15,12 +15,13 @@ import "./directory-streamer-entry";
 class DirectoryStreamers extends LitElement {
   static get properties() {
     return {
-      streamers: Array,
-      streamersLive: Array
+      streamers: { type: Array },
+      streamersLive: { type: Array }
     };
   }
 
-  _render({ streamers, streamersLive }) {
+  render() {
+    const { streamers, streamersLive } = this;
     const hasStreamersLive = streamersLive.length > 0;
 
     return html`
@@ -34,7 +35,7 @@ class DirectoryStreamers extends LitElement {
 
         h2 {
           width: 100%;
-          color: var(--gwn-on-background)
+          color: var(--gwn-on-background);
         }
 
         directory-entry,
@@ -52,9 +53,25 @@ class DirectoryStreamers extends LitElement {
         }
       </style>
 
-      ${ hasStreamersLive ? html`<h2>Live</h2>` : ""}
-      ${ hasStreamersLive ? this._renderStreamerLiveList(streamersLive, streamers) : ""}
-      ${ hasStreamersLive ? html`<h2>Directory</h2>` : ""}
+      ${
+        hasStreamersLive
+          ? html`
+              <h2>Live</h2>
+            `
+          : ""
+      }
+      ${
+        hasStreamersLive
+          ? this._renderStreamerLiveList(streamersLive, streamers)
+          : ""
+      }
+      ${
+        hasStreamersLive
+          ? html`
+              <h2>Directory</h2>
+            `
+          : ""
+      }
       ${this._renderStreamerList(streamers)}
     `;
   }
@@ -66,15 +83,8 @@ class DirectoryStreamers extends LitElement {
     this.streamersLive = [];
   }
 
-  _propertiesChanged(props, changedProps, prevProps) {
-    super._propertiesChanged(props, changedProps, prevProps);
-
-    if (
-      props.streamers &&
-      props.streamers.length > 0 &&
-      prevProps.streamers &&
-      props.streamers.length != prevProps.streamers.length
-    ) {
+  updated(changedProps) {
+    if (changedProps.get("streamers") && this.streamers.length > 0) {
       const twitchStreamers = this._filterTwitchStreamers(this.streamers);
 
       this._loadStreamersFromTwitch(twitchStreamers)
@@ -85,28 +95,30 @@ class DirectoryStreamers extends LitElement {
           console.log(error);
         });
     }
-    
   }
 
   _renderStreamerLiveList(streamersLive, streamers) {
     return html`
-    ${
-      streamersLive &&
-        streamersLive.map(streamer => {
-          const streamerInfo = streamers.find(streamerInfo => {
-            return streamer.user_name.toLowerCase() == streamerInfo.url.toLowerCase();
-          });
+      ${
+        streamersLive &&
+          streamersLive.map(streamer => {
+            const streamerInfo = streamers.find(streamerInfo => {
+              return (
+                streamer.user_name.toLowerCase() ==
+                streamerInfo.url.toLowerCase()
+              );
+            });
 
-          return html`
-            <directory-streamer-entry
-              name="${streamer.user_name}"
-              url="${this._resolvePlatformSpecificUrl(streamer)}"
-              description="${streamerInfo ? streamerInfo.description : ""}"
-            ></directory-streamer-entry>
-          `;
-        })
-    }
-  `;
+            return html`
+              <directory-streamer-entry
+                name="${streamer.user_name}"
+                url="${this._resolvePlatformSpecificUrl(streamer)}"
+                description="${streamerInfo ? streamerInfo.description : ""}"
+              ></directory-streamer-entry>
+            `;
+          })
+      }
+    `;
   }
 
   _renderStreamerList(streamers) {
