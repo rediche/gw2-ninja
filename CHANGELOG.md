@@ -1,7 +1,12 @@
 # Next release
 
+- 
+
+# January 19, 2019 - v2.8.0
+
 - Add darkmode theme.
 - Show streamers that are currently live.
+- Added a few more streamers.
 
 # January 11, 2019 - v2.7.2
 
