@@ -1,6 +1,9 @@
 # Next release
 
+# January 20, 2019 - v2.8.2
+
 - Update dependency lit-element.
+- Add new black lion collections.
 
 # January 19, 2019 - v2.8.0
 

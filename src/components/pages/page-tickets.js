@@ -70,6 +70,7 @@ class PageTickets extends PolymerElement {
         ></paper-spinner>
         <gw2-coin-output
           class="display-3"
+          prepend-zeroes
           coin-string="[[averageSell]]"
           hidden$="[[averageSellLoading]]"
         ></gw2-coin-output>
@@ -82,6 +83,7 @@ class PageTickets extends PolymerElement {
         ></paper-spinner>
         <gw2-coin-output
           class="display-3"
+          prepend-zeroes
           coin-string="[[averageBuy]]"
           hidden$="[[averageBuyLoading]]"
         ></gw2-coin-output>
