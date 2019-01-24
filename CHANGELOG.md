@@ -1,10 +1,15 @@
 # Next release
 
+-
+
+# January 24, 2019 - v2.8.8
+
 - Change live streamers from embed to thumbnail with playbutton.
 - Add disaproval to streamers.
 - Add black lion mini collections.
 - Add dark theme tables.
 - Remove "inactive" label from directory.
+- Fix wrong text color on WvW page error message.
 
 # January 20, 2019 - v2.8.2
 
