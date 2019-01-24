@@ -1,5 +1,7 @@
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import "@polymer/paper-ripple/paper-ripple.js";
+import "@polymer/iron-icon/iron-icon.js";
+import "@polymer/iron-icons/av-icons.js";
 import { SharedStyles } from "../shared-styles.js";
 
 class DirectoryEntry extends PolymerElement {
@@ -8,7 +10,8 @@ class DirectoryEntry extends PolymerElement {
       name: String,
       url: String,
       live: String,
-      description: String
+      description: String,
+      thumbnail: String
     };
   }
 
@@ -18,36 +21,6 @@ class DirectoryEntry extends PolymerElement {
       <style>
         :host {
           box-sizing: border-box;
-        }
-
-        .links {
-          display: flex;
-        }
-
-        a {
-          position: relative;
-          flex: 1;
-          padding: 0.5rem 1rem;
-          text-align: center;
-          border-radius: var(--gwn-border-radius);
-          background-color: var(--gwn-primary);
-          color: var(--gwn-on-primary);
-          text-decoration: none;
-          margin-right: 1rem;
-          font-size: 0.85rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        a:last-of-type {
-          margin-right: 0;
-        }
-
-        a.secondary {
-          background-color: transparent;
-          color: var(--gwn-on-surface);
-          border: 1px solid var(--gwn-on-surface);
         }
 
         h6 {
@@ -96,25 +69,36 @@ class DirectoryEntry extends PolymerElement {
           max-width: 100%;
         }
 
-        .embed-container iframe {
+        .embed-container .play {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 3rem;
+          height: 3rem;
+          color: var(--gwn-on-primary);
+          background-color: var(--gwn-primary);
+          box-shadow: var(--gwn-box-shadow);
+          border-radius: 100%;
+        }
+
+        .embed-container img {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
+          object-fit: cover;
         }
       </style>
 
       <div class="card">
-        <div class="embed-container">
-          <iframe
-            src="https://player.twitch.tv/?channel=[[ name ]]&autoplay=false"
-            frameborder=0"
-            scrolling="no"
-            allowfullscreen="false"
-          >
-          </iframe>
-        </div>
+        <a href="[[ url ]]" target="_blank" rel="noopener noreferrer">
+          <div class="embed-container">
+            <img src="[[ thumbnail ]]" alt="[[ name ]]" />
+            <iron-icon class="play" icon="av:play-arrow"></iron-icon>
+          </div>
+        </a>
         <div class="inner">
           <h6 class="title">[[ name ]]</h6>
           <p class="entry-description">[[ description ]]</p>

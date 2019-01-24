@@ -89,6 +89,7 @@ class DirectoryStreamers extends LitElement {
 
       this._loadStreamersFromTwitch(twitchStreamers)
         .then(data => {
+          console.log(data);
           this.streamersLive = data;
         })
         .catch(error => {
@@ -112,8 +113,20 @@ class DirectoryStreamers extends LitElement {
             return html`
               <directory-streamer-entry
                 name="${streamer.user_name}"
-                url="${this._resolvePlatformSpecificUrl(streamer)}"
+                url="${
+                  this._resolvePlatformSpecificUrl({
+                    url: streamer.user_name,
+                    platform: "twitch"
+                  })
+                }"
                 description="${streamerInfo ? streamerInfo.description : ""}"
+                thumbnail="${
+                  this._getThumbnailUrlWithSize(
+                    streamer.thumbnail_url,
+                    514,
+                    290
+                  )
+                }"
               ></directory-streamer-entry>
             `;
           })
@@ -137,6 +150,10 @@ class DirectoryStreamers extends LitElement {
           })
       }
     `;
+  }
+
+  _getThumbnailUrlWithSize(url, width, height) {
+    return url.replace("{width}", width).replace("{height}", height);
   }
 
   _resolvePlatformSpecificUrl({ url, platform }) {

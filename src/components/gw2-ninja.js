@@ -98,8 +98,6 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
 
           /* Main variables */
           --gwn-text-light: #ffffff;
-
-          --gwn-text-light: #ffffff;
           --gwn-text-dark: #333333;
 
           --gwn-primary: var(--color-path-of-fire);

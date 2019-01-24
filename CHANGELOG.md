@@ -1,5 +1,7 @@
 # Next release
 
+- Change live streamers from embed to thumbnail with playbutton.
+
 # January 20, 2019 - v2.8.2
 
 - Update dependency lit-element.
