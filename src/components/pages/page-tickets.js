@@ -111,12 +111,14 @@ class PageTickets extends PolymerElement {
     let totalBuy = 0;
     let totalSell = 0;
 
-    collectionData.forEach(collection => {
-      let tempTotals = this._calcTotalPrices(collection.items);
-      totalBuy += tempTotals.buys;
-      totalSell += tempTotals.sells;
-      totalWeapons += collection.items.length;
-      totalTickets += collection.tickets * collection.items.length;
+    collectionData.map(collection => {
+      if (collection.tickets) {
+        let tempTotals = this._calcTotalPrices(collection.items);
+        totalBuy += tempTotals.buys;
+        totalSell += tempTotals.sells;
+        totalWeapons += collection.items.length;
+        totalTickets += collection.tickets * collection.items.length;
+      }
     });
 
     let averageBuy = totalBuy / totalWeapons / (totalTickets / totalWeapons);
@@ -129,17 +131,15 @@ class PageTickets extends PolymerElement {
   }
 
   _calcTotalPrices(items) {
-    let totals = {
-      buys: 0,
-      sells: 0
-    };
-
-    items.forEach(item => {
-      totals.sells += item.sells.unit_price;
-      totals.buys += item.buys.unit_price;
-    });
-
-    return totals;
+    return items.reduce(
+      (totals, item) => {
+        return {
+          buys: (totals.buys += item.buys.unit_price),
+          sells: (totals.sells += item.sells.unit_price)
+        };
+      },
+      { buys: 0, sells: 0 }
+    );
   }
 
   async _loadCollectionData() {

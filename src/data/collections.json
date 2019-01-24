@@ -873,6 +873,70 @@
     "tickets": 3
   },
   {
+    "name": "Mini Griffon Hatchling Collection",
+    "ids": [
+      87471,
+      87475,
+      87400,
+      87395,
+      87450,
+      87394,
+      87387,
+      87390,
+      87421,
+      87470
+    ],
+    "category": "blacklion"
+  },
+  {
+    "name": "Mini Jackal Pup Collection",
+    "ids": [
+      86742,
+      86811,
+      86754,
+      86856,
+      86760,
+      86833,
+      86785,
+      86767,
+      86740,
+      86868
+    ],
+    "category": "blacklion"
+  },
+  {
+    "name": "Mini Raptor Hatchling Collection",
+    "ids": [
+      84864,
+      85057,
+      85211,
+      85278,
+      85158,
+      84948,
+      85303,
+      84946,
+      84990,
+      85069
+    ],
+    "category": "blacklion"
+  },
+  {
+    "name": "Mini Springer Kit Collection",
+    "ids": [
+      88374,
+      88399,
+      88423,
+      88378,
+      88416,
+      88368,
+      88391,
+      88470,
+      88381,
+      88446
+    ],
+    "category": "blacklion"
+  },
+  {
     "name": "Mordrem Weapon Collection",
     "ids": [
       68578,
