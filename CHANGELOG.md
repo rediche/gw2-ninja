@@ -1,6 +1,7 @@
 # Next release
 
 - Change live streamers from embed to thumbnail with playbutton.
+- Add disaproval to streamers.
 
 # January 20, 2019 - v2.8.2
 
