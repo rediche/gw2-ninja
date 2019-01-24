@@ -139,6 +139,7 @@ class PageWvw extends connect(store)(PolymerElement) {
         }
 
         .error-msg {
+          color: var(--gwn-on-background);
           margin: var(--spacer-medium);
           font-weight: 600;
         }
