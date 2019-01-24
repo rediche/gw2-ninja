@@ -66,7 +66,7 @@ class CollectionList extends connect(store)(
 
       <div class="card">
         <vaadin-grid
-          theme="no-border row-stripes"
+          theme$="no-border row-stripes [[theme]]"
           height-by-rows
           items="[[collectionData]]"
         >
@@ -133,7 +133,8 @@ class CollectionList extends connect(store)(
    */
   static get properties() {
     return {
-      collectionData: Array
+      collectionData: Array,
+      theme: String
     };
   }
 
@@ -153,9 +154,9 @@ class CollectionList extends connect(store)(
   }
 
   // This is called every time something is updated in the store.
-  _stateChanged(state) {
-    if (!state) return;
-    //this.set('open', state.collections.collectionModalOpened);
+  _stateChanged({ settings }) {
+    if (!settings) return;
+    this.set("theme", settings.theme);
   }
 }
 

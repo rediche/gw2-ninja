@@ -1,7 +1,8 @@
 import { html } from "@polymer/polymer/polymer-element.js";
+import "@vaadin/vaadin-lumo-styles/color";
 
 export const SharedStyles = html`
-  <style>
+  <style include="lumo-color">
     *,
     *::before,
     *::after {
@@ -153,6 +154,12 @@ export const SharedStyles = html`
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
+    }
+
+    vaadin-grid[theme] {
+      --lumo-base-color: var(--gwn-surface);
+      --lumo-body-text-color: var(--gwn-on-surface);
+      --lumo-font-family: var(--gwn-font-stack);
     }
   </style>
 `;

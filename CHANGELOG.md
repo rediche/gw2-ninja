@@ -3,6 +3,7 @@
 - Change live streamers from embed to thumbnail with playbutton.
 - Add disaproval to streamers.
 - Add black lion mini collections.
+- Add dark theme tables.
 - Remove "inactive" label from directory.
 
 # January 20, 2019 - v2.8.2

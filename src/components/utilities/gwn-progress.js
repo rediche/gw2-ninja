@@ -40,7 +40,7 @@ class GWNProgress extends LitElement {
           height: 100%;
           box-sizing: border-box;
           background-color: var(--gwn-progress-color, #9c27b0);
-          padding: var(--gwn-progress-padding, 1px 4px);
+          padding: var(--gwn-progress-padding, 2px 6px);
           color: var(--gwn-progress-label-color, #ffffff);
           font-weight: var(--gwn-progress-label-weight, 600);
         }

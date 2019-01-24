@@ -5,6 +5,16 @@ import "@vaadin/vaadin-grid/vaadin-grid";
 import { SharedStyles } from "../shared-styles";
 import { SharedWvwStyles } from "../shared-wvw-styles";
 
+import { connect } from "pwa-helpers/connect-mixin.js";
+
+// Load redux store
+import { store } from "../../store.js";
+
+import settings from "../../reducers/settings.js";
+store.addReducers({
+  settings
+});
+
 /**
  * `wvw-matchup`
  *
@@ -13,7 +23,7 @@ import { SharedWvwStyles } from "../shared-wvw-styles";
  * @demo
  *
  */
-class WvWMatchup extends PolymerElement {
+class WvWMatchup extends connect(store)(PolymerElement) {
   static get properties() {
     return {
       matchup: Object,
@@ -21,7 +31,8 @@ class WvWMatchup extends PolymerElement {
       skirmishesDesc: {
         type: Array,
         computed: "_reverseSkirmishes(matchup.skirmishes)"
-      }
+      },
+      theme: String
     };
   }
 
@@ -272,7 +283,7 @@ class WvWMatchup extends PolymerElement {
         <h2 class="title">Skirmishes</h2>
         <div class="card">
           <vaadin-grid
-            theme="no-border row-stripes"
+            theme$="no-border row-stripes [[theme]]"
             aria-label="Skirmish overview"
             items="[[skirmishesDesc]]"
           >
@@ -558,6 +569,11 @@ class WvWMatchup extends PolymerElement {
       case "GreenHome":
         return "Green Borderland";
     }
+  }
+
+  _stateChanged({ settings }) {
+    if (!settings) return;
+    this.set("theme", settings.theme);
   }
 }
 

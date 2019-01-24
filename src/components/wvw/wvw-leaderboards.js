@@ -7,6 +7,16 @@ import { hasWorld } from "../utilities/gwn-misc-utils";
 
 import { SharedStyles } from "../shared-styles";
 
+import { connect } from "pwa-helpers/connect-mixin.js";
+
+// Load redux store
+import { store } from "../../store.js";
+
+import settings from "../../reducers/settings.js";
+store.addReducers({
+  settings
+});
+
 /**
  * `wvw-leaderboards` render a leaderboard table for WvW.
  *
@@ -15,7 +25,7 @@ import { SharedStyles } from "../shared-styles";
  * @demo
  *
  */
-class WvwLeaderboards extends PolymerElement {
+class WvwLeaderboards extends connect(store)(PolymerElement) {
   static get properties() {
     return {
       worlds: {
@@ -30,7 +40,8 @@ class WvwLeaderboards extends PolymerElement {
         type: Array,
         value: []
       },
-      ownWorld: Number
+      ownWorld: Number,
+      theme: String
     };
   }
 
@@ -77,7 +88,7 @@ class WvwLeaderboards extends PolymerElement {
 
         <div class="card">
           <vaadin-grid
-            theme="no-border row-stripes"
+            theme$="no-border row-stripes [[theme]]"
             aria-label="World vs. World weekly server leaderboard"
             items="[[links]]"
             height-by-rows
@@ -274,6 +285,11 @@ class WvwLeaderboards extends PolymerElement {
   _calcKDR(kills, deaths) {
     if (!kills || !deaths) return;
     return parseFloat(Math.round((kills / deaths) * 100) / 100).toFixed(2);
+  }
+
+  _stateChanged({ settings }) {
+    if (!settings) return;
+    this.set("theme", settings.theme);
   }
 }
 
