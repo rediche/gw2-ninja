@@ -999,6 +999,13 @@
     "platform": "twitch"
   },
   {
+    "name": "disaproval",
+    "description": "",
+    "url": "disaproval",
+    "directory": "streamers",
+    "platform": "twitch"
+  },
+  {
     "name": "Silveress's Public Tradepost Sheet",
     "description": "Data spreadsheet with various research that can come in handy for even the most experienced Trading Post player.",
     "url": "https://docs.google.com/spreadsheets/d/1wLhXy3u0rWMasneeBsU3gvLmEGJS31hrFfcvIadRtDY/",
