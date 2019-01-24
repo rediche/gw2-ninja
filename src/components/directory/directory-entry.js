@@ -8,10 +8,6 @@ class DirectoryEntry extends PolymerElement {
       name: String,
       url: String,
       description: String,
-      inactive: {
-        type: Boolean,
-        value: false
-      },
       approval: {
         type: String,
         value: null
@@ -91,7 +87,7 @@ class DirectoryEntry extends PolymerElement {
 
       <div class="card">
         <h6 class="title">
-          [[ name ]] <span hidden$="[[ !inactive ]]">- Inactive</span>
+          [[ name ]]
         </h6>
         <p class="entry-description">[[ description ]]</p>
 

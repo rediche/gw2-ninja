@@ -2,6 +2,7 @@
 
 - Change live streamers from embed to thumbnail with playbutton.
 - Add disaproval to streamers.
+- Remove "inactive" label from directory.
 
 # January 20, 2019 - v2.8.2
 

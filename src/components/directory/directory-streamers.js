@@ -144,7 +144,7 @@ class DirectoryStreamers extends LitElement {
                 name="${streamer.name}"
                 url="${this._resolvePlatformSpecificUrl(streamer)}"
                 description="${streamer.description}"
-                inactive="${streamer.inactive}"
+                inactive="${streamer.inactive ? true : false}"
               ></directory-entry>
             `;
           })
