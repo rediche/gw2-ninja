@@ -37,72 +37,94 @@ class CollectionList extends connect(store)(
 ) {
   static get template() {
     return html`
-    ${SharedStyles}
-    <style>
-      :host {
-        display: block;
-        max-width: 1100px;
-        margin: var(--spacer-large) auto;
-      }
+      ${SharedStyles}
+      <style>
+        :host {
+          display: block;
+          max-width: 1100px;
+          margin: var(--spacer-large) auto;
+        }
 
-      .card {
-        padding: 0;
-        margin: 0 var(--spacer-large);
-      }
+        .card {
+          padding: 0;
+          margin: 0 var(--spacer-large);
+        }
 
-      .align-right {
-        text-align: right;
-      }
+        .align-right {
+          text-align: right;
+        }
 
-      gw2-coin-output {
-        text-align: right;
-        display: block;
-      }
-      
-      .pointer {
-        cursor: pointer;
-      }
-    </style>
+        gw2-coin-output {
+          text-align: right;
+          display: block;
+        }
 
-    <vaadin-grid class="card" theme="no-border row-stripes" height-by-rows items="[[collectionData]]">
-      <vaadin-grid-column>
-        <template class="header">
-          <vaadin-grid-sorter path="name">Collection</vaadin-grid-sorter>
-        </template>
-        <template>
-          <div on-tap="openModal" class="pointer">[[ item.name ]]</div>
-        </template>
-        <template class="footer">Collection</template>
-      </vaadin-grid-column>
+        .pointer {
+          cursor: pointer;
+        }
+      </style>
 
-      <vaadin-grid-column>
-        <template class="header">
-          <div class="align-right">
-            <vaadin-grid-sorter path="total_buy">Buy Order</vaadin-grid-sorter>
-          </div>
-        </template>
-        <template>
-          <gw2-coin-output class="pointer" on-tap="openModal" prepend-zeroes coin-string="[[item.total_buy]]"></gw2-coin-output>
-        </template>
-        <template class="footer">
-          <div class="align-right">Buy Order</div>
-        </template>
-      </vaadin-grid-column>
+      <div class="card">
+        <vaadin-grid
+          theme$="no-border row-stripes [[theme]]"
+          height-by-rows
+          items="[[collectionData]]"
+        >
+          <vaadin-grid-column>
+            <template class="header">
+              <vaadin-grid-sorter path="name">Collection</vaadin-grid-sorter>
+            </template>
+            <template>
+              <div on-tap="openModal" class="pointer">[[ item.name ]]</div>
+            </template>
+            <template class="footer"
+              >Collection</template
+            >
+          </vaadin-grid-column>
 
-      <vaadin-grid-column>
-        <template class="header">
-          <div class="align-right">
-            <vaadin-grid-sorter path="total_sell">Sell Listing</vaadin-grid-sorter>
-          </div>
-        </template>
-        <template>
-          <gw2-coin-output class="pointer" on-tap="openModal" prepend-zeroes coin-string="[[item.total_sell]]"></gw2-coin-output>
-        </template>
-        <template class="footer">
-          <div class="align-right">Sell Listing</div>
-        </template>
-      </vaadin-grid-column>
-    </vaadin-grid>
+          <vaadin-grid-column>
+            <template class="header">
+              <div class="align-right">
+                <vaadin-grid-sorter path="total_buy"
+                  >Buy Order</vaadin-grid-sorter
+                >
+              </div>
+            </template>
+            <template>
+              <gw2-coin-output
+                class="pointer"
+                on-tap="openModal"
+                prepend-zeroes
+                coin-string="[[item.total_buy]]"
+              ></gw2-coin-output>
+            </template>
+            <template class="footer">
+              <div class="align-right">Buy Order</div>
+            </template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column>
+            <template class="header">
+              <div class="align-right">
+                <vaadin-grid-sorter path="total_sell"
+                  >Sell Listing</vaadin-grid-sorter
+                >
+              </div>
+            </template>
+            <template>
+              <gw2-coin-output
+                class="pointer"
+                on-tap="openModal"
+                prepend-zeroes
+                coin-string="[[item.total_sell]]"
+              ></gw2-coin-output>
+            </template>
+            <template class="footer">
+              <div class="align-right">Sell Listing</div>
+            </template>
+          </vaadin-grid-column>
+        </vaadin-grid>
+      </div>
     `;
   }
 
@@ -111,7 +133,8 @@ class CollectionList extends connect(store)(
    */
   static get properties() {
     return {
-      collectionData: Array
+      collectionData: Array,
+      theme: String
     };
   }
 
@@ -131,9 +154,9 @@ class CollectionList extends connect(store)(
   }
 
   // This is called every time something is updated in the store.
-  _stateChanged(state) {
-    if (!state) return;
-    //this.set('open', state.collections.collectionModalOpened);
+  _stateChanged({ settings }) {
+    if (!settings) return;
+    this.set("theme", settings.theme);
   }
 }
 

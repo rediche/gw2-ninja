@@ -18,15 +18,8 @@ class CommandSelector extends PolymerElement {
     return html`
       ${SharedStyles}
       <style>
-        :host {
-          display: block;
-        }
-
-        :host([hidden]) {
-          display: none;
-        }
-
-        iron-pages, paper-dropdown-menu {
+        iron-pages,
+        paper-dropdown-menu {
           width: 100%;
         }
 
@@ -36,10 +29,18 @@ class CommandSelector extends PolymerElement {
         }
       </style>
 
-      <iron-pages attr-for-selected="type" selected="[[ selectedType ]]" fallback-selection="fallback">
+      <iron-pages
+        attr-for-selected="type"
+        selected="[[ selectedType ]]"
+        fallback-selection="fallback"
+      >
         <!-- ACCOUNT -->
         <paper-dropdown-menu type="account" label="[[commandLabel]]">
-          <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
+          <paper-listbox
+            slot="dropdown-content"
+            attr-for-selected="name"
+            selected="{{ selectedCommand }}"
+          >
             <paper-item name="age" disabled>
               <paper-item-body two-line>
                 <div>Age</div>
@@ -53,17 +54,29 @@ class CommandSelector extends PolymerElement {
 
         <!-- PVE -->
         <paper-dropdown-menu type="pve" label="[[commandLabel]]">
-          <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
+          <paper-listbox
+            slot="dropdown-content"
+            attr-for-selected="name"
+            selected="{{ selectedCommand }}"
+          >
             <paper-item name="mastery-points">Mastery Points</paper-item>
-            <paper-item name="mastery-points-tyria">Mastery Points (Tyria)</paper-item>
-            <paper-item name="mastery-points-maguuma">Mastery Points (Maguuma)</paper-item>
+            <paper-item name="mastery-points-tyria"
+              >Mastery Points (Tyria)</paper-item
+            >
+            <paper-item name="mastery-points-maguuma"
+              >Mastery Points (Maguuma)</paper-item
+            >
             <paper-item name="fractal-level">Fractal Level</paper-item>
           </paper-listbox>
         </paper-dropdown-menu>
 
         <!-- PVP -->
         <paper-dropdown-menu type="pvp" label="[[commandLabel]]">
-          <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
+          <paper-listbox
+            slot="dropdown-content"
+            attr-for-selected="name"
+            selected="{{ selectedCommand }}"
+          >
             <paper-item name="rank">Rank</paper-item>
             <paper-item name="rating" disabled>
               <paper-item-body two-line>
@@ -84,7 +97,11 @@ class CommandSelector extends PolymerElement {
 
         <!-- Wallet -->
         <paper-dropdown-menu type="wallet" label="[[commandLabel]]">
-          <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
+          <paper-listbox
+            slot="dropdown-content"
+            attr-for-selected="name"
+            selected="{{ selectedCommand }}"
+          >
             <paper-item name="gold">Gold</paper-item>
             <paper-item name="karma">Karma</paper-item>
             <paper-item name="laurels">Laurels</paper-item>
@@ -95,7 +112,11 @@ class CommandSelector extends PolymerElement {
 
         <!-- WVW -->
         <paper-dropdown-menu type="wvw" label="[[commandLabel]]">
-          <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
+          <paper-listbox
+            slot="dropdown-content"
+            attr-for-selected="name"
+            selected="{{ selectedCommand }}"
+          >
             <paper-item name="rank">Rank</paper-item>
             <paper-item name="kills">Kills</paper-item>
             <paper-item name="matchup">Matchup</paper-item>
@@ -104,11 +125,18 @@ class CommandSelector extends PolymerElement {
 
         <!-- FALLBACK -->
         <paper-dropdown-menu type="fallback" label="[[commandLabel]]">
-          <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
-            <paper-item name="select-a-type" disabled>Select a type first</paper-item>
+          <paper-listbox
+            slot="dropdown-content"
+            attr-for-selected="name"
+            selected="{{ selectedCommand }}"
+          >
+            <paper-item name="select-a-type" disabled
+              >Select a type first</paper-item
+            >
           </paper-listbox>
         </paper-dropdown-menu>
-      <iron-pages>
+        <iron-pages> </iron-pages
+      ></iron-pages>
     `;
   }
 
@@ -126,7 +154,7 @@ class CommandSelector extends PolymerElement {
       },
       commandLabel: {
         type: String,
-        value: 'Command'
+        value: "Command"
       }
     };
   }

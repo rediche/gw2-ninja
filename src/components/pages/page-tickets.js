@@ -6,54 +6,6 @@ import "gw2-coin-output/gw2-coin-output.js";
 import { SharedStyles } from "../shared-styles.js";
 
 class PageTickets extends PolymerElement {
-  static get is() {
-    return "page-tickets";
-  }
-
-  static get template() {
-    return html`
-    ${SharedStyles}
-    <style>
-      :host {
-        display: block;
-      }
-
-      .title {
-        margin-bottom: 0;
-      }
-
-      .card {
-        margin: var(--spacer-large);
-        max-width: 30rem;
-      }
-
-      gw2-coin-output {
-        display: block;
-      }
-
-      paper-spinner {
-        margin: 1.75rem 0;
-        display: block;
-      }
-    </style>
-
-    <p class="description">Ever wondered what it would cost to buy a Black Lion Claim Ticket with gold?<br> This tool does the math for you, so you don't have to.</p>
-
-    <div class="card">
-      <p class="title">Average Listing Price</p>
-      <paper-spinner active="[[averageSellLoading]]" hidden$="[[!averageSellLoading]]"></paper-spinner>
-      <gw2-coin-output class="display-3" coin-string="[[averageSell]]" hidden$="[[averageSellLoading]]"></gw2-coin-output>
-    </div>
-    <div class="card">
-      <p class="title">Average Order Price</p>
-      <paper-spinner active="[[averageBuyLoading]]" hidden$="[[!averageBuyLoading]]"></paper-spinner>
-      <gw2-coin-output class="display-3" coin-string="[[averageBuy]]" hidden$="[[averageBuyLoading]]"></gw2-coin-output>
-    </div>
-
-    <paper-toast id="toast" duration="0" text="An error occured."></paper-toast>
-    `;
-  }
-
   static get properties() {
     return {
       collectionData: {
@@ -77,6 +29,74 @@ class PageTickets extends PolymerElement {
     };
   }
 
+  static get template() {
+    return html`
+      ${SharedStyles}
+      <style>
+        :host {
+          display: block;
+        }
+
+        .title {
+          margin-bottom: 0;
+        }
+
+        .card {
+          margin: var(--spacer-large);
+          max-width: 30rem;
+        }
+
+        gw2-coin-output {
+          display: block;
+        }
+
+        paper-spinner {
+          margin: 1.75rem 0;
+          display: block;
+        }
+      </style>
+
+      <p class="description">
+        Ever wondered what it would cost to buy a Black Lion Claim Ticket with
+        gold?<br />
+        This tool does the math for you, so you don't have to.
+      </p>
+
+      <div class="card">
+        <p class="title">Average Listing Price</p>
+        <paper-spinner
+          active="[[averageSellLoading]]"
+          hidden$="[[!averageSellLoading]]"
+        ></paper-spinner>
+        <gw2-coin-output
+          class="display-3"
+          prepend-zeroes
+          coin-string="[[averageSell]]"
+          hidden$="[[averageSellLoading]]"
+        ></gw2-coin-output>
+      </div>
+      <div class="card">
+        <p class="title">Average Order Price</p>
+        <paper-spinner
+          active="[[averageBuyLoading]]"
+          hidden$="[[!averageBuyLoading]]"
+        ></paper-spinner>
+        <gw2-coin-output
+          class="display-3"
+          prepend-zeroes
+          coin-string="[[averageBuy]]"
+          hidden$="[[averageBuyLoading]]"
+        ></gw2-coin-output>
+      </div>
+
+      <paper-toast
+        id="toast"
+        duration="0"
+        text="An error occured."
+      ></paper-toast>
+    `;
+  }
+
   ready() {
     super.ready();
 
@@ -91,12 +111,14 @@ class PageTickets extends PolymerElement {
     let totalBuy = 0;
     let totalSell = 0;
 
-    collectionData.forEach(collection => {
-      let tempTotals = this._calcTotalPrices(collection.items);
-      totalBuy += tempTotals.buys;
-      totalSell += tempTotals.sells;
-      totalWeapons += collection.items.length;
-      totalTickets += collection.tickets * collection.items.length;
+    collectionData.map(collection => {
+      if (collection.tickets) {
+        let tempTotals = this._calcTotalPrices(collection.items);
+        totalBuy += tempTotals.buys;
+        totalSell += tempTotals.sells;
+        totalWeapons += collection.items.length;
+        totalTickets += collection.tickets * collection.items.length;
+      }
     });
 
     let averageBuy = totalBuy / totalWeapons / (totalTickets / totalWeapons);
@@ -109,17 +131,15 @@ class PageTickets extends PolymerElement {
   }
 
   _calcTotalPrices(items) {
-    let totals = {
-      buys: 0,
-      sells: 0
-    };
-
-    items.forEach(item => {
-      totals.sells += item.sells.unit_price;
-      totals.buys += item.buys.unit_price;
-    });
-
-    return totals;
+    return items.reduce(
+      (totals, item) => {
+        return {
+          buys: (totals.buys += item.buys.unit_price),
+          sells: (totals.sells += item.sells.unit_price)
+        };
+      },
+      { buys: 0, sells: 0 }
+    );
   }
 
   async _loadCollectionData() {
@@ -160,4 +180,4 @@ class PageTickets extends PolymerElement {
   }
 }
 
-window.customElements.define(PageTickets.is, PageTickets);
+window.customElements.define("page-tickets", PageTickets);

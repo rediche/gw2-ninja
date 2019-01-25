@@ -19,40 +19,36 @@ class GWNItemIcon extends PolymerElement {
           display: inline-block;
         }
 
-        :host([hidden]) {
-          display: none !important;
-        }
-
         :host([rarity]) {
           border: 1px solid black;
         }
 
         :host([rarity="Junk"]) {
-          border-color: #AAA;
+          border-color: #aaa;
         }
 
         :host([rarity="Fine"]) {
-          border-color: #62A4DA;
+          border-color: #62a4da;
         }
 
         :host([rarity="Masterwork"]) {
-          border-color: #1A9306;
+          border-color: #1a9306;
         }
-        
+
         :host([rarity="Rare"]) {
-          border-color: #FCD00B;
+          border-color: #fcd00b;
         }
-        
+
         :host([rarity="Exotic"]) {
-          border-color: #FFA405;
+          border-color: #ffa405;
         }
-        
+
         :host([rarity="Ascended"]) {
-          border-color: #FB3E8D;
+          border-color: #fb3e8d;
         }
-        
+
         :host([rarity="Legendary"]) {
-          border-color: #4C139D;
+          border-color: #4c139d;
         }
 
         img {
@@ -61,7 +57,7 @@ class GWNItemIcon extends PolymerElement {
         }
       </style>
 
-      <img src="[[icon]]" alt="[[name]]">
+      <img src="[[icon]]" alt="[[name]]" />
     `;
   }
 }

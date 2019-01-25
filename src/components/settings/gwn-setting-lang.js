@@ -35,15 +35,6 @@ class GWNSettingLang extends connect(store)(PolymerElement) {
     return html`
       ${SharedStyles}
       ${SettingsStyles}
-      <style>
-        :host {
-          display: block;
-        }
-
-        :host([hidden]) {
-          display: none;
-        }
-      </style>
 
       <paper-dropdown-menu label="API Language">
         <paper-listbox slot="dropdown-content" class="dropdown-content" selected="{{language}}" attr-for-selected="value">

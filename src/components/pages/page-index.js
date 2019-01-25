@@ -54,7 +54,7 @@ class PageIndex extends PolymerElement {
         margin: 0;
         padding: 0 var(--spacer-medium) var(--spacer-medium);
         width: 100%;
-        color: var(--app-text-color-light);
+        color: var(--gwn-text-light);
       }
 
       @media screen and (min-width: 950px) {

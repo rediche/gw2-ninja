@@ -1,5 +1,35 @@
 # Next release
 
+-
+
+# January 24, 2019 - v2.8.8
+
+- Change live streamers from embed to thumbnail with playbutton.
+- Add disaproval to streamers.
+- Add black lion mini collections.
+- Add dark theme tables.
+- Remove "inactive" label from directory.
+- Fix wrong text color on WvW page error message.
+
+# January 20, 2019 - v2.8.2
+
+- Update dependency lit-element.
+- Add new black lion collections.
+
+# January 19, 2019 - v2.8.0
+
+- Add darkmode theme.
+- Show streamers that are currently live.
+- Added a few more streamers.
+
+# January 11, 2019 - v2.7.2
+
+- Add more addons, websites and streamers.
+- Fix visual bug on streamers directory.
+
+# January 7, 2019 - v2.7.0
+
+- Add compact view to timer
 - Bugfix: Show proper Garrison info (#52)
 
 # October 20, 2018 - v2.6.1

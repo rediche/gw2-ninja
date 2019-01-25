@@ -855,20 +855,6 @@
     "directory": "youtube"
   },
   {
-    "name": "Wolfineer",
-    "description": "Wolfineer is not active more. But his link will stay as a tribute to all the hard work he did on his Engineer guides.",
-    "url": "https://www.youtube.com/user/Wolfineer",
-    "directory": "youtube",
-    "inactive": true
-  },
-  {
-    "name": "Chemsorly",
-    "description": "Chemsorly provided content for the WvW fans for a long time. He's not playing the game currently, but his link will remain as a tribute to his hard work.",
-    "url": "https://www.youtube.com/channel/UCTwstgtfGtAs__90pp5YICw",
-    "directory": "youtube",
-    "inactive": true
-  },
-  {
     "name": "Shinryuku",
     "description": "\"Here you'll find many of my Twitch.tv stream highlights, as well as other content regarding the games I play!\" - YT Description",
     "url": "https://www.youtube.com/user/Shinryuku",
@@ -945,14 +931,14 @@
   {
     "name": "Bodydoc",
     "description": "",
-    "url": "bodydoc/",
+    "url": "bodydoc",
     "directory": "streamers",
     "platform": "twitch"
   },
   {
     "name": "The Lord Helseth",
     "description": "High ranked PvP player.",
-    "url": "thelordhelseth/",
+    "url": "thelordhelseth",
     "directory": "streamers",
     "platform": "twitch"
   },
@@ -967,6 +953,41 @@
     "name": "Unity Jebro",
     "description": "An Official Guild Wars 2 Shoutcaster.",
     "url": "jebrounity",
+    "directory": "streamers",
+    "platform": "twitch"
+  },
+  {
+    "name": "Deroir",
+    "description": "Give us more Deroira, please.",
+    "url": "deroir",
+    "directory": "streamers",
+    "platform": "twitch"
+  },
+  {
+    "name": "Seven",
+    "description": "",
+    "url": "chill_seven",
+    "directory": "streamers",
+    "platform": "twitch"
+  },
+  {
+    "name": "Vallun",
+    "description": "",
+    "url": "vallun",
+    "directory": "streamers",
+    "platform": "twitch"
+  },
+  {
+    "name": "irAjaxx",
+    "description": "",
+    "url": "irAjaxx",
+    "directory": "streamers",
+    "platform": "twitch"
+  },
+  {
+    "name": "disaproval",
+    "description": "",
+    "url": "disaproval",
     "directory": "streamers",
     "platform": "twitch"
   },
@@ -1085,6 +1106,24 @@
     "directory": "websites"
   },
   {
+    "name": "GW2AP",
+    "description": "Quick and easy filtering and sorting of your Guild Wars 2 achievements.",
+    "url": "https://gw2ap.com/",
+    "directory": "websites"
+  },
+  {
+    "name": "Kulinda's GuildWars 2 dye browser",
+    "description": "Easy to use dye browser.",
+    "url": "https://kulinda.github.io/dyes/",
+    "directory": "websites"
+  },
+  {
+    "name": "GW2Profits",
+    "description": "Lots of Trading Post tools.",
+    "url": "http://gw2profits.com/",
+    "directory": "websites"
+  },
+  {
     "name": "ArcDPS",
     "description": "A Guild Wars 2 DPS Meter.",
     "url": "https://www.deltaconnected.com/arcdps/",
@@ -1109,6 +1148,25 @@
     "name": "Gw2Hook",
     "description": "Gw2Hook allows you to finely control the graphical settings of Guild Wars 2 by changing shaders, colorgrading and more.",
     "url": "https://04348.github.io/Gw2Hook/",
+    "directory": "addons"
+  },
+  {
+    "name": "Scrolling Combat Text",
+    "description": "A scrolling combat text addon for GW2 using ArcDPS API.",
+    "url": "https://github.com/Artenuvielle/GW2-SCT",
+    "directory": "addons",
+    "approval": "https://www.reddit.com/r/Guildwars2/comments/9laevv/gw2_sct_updated_for_new_arcdps_api/e766yys"
+  },
+  {
+    "name": "Augmented Tyria",
+    "description": "The ultimate Guild Wars 2 map completion tool.",
+    "url": "https://github.com/ideka/AugTyr",
+    "directory": "addons"
+  },
+  {
+    "name": "GW2 Launch Buddy",
+    "description": "Custom launcher generator for Guild Wars 2.",
+    "url": "https://github.com/TheCheatsrichter/Gw2_Launchbuddy",
     "directory": "addons"
   }
 ]

@@ -10,7 +10,6 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
     ${SharedStyles}
     <style>
       :host {
-        display: block;
         height: calc(100vh - 4rem);
         background-image: url("/src/images/precursors/precursors_bg.png");
         background-size: cover;
@@ -18,10 +17,6 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
         overflow: hidden;
         max-width: 100%;
         position: relative;
-      }
-      
-      :host([hidden]) {
-        display: none;
       }
 
       .prepare {
@@ -47,7 +42,7 @@ class PagePrecursors extends GestureEventListeners(PolymerElement) {
         animation-duration: 2s;
         animation-timing-function: cubic-bezier(0.600, 0.040, 0.980, 0.335);
         animation-timing-function: ease-in;
-        box-shadow: var(--app-box-shadow);
+        box-shadow: var(--gwn-box-shadow);
       }
 
       @keyframes rain {

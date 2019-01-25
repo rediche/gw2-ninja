@@ -1,4 +1,4 @@
-import {LitElement, html} from '@polymer/lit-element';
+import { LitElement, html } from "lit-element";
 
 /**
  * `gwn-progress`
@@ -6,22 +6,24 @@ import {LitElement, html} from '@polymer/lit-element';
  * @customElement
  * @polymer
  * @demo
- * 
+ *
  */
 class GWNProgress extends LitElement {
   static get properties() {
     return {
-      progress: Number,
-      max: Number
-    }
+      progress: { type: Number },
+      max: { type: Number }
+    };
   }
 
-  /**
-   * Implement to describe the element's DOM using lit-html.
-   * Use the element current props to return a lit-html template result
-   * to render into the element.
-   */
-  _render({ progress, max }) {
+  constructor() {
+    super();
+    this.progress = 50;
+    this.max = 100;
+  }
+
+  render() {
+    const { progress, max } = this;
     return html`
       <style>
         :host {
@@ -37,31 +39,18 @@ class GWNProgress extends LitElement {
         .progress {
           height: 100%;
           box-sizing: border-box;
-          background-color: var(--gwn-progress-color, #9C27B0);
-          padding: var(--gwn-progress-padding, 1px 4px);
+          background-color: var(--gwn-progress-color, #9c27b0);
+          padding: var(--gwn-progress-padding, 2px 6px);
           color: var(--gwn-progress-label-color, #ffffff);
           font-weight: var(--gwn-progress-label-weight, 600);
         }
       </style>
 
-      <div class="progress" style$="width: ${progress / max * 100}%;">
+      <div class="progress" style="width: ${(progress / max) * 100}%;">
         <slot></slot>
       </div>
     `;
   }
-
-  /**
-   * Instance of the element is created/upgraded. Use: initializing state,
-   * set up event listeners, create shadow dom.
-   * @constructor
-   */
-  constructor() {
-    super();
-
-    this.progress = 50;
-    this.max = 100;
-  }
-
 }
 
-customElements.define('gwn-progress', GWNProgress);
+customElements.define("gwn-progress", GWNProgress);

@@ -77,17 +77,11 @@ class GWNApiPermissionsList extends PolymerElement {
 
   static get template() {
     return html`
-      ${SharedStyles}
-      ${SettingsStyles}
+      ${SharedStyles} ${SettingsStyles}
       <style>
         :host {
-          display: block;
           margin-top: var(--spacer-large);
-          font-size: .85rem;
-        }
-
-        :host([hidden]) {
-          display: none;
+          font-size: 0.85rem;
         }
 
         dom-repeat {
@@ -111,16 +105,23 @@ class GWNApiPermissionsList extends PolymerElement {
         }
       </style>
 
-      <hr>
+      <hr />
       <p class="subsection">API Permissions</p>
       <ul class="permissions-list">
         <dom-repeat items="[[possiblePermissions]]" as="permission">
           <template>
-            <li 
-              title="[[ permission.description ]]" 
-              missing-permission$="[[!_hasPermission(permission.value, permissions)]]">
-              <iron-icon icon="my-icons:close" hidden$="[[_hasPermission(permission.value, permissions)]]"></iron-icon>
-              <iron-icon icon="my-icons:check" hidden$="[[!_hasPermission(permission.value, permissions)]]"></iron-icon>
+            <li
+              title="[[ permission.description ]]"
+              missing-permission$="[[!_hasPermission(permission.value, permissions)]]"
+            >
+              <iron-icon
+                icon="my-icons:close"
+                hidden$="[[_hasPermission(permission.value, permissions)]]"
+              ></iron-icon>
+              <iron-icon
+                icon="my-icons:check"
+                hidden$="[[!_hasPermission(permission.value, permissions)]]"
+              ></iron-icon>
               [[ permission.name ]]
             </li>
           </template>
