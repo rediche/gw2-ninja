@@ -314,6 +314,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           <page-about name="about"></page-about>
           <page-precursors name="precursors" page="[[page]]"></page-precursors>
           <page-stream-tools name="stream"></page-stream-tools>
+          <page-links name="links"></page-links>
           <page-view404 name="view404"></page-view404>
         </iron-pages>
       </app-header-layout>

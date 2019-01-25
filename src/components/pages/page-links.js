@@ -1,4 +1,4 @@
-import { LitElement, html } from "@polymer/lit-element";
+import { LitElement, html } from "lit-element";
 import "@polymer/paper-button";
 
 /**
@@ -10,7 +10,8 @@ import "@polymer/paper-button";
  *
  */
 class PageLinks extends LitElement {
-  _render({ url }) {
+  render() {
+    const { url } = this;
     return html`
       <style>
         :host {
