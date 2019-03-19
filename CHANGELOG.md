@@ -1,6 +1,7 @@
 # Next release
 
--
+- Add GW2 Treasures to directory.
+- Change GW2 Mounts to GW2 Radial in directory.
 
 # January 24, 2019 - v2.8.8
 
