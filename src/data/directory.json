@@ -1168,5 +1168,11 @@
     "description": "Custom launcher generator for Guild Wars 2.",
     "url": "https://github.com/TheCheatsrichter/Gw2_Launchbuddy",
     "directory": "addons"
+  },
+  {
+    "name": "GW2 Treasures",
+    "description": "GW2 Treasures is a modern API driven database providing up-to-date info on items, achievements and more.",
+    "url": "https://gw2treasures.com/",
+    "directory": "websites"
   }
 ]
