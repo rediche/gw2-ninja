@@ -190,7 +190,7 @@ class PageWvw extends connect(store)(PolymerElement) {
             class="dropdown-content"
             attr-for-selected="value"
           >
-            <template is="dom-repeat" items="[[worlds]]" as="world">
+            <template is="dom-repeat" items="[[_alphabeticalWorlds(worlds)]]" as="world">
               <paper-item value="[[world.id]]">[[world.name]]</paper-item>
             </template>
           </paper-listbox>
@@ -330,6 +330,17 @@ class PageWvw extends connect(store)(PolymerElement) {
 
     if (!account.world) return;
     this.set("serverId", account.world);
+  }
+
+  _alphabeticalWorlds(worlds) {
+    if (!worlds) return [];
+    return worlds.sort(this._sortWorlds);
+  }
+
+  _sortWorlds(a, b) {
+    if (a.name < b.name) return -1;
+    if (a.name > b.name) return 1;
+    return 0;
   }
 }
 
