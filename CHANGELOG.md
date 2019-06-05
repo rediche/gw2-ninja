@@ -3,6 +3,7 @@
 - Add GW2 Treasures to directory.
 - Change GW2 Mounts to GW2 Radial in directory.
 - Alphabetically sort worlds dropdown on WvW section.
+- Optimize concept art on homepage better.
 
 # January 24, 2019 - v2.8.8
 
