@@ -4,6 +4,7 @@
 - Change GW2 Mounts to GW2 Radial in directory.
 - Alphabetically sort worlds dropdown on WvW section.
 - Optimize concept art on homepage better.
+- Optimize Mike O picture on precursors page.
 
 # January 24, 2019 - v2.8.8
 
