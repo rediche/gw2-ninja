@@ -79,6 +79,14 @@
   ],
   "category": "path-of-fire"
 },{
+  "name": "Elon Riverlands",
+  "phases": [
+    { "name": "Doppelganger", "duration": 5, "color": "#FFB74D" },
+    { "name": "", "duration": 85, "color": "#FFB74D" },
+    { "name": "The Path to Ascension: Augury Rock", "duration": 30, "color": "#FFB74D" }
+  ],
+  "category": "path-of-fire"
+},{
   "name": "The Desolation",
   "phases": [
     { "name": "", "duration": 30, "color": "#FFB74D" },
