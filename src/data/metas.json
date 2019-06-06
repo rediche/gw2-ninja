@@ -79,6 +79,18 @@
   ],
   "category": "path-of-fire"
 },{
+  "name": "The Desolation",
+  "phases": [
+    { "name": "", "duration": 30, "color": "#FFB74D" },
+    { "name": "Junundu Rising", "duration": 20, "color": "#FFB74D" },
+    { "name": "", "duration": 10, "color": "#FFB74D" },
+    { "name": "Maws of Torment", "duration": 20, "color": "#FFB74D" },
+    { "name": "", "duration": 10, "color": "#FFB74D" },
+    { "name": "Junundu Rising", "duration": 20, "color": "#FFB74D" },
+    { "name": "", "duration": 10, "color": "#FFB74D" }
+  ],
+  "category": "path-of-fire"
+},{
   "name": "Domain of Vabbi",
   "phases": [
     { "name": "Forged with Fire", "duration": 30, "color": "#FB8C00" },

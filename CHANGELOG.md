@@ -1,6 +1,7 @@
 # Next release
 
-- 
+- Updated Domain of Vabbi metas.
+- Added The Desolation metas.
 
 # June 6, 2019 - v2.8.13
 
