@@ -166,7 +166,7 @@ class PageTimer extends connect(store)(PolymerElement) {
               <template is="dom-repeat" items="[[ meta.phases ]]" as="phase">
                 <div
                   class="phase"
-                  style$="background: [[ phase.color ]]; width:calc([[ _calcPhaseWidth(phase.duration) ]]% - .25rem);"
+                  style$="background: [[ phase.color ]]; color: [[ _textColor(phase.text) ]]; width:calc([[ _calcPhaseWidth(phase.duration) ]]% - .25rem);"
                 >
                   <div class="phase-time" hidden$="[[ _isCompact(size) ]]">
                     [[ phase.hour ]]:[[ phase.minute ]]
@@ -214,6 +214,10 @@ class PageTimer extends connect(store)(PolymerElement) {
 
   _isCompact(size) {
     return size === "compact";
+  }
+
+  _textColor(textColor) {
+    return textColor === "light" ? "white" : "black";
   }
 
   _metaCategoryMatchesSelected(category, selectedMeta) {

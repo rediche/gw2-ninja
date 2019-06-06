@@ -3,6 +3,7 @@
 - Updated Domain of Vabbi metas.
 - Added The Desolation metas.
 - Added Elon Riverlands metas.
+- Update colors on different metas.
 
 # June 6, 2019 - v2.8.13
 

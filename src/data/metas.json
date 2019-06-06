@@ -1,11 +1,11 @@
 [{
   "name": "Day and night",
   "phases": [
-    { "name": "Night", "duration": 25, "color": "#9E9D24"},
-    { "name": "Dawn", "duration": 5, "color": "#D4E157"},
-    { "name": "Day", "duration": 70,  "color": "#F0F4C3" },
-    { "name": "Dusk", "duration": 5, "color": "#D4E157" },
-    { "name": "Night", "duration": 15, "color": "#9E9D24"}
+    { "name": "Night", "duration": 25, "color": "#263238", "text": "light" },
+    { "name": "Dawn", "duration": 5, "color": "linear-gradient(to right, #263238, #78909C)", "text": "light" },
+    { "name": "Day", "duration": 70,  "color": "#78909C", "text": "light" },
+    { "name": "Dusk", "duration": 5, "color": "linear-gradient(to right, #78909C, #263238)", "text": "light" },
+    { "name": "Night", "duration": 15, "color": "#263238", "text": "light" }
   ],
   "category": "other"
 },{
@@ -64,47 +64,47 @@
 },{
   "name": "Crystal Oasis",
   "phases": [
-    { "name": "", "duration": 5, "color": "#FFB74D" },
-    { "name": "Rounds 1 to 3", "duration": 16, "color": "#FB8C00" },
-    { "name": "Pinata / Reset", "duration": 9, "color": "#EF6C00" },
-    { "name": "", "duration": 90, "color": "#FFB74D" }
+    { "name": "", "duration": 5, "color": "#FFCC80" },
+    { "name": "Rounds 1 to 3", "duration": 16, "color": "#FFA726" },
+    { "name": "Pinata / Reset", "duration": 9, "color": "#FB8C00" },
+    { "name": "", "duration": 90, "color": "#FFCC80" }
   ],
   "category": "path-of-fire"
 },{
   "name": "Desert Highlands",
   "phases": [
-    { "name": "", "duration": 60, "color": "#FFB74D" },
-    { "name": "Buried Treasure", "duration": 20, "color": "#FB8C00" },
-    { "name": "", "duration": 40, "color": "#EF6C00" }
+    { "name": "", "duration": 60, "color": "#4FC3F7" },
+    { "name": "Buried Treasure", "duration": 20, "color": "#039BE5" },
+    { "name": "", "duration": 40, "color": "#4FC3F7" }
   ],
   "category": "path-of-fire"
 },{
   "name": "Elon Riverlands",
   "phases": [
-    { "name": "Doppelganger", "duration": 5, "color": "#FFB74D" },
-    { "name": "", "duration": 85, "color": "#FFB74D" },
-    { "name": "The Path to Ascension: Augury Rock", "duration": 30, "color": "#FFB74D" }
+    { "name": "Doppelganger", "duration": 5, "color": "#FFCA28" },
+    { "name": "", "duration": 85, "color": "#FFE082" },
+    { "name": "The Path to Ascension: Augury Rock", "duration": 30, "color": "#FFCA28" }
   ],
   "category": "path-of-fire"
 },{
   "name": "The Desolation",
   "phases": [
-    { "name": "", "duration": 30, "color": "#FFB74D" },
-    { "name": "Junundu Rising", "duration": 20, "color": "#FFB74D" },
-    { "name": "", "duration": 10, "color": "#FFB74D" },
-    { "name": "Maws of Torment", "duration": 20, "color": "#FFB74D" },
-    { "name": "", "duration": 10, "color": "#FFB74D" },
-    { "name": "Junundu Rising", "duration": 20, "color": "#FFB74D" },
-    { "name": "", "duration": 10, "color": "#FFB74D" }
+    { "name": "", "duration": 30, "color": "#A1887F" },
+    { "name": "Junundu Rising", "duration": 20, "color": "#795548", "text": "light" },
+    { "name": "", "duration": 10, "color": "#A1887F" },
+    { "name": "Maws of Torment", "duration": 20, "color": "#3E2723", "text": "light" },
+    { "name": "", "duration": 10, "color": "#A1887F" },
+    { "name": "Junundu Rising", "duration": 20, "color": "#795548", "text": "light" },
+    { "name": "", "duration": 10, "color": "#A1887F" }
   ],
   "category": "path-of-fire"
 },{
   "name": "Domain of Vabbi",
   "phases": [
-    { "name": "Forged with Fire", "duration": 30, "color": "#FB8C00" },
-    { "name": "Serpents' Ire", "duration": 30, "color": "#FFB74D" },
-    { "name": "Forged with Fire", "duration": 30, "color": "#FB8C00" },
-    { "name": "", "duration": 30, "color": "#FFB74D" }
+    { "name": "Forged with Fire", "duration": 30, "color": "#8E24AA", "text": "light" },
+    { "name": "Serpents' Ire", "duration": 30, "color": "#4A148C", "text": "light" },
+    { "name": "Forged with Fire", "duration": 30, "color": "#8E24AA", "text": "light" },
+    { "name": "", "duration": 30, "color": "#AB47BC", "text": "light" }
   ],
   "category": "path-of-fire"
 },{
@@ -127,9 +127,9 @@
 },{
   "name": "Ley-Line Anomaly",
   "phases": [
-    { "name": "", "duration": 20, "color": "#e74c3c" },
-    { "name": "Spawn", "duration": 20, "color": "#c0392b"},
-    { "name": "Accumulating", "duration": 80, "color": "#e74c3c" }
+    { "name": "Accumulating", "duration": 20, "color": "#D32F2F", "text": "light" },
+    { "name": "Spawn", "duration": 20, "color": "#B71C1C", "text": "light" },
+    { "name": "Accumulating", "duration": 80, "color": "#D32F2F", "text": "light" }
   ],
   "category": "other"
 }]
