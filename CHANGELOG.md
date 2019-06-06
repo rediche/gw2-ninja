@@ -1,5 +1,9 @@
 # Next release
 
+- 
+
+# June 7, 2019 - v2.8.17
+
 - Updated Domain of Vabbi metas.
 - Added The Desolation metas.
 - Added Elon Riverlands metas.
