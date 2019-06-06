@@ -81,9 +81,10 @@
 },{
   "name": "Domain of Vabbi",
   "phases": [
-    { "name": "", "duration": 60, "color": "#FFB74D" },
-    { "name": "Zealots", "duration": 30, "color": "#FB8C00" },
-    { "name": "", "duration": 30, "color": "#EF6C00" }
+    { "name": "Forged with Fire", "duration": 30, "color": "#FB8C00" },
+    { "name": "Serpents' Ire", "duration": 30, "color": "#FFB74D" },
+    { "name": "Forged with Fire", "duration": 30, "color": "#FB8C00" },
+    { "name": "", "duration": 30, "color": "#FFB74D" }
   ],
   "category": "path-of-fire"
 },{
