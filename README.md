@@ -18,13 +18,7 @@ First, install [Polymer CLI](https://github.com/Polymer/polymer-cli) (we assume 
 
 #### Configuation
 
-Add a `config.js` to the root directory with the following code:
-
-    export default {
-        clientId: ""
-    }
-
-Where `clientId` is a Twitch Client ID. You can get one from [your Twitch Developer Dashboard](https://glass.twitch.tv/console/apps).
+Modify `./config.js` in the root directory with your application Client ID from Twitch. You can get one from [your Twitch Developer Dashboard](https://glass.twitch.tv/console/apps).
 
 ## Start the development server
 

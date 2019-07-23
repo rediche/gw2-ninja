@@ -1,5 +1,6 @@
 import { LitElement, html } from "lit-element";
 
+import config from "../../../config";
 import "./directory-entry";
 import "./directory-streamer-entry";
 
@@ -178,7 +179,7 @@ class DirectoryStreamers extends LitElement {
     const options = {
       method: "GET",
       headers: {
-        "Client-ID": "0x46pc0vtag2uh62on5c12x4gz33x8"
+        "Client-ID": config.clientId
       }
     };
 
