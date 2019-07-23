@@ -174,20 +174,11 @@ class DirectoryStreamers extends LitElement {
       },
       ""
     );
-    
-    let clientId;
-
-    if (!process.env.CLIENT_ID) {
-      const { default: config } = await import("../../../config.js");
-      clientId = config.clientId;
-    } else {
-      clientId = process.env.CLIENT_ID;
-    }
 
     const options = {
       method: "GET",
       headers: {
-        "Client-ID": clientId
+        "Client-ID": "0x46pc0vtag2uh62on5c12x4gz33x8"
       }
     };
 
