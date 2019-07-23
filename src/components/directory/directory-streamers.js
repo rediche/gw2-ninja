@@ -1,6 +1,5 @@
 import { LitElement, html } from "lit-element";
 
-import config from "../../../config";
 import "./directory-entry";
 import "./directory-streamer-entry";
 
@@ -22,7 +21,7 @@ class DirectoryStreamers extends LitElement {
 
   render() {
     const { streamers, streamersLive } = this;
-    const hasStreamersLive = streamersLive.length > 0;
+    const hasStreamersLive = streamersLive && streamersLive.length > 0;
 
     return html`
       <style>
@@ -89,7 +88,6 @@ class DirectoryStreamers extends LitElement {
 
       this._loadStreamersFromTwitch(twitchStreamers)
         .then(data => {
-          console.log(data);
           this.streamersLive = data;
         })
         .catch(error => {
@@ -167,7 +165,7 @@ class DirectoryStreamers extends LitElement {
     }
   }
 
-  _loadStreamersFromTwitch(streamers) {
+  async _loadStreamersFromTwitch(streamers) {
     if (!streamers) return;
 
     const streamerUsernameList = streamers.reduce(
@@ -176,27 +174,34 @@ class DirectoryStreamers extends LitElement {
       },
       ""
     );
+    
+    let clientId;
+
+    if (!process.env.CLIENT_ID) {
+      const { default: config } = await import("../../../config.js");
+      clientId = config.clientId;
+    } else {
+      clientId = process.env.CLIENT_ID;
+    }
 
     const options = {
       method: "GET",
       headers: {
-        "Client-ID": config.clientId
+        "Client-ID": clientId
       }
     };
 
-    return fetch(
+    const response = await fetch(
       `https://api.twitch.tv/helix/streams?game_id=19357${streamerUsernameList}`,
       options
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(json => {
-        return json.data;
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    );
+    
+    if (!response.ok) {
+      return;
+    }
+
+    const json = await response.json();
+    return json.data;
   }
 
   _filterTwitchStreamers(streamers) {
