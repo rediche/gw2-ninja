@@ -26,11 +26,9 @@
   "builds": [
     {
       "name": "es6-bundled",
-      "browserCapabilities": ["es2015"],
+      "browserCapabilities": ["es2015", "modules"],
       "js": {
-        "compile": "es2015",
-        "minify": true,
-        "transformModulesToAmd": true
+        "minify": true
       },
       "css": {
         "minify": true
