@@ -1,5 +1,6 @@
 import { LitElement, html } from "lit-element";
 import { Checkbox } from "@material/mwc-checkbox";
+import config from "../../../config";
 
 /**
  * `links-form` Description
@@ -12,12 +13,22 @@ import { Checkbox } from "@material/mwc-checkbox";
 class LinksForm extends LitElement {
   static get properties() {
     return {
-      url: { type: String }
+      url: { type: String },
+      humanReadable: { type: Boolean },
+      success: { type: Boolean },
+      error: { type: Boolean }
     };
   }
 
   render() {
-    const { url, _inputChanged, _onClick } = this;
+    const {
+      url,
+      humanReadable,
+      success,
+      error,
+      _inputChanged,
+      _onSubmit
+    } = this;
     return html`
       <style>
         :host {
@@ -61,6 +72,7 @@ class LinksForm extends LitElement {
           justify-content: center;
           border: 0;
           margin: var(--spacer-xsmall);
+          cursor: pointer;
         }
 
         .search button:focus {
@@ -89,49 +101,81 @@ class LinksForm extends LitElement {
 
         .success {
           background-color: green;
+          color: #ffffff;
         }
 
         .error {
           background-color: red;
+          color: #ffffff;
         }
       </style>
 
-      <div class="search">
+      <form class="search" @submit="${_onSubmit}">
         <input
           type="url"
           placeholder="https://example.com/super/long/url"
           .value="${url}"
           @input="${_inputChanged}"
         />
-        <button @click="${_onClick}">Shorten</button>
-      </div>
+        <button>Shorten</button>
+      </form>
 
-      <div class="checkbox-container">
+      <!-- <div class="checkbox-container">
         <mwc-checkbox id="checkbox"></mwc-checkbox>
-        <label for="checkbox">Human readable</label>
-      </div>
+        <label for="checkbox">Readable</label>
+      </div> -->
 
-      <div class="message success">
-        Your shortlink was created.
-      </div>
-
-      <div class="message error">
-        Something went wrong when creating your shortlink.
-      </div>
+      ${
+        success
+          ? html`
+              <div class="message success">Your shortlink was created.</div>
+            `
+          : ""
+      }
+      ${
+        error
+          ? html`
+              <div class="message error">
+                Something went wrong when creating your shortlink.
+              </div>
+            `
+          : ""
+      }
     `;
   }
 
   constructor() {
     super();
     this.url = "";
+    this.humanReadable = false;
+    this.success = false;
+    this.error = false;
   }
 
   _inputChanged(e) {
     this.url = e.target.value;
   }
 
-  _onClick() {
+  _onSubmit(e) {
+    e.preventDefault();
     console.log("click", this.url);
+    console.log("is human readable", this.humanReadable);
+    this._createLink();
+  }
+
+  _createLink() {
+    const body = {
+      "url": "https://www.guildwars2.com/en/the-game/",
+      "readable": true
+    };
+
+    fetch(config.linksApi + '/links', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    }).then(resp => console.log(resp));
   }
 }
 

@@ -23,7 +23,7 @@ class PageLinks extends LitElement {
         }
       </style>
 
-      <h2>Shortlink generator</h2>
+      <h2>Guild Wars 2 Link Shortener</h2>
 
       <links-form></links-form>
     `;
