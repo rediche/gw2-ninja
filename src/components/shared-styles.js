@@ -142,7 +142,7 @@ export const SharedStyles = html`
 
     .sticky-tabs {
       position: sticky;
-      top: 4rem;
+      top: 6rem;
       z-index: 401; /* 401 because it needs to be higher than z-index 400 on timer page */
     }
 

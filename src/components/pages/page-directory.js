@@ -50,12 +50,19 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
         }
 
         .sticky-tabs {
-          background-color: var(--gwn-primary);
+          box-shadow: var(--gwn-box-shadow);
+          border-radius: var(--gwn-border-radius);
+          max-width: calc(1100px - var(--spacer-large) * 2);
+          margin: var(--spacer-large) auto;
+          overflow: hidden;
+          display: flex;
         }
 
         paper-tabs {
+          background-color: var(--gwn-primary);
           --paper-tabs-selection-bar-color: var(--gwn-on-primary);
           padding: 0 var(--spacer-large);
+          flex: 1;
         }
 
         paper-tab {
@@ -63,7 +70,6 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
         }
 
         .search {
-          margin: var(--spacer-medium) var(--spacer-small);
           position: relative;
         }
 
@@ -74,10 +80,8 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
           box-sizing: border-box;
           width: 100%;
           border: 0;
-          border-radius: var(--gwn-border-radius);
           background-color: var(--gwn-surface);
           color: var(--gwn-on-surface);
-          box-shadow: var(--gwn-box-shadow);
         }
 
         .search-clear {
@@ -106,10 +110,6 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
         }
 
         @media screen and (min-width: 768px) {
-          .search {
-            margin: var(--spacer-large);
-          }
-
           .directory-list {
             margin: var(--spacer-large);
           }
@@ -140,9 +140,6 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
           <paper-tab name="streamers">Streamers</paper-tab>
           <paper-tab name="youtubers">YouTubers</paper-tab>
         </paper-tabs>
-      </div>
-
-      <div class="container">
         <div class="search">
           <input
             class="search-field"
@@ -157,7 +154,9 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
             on-tap="_clearSearchValue"
           ></paper-icon-button>
         </div>
+      </div>
 
+      <div class="container">
         <iron-pages
           selected="{{subviewData.subview}}"
           attr-for-selected="name"

@@ -12,6 +12,7 @@ class GWNHeader extends LitElement {
           display: block;
           position: sticky;
           top: 0;
+          z-index: 1;
         }
         
         header {
