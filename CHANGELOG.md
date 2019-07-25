@@ -1,6 +1,7 @@
 # Next release
 
 - Add a new more lightweight header component.
+- Remove beta label from WvW section.
 
 # June 7, 2019 - v2.8.17
 

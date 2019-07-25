@@ -330,7 +330,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
             <a name="index" href="/">Home</a>
             <a name="directory" href="/directory/websites">Directory</a>
             <a name="timer" href="/timer/all">Meta Timer</a>
-            <a name="wvw" href="/wvw/overview">World vs World (Beta)</a>
+            <a name="wvw" href="/wvw/overview">World vs World</a>
             <hr />
             <a name="collections" href="/collections/basic">Collections</a>
             <a name="tickets" href="/tickets">Tickets</a>
@@ -476,7 +476,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
     if (activePage == "chatcodes") return "Chatcode Generator";
     if (activePage == "timer") return "Meta Timer";
     if (activePage == "calc") return "Trading Post Calculator";
-    if (activePage == "wvw") return "World vs World (Beta)";
+    if (activePage == "wvw") return "World vs World";
     if (activePage == "about") return "About GW2 Ninja";
     if (activePage == "precursors") return "Precursor Rain. HALLELUJAH!";
     if (activePage == "stream") return "Stream Tools";
