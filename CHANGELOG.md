@@ -1,6 +1,6 @@
 # Next release
 
-- 
+- Add a new more lightweight header component.
 
 # June 7, 2019 - v2.8.17
 
