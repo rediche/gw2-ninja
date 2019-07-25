@@ -6,16 +6,10 @@ import {
 } from "@polymer/polymer/lib/utils/settings.js";
 import { GestureEventListeners } from "@polymer/polymer/lib/mixins/gesture-event-listeners.js";
 import "@polymer/app-layout/app-drawer/app-drawer.js";
-import "@polymer/app-layout/app-drawer-layout/app-drawer-layout.js";
-import "@polymer/app-layout/app-header/app-header.js";
-import "@polymer/app-layout/app-header-layout/app-header-layout.js";
-import "@polymer/app-layout/app-scroll-effects/app-scroll-effects.js";
-import "@polymer/app-layout/app-toolbar/app-toolbar.js";
 import "@polymer/app-route/app-location.js";
 import "@polymer/app-route/app-route.js";
 import "@polymer/iron-pages/iron-pages.js";
 import "@polymer/iron-selector/iron-selector.js";
-import "@polymer/iron-icon/iron-icon.js";
 import "@polymer/paper-icon-button/paper-icon-button.js";
 import "@polymer/paper-item/paper-item.js";
 import "@polymer/paper-toast/paper-toast.js";
@@ -25,6 +19,7 @@ import "./online-status.js";
 import "./drawer-top";
 import "./settings/gwn-settings.js";
 import "./collections/collection-modal.js";
+import "./partials/gwn-header";
 
 import { connect } from "pwa-helpers/connect-mixin.js";
 
@@ -154,32 +149,37 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
             1px 0 2px rgba(0, 0, 0, 0.24);
         }
 
-        app-toolbar {
-          font-weight: 800;
-        }
-
         app-drawer {
           z-index: 99999;
         }
 
-        app-header {
+        .layout {
+          display: block;
+          position: relative;
+          z-index: 0;
+        }
+
+        gwn-header {
           color: var(--gwn-on-primary);
           background-color: var(--gwn-primary);
         }
 
-        app-header paper-icon-button {
+        gwn-header paper-icon-button {
           --paper-icon-button-ink-color: var(--gwn-on-primary);
         }
 
-        app-toolbar [main-title] {
+        gwn-header h1 {
           text-transform: capitalize;
           display: flex;
           align-items: center;
           padding: 0 var(--spacer-medium);
+          font-size: 1.25rem;
+          font-weight: 800;
+          margin: 0;
         }
 
-        app-toolbar [main-title] iron-icon {
-          margin-right: var(--spacer-small);
+        .settings {
+          margin-left: auto;
         }
 
         .drawer-scroll {
@@ -280,22 +280,21 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
         text="You appear to be offline. Some tools might not work correctly."
       ></paper-toast>
 
-      <app-header-layout>
-        <app-header slot="header" fixed>
-          <app-toolbar>
-            <paper-icon-button
-              icon="my-icons:menu"
-              on-tap="_openDrawer"
-              aria-label="Open Menu"
-            ></paper-icon-button>
-            <div main-title>[[ _pageTitle(page) ]]</div>
-            <paper-icon-button
-              icon="my-icons:settings"
-              aria-label="Open Settings"
-              on-tap="_toggleSettings"
-            ></paper-icon-button>
-          </app-toolbar>
-        </app-header>
+      <div class="layout">
+        <gwn-header slot="header">
+          <paper-icon-button
+            icon="my-icons:menu"
+            on-tap="_openDrawer"
+            aria-label="Open Menu"
+          ></paper-icon-button>
+          <h1>[[ _pageTitle(page) ]]</h1>
+          <paper-icon-button
+            class="settings"
+            icon="my-icons:settings"
+            aria-label="Open Settings"
+            on-tap="_toggleSettings"
+          ></paper-icon-button>
+        </gwn-header>
 
         <iron-pages
           selected="[[page]]"
@@ -316,7 +315,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           <page-stream-tools name="stream"></page-stream-tools>
           <page-view404 name="view404"></page-view404>
         </iron-pages>
-      </app-header-layout>
+      </div>
 
       <!-- Drawer content -->
       <app-drawer id="drawer" swipe-open opened="{{drawer}}">
