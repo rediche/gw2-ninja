@@ -144,6 +144,11 @@ export const SharedStyles = html`
       position: sticky;
       top: 6rem;
       z-index: 401; /* 401 because it needs to be higher than z-index 400 on timer page */
+      box-shadow: var(--gwn-box-shadow);
+      border-radius: var(--gwn-border-radius);
+      max-width: calc(1100px - var(--spacer-large) * 2);
+      margin: var(--spacer-large) auto;
+      overflow: hidden;
     }
 
     paper-item {

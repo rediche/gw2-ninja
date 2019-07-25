@@ -50,11 +50,6 @@ class PageDirectory extends GestureEventListeners(PolymerElement) {
         }
 
         .sticky-tabs {
-          box-shadow: var(--gwn-box-shadow);
-          border-radius: var(--gwn-border-radius);
-          max-width: calc(1100px - var(--spacer-large) * 2);
-          margin: var(--spacer-large) auto;
-          overflow: hidden;
           display: flex;
         }
 

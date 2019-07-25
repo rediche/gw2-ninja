@@ -28,8 +28,10 @@ class PageTimer extends connect(store)(PolymerElement) {
           display: block;
         }
 
-        paper-tabs {
-          margin-bottom: var(--spacer-large);
+        .sticky-tabs {
+          max-width: initial;
+          position: initial;
+          margin: .25rem .25rem var(--spacer-large);
           background-color: var(--gwn-primary);
           --paper-tabs-selection-bar-color: var(--gwn-on-primary);
         }
