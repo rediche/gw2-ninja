@@ -11,6 +11,9 @@ store.addReducers({
   account
 });
 
+import { getAccount } from "../../api/account.js";
+import { getWorld } from '../../api/worlds.js';
+
 /**
  * `page-account` is a page that shows basic information about your GW2 account.
  *
@@ -22,7 +25,9 @@ store.addReducers({
 class PageAccount extends connect(store)(LitElement) {
     static get properties() {
         return {
-            name: String
+            apikey: String,
+            account: Object,
+            world: Object
         }
     }
 
@@ -33,7 +38,9 @@ class PageAccount extends connect(store)(LitElement) {
      */
     constructor() {
         super();
-        this.name = "";
+        this.apikey = "";
+        this.account = {};
+        this.world = {};
     }
 
     static get styles() {
@@ -70,27 +77,38 @@ class PageAccount extends connect(store)(LitElement) {
         return html`            
             <div class="container">
                 <div class="card">
-                    <div class="bold">Account</div>
+                    <div>Welcome back <span class="bold">${ this.account.name }</span></div>
                     <ul>
-                        <li>${ this.name }</li>
+                        <li>${ this._getAccountAge() }</li>
+                        <li>${ this.world.name }</li>
+                        <li>${ this.account.created }</li>
+                        <li>${ this.account.fractal_level }</li>
+                        <li>${ this.account.wvw_rank }</li>
+                        <li>${ this.account.daily_ap }</li>
+                        <li>${ this.account.monthly_ap }</li>
                     </ul>
                 </div>
             </div>
         `;
     }
 
-    _stateChanged(state) {
-        if (!state) return;
-    
-        
-        if ( state.account ) {
-            console.log(state.account);
-            this.name = state.account.name;
-            // TODO: Redirect to frontpage if no account available
-          //this.set("hasAccount", !!state.account.name);
-        }
-      }
+    _getAccountAge() {
+        return this.account.age;//humanizeDuration(this.account.age || 0);
+    }
 
+    _stateChanged(state) {
+        if (!state || !state.settings) return;
+
+        this.apikey = state.settings.apiKey;
+
+        this._loadAccount();
+    }
+
+    async _loadAccount() {
+        this.account = await getAccount(this.apikey);
+        this.world = await getWorld(this.account.world);
+        console.log(this.account);
+    }
 }
 
 customElements.define('page-account', PageAccount);
