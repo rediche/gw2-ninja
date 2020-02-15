@@ -30,6 +30,8 @@ import "../utilities/gwn-api-permissions-list.js";
 import { SharedStyles } from "../shared-styles.js";
 import { SettingsStyles } from "./gwn-settings-styles.js";
 
+import { getAccount } from "../../api/account.js";
+
 class GWNSettingApiKey extends connect(store)(PolymerElement) {
   static get properties() {
     return {
@@ -102,7 +104,7 @@ class GWNSettingApiKey extends connect(store)(PolymerElement) {
       apiPermissions: tokenInfo.permissions
     });
 
-    const accountInfo = await this.fetchAccountInfo(apiKey);
+    const accountInfo = await getAccount(apiKey);
 
     if (!accountInfo) return;
 
@@ -131,17 +133,6 @@ class GWNSettingApiKey extends connect(store)(PolymerElement) {
 
   async fetchTokenInfo(apiKey) {
     const url = `https://api.guildwars2.com/v2/tokeninfo?access_token=${apiKey}`;
-    const response = await fetch(url);
-
-    if (response.status !== 200) return false;
-
-    const json = await response.json();
-
-    return json;
-  }
-
-  async fetchAccountInfo(apiKey) {
-    const url = `https://api.guildwars2.com/v2/account?access_token=${apiKey}`;
     const response = await fetch(url);
 
     if (response.status !== 200) return false;
