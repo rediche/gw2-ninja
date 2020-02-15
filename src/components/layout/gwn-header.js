@@ -96,7 +96,7 @@ class GWNHeader extends LitElement {
     if (activePage == "chatcodes") return "Chatcode Generator";
     if (activePage == "timer") return "Meta Timer";
     if (activePage == "calc") return "Trading Post Calculator";
-    if (activePage == "wvw") return "World vs World (Beta)";
+    if (activePage == "wvw") return "World vs World";
     if (activePage == "about") return "About GW2 Ninja";
     if (activePage == "precursors") return "Precursor Rain. HALLELUJAH!";
     if (activePage == "stream") return "Stream Tools";

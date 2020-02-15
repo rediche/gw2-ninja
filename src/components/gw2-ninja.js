@@ -294,7 +294,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
             <a name="index" href="/">Home</a>
             <a name="directory" href="/directory/websites">Directory</a>
             <a name="timer" href="/timer/all">Meta Timer</a>
-            <a name="wvw" href="/wvw/overview">World vs World (Beta)</a>
+            <a name="wvw" href="/wvw/overview">World vs World</a>
             <hr />
             <a name="collections" href="/collections/basic">Collections</a>
             <a name="tickets" href="/tickets">Tickets</a>
