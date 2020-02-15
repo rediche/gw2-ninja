@@ -5,6 +5,11 @@
     "description": "Guild Wars 2 Event Meta Timers, Trading Post tools, Chatcode Generator and the largest directory of fansites, YouTubers and streamers."
   },
   {
+    "page": "account",
+    "title": "Account",
+    "description": "Inspect your Guild Wars 2 account."
+  },
+  {
     "page": "directory",
     "title": "Directory",
     "description": "The largest directory of Guild Wars 2 related fansites, Trading Post tools, YouTubers and streamers."

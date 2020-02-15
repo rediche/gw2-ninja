@@ -90,6 +90,7 @@ class GWNHeader extends LitElement {
     if (!activePage) return;
 
     if (activePage == "index") return "Home";
+    if (activePage == "account") return "Account";
     if (activePage == "directory") return "Directory";
     if (activePage == "collections") return "Collections";
     if (activePage == "tickets") return "Tickets";

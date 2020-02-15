@@ -16,7 +16,7 @@ export const SharedStyles = html`
 
     [hidden],
     :host([hidden]) {
-      display: none;
+      display: none !important;
     }
 
     body {

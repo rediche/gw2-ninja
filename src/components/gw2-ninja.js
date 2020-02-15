@@ -31,8 +31,10 @@ import { store } from "../store.js";
 
 // Lazy load reducers
 import settings from "../reducers/settings.js";
+import account from "../reducers/account.js";
 store.addReducers({
-  settings
+  settings,
+  account
 });
 
 import { SharedStyles } from "./shared-styles.js";
@@ -67,6 +69,10 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
       theme: {
         type: String,
         reflectToAttribute: true
+      },
+      hasAccount: {
+        type: Boolean,
+        value: false
       }
     };
   }
@@ -267,6 +273,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
           role="main"
         >
           <page-index name="index"></page-index>
+          <page-account name="account"></page-account>
           <page-directory name="directory"></page-directory>
           <page-collections name="collections"></page-collections>
           <page-tickets name="tickets"></page-tickets>
@@ -292,6 +299,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
             role="navigation"
           >
             <a name="index" href="/">Home</a>
+            <a name="account" href="/account" hidden$="[[ !hasAccount ]]">Account</a>
             <a name="directory" href="/directory/websites">Directory</a>
             <a name="timer" href="/timer/all">Meta Timer</a>
             <a name="wvw" href="/wvw/overview">World vs World</a>
@@ -358,6 +366,7 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
     } else if (
       [
         "index",
+        "account",
         "about",
         "calc",
         "chatcodes",
@@ -389,6 +398,9 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
     switch (page) {
       case "index":
         import("./pages/page-index.js");
+        break;
+      case "account":
+        import("./pages/page-account.js");
         break;
       case "about":
         import("./pages/page-about.js");
@@ -443,8 +455,17 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
   }
 
   _stateChanged(state) {
-    if (!state || !state.settings) return;
-    this.set("theme", state.settings.theme);
+    if (!state) return;
+
+    console.log(state.account);
+
+    if ( state.account ) {
+      this.set("hasAccount", !!state.account.name);
+    }
+
+    if ( state.settings ) {
+      this.set("theme", state.settings.theme);
+    }
   }
 }
 
