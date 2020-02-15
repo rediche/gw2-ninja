@@ -457,8 +457,6 @@ class GW2Ninja extends connect(store)(GestureEventListeners(PolymerElement)) {
   _stateChanged(state) {
     if (!state) return;
 
-    console.log(state.account);
-
     if ( state.account ) {
       this.set("hasAccount", !!state.account.name);
     }
