@@ -31,6 +31,7 @@ import { SharedStyles } from "../shared-styles.js";
 import { SettingsStyles } from "./gwn-settings-styles.js";
 
 import { getAccount } from "../../api/account.js";
+import { getTokenInfo } from "../../api/tokeninfo.js";
 
 class GWNSettingApiKey extends connect(store)(PolymerElement) {
   static get properties() {
@@ -86,7 +87,7 @@ class GWNSettingApiKey extends connect(store)(PolymerElement) {
 
     if (!this.apiPatternValidation(apiKey)) return this.set("invalid", true);
 
-    const tokenInfo = await this.fetchTokenInfo(apiKey);
+    const tokenInfo = await getTokenInfo(apiKey);
 
     if (!tokenInfo) return this.set("invalid", true);
 
@@ -129,17 +130,6 @@ class GWNSettingApiKey extends connect(store)(PolymerElement) {
     if (!apiKey) return false;
     const apiKeyPattern = /^[^\W_]{8}-[^\W_]{4}-[^\W_]{4}-[^\W_]{4}-[^\W_]{20}-[^\W_]{4}-[^\W_]{4}-[^\W_]{4}-[^\W_]{12}$/;
     return apiKeyPattern.test(apiKey);
-  }
-
-  async fetchTokenInfo(apiKey) {
-    const url = `https://api.guildwars2.com/v2/tokeninfo?access_token=${apiKey}`;
-    const response = await fetch(url);
-
-    if (response.status !== 200) return false;
-
-    const json = await response.json();
-
-    return json;
   }
 }
 

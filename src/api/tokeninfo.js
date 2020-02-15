@@ -1,7 +1,7 @@
 const BASE_URL = 'https://api.guildwars2.com/v2';
 
-export const getAccount = async apiKey => {
-    const url = `${BASE_URL}/account?access_token=${apiKey}`;
+export const getTokenInfo = async apiKey => {
+    const url = `${BASE_URL}/tokeninfo?access_token=${apiKey}`;
     const response = await fetch(url);
 
     if (!response.ok) return false;
@@ -9,4 +9,4 @@ export const getAccount = async apiKey => {
     const json = await response.json();
 
     return json;
-}
+  }
