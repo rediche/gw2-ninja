@@ -172,7 +172,7 @@ Fill out the form, to get your command.</pre
     if (!selectedChatbot || !selectedType || !selectedCommand || !apiKey)
       return "";
 
-    const url = `https://nightbot.gw2.ninja/command/${selectedType}-${selectedCommand}/${apiKey}`;
+    const url = `https://gw2.stream/${selectedCommand}?token=${apiKey}`;
 
     switch (selectedChatbot) {
       case "nightbot":
