@@ -21,6 +21,12 @@
     "platform": "twitch"
   },
   {
+    "name": "WvW Basics Guide",
+    "description": "A series of introductional guides about different WvW topics.",
+    "url": "https://rediche.stream/articles",
+    "directory": "websites"
+  },
+  {
     "name": "Black Lion Ticket Value",
     "description": "This page shows the value of a Black Lion Claim Ticket",
     "url": "https://gw2.ninja/tickets",
@@ -49,12 +55,6 @@
     "description": "An Offical Guild Wars 2 Shoutcaster.",
     "url": "https://www.youtube.com/user/UnityJebro",
     "directory": "youtube"
-  },
-  {
-    "name": "Permanent Harvesting Nodes Route",
-    "description": "A waypoint optimized route to permanent nodes all around the Tyrian continent.",
-    "url": "http://starbuckguild.com/ore/",
-    "directory": "websites"
   },
   {
     "name": "GW2 BLTC",
@@ -141,27 +141,9 @@
     "directory": "websites"
   },
   {
-    "name": "To Dye For",
-    "description": "Database with the best combinations of dye for you armor and add your own combinations.",
-    "url": "http://www.todyeforguildwars2.com/",
-    "directory": "websites"
-  },
-  {
-    "name": "Guild Wars 2 Dungeons",
-    "description": "Speedrunning leaderboards, guides and the all-in-one resource for dungeon running.",
-    "url": "http://gw2dungeons.net/",
-    "directory": "websites"
-  },
-  {
     "name": "GW2 Stats",
     "description": "A go-to site when it comes to leaderboards in Guild Wars 2. (This used to be MOS Millenium)",
     "url": "http://gw2stats.com",
-    "directory": "websites"
-  },
-  {
-    "name": "GW2Tools.de Worldboss Timer",
-    "description": "Yet another worldboss timer.",
-    "url": "http://timer.gw2tools.de/",
     "directory": "websites"
   },
   {
@@ -210,12 +192,6 @@
     "name": "Chronicle of Tyria",
     "description": "News, podcast, magazine, fanfiction. They just got everything written for sure.",
     "url": "http://www.chroniclesoftyria.com/",
-    "directory": "websites"
-  },
-  {
-    "name": "Dragon Season",
-    "description": "News, Interviews, Guides, Lore, Fan Fiction and more.",
-    "url": "http://dragonseason.com/",
     "directory": "websites"
   },
   {
@@ -285,75 +261,15 @@
     "directory": "websites"
   },
   {
-    "name": "GW2 Nodes",
-    "description": "Select your megaserverinstance IP and find every single node in that instance.",
-    "url": "http://gw2nodes.com/",
-    "directory": "websites"
-  },
-  {
-    "name": "Silverwastes Cryptobotanist Map",
-    "description": "Find the current location of the Cryptobotanist on this small, but fantastic tool.",
-    "url": "http://johnweng.com/tools/cryptobotanist/",
-    "directory": "websites"
-  },
-  {
-    "name": "Custom Map Routes",
-    "description": "Create your own map with different routes for nodes or whatever you'd like. You can also browse maps other players made.",
-    "url": "http://www.gw2maps.ch/",
-    "directory": "websites"
-  },
-  {
     "name": "WvW Intel",
     "description": "A live Guild Wars 2 World vs. World map that works on every screensize, even mobile devices.",
     "url": "http://wvwintel.com/",
     "directory": "websites"
   },
   {
-    "name": "Abbadon's Mouth [DE]",
-    "description": "",
-    "url": "http://abaddons-mund.eu/",
-    "directory": "websites"
-  },
-  {
-    "name": "Aurora Glade [EU]",
-    "description": "",
-    "url": "http://auroragla.de/",
-    "directory": "websites"
-  },
-  {
-    "name": "Blackgate [NA]",
-    "description": "",
-    "url": "http://gw2blackgate.com/forum/",
-    "directory": "websites"
-  },
-  {
-    "name": "Borlis Pass [NA]",
-    "description": "",
-    "url": "http://borlis.org/",
-    "directory": "websites"
-  },
-  {
-    "name": "Crystal Desert [NA]",
-    "description": "",
-    "url": "http://crystal-desert.com/",
-    "directory": "websites"
-  },
-  {
     "name": "Darkhaven [NA]",
     "description": "",
     "url": "http://www.darkhaven.us/",
-    "directory": "websites"
-  },
-  {
-    "name": "Devona's Rest [NA]",
-    "description": "",
-    "url": "http://www.devonasrest.net/",
-    "directory": "websites"
-  },
-  {
-    "name": "Drakkar Lake [DE]",
-    "description": "",
-    "url": "http://www.drakkarsee.de/",
     "directory": "websites"
   },
   {
@@ -369,39 +285,9 @@
     "directory": "websites"
   },
   {
-    "name": "Fort Aspenwood [NA]",
-    "description": "",
-    "url": "http://www.fort-aspenwood.com/",
-    "directory": "websites"
-  },
-  {
-    "name": "Gandara [EU]",
-    "description": "",
-    "url": "https://gankdara.com/",
-    "directory": "websites"
-  },
-  {
-    "name": "Gunnar's Hold [EU]",
-    "description": "",
-    "url": "http://www.gunnars-hold.eu/",
-    "directory": "websites"
-  },
-  {
-    "name": "Henge of Denravi [NA]",
-    "description": "",
-    "url": "http://www.hengeofdenravi.com/",
-    "directory": "websites"
-  },
-  {
     "name": "Jade Quarry [NA]",
     "description": "",
     "url": "http://jadequarry.com/page/index.html",
-    "directory": "websites"
-  },
-  {
-    "name": "Jade Sea [FR]",
-    "description": "",
-    "url": "http://www.merdejade.fr/",
     "directory": "websites"
   },
   {
@@ -417,39 +303,9 @@
     "directory": "websites"
   },
   {
-    "name": "Ring of Fire [EU]",
-    "description": "",
-    "url": "http://rof-community.com/",
-    "directory": "websites"
-  },
-  {
     "name": "Sanctum of Rall [NA]",
     "description": "",
     "url": "http://www.sanctumofrall.com/",
-    "directory": "websites"
-  },
-  {
-    "name": "Seafarer's Rest [EU]",
-    "description": "",
-    "url": "http://www.pevepe.net/gw2",
-    "directory": "websites"
-  },
-  {
-    "name": "Stormbluff Isle [NA]",
-    "description": "",
-    "url": "http://www.stormbluffisle.com/",
-    "directory": "websites"
-  },
-  {
-    "name": "Whiteside Ridge [EU]",
-    "description": "",
-    "url": "http://whitesideridge.com/",
-    "directory": "websites"
-  },
-  {
-    "name": "Yak's Bend [NA]",
-    "description": "",
-    "url": "http://yaks-bend.enjin.com/",
     "directory": "websites"
   },
   {
@@ -485,7 +341,7 @@
   {
     "name": "Guild Wars 2 Forums",
     "description": "",
-    "url": "https://en-forum.guildwars2.com/forum",
+    "url": "https://en-forum.guildwars2.com/",
     "directory": "websites"
   },
   {
@@ -508,7 +364,7 @@
   },
   {
     "name": "The Atlas",
-    "description": "This is a sad day. The Atlas was killed. For those in the dark, there is a nice article on the Guild Wars 2 Wiki, where this link not refers to. NOTE: This is not the original link.",
+    "description": "This is a sad day. The Atlas was killed. For those in the dark, there is a nice article on the Guild Wars 2 Wiki, where this link refers to. NOTE: This is not the original link.",
     "url": "https://wiki.guildwars2.com/wiki/Atlas",
     "directory": "websites"
   },
@@ -561,12 +417,6 @@
     "directory": "websites"
   },
   {
-    "name": "GW2 Event Timer",
-    "description": "",
-    "url": "https://play.google.com/store/apps/details?id=com.danielling.gw2eventtimer",
-    "directory": "websites"
-  },
-  {
     "name": "GW2 WvW",
     "description": "\"This app provides real time score and map updates of World vs. World vs. World in Guild Wars 2. You can now use this app to your WvW scouting, commanding and roaming advantage!\" - iTunes Description.",
     "url": "https://itunes.apple.com/au/app/gw2-wvw/id653987126?mt=8",
@@ -603,12 +453,6 @@
     "directory": "websites"
   },
   {
-    "name": "GW2 Banker",
-    "description": "This tool is one of the most amazing tools for Guild Wars 2. Simply take a screenshot of your bank, upload and the site will calculate the rest.",
-    "url": "http://mayumi.fi/gw2banker/",
-    "directory": "websites"
-  },
-  {
     "name": "GW2 Efficiency",
     "description": "Keep track on everything on your account. Daily dungeons, worldbosses, even what's in your characters inventory!",
     "url": "http://gw2efficiency.com/",
@@ -630,12 +474,6 @@
     "name": "Project Tyria",
     "description": "Comparing Guild Wars and Guild Wars 2",
     "url": "http://projecttyria.blogspot.dk/",
-    "directory": "websites"
-  },
-  {
-    "name": "WuVerlay",
-    "description": "World VS World overlay.",
-    "url": "https://wuvoverlay.bitbucket.io/",
     "directory": "websites"
   },
   {
@@ -1004,12 +842,6 @@
     "directory": "youtube"
   },
   {
-    "name": "TP Notificator",
-    "description": "Track your Guild Wars 2 auction buying and selling orders and get notifications when you sold or bought anything. Works for Google Chrome and Opera",
-    "url": "https://github.com/terron-kun/tp-notificator",
-    "directory": "websites"
-  },
-  {
     "name": "GW2 Sidekick",
     "description": "This application intends to be the best mobile game companion.",
     "url": "https://play.google.com/store/apps/details?id=com.mwgames.gw2sidekick.free",
@@ -1091,12 +923,6 @@
     "name": "Patch Countdown",
     "description": "Attempt to predict the next update to Guild Wars 2. Made by that_shaman.",
     "url": "https://www.thatshaman.com/tools/countdown/",
-    "directory": "websites"
-  },
-  {
-    "name": "GW2 Hook",
-    "description": "Addon that allows you to do visual changes to how the game renders.",
-    "url": "https://04348.github.io/Gw2Hook/",
     "directory": "websites"
   },
   {
