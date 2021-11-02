@@ -34,7 +34,7 @@ class PageAbout extends PolymerElement {
 
   <div class="card">
     <h2 class="title">About</h2>
-    <p>Guild Wars 2 Ninja is a passion project by <a href="https://twitter.com/thegeil" target="_blank" rel="noopener noreferrer">Rediche</a>, a long time Guild Wars 2 player.</p>
+    <p>Guild Wars 2 Ninja is a passion project by <a href="https://twitter.com/redichegg" target="_blank" rel="noopener noreferrer">Rediche</a>, a long time Guild Wars 2 player.</p>
     <p>The project started as a fun way to keep learning about the web platform and constantly try to do things in new ways and provide simple tools to make the life easier for people.</p>
     <p>GW2 Ninja is built with Polymer and open source webcomponents.</p>
     <p>All the code behind the project has been open sourced. If you are a developer or just have suggestions, come participate in the developent process on <a href="https://github.com/rediche/gw2-ninja" target="_blank" rel="noopener noreferrer">Github</a>.</p>
