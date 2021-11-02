@@ -2,6 +2,11 @@
 
 - 
 
+# July 4, 2020 - v2.8.19
+
+  - Change from nightbot.gw2.ninja to gw2.stream.
+  - Update gw2.stream command list.
+
 # June 7, 2019 - v2.8.17
 
 - Updated Domain of Vabbi metas.

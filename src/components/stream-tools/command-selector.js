@@ -41,14 +41,9 @@ class CommandSelector extends PolymerElement {
             attr-for-selected="name"
             selected="{{ selectedCommand }}"
           >
-            <paper-item name="age" disabled>
-              <paper-item-body two-line>
-                <div>Age</div>
-                <div secondary>Not yet implemented.</div>
-              </paper-item-body>
-            </paper-item>
-            <paper-item name="name">Name</paper-item>
-            <paper-item name="server">Server</paper-item>
+            <paper-item name="account/age">Age</paper-item>
+            <paper-item name="account/name">Name</paper-item>
+            <paper-item name="account/server">Server</paper-item>
           </paper-listbox>
         </paper-dropdown-menu>
 
@@ -59,14 +54,22 @@ class CommandSelector extends PolymerElement {
             attr-for-selected="name"
             selected="{{ selectedCommand }}"
           >
-            <paper-item name="mastery-points">Mastery Points</paper-item>
-            <paper-item name="mastery-points-tyria"
-              >Mastery Points (Tyria)</paper-item
+            <paper-item name="account/mastery/points">Mastery Points (Total)</paper-item>
+            <paper-item name="account/mastery/points/tyria"
+              >Mastery Points (Core Tyria)</paper-item
             >
-            <paper-item name="mastery-points-maguuma"
-              >Mastery Points (Maguuma)</paper-item
+            <paper-item name="account/mastery/points/maguuma"
+              >Mastery Points (Heart of Thorns)</paper-item
             >
-            <paper-item name="fractal-level">Fractal Level</paper-item>
+            <paper-item name="account/mastery/points/desert"
+              >Mastery Points (Path of Fire)</paper-item
+            >
+            <paper-item name="account/fractal" disabled>
+              <paper-item-body two-line>
+                <div>Fractal level</div>
+                <div secondary>Not yet implemented.</div>
+              </paper-item-body>
+            </paper-item>
           </paper-listbox>
         </paper-dropdown-menu>
 
@@ -77,8 +80,8 @@ class CommandSelector extends PolymerElement {
             attr-for-selected="name"
             selected="{{ selectedCommand }}"
           >
-            <paper-item name="rank">Rank</paper-item>
-            <paper-item name="rating" disabled>
+            <paper-item name="pvp/stats/rank">Rank</paper-item>
+            <paper-item name="pvp/stats/rating" disabled>
               <paper-item-body two-line>
                 <div>Rating</div>
                 <div secondary>Not yet implemented.</div>
@@ -102,11 +105,12 @@ class CommandSelector extends PolymerElement {
             attr-for-selected="name"
             selected="{{ selectedCommand }}"
           >
-            <paper-item name="gold">Gold</paper-item>
-            <paper-item name="karma">Karma</paper-item>
-            <paper-item name="laurels">Laurels</paper-item>
-            <paper-item name="gems">Gems</paper-item>
-            <paper-item name="badges-of-honor">Badges of Honor</paper-item>
+            <paper-item name="account/wallet/gold">Gold</paper-item>
+            <paper-item name="account/wallet/karma">Karma</paper-item>
+            <paper-item name="account/wallet/laurels">Laurels</paper-item>
+            <paper-item name="account/wallet/gems">Gems</paper-item>
+            <paper-item name="account/wallet/badges-of-honor">Badges of Honor</paper-item>
+            <paper-item name="account/wallet/skirmish-claim-tickets">Skirmish Claim Tickets</paper-item>
           </paper-listbox>
         </paper-dropdown-menu>
 
@@ -117,9 +121,10 @@ class CommandSelector extends PolymerElement {
             attr-for-selected="name"
             selected="{{ selectedCommand }}"
           >
-            <paper-item name="rank">Rank</paper-item>
-            <paper-item name="kills">Kills</paper-item>
-            <paper-item name="matchup">Matchup</paper-item>
+            <paper-item name="account/wvw-rank">Rank</paper-item>
+            <paper-item name="wvw/stats/kills">Kills</paper-item>
+            <paper-item name="wvw/stats/matchup">Matchup</paper-item>
+            <paper-item name="account/wvw-rank/missing-xp">Missing WXP to Rank 10K</paper-item>
           </paper-listbox>
         </paper-dropdown-menu>
 
