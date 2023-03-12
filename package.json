@@ -11,6 +11,7 @@
   "scripts": {
     "lint": "eslint . --ext js,html --ignore-path .gitignore",
     "build": "polymer build",
+    "serve": "npm run build && npx http-server \"./build/es6-bundled\"",
     "test": "npm run lint && polymer test",
     "scrape": "node scripts/bl-collection-scraper.js"
   },
